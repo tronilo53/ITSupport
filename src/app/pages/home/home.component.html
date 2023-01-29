@@ -1,0 +1,38 @@
+<!-- Avaya está instalado -->
+<div class="avaya__ok">
+    <div class="container banner mb-4">
+        <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+    </div>
+    <div class="container content mb-5">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Configuración de Avaya</h5>
+                        <p class="card-text">Configuración básica de Avaya One X Agent. Errores comunes de la aplicación y manuales para la propia configuración.</p>
+                        <button (click)="openAvaya()" class="btn btn-dark">Más...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Información del Equipo</h5>
+                        <p class="card-text">Información básica del sistema operativo para el Departamento de soporte. <strong>En ningún momento se recoge información delicada.</strong></p>
+                        <button (click)="openIt()" class="btn btn-dark">Más...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container info">
+        <div class="alert alert-primary" role="alert">
+            Este programa es exclusivo para el <strong>Departamento de Soporte</strong>. En ningún momento se recopila información delicada, es meramente informativo para una mayor configuración y una atención más rápida.
+        </div>
+    </div>
+</div>
+
+<!-- Avaya no está instalado -->
+<div class="avaya__fail"></div>

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require( "electron" );
+const { app, BrowserWindow, ipcMain } = require( "electron" );
 const path = require( "path" );
 const url = require( "url" );
 const fs = require( "fs" );
@@ -6,65 +6,30 @@ const os = require( "os" );
 
 let appWin;
 
-let menu = [
-    {
-        label: 'Archivo',
-        submenu: [
-            {
-                label: 'Recargar',
-                click() {
-                    reloadWindow()
-                }
-            }
-        ]
-    }
-]
+//let menu = [{ label: 'Archivo', submenu: [{ label: 'Recargar', click() { reloadWindow() }}]}];
 
 createWindow = () => {
 
-    appWin = new BrowserWindow({
-
-        width: 800,
-        height: 600,
-        title: 'Avaya Help',
-        resizable: false,
-        webPreferences: {
-
-            contextIsolation: false,
-            nodeIntegration: true
-        }
-    });
-
+    appWin = new BrowserWindow({ width: 800, height: 600, title: 'Avaya Help', resizable: false, center: true, webPreferences: { contextIsolation: false, nodeIntegration: true } });
     appWin.setIcon( 'src/assets/favicon.png' );
-
-    appWin.loadURL(
-        url.format({
-            pathname: path.join( __dirname, '/dist/index.html' ),
-            protocol: 'file',
-            slashes: true
-        })
-    );
-
+    appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
+    appWin.on( "closed", () => appWin = null );
 
-    appWin.on( "closed", () => {
-
-        appWin = null;
-    });
-
-    let menuPrincipal = Menu.buildFromTemplate( menu );
-    appWin.setMenu( menuPrincipal );
+    /*let menuPrincipal = Menu.buildFromTemplate( menu );
+    appWin.setMenu( menuPrincipal );*/
 }
-
 app.on( "ready", createWindow );
-
 app.on( "window-all-closed", () => {
-
     if( process.platform !== 'darwin' ) app.quit();
 });
 
 //Comunicación entre procesos
 //--------------------------------------------
+
+ipcMain.on( 'openIt', ( event, args ) => openIt() );
+ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
+
 /*ipcMain.on( 'openModal', ( event, args ) => openModal() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
     if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
@@ -80,11 +45,20 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
 
 //Nueva ventana Modal
 //---------------------------------------------
-/*let openModal = () => {
-    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false } );
-    modal.setIcon( 'src/assets/avaya.png' );
-    modal.loadURL( `file://${ __dirname }/dist/index.html#/Ventana` );
+let openIt = () => {
+    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 500, y: 300, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    modal.title = 'Avaya Help',
+    modal.setIcon( 'src/assets/favicon.png' );
+    modal.loadURL( `file://${ __dirname }/dist/index.html#/It` );
     modal.once( "ready-to-show", () => modal.show() );
     modal.setMenu( null );
-    modal.webContents.openDevTools();
-};*/
+    //modal.webContents.openDevTools();
+};
+let openAvaya = () => {
+    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 500, y: 300, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    modal.setIcon( 'src/assets/favicon.png' );
+    modal.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
+    modal.once( "ready-to-show", () => modal.show() );
+    modal.setMenu( null );
+    //modal.webContents.openDevTools();
+};
