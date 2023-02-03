@@ -46,7 +46,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
 //Nueva ventana Modal
 //---------------------------------------------
 let openIt = () => {
-    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 500, y: 300, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
     modal.title = 'Avaya Help',
     modal.setIcon( 'src/assets/favicon.png' );
     modal.loadURL( `file://${ __dirname }/dist/index.html#/It` );
@@ -55,7 +55,7 @@ let openIt = () => {
     //modal.webContents.openDevTools();
 };
 let openAvaya = () => {
-    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 500, y: 300, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
     modal.setIcon( 'src/assets/favicon.png' );
     modal.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
     modal.once( "ready-to-show", () => modal.show() );
