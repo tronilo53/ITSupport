@@ -1,6 +1,13 @@
+.banner {
+    text-align: right;
+}
 .banner img {
     width: 15rem;
     margin-top: 5%;
+    margin-right: 5%;
+}
+.banner__2 img {
+    width: 15rem;
 }
 .data {
     width: 80%;
