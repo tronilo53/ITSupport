@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 import { IpcService } from 'src/app/services/ipc.service';
 
 @Component({
@@ -6,14 +7,35 @@ import { IpcService } from 'src/app/services/ipc.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor( private __ipcService: IpcService, private changeDetectorRef: ChangeDetectorRef ) { }
+  @ViewChild('avaya__ok') avaya__ok: ElementRef;
+  @ViewChild('avaya__fail') avaya__fail: ElementRef;
+
+  constructor( 
+    private __ipcService: IpcService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private __alertService: AlertService) {
+      this.__ipcService.send( 'CheckAvayaInstall' );
+      this.__ipcService.on( 'checkAvayaInstall', ( event, args ) => {
+        if( args === 'fail' ) {
+          this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
+          this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
+        }else {
+          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+        }
+      });
+    }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
+  }
+  ngAfterViewInit(): void {
+    this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
+    this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
   }
 
   public openIt(): void {

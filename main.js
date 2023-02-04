@@ -29,6 +29,8 @@ app.on( "window-all-closed", () => {
 
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
+ipcMain.on( 'CheckAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
+
 
 /*ipcMain.on( 'openModal', ( event, args ) => openModal() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
@@ -43,8 +45,9 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
     }
 });*/
 
-//Nueva ventana Modal
-//---------------------------------------------
+/* Nueva ventana modal
+------------------------------
+*/
 let openIt = () => {
     let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
     modal.title = 'Avaya Help',
@@ -61,4 +64,20 @@ let openAvaya = () => {
     modal.once( "ready-to-show", () => modal.show() );
     modal.setMenu( null );
     //modal.webContents.openDevTools();
+};
+
+/*
+    Verificación de instalación de Avaya
+    -----------------------------------
+*/
+let checkAvayaInstall = ( event, args ) => {
+    if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
+        if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
+            if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
+                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
+            }
+        }
+    }else {
+        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
+    }
 };

@@ -1,8 +1,11 @@
+<!--
+    TODO: Verificar que Avaya One X Agent está instalado.
+-->
+<div class="container banner mb-4">
+    <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+</div>
 <!-- Avaya está instalado -->
-<div class="avaya__ok">
-    <div class="container banner mb-4">
-        <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
-    </div>
+<div class="avaya__ok" #avaya__ok>
     <div class="container content mb-5">
         <div class="row">
             <div class="col">
@@ -35,4 +38,10 @@
 </div>
 
 <!-- Avaya no está instalado -->
-<div class="avaya__fail"></div>
+<div class="avaya__fail" #avaya__fail>
+    <div class="alert alert-warning" role="alert">
+        Avaya no está instalado en su Sistema.
+        <br>
+        Cierre este programa e instale <strong>Avaya One X Agent</strong>
+    </div>
+</div>
