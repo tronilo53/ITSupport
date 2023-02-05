@@ -15,6 +15,7 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     appWin.on( "closed", () => appWin = null );
+    //appWin.webContents.openDevTools();
 
     /*let menuPrincipal = Menu.buildFromTemplate( menu );
     appWin.setMenu( menuPrincipal );*/
@@ -29,21 +30,17 @@ app.on( "window-all-closed", () => {
 
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-ipcMain.on( 'CheckAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
-
-
-/*ipcMain.on( 'openModal', ( event, args ) => openModal() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
     if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
         if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
             if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
-                event.sender.send( 'checkAvayaInstall', { data: 'success' } );
+                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
             }
         }
     }else {
-        event.sender.send( 'checkAvayaInstall', { data: 'error' } );
+        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
     }
-});*/
+});
 
 /* Nueva ventana modal
 ------------------------------
@@ -70,14 +67,3 @@ let openAvaya = () => {
     Verificación de instalación de Avaya
     -----------------------------------
 */
-let checkAvayaInstall = ( event, args ) => {
-    if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
-        if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
-            if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
-                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
-            }
-        }
-    }else {
-        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
-    }
-};

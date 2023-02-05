@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     private __alertService: AlertService) {
-      this.__ipcService.send( 'CheckAvayaInstall' );
+      this.__ipcService.send( 'checkAvayaInstall' );
       this.__ipcService.on( 'checkAvayaInstall', ( event, args ) => {
-        if( args === 'fail' ) {
+        if( args.data === 'fail' ) {
           this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
           this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
         }else {
