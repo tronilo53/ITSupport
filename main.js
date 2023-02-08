@@ -3,6 +3,7 @@ const path = require( "path" );
 const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
+const { exec } = require( "child_process" );
 
 let appWin;
 
@@ -30,17 +31,7 @@ app.on( "window-all-closed", () => {
 
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
-    if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
-        if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
-            if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
-                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
-            }
-        }
-    }else {
-        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
-    }
-});
+ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
 
 /* Nueva ventana modal
 ------------------------------
@@ -62,8 +53,30 @@ let openAvaya = () => {
     modal.setMenu( null );
     //modal.webContents.openDevTools();
 };
-
 /*
     Verificación de instalación de Avaya
     -----------------------------------
 */
+let checkAvayaInstall = ( event, args ) => {
+    if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
+        if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
+            if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
+                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
+            }
+        }
+    }else {
+        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
+    }
+};
+/*
+    recopilación de datos OS
+    -----------------------------------
+*/
+let getDataOs = ( event, args ) => {
+    exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
+        if( error ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
+        else if( stderr ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
+        else event.sender.send( 'getDataOs', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
+    });
+};
+getDataOs();
