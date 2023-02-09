@@ -32,6 +32,7 @@ app.on( "window-all-closed", () => {
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
+ipcMain.on( 'getDataOs', ( event, args ) => getDataOs( event, args ) );
 
 /* Nueva ventana modal
 ------------------------------
@@ -79,4 +80,3 @@ let getDataOs = ( event, args ) => {
         else event.sender.send( 'getDataOs', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
     });
 };
-getDataOs();
