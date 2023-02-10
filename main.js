@@ -44,7 +44,7 @@ let openIt = () => {
     modal.loadURL( `file://${ __dirname }/dist/index.html#/It` );
     modal.once( "ready-to-show", () => modal.show() );
     modal.setMenu( null );
-    //modal.webContents.openDevTools();
+    modal.webContents.openDevTools();
 };
 let openAvaya = () => {
     let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
@@ -75,8 +75,7 @@ let checkAvayaInstall = ( event, args ) => {
 */
 let getDataOs = ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
-        if( error ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
-        else if( stderr ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
+        if( error || stderr ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
         else event.sender.send( 'getDataOs', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
     });
 };
