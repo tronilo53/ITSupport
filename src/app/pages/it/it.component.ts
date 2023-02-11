@@ -37,9 +37,17 @@ export class ItComponent implements OnInit, AfterViewInit {
     this.__ipcService.send( 'getDataOs' );
     this.__ipcService.on( 'getDataOs', ( event, args ) => {
       const data: string = args.data;
-      const serialNumber = data[1].split( '\n' )[1].trim();
-      //const nuewSerial: string = serialNumber.split( '\r' ).join( '' );
-      console.log( serialNumber );
+      if( data[1] === 'error'){
+        this.renderer.removeClass( this.serialTagErr.nativeElement, 'none' );
+        this.renderer.addClass( this.serialTag.nativeElement, 'none' );
+      }else {
+        const serialNumber = data[1].split( '\n' )[1].trim();
+        this.renderer.setProperty( this.serialTag.nativeElement, 'innerHTML', serialNumber );
+      }
+      const hostnameValue = data[0];
+      this.renderer.setProperty( this.hostname.nativeElement, 'innerHTML', hostnameValue );
+      const userValue = data[2];
+      this.renderer.setProperty( this.user.nativeElement, 'innerHTML', userValue );
     });
   }
 }
