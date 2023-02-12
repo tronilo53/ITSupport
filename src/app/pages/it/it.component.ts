@@ -8,6 +8,7 @@ import { IpcService } from 'src/app/services/ipc.service';
 })
 export class ItComponent implements OnInit, AfterViewInit {
 
+  //IDENTIFICAR ELEMENTOS DEL DOM
   @ViewChild( 'hostname' ) hostname: ElementRef;
   @ViewChild( 'hostnameErr' ) hostnameErr: ElementRef;
   @ViewChild( 'serialTag' ) serialTag: ElementRef;
@@ -25,25 +26,37 @@ export class ItComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-
   }
+
   ngAfterViewInit(): void {
+    //OCULTAR CAMPOS DE "SIN INFO";
     this.renderer.addClass( this.hostnameErr.nativeElement, 'none' );
     this.renderer.addClass( this.serialTagErr.nativeElement, 'none' );
     this.renderer.addClass( this.userErr.nativeElement, 'none' );
     this.renderer.addClass( this.extAvayaErr.nativeElement, 'none' );
     this.renderer.addClass( this.logAvayaErr.nativeElement, 'none' );
 
-    //INFORMACION O.S de Hostname, SerialTag y User
+    /*
+      COMUNICACION ENTRE PROCESOS;
+      HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
+    */
     this.__ipcService.send( 'getDataOsExcludeAvaya' );
     this.__ipcService.on( 'getDataOsExcludeAvaya', ( event, args ) => this.getDataOsExcludeAvaya( event, args ));
 
-    //INFORMACION O.S de Extension y Login Avaya.
+    /*
+      COMUNICACION ENTRE PROCESOS;
+      EXTENSION Y LOGIN DE AVAYA
+    */
     this.__ipcService.send( 'getDataOsAvaya' );
     this.__ipcService.on( 'getDataOsAvaya', ( event, args ) => this.getDataOsAvaya( event, args ));
   }
 
-  //INFORMACION O.S de Hostname, SerialTag y User
+
+
+  //FUNCIONES INTERNAS;
+  //---------------------------
+
+  //HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
   private getDataOsExcludeAvaya( event: any, args: any ): void {
     const data: string = args.data;
       const serialNumber = data[1].split( '\n' )[1].trim();
@@ -59,8 +72,25 @@ export class ItComponent implements OnInit, AfterViewInit {
       const userValue = data[2];
       this.renderer.setProperty( this.user.nativeElement, 'innerHTML', userValue );
   }
-  //INFORMACION O.S de Extension y Login Avaya.
+  
+  //EXTENSION Y LOGIN DE AVAYA
   private getDataOsAvaya( event: any, args: any ): void {
-    console.log( args );
+    const extension: string = args.data[0];
+    const login: string = args.data[1];
+
+    if( extension === '' ) {
+      this.renderer.removeClass( this.extAvayaErr.nativeElement, 'none' );
+      this.renderer.addClass( this.extAvaya.nativeElement, 'none' );
+    }else {
+      this.renderer.setProperty( this.extAvaya.nativeElement, 'innerHTML', extension );
+    }
+
+    if( login === '' ) {
+      this.renderer.removeClass( this.logAvayaErr.nativeElement, 'none' );
+      this.renderer.addClass( this.logAvaya.nativeElement, 'none' );
+    }else {
+      this.renderer.setProperty( this.logAvaya.nativeElement, 'innerHTML', login );
+    }
+    
   }
 }
