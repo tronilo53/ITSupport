@@ -90,8 +90,9 @@ let getDataOsAvaya = ( event, args ) => {
     fs.readFile( `${RUTE__COMPLETE}/Config.xml`, ( error, data ) => {
         if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
         else {
-            const result = convert.xml2json( data, { compact: true, spaces: 4 } );
-            event.sender.send( 'getDataOsAvaya', result );
+            const result = convert.xml2js( data, { compact: true, attributesKey: '$' } );
+            const ext = result.ConfigData.parameter[9].value._text; // extension
+            event.sender.send( 'getDataOsAvaya', ext );
         }
     });
 };
