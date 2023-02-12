@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'
 import { HomeComponent } from './home/home.component';
 import { ItComponent } from './it/it.component';
 import { AvayaComponent } from './avaya/avaya.component';
@@ -13,7 +14,8 @@ import { AvayaComponent } from './avaya/avaya.component';
     AvayaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     HomeComponent,

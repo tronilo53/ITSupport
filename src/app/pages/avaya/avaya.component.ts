@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-avaya',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvayaComponent implements OnInit {
 
-  constructor() { }
+  public problema: string = '???';
+
+  constructor( 
+    private renderer: Renderer2,
+    private __alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  public solucionar(): void {
+    console.log( this.problema );
+  }
 }

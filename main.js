@@ -63,7 +63,7 @@ let openAvaya = () => {
     modal.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
     modal.once( "ready-to-show", () => modal.show() );
     modal.setMenu( null );
-    //modal.webContents.openDevTools();
+    modal.webContents.openDevTools();
 };
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
