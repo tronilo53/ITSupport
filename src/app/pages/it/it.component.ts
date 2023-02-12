@@ -34,20 +34,33 @@ export class ItComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.extAvayaErr.nativeElement, 'none' );
     this.renderer.addClass( this.logAvayaErr.nativeElement, 'none' );
 
-    this.__ipcService.send( 'getDataOs' );
-    this.__ipcService.on( 'getDataOs', ( event, args ) => {
-      const data: string = args.data;
-      if( data[1] === 'error'){
+    //INFORMACION O.S de Hostname, SerialTag y User
+    this.__ipcService.send( 'getDataOsExcludeAvaya' );
+    this.__ipcService.on( 'getDataOsExcludeAvaya', ( event, args ) => this.getDataOsExcludeAvaya( event, args ));
+
+    //INFORMACION O.S de Extension y Login Avaya.
+    this.__ipcService.send( 'getDataOsAvaya' );
+    this.__ipcService.on( 'getDataOsAvaya', ( event, args ) => this.getDataOsAvaya( event, args ));
+  }
+
+  //INFORMACION O.S de Hostname, SerialTag y User
+  private getDataOsExcludeAvaya( event: any, args: any ): void {
+    const data: string = args.data;
+      const serialNumber = data[1].split( '\n' )[1].trim();
+      
+      if( data[1] === 'error' || serialNumber === 'To be filled by O.E.M.'){
         this.renderer.removeClass( this.serialTagErr.nativeElement, 'none' );
         this.renderer.addClass( this.serialTag.nativeElement, 'none' );
       }else {
-        const serialNumber = data[1].split( '\n' )[1].trim();
         this.renderer.setProperty( this.serialTag.nativeElement, 'innerHTML', serialNumber );
       }
       const hostnameValue = data[0];
       this.renderer.setProperty( this.hostname.nativeElement, 'innerHTML', hostnameValue );
       const userValue = data[2];
       this.renderer.setProperty( this.user.nativeElement, 'innerHTML', userValue );
-    });
+  }
+  //INFORMACION O.S de Extension y Login Avaya.
+  private getDataOsAvaya( event: any, args: any ): void {
+    console.log( args );
   }
 }

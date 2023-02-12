@@ -4,8 +4,10 @@ const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
 const { exec } = require( "child_process" );
+const convert = require( "xml-js" );
 
 let appWin;
+const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
 
 //let menu = [{ label: 'Archivo', submenu: [{ label: 'Recargar', click() { reloadWindow() }}]}];
 
@@ -32,7 +34,8 @@ app.on( "window-all-closed", () => {
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
-ipcMain.on( 'getDataOs', ( event, args ) => getDataOs( event, args ) );
+ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
+ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 
 /* Nueva ventana modal
 ------------------------------
@@ -61,7 +64,7 @@ let openAvaya = () => {
 let checkAvayaInstall = ( event, args ) => {
     if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
         if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
-            if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5` ) ) {
+            if( fs.existsSync( RUTE__COMPLETE ) ) {
                 event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
             }
         }
@@ -70,12 +73,25 @@ let checkAvayaInstall = ( event, args ) => {
     }
 };
 /*
-    recopilación de datos OS
+    recopilación de datos OS de Hostname, SerialTag y User
     -----------------------------------
 */
-let getDataOs = ( event, args ) => {
+let getDataOsExcludeAvaya = ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
-        if( error || stderr ) event.sender.send( 'getDataOs', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
-        else event.sender.send( 'getDataOs', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
+        if( error || stderr ) event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
+        else event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
+    });
+};
+/*
+    recopilación de datos OS de Extension y Login Avaya
+    -----------------------------------
+*/
+let getDataOsAvaya = ( event, args ) => {
+    fs.readFile( `${RUTE__COMPLETE}/Config.xml`, ( error, data ) => {
+        if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
+        else {
+            const result = convert.xml2json( data, { compact: true, spaces: 4 } );
+            event.sender.send( 'getDataOsAvaya', result );
+        }
     });
 };
