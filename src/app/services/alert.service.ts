@@ -14,10 +14,28 @@ export class AlertService {
       text: message
     });
   }
+  public alertPopSuccess( message: string ) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
   public alertError( message: string ): void {
     Swal.fire({
       icon: 'error',
       text: message
     });
+  }
+  public alertPopError( message: string ) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }

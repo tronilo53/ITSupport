@@ -13,6 +13,7 @@ export class Trouble1Component implements OnInit {
     extension: '',
     login: ''
   };
+  //DECLARACIONES DE VARIABLES
   private regExtension: RegExp = /^[2][0][2]([0-9]{4,4})$/;
   private regLogin: RegExp = /^[5][0][2]([0-9]{4,4})$/;
 
@@ -23,7 +24,7 @@ export class Trouble1Component implements OnInit {
 
   ngOnInit(): void {
   }
-
+  //BOTÓN SOLUCIONAR PROBLEMA
   public solucionar(): void {
     if( this.data.extension === '' && this.data.login === '' ) this.__alertService.alertError( 'Todos los campos son requeridos' );
     else {
@@ -33,6 +34,7 @@ export class Trouble1Component implements OnInit {
         if( !this.regExtension.test( this.data.extension ) ) this.__alertService.alertError( 'Extensión con formato incorrecto. Por favor, indique una extensión válida.' );
         else if( !this.regLogin.test( this.data.login ) ) this.__alertService.alertError( 'Login con formato incorrecto. Por favor, indique un Login válido.' );
         else {
+          //COMUNICACION DE PROCESOS
           this.__ipcService.send('trouble1', [ this.data.extension, this.data.login ] );
           this.__ipcService.on( 'trouble1', ( event, args ) => {
             if( args.data === 'notDeleteOriginalXML' || args.data === 'notCopySettingsFile' || args.data === 'notRead' || args.data === 'notJson' || args.data === 'notModify' ) this.__alertService.alertError( 'No se ha podido solucionar el problema, inténtalo de nuevo más tarde o ponte en contacto con IT - HelpDesk' );
@@ -40,7 +42,7 @@ export class Trouble1Component implements OnInit {
               this.data.extension = '';
               this.data.login = '';
               
-              this.__alertService.alertSuccess( 'Problema Solucionado con éxito. Cierre Avaya y vuelva a iniciarlo.' );
+              this.__alertService.alertPopSuccess( 'Problema solucionado con éxito!' );
             }
           });
         }

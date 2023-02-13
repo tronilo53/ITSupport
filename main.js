@@ -143,7 +143,7 @@ let trouble1 = ( event, args ) => {
                                             event.sender.send( 'trouble1', { data: 'ok' } );
                                             setTimeout( () => {
                                                 modalOpenTrouble1.close();
-                                            }, 1200);
+                                            }, 1500);
                                         }
                                     });
                                 }
