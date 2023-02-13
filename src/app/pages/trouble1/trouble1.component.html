@@ -1,1 +1,21 @@
-<h1>Trouble1 Component!</h1>
+<div class="container banner mb-4">
+    <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+</div>
+<div class="container banner__2 text-center">
+    <img src="assets/avaya.png" alt="avaya.png">
+</div>
+<div class="container title mb-5 mt-5 text-center">
+    <h4>Por favor, indica tu Extensión y Login de Avaya para poder solucionar el problema.</h4>
+    <h5 class="text-danger"><span class="text-dark">Problema: </span> <span #problema></span></h5>
+</div>
+<div class="container fields mb-5">
+    <div class="mb-3">
+        <input type="text" class="form-control" name="extension" placeholder="Extensión..." [(ngModel)]="data.extension">
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" name="login" placeholder="Login.." [(ngModel)]="data.login">
+    </div>
+</div>
+<div class="container button">
+    <button type="button" (click)="solucionar()" class="btn btn-dark">Solucionar...</button>
+</div>

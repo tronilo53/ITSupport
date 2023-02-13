@@ -47,6 +47,8 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
+ipcMain.on( 'textTrouble1', ( event, args ) => textTrouble1( event, args ) );
+ipcMain.on( 'trouble1Action', ( event, args ) => trouble1Action( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -113,7 +115,11 @@ let getDataOsAvaya = ( event, args ) => {
         }
     });
 };
-//MODIFICAR XML__PRUEBA__
+//MOSTRAR TEXTO trouble1;
+let textTrouble1 = ( event, args ) => {
+    
+};
+//PROBLEMA: AVAYA NO INICIA SESIÓN
 let trouble1 = ( event, args ) => {
     fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'modifyXML', { data: 'notRead' } );
@@ -123,6 +129,7 @@ let trouble1 = ( event, args ) => {
                 else {
                     let json = result;
                     openTrouble1();
+                    
                     //json.Settings.Login[0].Telephony[0].User[0].$.Station = '2026030';
                     //const builder = new xml2js.Builder();
                     //const xml = builder.buildObject( json );
@@ -137,3 +144,7 @@ let trouble1 = ( event, args ) => {
         }
     });
 };
+//PROBLEMA: AVAYA NO INICIA SESIÓN(ACCIÓN)
+/*let trouble1Action = ( event, args ) => {
+    ipcMain.send( 'openTrouble1',  );
+};*/
