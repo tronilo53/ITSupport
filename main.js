@@ -43,6 +43,7 @@ app.on( "window-all-closed", () => {
 //--------------------------------------------
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
+ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
@@ -114,29 +115,41 @@ let getDataOsAvaya = ( event, args ) => {
         }
     });
 };
-//PROBLEMA: AVAYA NO INICIA SESIÓN //TODO: ELIMINAR trouble1 y reemplazar por openTrouble1;
+//PROBLEMA: AVAYA NO INICIA SESIÓN
 let trouble1 = ( event, args ) => {
-    openTrouble1();
-};
-//PROBLEMA: AVAYA NO INICIA SESIÓN(ACCIÓN)
-let trouble1Action = ( event, args ) => {  //TODO: REENOMBRAR trouble1Action por trouble1;
-    fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'modifyXML', { data: 'notRead' } );
+    //ELIMINAR Settings.xml ORIGINAL;
+    fs.unlink( `${RUTE__PROFILE}/Settings.xml`, ( error ) => {
+        if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
         else {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'modifyXML', { data: 'notJson' } );
+            //COPIAR Settings PLANTILLA AL ORIGINAL
+            fs.copyFile( 'src/assets/Settings.xml', `${RUTE__PROFILE}/Settings.xml`, ( error ) => {
+                if( error ) event.sender.send( 'trouble1', { data: 'notCopySettingsFile' } );
                 else {
-                    let json = result;
-                    
-                    //json.Settings.Login[0].Telephony[0].User[0].$.Station = '2026030';
-                    //const builder = new xml2js.Builder();
-                    //const xml = builder.buildObject( json );
-                    /*fs.writeFile( `${RUTE__PROFILE__TEST}/Settings.xml`, xml, ( error ) => {
-                        if( error ) event.sender.send( 'modifyXML', { data: 'notModify' } );
+                    //LEER Settings ORIGINAL Y MODIFICAR
+                    fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( errorRead, data ) => {
+                        if( errorRead ) event.sender.send( 'trouble1', { data: 'notRead' } );
                         else {
-                            event.sender.send( 'modifyXML', { data: '2026030' } );
+                            xml2js.parseString( data, ( errorJson, result ) => {
+                                if( errorJson ) event.sender.send( 'trouble1', { data: 'notJson' } );
+                                else {
+                                    let json = result;
+                                    json.Settings.Login[0].Telephony[0].User[0].$.Station = args[0];
+                                    json.Settings.Login[0].Agent[0].$.Login = args[1];
+                                    const builder = new xml2js.Builder();
+                                    const xml = builder.buildObject( json );
+                                    fs.writeFile( `${RUTE__PROFILE}/Settings.xml`, xml, ( error ) => {
+                                        if( error ) event.sender.send( 'trouble1', { data: 'notModify' } );
+                                        else {
+                                            event.sender.send( 'trouble1', { data: 'ok' } );
+                                            setTimeout( () => {
+                                                modalOpenTrouble1.close();
+                                            }, 1200);
+                                        }
+                                    });
+                                }
+                            });
                         }
-                    });*/
+                    });
                 }
             });
         }
