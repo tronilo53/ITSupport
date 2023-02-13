@@ -5,12 +5,17 @@ const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
 const { exec } = require( "child_process" );
-const convert = require( "xml-js" );
+const xmljs = require( "xml-js" );
+const xml2js = require( "xml2js" );
 
 //DECLARACIONES DE VARIABLES
 let appWin;
+let modalOpenIt;
+let modalOpenAvaya;
+let modalOpenTrouble1;
 const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
+const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
@@ -41,6 +46,7 @@ ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
+ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -48,22 +54,31 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) )
 
 //ABRIR VENTANA NUEVA DE IT SUPPORT
 let openIt = () => {
-    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    modal.title = 'Avaya Help',
-    modal.setIcon( 'src/assets/favicon.png' );
-    modal.loadURL( `file://${ __dirname }/dist/index.html#/It` );
-    modal.once( "ready-to-show", () => modal.show() );
-    modal.setMenu( null );
+    modalOpenIt = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    modalOpenIt.title = 'Avaya Help',
+    modalOpenIt.setIcon( 'src/assets/favicon.png' );
+    modalOpenIt.loadURL( `file://${ __dirname }/dist/index.html#/It` );
+    modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
+    modalOpenIt.setMenu( null );
     //modal.webContents.openDevTools();
 };
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
 let openAvaya = () => {
-    let modal = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    modal.setIcon( 'src/assets/favicon.png' );
-    modal.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    modal.once( "ready-to-show", () => modal.show() );
-    modal.setMenu( null );
-    modal.webContents.openDevTools();
+    modalOpenAvaya = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
+    modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
+    modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
+    modalOpenAvaya.setMenu( null );
+    //modalmodalOpenAvaya.webContents.openDevTools();
+};
+//ABRIR VENTANA NUEVA DE trouble1
+let openTrouble1 = () => {
+    modalOpenTrouble1 = new BrowserWindow( { parent: modalOpenAvaya, modal: true, show: false, x: 400, y: 150, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
+    modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
+    modalOpenTrouble1.loadURL( `file://${ __dirname }/dist/index.html#/Trouble1` );
+    modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
+    modalOpenTrouble1.setMenu( null );
+    modalOpenTrouble1.webContents.openDevTools();
 };
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
@@ -89,12 +104,36 @@ let getDataOsAvaya = ( event, args ) => {
     fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( error, data ) => {
         if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
         else {
-            const result = convert.xml2js( data, { compact: true, attributesKey: '$' } );
+            const result = xmljs.xml2js( data, { compact: true, attributesKey: '$' } );
 
             const ext = result.Settings.Login.Telephony.User.$.Station; // extension
             const log = result.Settings.Login.Agent.$.Login; // login
 
             event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
+        }
+    });
+};
+//MODIFICAR XML__PRUEBA__
+let trouble1 = ( event, args ) => {
+    fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'modifyXML', { data: 'notRead' } );
+        else {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'modifyXML', { data: 'notJson' } );
+                else {
+                    let json = result;
+                    openTrouble1();
+                    //json.Settings.Login[0].Telephony[0].User[0].$.Station = '2026030';
+                    //const builder = new xml2js.Builder();
+                    //const xml = builder.buildObject( json );
+                    /*fs.writeFile( `${RUTE__PROFILE__TEST}/Settings.xml`, xml, ( error ) => {
+                        if( error ) event.sender.send( 'modifyXML', { data: 'notModify' } );
+                        else {
+                            event.sender.send( 'modifyXML', { data: '2026030' } );
+                        }
+                    });*/
+                }
+            });
         }
     });
 };

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { HomeComponent } from './home/home.component';
 import { ItComponent } from './it/it.component';
 import { AvayaComponent } from './avaya/avaya.component';
+import { Trouble1Component } from './trouble1/trouble1.component';
 
 
 
@@ -11,7 +12,8 @@ import { AvayaComponent } from './avaya/avaya.component';
   declarations: [
     HomeComponent,
     ItComponent,
-    AvayaComponent
+    AvayaComponent,
+    Trouble1Component
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { AvayaComponent } from './avaya/avaya.component';
   exports: [
     HomeComponent,
     ItComponent,
-    AvayaComponent
+    AvayaComponent,
+    Trouble1Component
   ]
 })
 export class PagesModule { }
