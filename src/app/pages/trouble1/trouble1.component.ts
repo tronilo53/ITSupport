@@ -35,8 +35,9 @@ export class Trouble1Component implements OnInit {
         if( !this.regExtension.test( this.data.extension ) ) this.__alertService.alertError( 'Extensión con formato incorrecto. Por favor, indique una extensión válida.' );
         else if( !this.regLogin.test( this.data.login ) ) this.__alertService.alertError( 'Login con formato incorrecto. Por favor, indique un Login válido.' );
         else {
-          this.__ipcService.on( 'openTrouble1', ( event, args ) => {
-            console.log( args );
+          this.__ipcService.send('trouble1Action' );
+          this.__ipcService.on( 'trouble1Action', ( event, args ) => {
+            
           });
         }
       }
