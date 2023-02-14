@@ -15,6 +15,7 @@ let modalOpenAvaya;
 let modalOpenTrouble1;
 const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
+const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
 //FUNCION DE VENTANA PRINCIPAL
@@ -48,7 +49,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-ipcMain.on( 'trouble1Action', ( event, args ) => trouble1Action( event, args ) );
+ipcMain.on( 'trouble2', ( event, args ) => trouble1( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -80,7 +81,7 @@ let openTrouble1 = () => {
     modalOpenTrouble1.loadURL( `file://${ __dirname }/dist/index.html#/Trouble1` );
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
-    modalOpenTrouble1.webContents.openDevTools();
+    //modalOpenTrouble1.webContents.openDevTools();
 };
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
@@ -150,6 +151,21 @@ let trouble1 = ( event, args ) => {
                             });
                         }
                     });
+                }
+            });
+        }
+    });
+};
+//PROBLEMA: AVAYA NO INICIA SESIÓN AUTOMÁTICAMENTE
+let trouble2 = ( event, args ) => {
+    fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'trouble2', { data: 'notRead' } );
+        else {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'trouble2', { data: 'notJson' } );
+                else {
+                    let json = result;
+                    // TODO: MODIFICAR INICIO AUTOMÁTICO XML
                 }
             });
         }

@@ -23,6 +23,7 @@ export class Trouble1Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.__alertService.alertInfo( 'Solucionando este problema, se borrará toda la configuración incluidos los botones favoritos.' );
   }
   //BOTÓN SOLUCIONAR PROBLEMA
   public solucionar(): void {

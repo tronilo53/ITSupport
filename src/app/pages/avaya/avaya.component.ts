@@ -21,8 +21,12 @@ export class AvayaComponent implements OnInit {
   }
 
   public solucionar(): void {
-    if( this.problema === '1' ) {
-      this.__ipcService.send( 'openTrouble1' );
+    if( this.problema === '1' ) this.__ipcService.send( 'openTrouble1' );
+    else if( this.problema === '2' ) {
+      this.__ipcService.send( 'trouble2' );
+      this.__ipcService.on( 'trouble2', ( event, args ) => {
+        if( args.data === 'notRead' || args.data === 'notJson' ) this.__alertService.alertError( 'No se ha podido solucionar el problema, inténtalo de nuevo más tarde o ponte en contacto con IT - HelpDesk' );
+      });
     }
   }
 }

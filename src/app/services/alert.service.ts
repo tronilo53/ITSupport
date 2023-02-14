@@ -14,6 +14,12 @@ export class AlertService {
       text: message
     });
   }
+  public alertInfo( message: string ) {
+    Swal.fire({
+      icon: 'info',
+      text: message
+    });
+  }
   public alertPopSuccess( message: string ) {
     Swal.fire({
       position: 'top-end',
