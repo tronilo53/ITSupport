@@ -50,6 +50,7 @@ ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( e
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
 ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
+ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -179,5 +180,14 @@ let trouble2 = ( event, args ) => {
                 }
             });
         }
+    });
+};
+
+//PRUEBAS CON TASKKILL
+let pruebaTask = ( event, args ) => {
+    exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
+        if( error ) event.sender.send( 'pruebaTask', { data: error } );
+        else if( stderr ) event.sender.send( 'pruebaTask', { data: stderr } );
+        else event.sender.send( 'pruebaTask', { data: stdout } );
     });
 };
