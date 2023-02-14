@@ -49,7 +49,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-ipcMain.on( 'trouble2', ( event, args ) => trouble1( event, args ) );
+ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -119,7 +119,7 @@ let getDataOsAvaya = ( event, args ) => {
 //PROBLEMA: AVAYA NO INICIA SESIÓN
 let trouble1 = ( event, args ) => {
     //ELIMINAR Settings.xml ORIGINAL;
-    fs.unlink( `${RUTE__PROFILE}/Settings.xml`, ( error ) => {
+    fs.unlink( RUTE__PROFILE__SETTINGS, ( error ) => {
         if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
         else {
             //COPIAR Settings PLANTILLA AL ORIGINAL
@@ -127,7 +127,7 @@ let trouble1 = ( event, args ) => {
                 if( error ) event.sender.send( 'trouble1', { data: 'notCopySettingsFile' } );
                 else {
                     //LEER Settings ORIGINAL Y MODIFICAR
-                    fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( errorRead, data ) => {
+                    fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
                         if( errorRead ) event.sender.send( 'trouble1', { data: 'notRead' } );
                         else {
                             xml2js.parseString( data, ( errorJson, result ) => {
@@ -165,7 +165,17 @@ let trouble2 = ( event, args ) => {
                 if( errorJson ) event.sender.send( 'trouble2', { data: 'notJson' } );
                 else {
                     let json = result;
-                    // TODO: MODIFICAR INICIO AUTOMÁTICO XML
+                    json.Settings.Login[0].Telephony[0].User[0].$.AutoLogin = 'true';
+                    json.Settings.Login[0].Agent[0].$.AutoLogin = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorWrite ) => {
+                        if( errorWrite ) event.sender.send( 'trouble2', { data: 'notModify' } );
+                        else {
+                            event.sender.send( 'trouble2', { data: 'ok' } );
+                        }
+                    });
+                    // TODO: MODIFICAR INICIO AUTOMÁTICO XMl
                 }
             });
         }

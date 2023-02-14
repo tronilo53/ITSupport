@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { IpcService } from 'src/app/services/ipc.service';
 
@@ -12,7 +12,6 @@ export class AvayaComponent implements OnInit {
   public problema: string = '???';
 
   constructor( 
-    private renderer: Renderer2,
     private __alertService: AlertService,
     private __ipcService: IpcService
   ) { }
@@ -25,7 +24,8 @@ export class AvayaComponent implements OnInit {
     else if( this.problema === '2' ) {
       this.__ipcService.send( 'trouble2' );
       this.__ipcService.on( 'trouble2', ( event, args ) => {
-        if( args.data === 'notRead' || args.data === 'notJson' ) this.__alertService.alertError( 'No se ha podido solucionar el problema, inténtalo de nuevo más tarde o ponte en contacto con IT - HelpDesk' );
+        if( args.data === 'notRead' || args.data === 'notJson' || args.data === 'notModify' ) this.__alertService.alertError( 'No se ha podido solucionar el problema, inténtalo de nuevo más tarde o ponte en contacto con IT - HelpDesk' );
+        else this.__alertService.alertPopSuccess( 'Problema solucionado con éxito!' );
       });
     }
   }

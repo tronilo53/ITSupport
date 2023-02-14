@@ -39,12 +39,7 @@ export class Trouble1Component implements OnInit {
           this.__ipcService.send('trouble1', [ this.data.extension, this.data.login ] );
           this.__ipcService.on( 'trouble1', ( event, args ) => {
             if( args.data === 'notDeleteOriginalXML' || args.data === 'notCopySettingsFile' || args.data === 'notRead' || args.data === 'notJson' || args.data === 'notModify' ) this.__alertService.alertError( 'No se ha podido solucionar el problema, inténtalo de nuevo más tarde o ponte en contacto con IT - HelpDesk' );
-            else {
-              this.data.extension = '';
-              this.data.login = '';
-              
-              this.__alertService.alertPopSuccess( 'Problema solucionado con éxito!' );
-            }
+            else this.__alertService.alertPopSuccess( 'Problema solucionado con éxito!' );
           });
         }
       }
