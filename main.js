@@ -1,5 +1,6 @@
 //IMPORTACIONES DE MODULOS;
 const { app, BrowserWindow, ipcMain } = require( "electron" );
+const { autoUpdater } = require( "electron-updater" );
 const path = require( "path" );
 const url = require( "url" );
 const fs = require( "fs" );
@@ -26,10 +27,9 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     appWin.on( "closed", () => appWin = null );
+    //COMPROBAR ACTUALIZACIONES;
+    appWin.once( "ready-to-show", () => autoUpdater.checkForUpdatesAndNotify());
     //appWin.webContents.openDevTools();
-
-    /*let menuPrincipal = Menu.buildFromTemplate( menu );
-    appWin.setMenu( menuPrincipal );*/
 }
 
 //PREPARAR LA VENTANA PRINCIPAL
@@ -191,3 +191,11 @@ let pruebaTask = ( event, args ) => {
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
 };
+
+
+//ACTUALIZACION DISPONIBLE
+autoUpdater.on( 'update-available', () => appWin.webContents().send( 'update_available' ) );
+//ACTUALIZACION DESCARGADA
+autoUpdater.on( 'update-downloaded', () => appWin.webContents().send( 'update_downloaded' ) );
+//INSTALAR ACTUALIZACION
+ipcMain.on( 'restartApp', () => autoUpdater.quitAndInstall() );
