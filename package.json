@@ -1,6 +1,6 @@
 {
-  "name": "itsupport",
-  "version": "0.0.0",
+  "name": "ITSupport",
+  "version": "1.0.0",
   "main": "main.js",
   "repository": {
     "type": "git",
@@ -12,7 +12,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron": "ng build && electron ."
+    "electron": "ng build && electron .",
+    "devSetup": "electron-builder build --win --publish never",
+    "setup": "electron-builder build --win --publish always"
   },
   "private": true,
   "dependencies": {
