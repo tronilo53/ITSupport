@@ -1,6 +1,5 @@
 {
   "name": "ITSupport",
-  "productName": "ITSupport",
   "version": "1.0.0",
   "main": "main.js",
   "repository": {
@@ -17,7 +16,7 @@
     "test": "ng test",
     "electron": "ng build && electron .",
     "devSetup": "electron-builder build --win --publish never",
-    "setup": "electron-builder build --win --publish always"
+    "setup": "electron-builder create-self-signed-cert build --win --publish always"
   },
   "private": true,
   "dependencies": {

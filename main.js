@@ -23,7 +23,7 @@ const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3
 createWindow = () => {
 
     appWin = new BrowserWindow({ width: 800, height: 600, title: 'Avaya Help', resizable: false, center: true, webPreferences: { contextIsolation: false, nodeIntegration: true } });
-    appWin.setIcon( 'src/assets/favicon.png' );
+    appWin.setIcon( 'favicon.png' );
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     appWin.on( "closed", () => appWin = null );
