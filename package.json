@@ -1,7 +1,5 @@
 {
   "build": {
-    "appId": "ITSupport",
-    "productName": "ITSupport",
     "copyright": "ltm dev ITSupport. Adm.",
     "directories": {
       "output": "release",
@@ -28,22 +26,15 @@
       "menuCategory": false,
       "shortcutName": "ITSupport",
       "runAfterFinish": false
-    },
-    "publish": [{
-      "provider": "github",
-      "owner": "tronilo53",
-      "repo": "ITSupport.git",
-      "host": "github.com",
-      "protocol": "https",
-      "token": "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"
-    }]
+    }
   },
   "name": "ITSupport",
   "version": "1.0.0",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tronilo53/ITSupport.git"
+    "url": "https://github.com/tronilo53/ITSupport.git",
+    "token": "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"
   },
   "description": "ITSupport program for the configuration of Avaya One X Agent",
   "author": "Luis Tronilo - ITSupport",
@@ -56,9 +47,8 @@
     "test": "ng test",
     "electron": "ng build && electron .",
     "devSetup": "electron-builder build --win --publish never",
-    "setup": "electron-builder build --publish always"
+    "setup": "ng build && electron-builder --publish always"
   },
-  
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
