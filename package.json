@@ -1,4 +1,37 @@
 {
+  "build": {
+    "appId": "ITSupport",
+    "productName": "ITSupport",
+    "copiright": "ltm dev ITSupport. Adm.",
+    "directories": {
+      "app": ".",
+      "output": "out",
+      "buildResources": "build-res"
+
+    },
+    "files": [
+      "package.json",
+      "app/**/*",
+      "node_modules"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "removeDefaultUninstallWelcomePage": false,
+      "installerIcon": "build/installerIcon.ico",
+      "uninstallerIcon": "build/uninstallerIcon.ico",
+      "installerHeaderIcon": "build/installerHeaderIcon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": false,
+      "shortcutName": "ITSupport"
+    }
+  },
   "name": "ITSupport",
   "version": "1.0.0",
   "main": "main.js",
@@ -16,8 +49,9 @@
     "test": "ng test",
     "electron": "ng build && electron .",
     "devSetup": "electron-builder build --win --publish never",
-    "setup": "electron-builder create-self-signed-cert build --win --publish always"
+    "setup": "electron-builder build --publish always"
   },
+  
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
