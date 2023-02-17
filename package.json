@@ -2,23 +2,20 @@
   "build": {
     "appId": "ITSupport",
     "productName": "ITSupport",
-    "copiright": "ltm dev ITSupport. Adm.",
+    "copyright": "ltm dev ITSupport. Adm.",
     "directories": {
-      "app": ".",
-      "output": "out",
-      "buildResources": "build-res"
+      "output": "release",
+      "buildResources": "dist"
 
     },
-    "files": [
-      "package.json",
-      "app/**/*",
-      "node_modules"
-    ],
+    "files": ["**/*", "dist/**/*"],
     "win": {
-      "target": "nsis"
+      "target": ["nsis"],
+      "icon": "build/icon.ico"
     },
+    "asar": false,
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
       "perMachine": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
@@ -29,8 +26,17 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "menuCategory": false,
-      "shortcutName": "ITSupport"
-    }
+      "shortcutName": "ITSupport",
+      "runAfterFinish": false
+    },
+    "publish": [{
+      "provider": "github",
+      "owner": "tronilo53",
+      "repo": "ITSupport.git",
+      "host": "github.com",
+      "protocol": "https",
+      "token": "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"
+    }]
   },
   "name": "ITSupport",
   "version": "1.0.0",
@@ -44,7 +50,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "dist": "electron-builder",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
