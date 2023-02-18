@@ -28,17 +28,13 @@ createWindow = () => {
     appWin.setIcon( 'resources/app/src/assets/favicon.png' );
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
+    autoUpdater.checkForUpdates();
     appWin.on( "closed", () => appWin = null );
     //appWin.webContents.openDevTools();
 }
 
 //PREPARAR LA VENTANA PRINCIPAL
-app.on( "ready", () => {
-    createWindow();
-    setInterval( () => {
-        autoUpdater.checkForUpdates();
-    }, 10000);
-});
+app.on( "ready", () => createWindow );
 
 //ACCIONES PARA CERRAR LA VENTANA PRINCIPAL
 app.on( "window-all-closed", () => {
