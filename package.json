@@ -11,6 +11,14 @@
       "target": ["nsis"],
       "icon": "build/icon.ico"
     },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "tronilo53",
+        "repo": "ITSupport",
+        "private": false
+      }
+    ],
     "asar": false,
     "nsis": {
       "oneClick": false,
@@ -32,11 +40,6 @@
   "version": "1.0.1",
   "main": "main.js",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tronilo53/ITSupport.git",
-    "token": "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"
-  },
   "description": "ITSupport program for the configuration of Avaya One X Agent",
   "author": "Luis Tronilo - ITSupport",
   "scripts": {
@@ -46,7 +49,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
-    "setupProd": "ng build && electron-builder --publish always",
+    "setupProd": "ng build && electron-builder -p always",
     "setupDev": "ng build && electron-builder"
   },
   "private": true,

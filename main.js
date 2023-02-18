@@ -30,13 +30,14 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     appWin.on( "closed", () => appWin = null );
-    //COMPROBAR ACTUALIZACIONES;
-    appWin.once( "ready-to-show", () => autoUpdater.checkForUpdatesAndNotify());
     //appWin.webContents.openDevTools();
 }
 
 //PREPARAR LA VENTANA PRINCIPAL
-app.on( "ready", createWindow );
+app.on( "ready", () => {
+    createWindow;
+    autoUpdater.checkForUpdatesAndNotify();
+});
 
 //ACCIONES PARA CERRAR LA VENTANA PRINCIPAL
 app.on( "window-all-closed", () => {
@@ -194,7 +195,6 @@ let trouble2 = ( event, args ) => {
         }
     });
 };
-
 //PRUEBAS CON TASKKILL
 let pruebaTask = ( event, args ) => {
     exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
@@ -206,8 +206,14 @@ let pruebaTask = ( event, args ) => {
 
 
 //ACTUALIZACION DISPONIBLE
-autoUpdater.on( 'update-available', () => appWin.webContents().send( 'update_available' ) );
+autoUpdater.on( 'update-available', () => {
+    ipcMain.send( 'update_available' );
+    //appWin.webContents().send( 'update_available' );
+});
 //ACTUALIZACION DESCARGADA
-autoUpdater.on( 'update-downloaded', () => appWin.webContents().send( 'update_downloaded' ) );
+autoUpdater.on( 'update-downloaded', () => {
+    ipcMain.send( 'update_downloaded' );
+    //appWin.webContents().send( 'update_downloaded' )
+});
 //INSTALAR ACTUALIZACION
 ipcMain.on( 'restartApp', () => autoUpdater.quitAndInstall() );
