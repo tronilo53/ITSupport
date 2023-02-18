@@ -56,11 +56,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.__ipcService.removeAllListeners( 'update_downloaded' );
       this.__alertService.alertResetForUpdate();
     });
-
-    this.Toast.fire({
-      icon: 'info',
-      title: 'Actualización Disponible'
-    });
   }
 
   public openIt(): void {
