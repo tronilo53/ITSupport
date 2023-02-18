@@ -31,6 +31,7 @@
   "name": "ITSupport",
   "version": "1.0.0",
   "main": "main.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/tronilo53/ITSupport.git",
@@ -41,13 +42,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "dist": "electron-builder",
-    "build": "ng build --prod",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
-    "devSetup": "electron-builder build --win --publish never",
-    "setup": "ng build && electron-builder --publish always"
+    "setupProd": "ng build && electron-builder --publish always",
+    "setupDev": "ng build && electron-builder"
   },
   "private": true,
   "dependencies": {

@@ -23,7 +23,10 @@ const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3
 createWindow = () => {
 
     appWin = new BrowserWindow({ width: 800, height: 600, title: 'Avaya Help', resizable: false, center: true, webPreferences: { contextIsolation: false, nodeIntegration: true } });
-    appWin.setIcon( 'src/assets/favicon.png' );
+    //ICON DESARROLLO
+    //appWin.setIcon( 'src/assets/favicon.png' );
+    //ICON PRODUCCION
+    appWin.setIcon( 'resources/app/src/assets/favicon.png' );
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     appWin.on( "closed", () => appWin = null );
@@ -60,7 +63,10 @@ ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
 let openIt = () => {
     modalOpenIt = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
     modalOpenIt.title = 'Avaya Help',
-    modalOpenIt.setIcon( 'src/assets/favicon.png' );
+    //ICON DESARROLLO
+    //modalOpenIt.setIcon( 'src/assets/favicon.png' );
+    //ICON PRODUCCION
+    modalOpenIt.setIcon( 'resources/app/src/assets/favicon.png' );
     modalOpenIt.loadURL( `file://${ __dirname }/dist/index.html#/It` );
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
     modalOpenIt.setMenu( null );
@@ -69,7 +75,10 @@ let openIt = () => {
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
 let openAvaya = () => {
     modalOpenAvaya = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
+    //ICON DESARROLLO
+    //modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
+    //ICON PRODUCCION
+    modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
@@ -78,7 +87,10 @@ let openAvaya = () => {
 //ABRIR VENTANA NUEVA DE trouble1
 let openTrouble1 = () => {
     modalOpenTrouble1 = new BrowserWindow( { parent: modalOpenAvaya, modal: true, show: false, x: 400, y: 150, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
+    //ICON DESARROLLO
+    //modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
+    //ICON PRODUCCION
+    modalOpenTrouble1.setIcon( 'resources/app/src/assets/favicon.png' );
     modalOpenTrouble1.loadURL( `file://${ __dirname }/dist/index.html#/Trouble1` );
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
