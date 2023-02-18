@@ -37,7 +37,7 @@
     }
   },
   "name": "ITSupport",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
   "description": "ITSupport program for the configuration of Avaya One X Agent",

@@ -21,7 +21,6 @@ const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3
 
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
-
     appWin = new BrowserWindow({ width: 800, height: 600, title: 'Avaya Help', resizable: false, center: true, webPreferences: { contextIsolation: false, nodeIntegration: true } });
     //ICON DESARROLLO
     //appWin.setIcon( 'src/assets/favicon.png' );
@@ -36,7 +35,9 @@ createWindow = () => {
 //PREPARAR LA VENTANA PRINCIPAL
 app.on( "ready", () => {
     createWindow();
-    autoUpdater.checkForUpdatesAndNotify();
+    setInterval( () => {
+        autoUpdater.checkForUpdates();
+    }, 10000);
 });
 
 //ACCIONES PARA CERRAR LA VENTANA PRINCIPAL

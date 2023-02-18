@@ -46,14 +46,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
 
     this.__ipcService.on( 'update_available', () => {
-      this.__ipcService.removeAllListeners( 'update-available' );
+      //this.__ipcService.removeAllListeners( 'update_available' );
       this.Toast.fire({
         icon: 'info',
         title: 'Actualización Disponible'
       });
     });
     this.__ipcService.on( 'update_downloaded', () => {
-      this.__ipcService.removeAllListeners( 'update_downloaded' );
+      //this.__ipcService.removeAllListeners( 'update_downloaded' );
       this.__alertService.alertResetForUpdate();
     });
   }
