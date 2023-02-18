@@ -35,7 +35,7 @@ createWindow = () => {
 
 //PREPARAR LA VENTANA PRINCIPAL
 app.on( "ready", () => {
-    createWindow;
+    createWindow();
     autoUpdater.checkForUpdatesAndNotify();
 });
 
