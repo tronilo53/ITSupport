@@ -1,5 +1,6 @@
 //IMPORTACIONES DE MODULOS;
-const { app, BrowserWindow, ipcMain } = require( "electron" );
+const { app, BrowserWindow, ipcMain, dialog } = require( "electron" );
+const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
 const path = require( "path" );
 const url = require( "url" );
@@ -19,30 +20,72 @@ const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
+//CONFIGURACIONES DE ELECTRON-UPDATER
+autoUpdater.autoDownload = false;
+autoUpdater.autoInstallOnAppQuit = false;
+
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
-    appWin = new BrowserWindow({ width: 800, height: 600, title: 'Avaya Help', resizable: false, center: true, webPreferences: { contextIsolation: false, nodeIntegration: true } });
-    //ICON DESARROLLO
-    //appWin.setIcon( 'src/assets/favicon.png' );
-    //ICON PRODUCCION
-    appWin.setIcon( 'resources/app/src/assets/favicon.png' );
+    appWin = new BrowserWindow(
+        { 
+            width: 800, 
+            height: 600, 
+            title: 'Avaya Help', 
+            resizable: false, 
+            center: true, 
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            } 
+        }
+    );
+
+    if(isDev) appWin.setIcon( 'src/assets/favicon.png' );
+    else appWin.setIcon( 'resources/app/src/assets/favicon.png' );
+
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
-    setInterval( () => {
-        autoUpdater.checkForUpdates();
-    }, 300000);
+
+    if(isDev) {
+        appWin.webContents.openDevTools( { mode: "detach" } );
+    }
+    if(!isDev) autoUpdater.checkForUpdates();
     appWin.on( "closed", () => appWin = null );
-    //appWin.webContents.openDevTools();
 }
 
 //PREPARAR LA VENTANA PRINCIPAL
-app.on( "ready", () => createWindow() );
+app.whenReady().then( () => createWindow() );
 
 //ACCIONES PARA CERRAR LA VENTANA PRINCIPAL
 app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
 
+autoUpdater.on( "update-available", () => {
+    /*const dialogOpts = {
+        type: 'info',
+        buttons: [ 'ok' ],
+        title: 'Application update',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A new version is being downloaded.'
+    }
+    dialog.showMessageBox( dialogOpts, ( response ) => {
+
+    });*/
+    ipcMain.send( 'update_available' );
+});
+autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
+    const dialogOpts = {
+        type: 'info',
+        buttons: [ 'Restart', 'Later' ],
+        title: 'Application update',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+    }
+    dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
+        if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
+    });
+});
 //COMUNICACIÓN ENTRE PROCESOS
 //--------------------------------------------
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
@@ -61,12 +104,25 @@ ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
 
 //ABRIR VENTANA NUEVA DE IT SUPPORT
 let openIt = () => {
-    modalOpenIt = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    modalOpenIt.title = 'Avaya Help',
-    //ICON DESARROLLO
-    //modalOpenIt.setIcon( 'src/assets/favicon.png' );
-    //ICON PRODUCCION
-    modalOpenIt.setIcon( 'resources/app/src/assets/favicon.png' );
+    modalOpenIt = new BrowserWindow( 
+        { 
+            parent: appWin, 
+            modal: true, 
+            show: false, 
+            x: 400, 
+            y: 100, 
+            resizable: false, 
+            title: 'Avaya Help', 
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            } 
+        } 
+    );
+    
+    if(isDev) modalOpenIt.setIcon( 'src/assets/favicon.png' );
+    else modalOpenIt.setIcon( 'resources/app/src/assets/favicon.png' );
+    
     modalOpenIt.loadURL( `file://${ __dirname }/dist/index.html#/It` );
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
     modalOpenIt.setMenu( null );
@@ -74,11 +130,25 @@ let openIt = () => {
 };
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
 let openAvaya = () => {
-    modalOpenAvaya = new BrowserWindow( { parent: appWin, modal: true, show: false, x: 400, y: 100, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    //ICON DESARROLLO
-    //modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
-    //ICON PRODUCCION
-    modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
+    modalOpenAvaya = new BrowserWindow( 
+        { 
+            parent: appWin, 
+            modal: true, 
+            show: false, 
+            x: 400, 
+            y: 100, 
+            resizable: false, 
+            title: 'Avaya Help', 
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            } 
+        } 
+    );
+
+    if(isDev) modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
+    else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
+
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
@@ -86,11 +156,25 @@ let openAvaya = () => {
 };
 //ABRIR VENTANA NUEVA DE trouble1
 let openTrouble1 = () => {
-    modalOpenTrouble1 = new BrowserWindow( { parent: modalOpenAvaya, modal: true, show: false, x: 400, y: 150, resizable: false, title: 'Avaya Help', webPreferences: { contextIsolation: false, nodeIntegration: true } } );
-    //ICON DESARROLLO
-    //modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
-    //ICON PRODUCCION
-    modalOpenTrouble1.setIcon( 'resources/app/src/assets/favicon.png' );
+    modalOpenTrouble1 = new BrowserWindow( 
+        { 
+            parent: modalOpenAvaya, 
+            modal: true, 
+            show: false, 
+            x: 400, 
+            y: 150, 
+            resizable: false, 
+            title: 'Avaya Help', 
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            } 
+        } 
+    );
+
+    if(isDev) modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
+    else modalOpenTrouble1.setIcon( 'resources/app/src/assets/favicon.png' );
+
     modalOpenTrouble1.loadURL( `file://${ __dirname }/dist/index.html#/Trouble1` );
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
@@ -205,14 +289,12 @@ let pruebaTask = ( event, args ) => {
 
 
 //ACTUALIZACION DISPONIBLE
-autoUpdater.on( 'update-available', () => {
-    ipcMain.send( 'update_available' );
-    //appWin.webContents().send( 'update_available' );
-});
+/*autoUpdater.on( 'update-available', () => {
+    appWin.webContents().send( 'update_available' );
+});*/
 //ACTUALIZACION DESCARGADA
-autoUpdater.on( 'update-downloaded', () => {
-    ipcMain.send( 'update_downloaded' );
-    //appWin.webContents().send( 'update_downloaded' )
-});
+/*autoUpdater.on( 'update-downloaded', () => {
+    appWin.webContents().send( 'update_downloaded' )
+});*/
 //INSTALAR ACTUALIZACION
-ipcMain.on( 'restartApp', () => autoUpdater.quitAndInstall() );
+/*ipcMain.on( 'restartApp', () => autoUpdater.quitAndInstall() );*/
