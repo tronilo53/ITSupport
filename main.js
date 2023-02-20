@@ -49,7 +49,7 @@ createWindow = () => {
     if(isDev) {
         appWin.webContents.openDevTools( { mode: "detach" } );
     }
-    if(!isDev) autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdates();
     appWin.on( "closed", () => appWin = null );
 }
 
