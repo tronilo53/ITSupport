@@ -62,25 +62,24 @@ app.on( "window-all-closed", () => {
 });
 
 autoUpdater.on( "update-available", () => {
-    /*const dialogOpts = {
+    const dialogOpts = {
         type: 'info',
         buttons: [ 'ok' ],
-        title: 'Application update',
+        title: 'Actualización disponible',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version is being downloaded.'
+        detail: 'Hay una nueva Actualización'
     }
-    dialog.showMessageBox( dialogOpts, ( response ) => {
-
-    });*/
-    ipcMain.send( 'update_available' );
+    dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
+        if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
+    });
 });
 autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
     const dialogOpts = {
         type: 'info',
-        buttons: [ 'Restart', 'Later' ],
-        title: 'Application update',
+        buttons: [ 'Instalar Ahora', 'Cancelar' ],
+        title: 'Actualización descargada',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+        detail: 'Se ha descargado una nueva actualización, ¿Quieres instalarla ahora?'
     }
     dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
         if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
