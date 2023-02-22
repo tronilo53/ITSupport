@@ -40,11 +40,11 @@
     }
   },
   "name": "ITSupport",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
   "description": "ITSupport program for the configuration of Avaya One X Agent",
-  "author": "Luis Tronilo - ITSupport",
+  "author": "Luis TM - ITSupport",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -87,6 +87,7 @@
     "@types/jasmine": "~4.0.0",
     "electron": "^23.0.0",
     "electron-builder": "^23.6.0",
+    "electron-log": "^5.0.0-beta.16",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

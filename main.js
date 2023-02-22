@@ -2,27 +2,25 @@
 const { app, BrowserWindow, ipcMain, dialog } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
+const log = require( "electron-log" );
 const path = require( "path" );
 const url = require( "url" );
-const fs = require( "fs" );
-const os = require( "os" );
-const { exec } = require( "child_process" );
-const xmljs = require( "xml-js" );
-const xml2js = require( "xml2js" );
+//const fs = require( "fs" );
+//const os = require( "os" );
+//const { exec } = require( "child_process" );
+//const xmljs = require( "xml-js" );
+//const xml2js = require( "xml2js" );
 
 //DECLARACIONES DE VARIABLES
 let appWin;
-let modalOpenIt;
+/*let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble1;
 const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
-
-//CONFIGURACIONES DE ELECTRON-UPDATER
-autoUpdater.autoDownload = false;
-autoUpdater.autoInstallOnAppQuit = false;
+*/
 
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
@@ -30,7 +28,7 @@ createWindow = () => {
         { 
             width: 800, 
             height: 600, 
-            title: 'Avaya Help', 
+            title: 'ITSupport', 
             resizable: false, 
             center: true, 
             webPreferences: { 
@@ -46,10 +44,52 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
 
-    if(isDev) {
-        appWin.webContents.openDevTools( { mode: "detach" } );
-    }
-    autoUpdater.checkForUpdates();
+    if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+
+    autoUpdater.logger = log;
+    log.info( 'Iniciando Aplicación...' );
+
+    appWin.once( "ready-to-show" ), () => autoUpdater.checkForUpdatesAndNotify();
+
+    autoUpdater.on( "update-available", () => {
+        log.info( 'Actualización disponible!...' );
+        const dialogOpts = {
+            type: 'info',
+            buttons: [ 'ok' ],
+            title: 'Actualización disponible',
+            message: process.platform === 'win32' ? releaseNotes : releaseName,
+            detail: 'Hay una nueva Actualización'
+        }
+        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
+            if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
+        });
+    });
+    autoUpdater.on( "error", ( ev, error ) => {
+        log.info( `Error: ${error}` );
+        const dialogOpts = {
+            type: 'error',
+            buttons: [ 'ok' ],
+            title: 'Error en actualización',
+            message: process.platform === 'win32' ? releaseNotes : releaseName,
+            detail: error
+        }
+        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
+            if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
+        });
+    });
+    autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
+        log.info( 'Actualización descargada!...' );
+        const dialogOpts = {
+            type: 'info',
+            buttons: [ 'Instalar Ahora', 'Cancelar' ],
+            title: 'Actualización descargada',
+            message: process.platform === 'win32' ? releaseNotes : releaseName,
+            detail: 'Se ha descargado una nueva actualización, ¿Quieres instalarla ahora?'
+        }
+        dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
+            if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
+        });
+    });
     appWin.on( "closed", () => appWin = null );
 }
 
@@ -61,33 +101,9 @@ app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
 
-autoUpdater.on( "update-available", () => {
-    const dialogOpts = {
-        type: 'info',
-        buttons: [ 'ok' ],
-        title: 'Actualización disponible',
-        message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'Hay una nueva Actualización'
-    }
-    dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
-        if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
-    });
-});
-autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
-    const dialogOpts = {
-        type: 'info',
-        buttons: [ 'Instalar Ahora', 'Cancelar' ],
-        title: 'Actualización descargada',
-        message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'Se ha descargado una nueva actualización, ¿Quieres instalarla ahora?'
-    }
-    dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
-        if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
-    });
-});
 //COMUNICACIÓN ENTRE PROCESOS
 //--------------------------------------------
-ipcMain.on( 'openIt', ( event, args ) => openIt() );
+/*ipcMain.on( 'openIt', ( event, args ) => openIt() );
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
 ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
@@ -95,14 +111,14 @@ ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( e
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
 ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
-ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
+ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );*/
 
 
 //FUNCIONES INTERNAS
 //------------------------------
 
 //ABRIR VENTANA NUEVA DE IT SUPPORT
-let openIt = () => {
+/*let openIt = () => {
     modalOpenIt = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -285,7 +301,7 @@ let pruebaTask = ( event, args ) => {
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
 };
-
+*/
 
 //ACTUALIZACION DISPONIBLE
 /*autoUpdater.on( 'update-available', () => {
