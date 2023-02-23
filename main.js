@@ -2,28 +2,30 @@
 const { app, BrowserWindow, ipcMain, dialog } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
-const log = require( "electron-log" );
 const path = require( "path" );
 const url = require( "url" );
-//const fs = require( "fs" );
-//const os = require( "os" );
+const fs = require( "fs" );
+const os = require( "os" );
 //const { exec } = require( "child_process" );
 //const xmljs = require( "xml-js" );
 //const xml2js = require( "xml2js" );
 
 //DECLARACIONES DE VARIABLES
 let appWin;
-/*let modalOpenIt;
-let modalOpenAvaya;
-let modalOpenTrouble1;
+//let modalOpenIt;
+//let modalOpenAvaya;
+//let modalOpenTrouble1;
 const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
-const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
-const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
-const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
-*/
+//const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
+//const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
+//const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
+
 
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
+
+    autoUpdater.checkForUpdates();
+
     appWin = new BrowserWindow(
         { 
             width: 800, 
@@ -44,27 +46,11 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
 
-    if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+    //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+    appWin.webContents.openDevTools( { mode: "detach" } );
 
-    autoUpdater.logger = log;
-    log.info( 'Iniciando Aplicación...' );
-
-    appWin.once( "ready-to-show" ), () => autoUpdater.checkForUpdatesAndNotify();
-
-    autoUpdater.on( "update-available", () => {
-        log.info( 'Actualización disponible!...' );
-        const dialogOpts = {
-            type: 'info',
-            buttons: [ 'ok' ],
-            title: 'Actualización disponible',
-            message: process.platform === 'win32' ? releaseNotes : releaseName,
-            detail: 'Hay una nueva Actualización'
-        }
-        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
-            if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
-        });
-    });
-    autoUpdater.on( "error", ( ev, error ) => {
+    appWin.once( "ready-to-show", () => checks() );
+    /*autoUpdater.on( "error", ( ev, error ) => {
         log.info( `Error: ${error}` );
         const dialogOpts = {
             type: 'error',
@@ -76,8 +62,8 @@ createWindow = () => {
         dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
             if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
         });
-    });
-    autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
+    });*/
+    /*autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
         log.info( 'Actualización descargada!...' );
         const dialogOpts = {
             type: 'info',
@@ -89,7 +75,7 @@ createWindow = () => {
         dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
             if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
         });
-    });
+    });*/
     appWin.on( "closed", () => appWin = null );
 }
 
@@ -103,15 +89,15 @@ app.on( "window-all-closed", () => {
 
 //COMUNICACIÓN ENTRE PROCESOS
 //--------------------------------------------
-/*ipcMain.on( 'openIt', ( event, args ) => openIt() );
-ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
+//ipcMain.on( 'openIt', ( event, args ) => openIt() );
+//ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
+//ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
-ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
-ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
-ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
-ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );*/
+//ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
+//ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
+//ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
+//ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
+//ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
 
 
 //FUNCIONES INTERNAS
@@ -142,9 +128,9 @@ ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );*/
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
     modalOpenIt.setMenu( null );
     //modal.webContents.openDevTools();
-};
+};*/
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
-let openAvaya = () => {
+/*let openAvaya = () => {
     modalOpenAvaya = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -168,9 +154,9 @@ let openAvaya = () => {
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
     //modalmodalOpenAvaya.webContents.openDevTools();
-};
+};*/
 //ABRIR VENTANA NUEVA DE trouble1
-let openTrouble1 = () => {
+/*let openTrouble1 = () => {
     modalOpenTrouble1 = new BrowserWindow( 
         { 
             parent: modalOpenAvaya, 
@@ -194,7 +180,7 @@ let openTrouble1 = () => {
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
     //modalOpenTrouble1.webContents.openDevTools();
-};
+};*/
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
     if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
@@ -208,14 +194,14 @@ let checkAvayaInstall = ( event, args ) => {
     }
 };
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
-let getDataOsExcludeAvaya = ( event, args ) => {
+/*let getDataOsExcludeAvaya = ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
         if( error || stderr ) event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
         else event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
     });
-};
+};*/
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
-let getDataOsAvaya = ( event, args ) => {
+/*let getDataOsAvaya = ( event, args ) => {
     fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( error, data ) => {
         if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
         else {
@@ -227,9 +213,9 @@ let getDataOsAvaya = ( event, args ) => {
             event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
         }
     });
-};
+};*/
 //PROBLEMA: AVAYA NO INICIA SESIÓN
-let trouble1 = ( event, args ) => {
+/*let trouble1 = ( event, args ) => {
     //ELIMINAR Settings.xml ORIGINAL;
     fs.unlink( RUTE__PROFILE__SETTINGS, ( error ) => {
         if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
@@ -267,9 +253,9 @@ let trouble1 = ( event, args ) => {
             });
         }
     });
-};
+};*/
 //PROBLEMA: AVAYA NO INICIA SESIÓN AUTOMÁTICAMENTE
-let trouble2 = ( event, args ) => {
+/*let trouble2 = ( event, args ) => {
     fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'trouble2', { data: 'notRead' } );
         else {
@@ -292,24 +278,54 @@ let trouble2 = ( event, args ) => {
             });
         }
     });
-};
+};*/
 //PRUEBAS CON TASKKILL
-let pruebaTask = ( event, args ) => {
+/*let pruebaTask = ( event, args ) => {
     exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
         if( error ) event.sender.send( 'pruebaTask', { data: error } );
         else if( stderr ) event.sender.send( 'pruebaTask', { data: stderr } );
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
-};
-*/
+};*/
 
-//ACTUALIZACION DISPONIBLE
-/*autoUpdater.on( 'update-available', () => {
-    appWin.webContents().send( 'update_available' );
-});*/
-//ACTUALIZACION DESCARGADA
-/*autoUpdater.on( 'update-downloaded', () => {
-    appWin.webContents().send( 'update_downloaded' )
-});*/
-//INSTALAR ACTUALIZACION
-/*ipcMain.on( 'restartApp', () => autoUpdater.quitAndInstall() );*/
+let checks = () => {
+
+    appWin.webContents.send( 'checks', 'Iniciando aplicación...' );
+
+    autoUpdater.on( 'checking-for-update', () => {
+        appWin.webContents.send( 'checks', 'Buscando actualizaciones...' );
+    });
+
+    autoUpdater.checkForUpdatesAndNotify();
+
+    autoUpdater.on( 'update-available', ( info ) => {
+        appWin.webContents.send( 'checks', 'Actualización disponible...' );
+        const dialogOpts = {
+            type: 'info',
+            buttons: [ 'ok' ],
+            title: 'Actualización disponible',
+            message: 'Te avisaremos cuando haya descargado',
+            detail: 'Hay una nueva Actualización Disponible!'
+        }
+        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {});
+    });
+    autoUpdater.on( 'update-not-available', () => {
+        appWin.webContents.send( 'checks', 'No hay actualizaciones disponibles...' );
+    });
+    autoUpdater.on( 'update-downloaded', () => {
+        appWin.webContents.send( 'checks', 'Actualización descargada!...' );
+        const dialogOpts = {
+            type: 'question',
+            buttons: [ 'Instalar Ahora', 'Cancelar' ],
+            title: 'Actualización descargada',
+            message: '¿Quieres instalarla ahora?',
+            detail: 'Se ha descargado una nueva actualización'
+        }
+        dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
+            if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
+        });
+    });
+    autoUpdater.on( 'error', ( error ) => {
+        appWin.webContents.send( 'checks', 'Error en actualización...' );
+    });
+};

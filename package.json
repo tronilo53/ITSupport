@@ -13,14 +13,12 @@
       "target": [
         "nsis"
       ],
-      "icon": "build/icon.ico"
-    },
-    "publish": {
-      "provider": "github",
-      "owner": "tronilo53",
-      "repo": "ITSupport",
-      "private": false,
-      "releaseType": "release"
+      "icon": "build/icon.ico",
+      "publish": {
+        "provider": "github",
+        "owner": "tronilo53",
+        "repo": "ITSupport"
+      }
     },
     "asar": false,
     "nsis": {
@@ -40,7 +38,7 @@
     }
   },
   "name": "ITSupport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "license": "MIT",
   "description": "ITSupport program for the configuration of Avaya One X Agent",
@@ -52,8 +50,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
-    "setupProd": "ng build && electron-builder -p always",
-    "setupDev": "ng build && electron-builder"
+    "pub": "ng build && electron-builder -p always"
   },
   "private": true,
   "dependencies": {
@@ -87,7 +84,6 @@
     "@types/jasmine": "~4.0.0",
     "electron": "^23.0.0",
     "electron-builder": "^23.6.0",
-    "electron-log": "^5.0.0-beta.16",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
