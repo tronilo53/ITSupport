@@ -10,6 +10,9 @@ const os = require( "os" );
 //const xmljs = require( "xml-js" );
 //const xml2js = require( "xml2js" );
 
+autoUpdater.autoDownload = false;
+autoUpdater.autoRunAppAfterInstall = true;
+
 //DECLARACIONES DE VARIABLES
 let appWin;
 //let modalOpenIt;
@@ -29,9 +32,8 @@ createWindow = () => {
     appWin = new BrowserWindow(
         { 
             width: 800, 
-            height: 600, 
-            title: 'ITSupport', 
-            resizable: false, 
+            height: 600,
+            resizable: false,
             center: true, 
             webPreferences: { 
                 contextIsolation: false, 
@@ -42,40 +44,11 @@ createWindow = () => {
 
     if(isDev) appWin.setIcon( 'src/assets/favicon.png' );
     else appWin.setIcon( 'resources/app/src/assets/favicon.png' );
-
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
-
-    //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
-    appWin.webContents.openDevTools( { mode: "detach" } );
-
+    if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+    appWin.webContents.send( 'setVersion', process.env.npm_package_version );
     appWin.once( "ready-to-show", () => checks() );
-    /*autoUpdater.on( "error", ( ev, error ) => {
-        log.info( `Error: ${error}` );
-        const dialogOpts = {
-            type: 'error',
-            buttons: [ 'ok' ],
-            title: 'Error en actualización',
-            message: process.platform === 'win32' ? releaseNotes : releaseName,
-            detail: error
-        }
-        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {
-            if( returnValue.response === 0 ) autoUpdater.downloadUpdate();
-        });
-    });*/
-    /*autoUpdater.on( "update-downloaded", ( _event, releaseNotes, releaseName ) => {
-        log.info( 'Actualización descargada!...' );
-        const dialogOpts = {
-            type: 'info',
-            buttons: [ 'Instalar Ahora', 'Cancelar' ],
-            title: 'Actualización descargada',
-            message: process.platform === 'win32' ? releaseNotes : releaseName,
-            detail: 'Se ha descargado una nueva actualización, ¿Quieres instalarla ahora?'
-        }
-        dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
-            if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
-        });
-    });*/
     appWin.on( "closed", () => appWin = null );
 }
 
@@ -112,8 +85,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
             show: false, 
             x: 400, 
             y: 100, 
-            resizable: false, 
-            title: 'Avaya Help', 
+            resizable: false,
             webPreferences: { 
                 contextIsolation: false, 
                 nodeIntegration: true 
@@ -138,8 +110,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
             show: false, 
             x: 400, 
             y: 100, 
-            resizable: false, 
-            title: 'Avaya Help', 
+            resizable: false,
             webPreferences: { 
                 contextIsolation: false, 
                 nodeIntegration: true 
@@ -164,8 +135,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
             show: false, 
             x: 400, 
             y: 150, 
-            resizable: false, 
-            title: 'Avaya Help', 
+            resizable: false,
             webPreferences: { 
                 contextIsolation: false, 
                 nodeIntegration: true 
@@ -290,31 +260,27 @@ let checkAvayaInstall = ( event, args ) => {
 
 let checks = () => {
 
-    appWin.webContents.send( 'checks', 'Iniciando aplicación...' );
-
-    autoUpdater.on( 'checking-for-update', () => {
-        appWin.webContents.send( 'checks', 'Buscando actualizaciones...' );
-    });
+    //appWin.webContents.send( 'checks', 'Iniciando aplicación...' );
 
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.on( 'update-available', ( info ) => {
-        appWin.webContents.send( 'checks', 'Actualización disponible...' );
-        const dialogOpts = {
+        appWin.webContents.send( 'update_available' );
+        /*const dialogOpts = {
             type: 'info',
             buttons: [ 'ok' ],
             title: 'Actualización disponible',
             message: 'Te avisaremos cuando haya descargado',
             detail: 'Hay una nueva Actualización Disponible!'
         }
-        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {});
+        dialog.showMessageBox( dialogOpts).then( ( returnValue ) => {});*/
     });
     autoUpdater.on( 'update-not-available', () => {
-        appWin.webContents.send( 'checks', 'No hay actualizaciones disponibles...' );
+        appWin.webContents.send( 'update_not_available' );
     });
     autoUpdater.on( 'update-downloaded', () => {
-        appWin.webContents.send( 'checks', 'Actualización descargada!...' );
-        const dialogOpts = {
+        appWin.webContents.send( 'update_downloaded' );
+        /*const dialogOpts = {
             type: 'question',
             buttons: [ 'Instalar Ahora', 'Cancelar' ],
             title: 'Actualización descargada',
@@ -323,9 +289,12 @@ let checks = () => {
         }
         dialog.showMessageBox( dialogOpts ).then( ( returnValue ) => {
             if( returnValue.response === 0 ) autoUpdater.quitAndInstall();
-        });
+        });*/
     });
     autoUpdater.on( 'error', ( error ) => {
-        appWin.webContents.send( 'checks', 'Error en actualización...' );
+        appWin.webContents.send( 'error_update' );
     });
 };
+
+ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
+ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );

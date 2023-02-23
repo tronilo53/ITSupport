@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
+  @ViewChild('versionValue') versionValue: ElementRef;
+
   private Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -45,20 +47,36 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
 
-    /*this.__ipcService.on( 'update_available', () => {
-      //this.__ipcService.removeAllListeners( 'update_available' );
-      this.Toast.fire({
-        icon: 'info',
-        title: 'Actualización Disponible'
-      });
-    });*/
-    /*this.__ipcService.on( 'update_downloaded', () => {
-      //this.__ipcService.removeAllListeners( 'update_downloaded' );
-      this.__alertService.alertResetForUpdate();
-    });*/
-    this.__ipcService.on( 'checks', ( event, args ) => {
+    this.__ipcService.on( 'setVersion', ( event, args ) => {
+      this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', args );
       console.log( args );
     });
+
+    this.__ipcService.on( 'update_available', () => {
+      this.__ipcService.removeAllListeners( 'update_available' );
+      this.__alertService.alertAvailableUpdate();
+    });
+    this.__ipcService.on( 'update_not_available', () => {
+      this.__ipcService.removeAllListeners( 'update_not_available' );
+      this.Toast.fire({
+        icon: 'warning',
+        title: 'No hay actualizaciones Disponibles'
+      });
+    });
+    this.__ipcService.on( 'error_update', () => {
+      this.__ipcService.removeAllListeners( 'error_update' );
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Error en actualizaciones'
+      });
+    });
+    this.__ipcService.on( 'update_downloaded', () => {
+      this.__ipcService.removeAllListeners( 'update_downloaded' );
+      this.__alertService.alertDownloadUpdate();
+    });
+    /*this.__ipcService.on( 'checks', ( event, args ) => {
+      console.log( args );
+    });*/
   }
 
   public openIt(): void {

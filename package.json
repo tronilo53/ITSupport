@@ -24,7 +24,7 @@
     "nsis": {
       "oneClick": false,
       "perMachine": true,
-      "allowElevation": true,
+      "allowElevation": false,
       "allowToChangeInstallationDirectory": true,
       "removeDefaultUninstallWelcomePage": false,
       "installerIcon": "build/installerIcon.ico",

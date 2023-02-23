@@ -12,13 +12,15 @@ export class AlertService {
   public alertSuccess( message: string ): void {
     Swal.fire({
       icon: 'success',
-      text: message
+      text: message,
+      allowOutsideClick: false
     });
   }
   public alertInfo( message: string ): void {
     Swal.fire({
       icon: 'info',
-      text: message
+      text: message,
+      allowOutsideClick: false
     });
   }
   public alertPopSuccess( message: string ): void {
@@ -27,7 +29,8 @@ export class AlertService {
       icon: 'success',
       title: message,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
+      allowOutsideClick: false
     });
   }
   public alertPopInfo( message: string ): void {
@@ -36,13 +39,15 @@ export class AlertService {
       icon: 'info',
       title: message,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
+      allowOutsideClick: false
     });
   }
   public alertError( message: string ): void {
     Swal.fire({
       icon: 'error',
-      text: message
+      text: message,
+      allowOutsideClick: false
     });
   }
   public alertPopError( message: string ): void {
@@ -51,26 +56,50 @@ export class AlertService {
       icon: 'error',
       title: message,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
+      allowOutsideClick: false
     })
   }
-  public alertResetForUpdate(): void {
+  public alertDownloadUpdate(): void {
     Swal.fire({
       title: 'Actualización Descargada',
       html: `
         <p>Se ha descargado una nueva actualización</p>,
         <p>¿Quieres instalarla ahora?</p>
-        <p><strong>Se instalará al reiniciar</strong></p>
+        <p><strong>* Se cerrará la aplicación.</strong></p>
       `,
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Actualizar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
     }).then((result) => {
       if (result.isConfirmed) {
-        this.__ipcService.send( 'restartApp' );
+        this.__ipcService.send( 'installApp' );
+      }
+    });
+  }
+  public alertAvailableUpdate(): void {
+    Swal.fire({
+      title: 'Actualización Disponible!',
+      html: `
+        <p>Hay una nueva actualización disponible</p>,
+        <p>¿Quieres descargarla ahora?</p>
+        <p>* Te avisaremos cuando se haya descargado</p>
+      `,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Descargar Ahora',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.__ipcService.send( 'downloadApp' );
+        this.alertPopInfo( 'Descargando Actualización' );
       }
     });
   }
