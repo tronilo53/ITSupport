@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     private __alertService: AlertService) {
+      //COMPROBAR QUE AVAYA ESTÉ INSTALADO
       this.__ipcService.send( 'checkAvayaInstall' );
       this.__ipcService.on( 'checkAvayaInstall', ( event, args ) => {
         if( args.data === 'fail' ) {
@@ -47,15 +48,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
 
-    this.__ipcService.on( 'setVersion', ( event, args ) => {
-      this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', args );
-      console.log( args );
-    });
+    //MOSTRAR VERSIÓN DE LA APLICACIÓN.
+    this.__ipcService.send( 'setVersion' );
+    this.__ipcService.on( 'setVersion', ( event, args ) => this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', `V.${args.data}` ) );
 
+    //ACTUALIZACION DISPONIBLE
     this.__ipcService.on( 'update_available', () => {
       this.__ipcService.removeAllListeners( 'update_available' );
       this.__alertService.alertAvailableUpdate();
     });
+
+    //ACTUALIZACION NO DISPONIBLE
     this.__ipcService.on( 'update_not_available', () => {
       this.__ipcService.removeAllListeners( 'update_not_available' );
       this.Toast.fire({
@@ -63,6 +66,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         title: 'No hay actualizaciones Disponibles'
       });
     });
+
+    //ERROR EN ACTUALIZACION
     this.__ipcService.on( 'error_update', () => {
       this.__ipcService.removeAllListeners( 'error_update' );
       this.Toast.fire({
@@ -70,13 +75,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         title: 'Error en actualizaciones'
       });
     });
+
+    //ACTUALIZACIÓN DESCARGADA
     this.__ipcService.on( 'update_downloaded', () => {
       this.__ipcService.removeAllListeners( 'update_downloaded' );
       this.__alertService.alertDownloadUpdate();
     });
-    /*this.__ipcService.on( 'checks', ( event, args ) => {
-      console.log( args );
-    });*/
   }
 
   public openIt(): void {

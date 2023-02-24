@@ -6,22 +6,22 @@ const path = require( "path" );
 const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
-//const { exec } = require( "child_process" );
-//const xmljs = require( "xml-js" );
-//const xml2js = require( "xml2js" );
+const { exec } = require( "child_process" );
+const xmljs = require( "xml-js" );
+const xml2js = require( "xml2js" );
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoRunAppAfterInstall = true;
 
 //DECLARACIONES DE VARIABLES
 let appWin;
-//let modalOpenIt;
-//let modalOpenAvaya;
-//let modalOpenTrouble1;
+let modalOpenIt;
+let modalOpenAvaya;
+let modalOpenTrouble1;
 const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
-//const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
-//const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
-//const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
+const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
+const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
+const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
 
 //FUNCION DE VENTANA PRINCIPAL
@@ -47,7 +47,6 @@ createWindow = () => {
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
     if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
-    appWin.webContents.send( 'setVersion', process.env.npm_package_version );
     appWin.once( "ready-to-show", () => checks() );
     appWin.on( "closed", () => appWin = null );
 }
@@ -62,22 +61,22 @@ app.on( "window-all-closed", () => {
 
 //COMUNICACIÓN ENTRE PROCESOS
 //--------------------------------------------
-//ipcMain.on( 'openIt', ( event, args ) => openIt() );
-//ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-//ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
+ipcMain.on( 'openIt', ( event, args ) => openIt() );
+ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
+ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
-//ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
-//ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
-//ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-//ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
-//ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
+ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
+ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
+ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
+ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
+ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
 
 
 //FUNCIONES INTERNAS
 //------------------------------
 
 //ABRIR VENTANA NUEVA DE IT SUPPORT
-/*let openIt = () => {
+let openIt = () => {
     modalOpenIt = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -100,9 +99,9 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
     modalOpenIt.setMenu( null );
     //modal.webContents.openDevTools();
-};*/
+};
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
-/*let openAvaya = () => {
+let openAvaya = () => {
     modalOpenAvaya = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -125,9 +124,9 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
     //modalmodalOpenAvaya.webContents.openDevTools();
-};*/
+};
 //ABRIR VENTANA NUEVA DE trouble1
-/*let openTrouble1 = () => {
+let openTrouble1 = () => {
     modalOpenTrouble1 = new BrowserWindow( 
         { 
             parent: modalOpenAvaya, 
@@ -150,7 +149,7 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, ar
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
     //modalOpenTrouble1.webContents.openDevTools();
-};*/
+};
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
     if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
@@ -164,14 +163,14 @@ let checkAvayaInstall = ( event, args ) => {
     }
 };
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
-/*let getDataOsExcludeAvaya = ( event, args ) => {
+let getDataOsExcludeAvaya = ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
         if( error || stderr ) event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
         else event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
     });
-};*/
+};
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
-/*let getDataOsAvaya = ( event, args ) => {
+let getDataOsAvaya = ( event, args ) => {
     fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( error, data ) => {
         if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
         else {
@@ -183,9 +182,9 @@ let checkAvayaInstall = ( event, args ) => {
             event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
         }
     });
-};*/
+};
 //PROBLEMA: AVAYA NO INICIA SESIÓN
-/*let trouble1 = ( event, args ) => {
+let trouble1 = ( event, args ) => {
     //ELIMINAR Settings.xml ORIGINAL;
     fs.unlink( RUTE__PROFILE__SETTINGS, ( error ) => {
         if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
@@ -223,9 +222,9 @@ let checkAvayaInstall = ( event, args ) => {
             });
         }
     });
-};*/
+};
 //PROBLEMA: AVAYA NO INICIA SESIÓN AUTOMÁTICAMENTE
-/*let trouble2 = ( event, args ) => {
+let trouble2 = ( event, args ) => {
     fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'trouble2', { data: 'notRead' } );
         else {
@@ -248,16 +247,25 @@ let checkAvayaInstall = ( event, args ) => {
             });
         }
     });
-};*/
+};
 //PRUEBAS CON TASKKILL
-/*let pruebaTask = ( event, args ) => {
+let pruebaTask = ( event, args ) => {
     exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
         if( error ) event.sender.send( 'pruebaTask', { data: error } );
         else if( stderr ) event.sender.send( 'pruebaTask', { data: stderr } );
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
-};*/
+};
+//DESCARGAR ACTUALIZACION
+ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
+//INSTALAR ACTUALIZACION
+ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
+//OBTENER VERSION DE APP
+ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { data: app.getVersion() } ) );
 
+
+
+//EVENTOS DE ACTUALIZACIONES AUTOMÁTICAS
 let checks = () => {
 
     //appWin.webContents.send( 'checks', 'Iniciando aplicación...' );
@@ -295,6 +303,3 @@ let checks = () => {
         appWin.webContents.send( 'error_update' );
     });
 };
-
-ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
-ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
