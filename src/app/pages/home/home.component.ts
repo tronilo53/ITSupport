@@ -76,6 +76,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     });
 
+    //PROGRESO DE DESCARGA
+    this.__ipcService.on( 'download_progress', ( event, args ) => {
+      console.log( args );
+    });    
+
     //ACTUALIZACIÓN DESCARGADA
     this.__ipcService.on( 'update_downloaded', () => {
       this.__ipcService.removeAllListeners( 'update_downloaded' );
