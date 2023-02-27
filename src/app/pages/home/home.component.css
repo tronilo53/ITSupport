@@ -20,3 +20,18 @@
     top: 1rem;
     left: 1rem;
 }
+.modalProgress {
+    position: fixed;
+    width: 100%;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+.modalProgress .containerModalProgressBar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 35%;
+    width: 80%;
+}

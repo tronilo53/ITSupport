@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
   @ViewChild('versionValue') versionValue: ElementRef;
+  @ViewChild('modal') modal: ElementRef;
+  @ViewChild('containerProgressBar') containerProgressBar: ElementRef;
+  @ViewChild('progressBar') progressBar: ElementRef;
 
   private Toast = Swal.mixin({
     toast: true,
@@ -47,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
+    this.renderer.addClass( this.modal.nativeElement, 'none' );
 
     //MOSTRAR VERSIÓN DE LA APLICACIÓN.
     this.__ipcService.send( 'setVersion' );
@@ -78,7 +82,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     //PROGRESO DE DESCARGA
     this.__ipcService.on( 'download_progress', ( event, args ) => {
-      console.log( args );
+      this.renderer.removeClass( this.modal.nativeElement, 'none' );
+      this.renderer.setProperty( this.containerProgressBar.nativeElement, 'aria-valuenow', args );
+      this.renderer.setProperty( this.progressBar.nativeElement, 'style', `width:${args}%` );
+      this.renderer.setProperty( this.progressBar.nativeElement, 'innerHTML', `${args}%` );
+      if( args == 100 ) this.renderer.addClass( this.modal.nativeElement, 'none' );
     });    
 
     //ACTUALIZACIÓN DESCARGADA

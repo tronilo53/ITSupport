@@ -10,6 +10,8 @@ const { exec } = require( "child_process" );
 const xmljs = require( "xml-js" );
 const xml2js = require( "xml2js" );
 
+let count = 0;
+
 autoUpdater.autoDownload = false;
 autoUpdater.autoRunAppAfterInstall = true;
 
@@ -26,7 +28,6 @@ const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3
 
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
-
     autoUpdater.checkForUpdates();
 
     appWin = new BrowserWindow(
@@ -46,8 +47,8 @@ createWindow = () => {
     else appWin.setIcon( 'resources/app/src/assets/favicon.png' );
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
-    //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
-    appWin.webContents.openDevTools( { mode: "detach" } );
+    if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+    //appWin.webContents.openDevTools( { mode: "detach" } );
     appWin.once( "ready-to-show", () => checks() );
     appWin.on( "closed", () => appWin = null );
 }
@@ -268,7 +269,6 @@ ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { 
 
 //EVENTOS DE ACTUALIZACIONES AUTOMÁTICAS
 let checks = () => {
-
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.on( 'update-available', ( info ) => {
@@ -278,7 +278,7 @@ let checks = () => {
         appWin.webContents.send( 'update_not_available' );
     });
     autoUpdater.on( 'download-progress', ( progressObj ) => {
-        appWin.webContents.send( 'download_progress', progressObj );
+        appWin.webContents.send( 'download_progress', Math.trunc( progressObj.percent ) );
     });
     autoUpdater.on( 'update-downloaded', () => {
         appWin.webContents.send( 'update_downloaded' );
