@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
+import { DataService } from 'src/app/services/data.service';
 import { IpcService } from 'src/app/services/ipc.service';
 
 @Component({
@@ -7,16 +8,21 @@ import { IpcService } from 'src/app/services/ipc.service';
   templateUrl: './avaya.component.html',
   styleUrls: ['./avaya.component.css']
 })
-export class AvayaComponent implements OnInit {
+export class AvayaComponent implements OnInit, AfterViewInit {
 
   public problema: string = '???';
 
   constructor( 
     private __alertService: AlertService,
-    private __ipcService: IpcService
+    private __ipcService: IpcService,
+    private __dataService: DataService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  ngAfterViewInit(): void {
+    this.__dataService.getTroubles().subscribe( ( data ) => {
+      console.log( data );
+    });
   }
 
   public solucionar(): void {

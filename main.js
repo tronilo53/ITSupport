@@ -49,7 +49,9 @@ createWindow = () => {
     appWin.setMenu( null );
     if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
     //appWin.webContents.openDevTools( { mode: "detach" } );
-    appWin.once( "ready-to-show", () => checks() );
+    appWin.once( "ready-to-show", () => {
+        //checks();
+    });
     appWin.on( "closed", () => appWin = null );
 }
 
