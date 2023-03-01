@@ -8,9 +8,19 @@ import { IpcService } from 'src/app/services/ipc.service';
   templateUrl: './avaya.component.html',
   styleUrls: ['./avaya.component.css']
 })
-export class AvayaComponent implements OnInit, AfterViewInit {
+export class AvayaComponent implements OnInit {
 
   public problema: string = '???';
+  public troublesGeneral: any[] = [];
+  public troublesSonido: any[] = [];
+  public troublesLlamadas: any[] = [];
+  public troublesInterfaz: any[] = [];
+  public troublesConexion: any[] = [];
+  public troublesContactos: any[] = [];
+  public troublesRegistro: any[] = [];
+  public troublesEstado: any[] = [];
+  public troublesPerfiles: any[] = [];
+  public troublesOtros: any[] = [];
 
   constructor( 
     private __alertService: AlertService,
@@ -18,10 +28,18 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     private __dataService: DataService
   ) { }
 
-  ngOnInit(): void { }
-  ngAfterViewInit(): void {
-    this.__dataService.getTroubles().subscribe( ( data ) => {
-      console.log( data );
+  ngOnInit(): void {
+    this.__dataService.getTroubles().subscribe( ( data: any ) => {
+      this.troublesGeneral = data;
+      this.troublesSonido = data.filter( obj => obj.category === 'sonido' );
+      this.troublesLlamadas = data.filter( obj => obj.category === 'llamadas' ); 
+      this.troublesInterfaz = data.filter( obj => obj.category === 'interfaz_de_usuario' ); 
+      this.troublesConexion = data.filter( obj => obj.category === 'conexion' ); 
+      this.troublesContactos = data.filter( obj => obj.category === 'contactos' );
+      this.troublesRegistro = data.filter( obj => obj.category === 'registro_de_tareas' );
+      this.troublesEstado = data.filter( obj => obj.category === 'estado_del_usuario' );
+      this.troublesPerfiles = data.filter( obj => obj.category === 'perfiles' );
+      this.troublesOtros = data.filter( obj => obj.category === 'otros' );
     });
   }
 

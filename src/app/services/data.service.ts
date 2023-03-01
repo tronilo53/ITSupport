@@ -9,6 +9,6 @@ export class DataService {
   constructor( private __httpClient: HttpClient ) { }
 
   public getTroubles () {
-    return this.__httpClient.get( '/assets/troubles.json' );
+    return this.__httpClient.get( 'assets/troubles.json' );
   }
 }

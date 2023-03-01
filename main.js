@@ -47,8 +47,7 @@ createWindow = () => {
     else appWin.setIcon( 'resources/app/src/assets/favicon.png' );
     appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
     appWin.setMenu( null );
-    if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
-    //appWin.webContents.openDevTools( { mode: "detach" } );
+    //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
     appWin.once( "ready-to-show", () => {
         //checks();
     });
@@ -125,6 +124,7 @@ let openAvaya = () => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
+    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
     //modalmodalOpenAvaya.webContents.openDevTools();

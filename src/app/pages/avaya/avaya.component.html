@@ -14,13 +14,23 @@
     <select class="form-select" name="problema" [(ngModel)]="problema">
         <option value="???" disabled selected>Seleccione un problema</option>
         <option value="" disabled>---Sonido---</option>
-        <option value="1">Avaya no inicia sesión</option>
-        <option value="2">Avaya no inicia sesión automáticamente</option>
-        <option value="3">Prueba con TASKKILL</option>
-        <option value="4">No se desvian las llamadas a otro usuario</option>
-        <option value="5">No se me registran las llamadas entrantes</option>
-        <option value="6">No se me registran las llamadas salientes</option>
-        <option value="7">Avaya inicia sesión pero no se escucha el sonido de entrada</option>
+        <option *ngFor="let t_sonido of troublesSonido" [value]="t_sonido.id">{{ t_sonido.trouble }}</option>
+        <option value="" disabled>---Llamadas---</option>
+        <option *ngFor="let t_llamadas of troublesLlamadas" [value]="t_llamadas.id">{{ t_llamadas.trouble }}</option>
+        <option value="" disabled>---Interfaz de Usuario---</option>
+        <option *ngFor="let t_interfaz of troublesInterfaz" [value]="t_interfaz.id">{{ t_interfaz.trouble }}</option>
+        <option value="" disabled>---Conexión---</option>
+        <option *ngFor="let t_conexion of troublesConexion" [value]="t_conexion.id">{{ t_conexion.trouble }}</option>
+        <option value="" disabled>---Contactos---</option>
+        <option *ngFor="let t_contactos of troublesContactos" [value]="t_contactos.id">{{ t_contactos.trouble }}</option>
+        <option value="" disabled>---Registro de Tareas---</option>
+        <option *ngFor="let t_registro of troublesRegistro" [value]="t_registro.id">{{ t_registro.trouble }}</option>
+        <option value="" disabled>---Estado del Usuario---</option>
+        <option *ngFor="let t_estado of troublesEstado" [value]="t_estado.id">{{ t_estado.trouble }}</option>
+        <option value="" disabled>---Perfiles---</option>
+        <option *ngFor="let t_perfiles of troublesPerfiles" [value]="t_perfiles.id">{{ t_perfiles.trouble }}</option>
+        <option value="" disabled>---Otros---</option>
+        <option *ngFor="let t_otros of troublesOtros" [value]="t_otros.id">{{ t_otros.trouble }}</option>
     </select>
 </div>
 <div class="container button">
