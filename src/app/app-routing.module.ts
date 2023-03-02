@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'Avaya', component: AvayaComponent },
   { path: 'Trouble1', component: Trouble1Component },
   { path: 'Preload', component: PreloadComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'Preload' }
+  { path: '**', pathMatch: 'full', redirectTo: 'Home' }
 ];
 
 @NgModule({

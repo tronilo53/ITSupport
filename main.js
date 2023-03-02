@@ -17,6 +17,7 @@ autoUpdater.autoRunAppAfterInstall = true;
 
 //DECLARACIONES DE VARIABLES
 let appWin;
+let appPrelaod;
 let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble1;
@@ -25,11 +26,9 @@ const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
-
 //FUNCION DE VENTANA PRINCIPAL
 createWindow = () => {
-    autoUpdater.checkForUpdates();
-
+    //autoUpdater.checkForUpdates();
     appWin = new BrowserWindow(
         { 
             width: 800, 
@@ -39,25 +38,47 @@ createWindow = () => {
             webPreferences: { 
                 contextIsolation: false, 
                 nodeIntegration: true 
-            } 
+            },
+            show: false 
         }
     );
-
-    if(isDev) appWin.setIcon( 'src/assets/favicon.png' );
-    else appWin.setIcon( 'resources/app/src/assets/favicon.png' );
-    appWin.loadURL( url.format({ pathname: path.join( __dirname, '/dist/index.html' ), protocol: 'file', slashes: true }));
+    appPrelaod = new BrowserWindow(
+        {
+            width: 600, 
+            height: 400,
+            resizable: false,
+            center: true,
+            frame: false,
+            transparent: true,
+            alwaysOnTop: true
+        }
+    );
+    if(isDev) {
+        appWin.setIcon( 'src/assets/favicon.png' );
+        appPrelaod.setIcon( 'src/assets/favicon.png' );
+    }else {
+        appWin.setIcon( 'resources/app/src/assets/favicon.png' );
+        appPrelaod.setIcon( 'resources/app/src/assets/favicon.png' );
+    }
+    appWin.loadURL( `file://${ __dirname }/dist/index.html` );
+    appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
     appWin.setMenu( null );
+    //appPrelaod.setMenu( null );
     //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
     appWin.once( "ready-to-show", () => {
         //checks();
     });
+    setTimeout( () => {
+        appPrelaod.close();
+        appWin.show();
+    }, 3000);
     appWin.on( "closed", () => appWin = null );
-}
+};
 
 //PREPARAR LA VENTANA PRINCIPAL
 app.whenReady().then( () => createWindow() );
 
-//ACCIONES PARA CERRAR LA VENTANA PRINCIPAL
+//ACCIONES PARA CERRAR LA VENTANA PRINCIPAL MacOs
 app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
