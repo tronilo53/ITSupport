@@ -16,12 +16,12 @@ export class PreloadComponent implements OnInit, AfterViewInit {
     private renderer: Renderer2
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
   ngAfterViewInit(): void {
     this.__ipcService.send( 'setVersion' );
     this.__ipcService.on( 'setVersion', ( event, args ) => {
-      this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', `${args.data}` );
+      this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', `v${args.data} &copy;${this.year} ITSupport` );
+      console.log( args );
     });
   }
 }

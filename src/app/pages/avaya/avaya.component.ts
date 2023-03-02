@@ -44,7 +44,12 @@ export class AvayaComponent implements OnInit {
   }
 
   public solucionar(): void {
-    if( this.problema === '1' ) this.__ipcService.send( 'openTrouble1' );
+    
+    console.log( this.problema );
+
+    
+
+    /*if( this.problema === '1' ) this.__ipcService.send( 'openTrouble1' );
     else if( this.problema === '2' ) {
       this.__ipcService.send( 'trouble2' );
       this.__ipcService.on( 'trouble2', ( event, args ) => {
@@ -56,6 +61,6 @@ export class AvayaComponent implements OnInit {
       this.__ipcService.on( 'pruebaTask', ( event, args ) => {
         this.__alertService.alertInfo( args.data );
       });
-    }
+    }*/
   }
 }

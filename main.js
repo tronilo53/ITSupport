@@ -26,7 +26,7 @@ const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
-//FUNCION DE VENTANA PRINCIPAL
+//FUNCION DE VENTANA PRINCIPAL Y VENTANA PRELOAD
 createWindow = () => {
     //autoUpdater.checkForUpdates();
     appWin = new BrowserWindow(
@@ -39,7 +39,7 @@ createWindow = () => {
                 contextIsolation: false, 
                 nodeIntegration: true 
             },
-            show: false 
+            show: false
         }
     );
     appPrelaod = new BrowserWindow(
@@ -48,6 +48,10 @@ createWindow = () => {
             height: 400,
             resizable: false,
             center: true,
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            },
             frame: false,
             transparent: true,
             alwaysOnTop: true
@@ -63,22 +67,27 @@ createWindow = () => {
     appWin.loadURL( `file://${ __dirname }/dist/index.html` );
     appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
     appWin.setMenu( null );
-    //appPrelaod.setMenu( null );
-    //if(isDev) appWin.webContents.openDevTools( { mode: "detach" } );
+    /*if(isDev) {
+        appWin.webContents.openDevTools( { mode: "detach" } );
+        appPrelaod.webContents.openDevTools( { mode: "detach" } );
+    }*/
     appWin.once( "ready-to-show", () => {
         //checks();
     });
+
     setTimeout( () => {
         appPrelaod.close();
         appWin.show();
     }, 3000);
+
     appWin.on( "closed", () => appWin = null );
+    appPrelaod.on( "closed", () => appPrelaod = null );
 };
 
-//PREPARAR LA VENTANA PRINCIPAL
+//PREPARAR LA VENTANA PRINCIPAL Y LA VENTANA PRELOAD
 app.whenReady().then( () => createWindow() );
 
-//ACCIONES PARA CERRAR LA VENTANA PRINCIPAL MacOs
+//ACCIONES PARA CERRAR LA APLICACIÓN
 app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
@@ -281,6 +290,7 @@ let pruebaTask = ( event, args ) => {
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
 };
+
 //DESCARGAR ACTUALIZACION
 ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
 //INSTALAR ACTUALIZACION
