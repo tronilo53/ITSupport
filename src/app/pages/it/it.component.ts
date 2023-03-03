@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 import { IpcService } from 'src/app/services/ipc.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class ItComponent implements OnInit, AfterViewInit {
 
   constructor( 
     private renderer: Renderer2,
-    private __ipcService: IpcService
+    private __ipcService: IpcService,
+    private __alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -75,22 +77,25 @@ export class ItComponent implements OnInit, AfterViewInit {
   
   //EXTENSION Y LOGIN DE AVAYA
   private getDataOsAvaya( event: any, args: any ): void {
-    const extension: string = args.data[0];
-    const login: string = args.data[1];
-
-    if( extension === '' ) {
+    if( args.data === 'notRead' || args.data === 'notJson' ) {
+      this.__alertService.alertError( 'Ha habido un error al recopilar la información del equipo, puede que no se muestren algunos datos correctamente' );
       this.renderer.removeClass( this.extAvayaErr.nativeElement, 'none' );
       this.renderer.addClass( this.extAvaya.nativeElement, 'none' );
-    }else {
-      this.renderer.setProperty( this.extAvaya.nativeElement, 'innerHTML', extension );
-    }
-
-    if( login === '' ) {
       this.renderer.removeClass( this.logAvayaErr.nativeElement, 'none' );
       this.renderer.addClass( this.logAvaya.nativeElement, 'none' );
     }else {
-      this.renderer.setProperty( this.logAvaya.nativeElement, 'innerHTML', login );
+      const extension: string = args.data[0];
+      const login: string = args.data[1];
+      if( extension === '' ) {
+        this.renderer.removeClass( this.extAvayaErr.nativeElement, 'none' );
+        this.renderer.addClass( this.extAvaya.nativeElement, 'none' );
+      }
+      else this.renderer.setProperty( this.extAvaya.nativeElement, 'innerHTML', extension );
+      if( login === '' ) {
+        this.renderer.removeClass( this.logAvayaErr.nativeElement, 'none' );
+        this.renderer.addClass( this.logAvaya.nativeElement, 'none' );
+      }
+      else this.renderer.setProperty( this.logAvaya.nativeElement, 'innerHTML', login );
     }
-    
   }
 }

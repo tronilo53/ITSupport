@@ -1,4 +1,5 @@
-//IMPORTACIONES DE MODULOS;
+/* -----------IMPORTACIONES DE MÓDULOS----------- */
+
 const { app, BrowserWindow, ipcMain, dialog } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
@@ -7,26 +8,30 @@ const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
 const { exec } = require( "child_process" );
-const xmljs = require( "xml-js" );
 const xml2js = require( "xml2js" );
 
-let count = 0;
+/* -----------PROPIEDADES DE AUTOUPDATER----------- */
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoRunAppAfterInstall = true;
 
-//DECLARACIONES DE VARIABLES
+/* -----------DECLARACIONES DE VARIABLES----------- */
+
 let appWin;
 let appPrelaod;
 let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble1;
-const RUTE__COMPLETE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5`;
+let count = 0;
+const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Config.xml`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
+const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
-//FUNCION DE VENTANA PRINCIPAL Y VENTANA PRELOAD
+
+/* -----------FUNCIÓN DE VENTANA PRINCIPAL Y PRELOAD----------- */
+
 createWindow = () => {
     //autoUpdater.checkForUpdates();
     appWin = new BrowserWindow(
@@ -84,29 +89,47 @@ createWindow = () => {
     appPrelaod.on( "closed", () => appPrelaod = null );
 };
 
-//PREPARAR LA VENTANA PRINCIPAL Y LA VENTANA PRELOAD
+/* -----------PREPARACIÓN DE LA VENTANA PRINCIPAL Y PRELOAD----------- */
+
 app.whenReady().then( () => createWindow() );
 
-//ACCIONES PARA CERRAR LA APLICACIÓN
+/* -----------ACCIONES PARA CERRAR LA APLICACIÓN MacOs----------- */
+
 app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
 
-//COMUNICACIÓN ENTRE PROCESOS
-//--------------------------------------------
+/* -----------COMUNICACIÓN ENTRE PROCESOS----------- */
+
+//ABRIR VENTANA NUEVA DE IT SUPPORT
 ipcMain.on( 'openIt', ( event, args ) => openIt() );
+//ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
 ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-ipcMain.on( 'openTrouble1', ( event, args ) => openTrouble1( event, args ) );
+//ABRIR VENTANA NUEVA DE trouble16
+//ipcMain.on( 'openTrouble16', ( event, args ) => openTrouble16( event, args ) );
+//VERIFICAR SI AVAYA ESTÁ INSTALADO
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
+//OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
+//OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
+//Trouble1
 ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-ipcMain.on( 'trouble2', ( event, args ) => trouble2( event, args ) );
+//Trouble16
+//ipcMain.on( 'trouble16', ( event, args ) => trouble16( event, args ) );
+//Trouble20
+//ipcMain.on( 'trouble20', ( event, args ) => trouble20( event, args ) );
+//PRUEBA CON TASKKILL
 ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
+//DESCARGAR ACTUALIZACION
+ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
+//INSTALAR ACTUALIZACION
+ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
+//OBTENER VERSION DE APP
+ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { data: app.getVersion() } ) );
 
 
-//FUNCIONES INTERNAS
-//------------------------------
+/* -----------FUNCIONES INTERNAS----------- */
 
 //ABRIR VENTANA NUEVA DE IT SUPPORT
 let openIt = () => {
@@ -186,15 +209,14 @@ let openTrouble1 = () => {
 };
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 let checkAvayaInstall = ( event, args ) => {
-    if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya` ) ) {
-        if( fs.existsSync( `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent` ) ) {
-            if( fs.existsSync( RUTE__COMPLETE ) ) {
-                event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
-            }
+    if( fs.existsSync( RUTE__INSTALL ) ) {
+        if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent` ) ) {
+            if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent/OneXAgentUI.exe` ) ) event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
+            else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
         }
-    }else {
-        event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
+        else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
     }
+    else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
 };
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
 let getDataOsExcludeAvaya = ( event, args ) => {
@@ -205,20 +227,52 @@ let getDataOsExcludeAvaya = ( event, args ) => {
 };
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
 let getDataOsAvaya = ( event, args ) => {
-    fs.readFile( `${RUTE__PROFILE}/Settings.xml`, ( error, data ) => {
-        if( error ) event.sender.send( 'getDataOsAvaya', 'error' );
+    fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'getDataOsAvaya', { data: 'notRead' } );
         else {
-            const result = xmljs.xml2js( data, { compact: true, attributesKey: '$' } );
-
-            const ext = result.Settings.Login.Telephony.User.$.Station; // extension
-            const log = result.Settings.Login.Agent.$.Login; // login
-
-            event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'getDataOsAvaya', { data: 'notJson' } );
+                else {
+                    const json = result;
+                    const ext = json.Settings.Login[0].Telephony[0].User[0].$.Station; // extension
+                    const log = json.Settings.Login[0].Agent[0].$.Login // login
+                    event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
+                }
+            });
         }
     });
 };
-//PROBLEMA: AVAYA NO INICIA SESIÓN
+
+/* -----------PROBLEMAS AVAYA----------- */
+
+//PROBLEMA: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
 let trouble1 = ( event, args ) => {
+
+    // PRED; RecepcionGanancia: 3.34 - TransmisionGanancia: 1.00
+
+    fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'trouble1', { data: 'notRead' } );
+        else {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'trouble1', { data: 'notJson' } );
+                else {
+                    const json = result;
+                    // json.ConfigData.parameter[15] - recepcion
+                    // json.ConfigData.parameter[16] - transmision
+                    if( json.ConfigData.paremeter[15].name === 'ReceiveGain' ) {
+                        //TODO: MODIFICAR VALOR AL PREDETERMINADO - 3.34
+                    }else {
+                        //TODO: CREAR NODO "ReceiveGain" AL FINAL (SE ORDENA AUTOMÁTICAMENTE)
+                    }
+                    event.sender.send( 'trouble1', { data: json } );
+                }
+            });
+        }
+    });
+};
+
+//PROBLEMA: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
+/*let trouble16 = ( event, args ) => {
     //ELIMINAR Settings.xml ORIGINAL;
     fs.unlink( RUTE__PROFILE__SETTINGS, ( error ) => {
         if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
@@ -256,14 +310,14 @@ let trouble1 = ( event, args ) => {
             });
         }
     });
-};
-//PROBLEMA: AVAYA NO INICIA SESIÓN AUTOMÁTICAMENTE
-let trouble2 = ( event, args ) => {
+};*/
+//PROBLEMA: Inicio de sesión automático(Aplicar) [ Value: 20 - CAT: Conexion ]
+/*let trouble20 = ( event, args ) => {
     fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'trouble2', { data: 'notRead' } );
+        if( errorRead ) event.sender.send( 'trouble20', { data: 'notRead' } );
         else {
             xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'trouble2', { data: 'notJson' } );
+                if( errorJson ) event.sender.send( 'trouble20', { data: 'notJson' } );
                 else {
                     let json = result;
                     json.Settings.Login[0].Telephony[0].User[0].$.AutoLogin = 'true';
@@ -271,36 +325,28 @@ let trouble2 = ( event, args ) => {
                     const builder = new xml2js.Builder();
                     const xml = builder.buildObject( json );
                     fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorWrite ) => {
-                        if( errorWrite ) event.sender.send( 'trouble2', { data: 'notModify' } );
+                        if( errorWrite ) event.sender.send( 'trouble20', { data: 'notModify' } );
                         else {
-                            event.sender.send( 'trouble2', { data: 'ok' } );
+                            event.sender.send( 'trouble20', { data: 'ok' } );
                         }
                     });
-                    // TODO: MODIFICAR INICIO AUTOMÁTICO XMl
                 }
             });
         }
     });
-};
-//PRUEBAS CON TASKKILL
-let pruebaTask = ( event, args ) => {
+};*/
+
+//PROBLEMAS: PRUEBAS CON TASKKILL
+/*let pruebaTask = ( event, args ) => {
     exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
         if( error ) event.sender.send( 'pruebaTask', { data: error } );
         else if( stderr ) event.sender.send( 'pruebaTask', { data: stderr } );
         else event.sender.send( 'pruebaTask', { data: stdout } );
     });
-};
+};*/
 
-//DESCARGAR ACTUALIZACION
-ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
-//INSTALAR ACTUALIZACION
-ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
-//OBTENER VERSION DE APP
-ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { data: app.getVersion() } ) );
+/* -----------EVENTOS DE ACTUALIZACIONES AUTOMÁTICAS----------- */
 
-
-
-//EVENTOS DE ACTUALIZACIONES AUTOMÁTICAS
 let checks = () => {
     autoUpdater.checkForUpdatesAndNotify();
 
