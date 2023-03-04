@@ -35,3 +35,42 @@
     top: 35%;
     width: 80%;
 }
+
+.language {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.language .content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    top: 20%;
+    padding: 80px 0;
+    border-radius: 5px;
+}
+.language .content h5 {
+    margin-bottom: 30px;
+}
+.language .content img {
+    margin: 0 30px;
+    cursor: pointer;
+}
+.language .content img:hover {
+    border: 3px double gray;
+}
+.language .content img:active {
+    border: none;
+}
+.language .content .sp {
+    width: 8rem;    
+}
+.language .content .in {
+    width: 10rem;
+}

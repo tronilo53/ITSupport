@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modal') modal: ElementRef;
   @ViewChild('containerProgressBar') containerProgressBar: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
+  @ViewChild('appLanguage') appLanguage: ElementRef;
 
   private Toast = Swal.mixin({
     toast: true,
@@ -29,33 +30,83 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private __ipcService: IpcService,
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
-    private __alertService: AlertService) {
-      //COMPROBAR QUE AVAYA ESTÉ INSTALADO
-      this.__ipcService.send( 'checkAvayaInstall' );
-      this.__ipcService.on( 'checkAvayaInstall', ( event, args ) => {
-        if( args.data === 'fail' ) {
-          this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
-          this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
-        }else {
-          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-        }
-      });
-    }
+    private __alertService: AlertService) { }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
   }
   ngAfterViewInit(): void {
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
     this.renderer.addClass( this.modal.nativeElement, 'none' );
+    this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
 
-    //MOSTRAR VERSIÓN DE LA APLICACIÓN.
+    this.checkAvayaInstall();
+  }
+
+  //ABRIR VENTANA DE IT
+  public openIt(): void {
+    this.__ipcService.send( 'openIt' );
+    this.changeDetectorRef.detectChanges();
+  }
+  //ABRIR DENTANA DE CONFIGURACION DE AVAYA
+  public openAvaya(): void {
+    this.__ipcService.send( 'openAvaya' );
+    this.changeDetectorRef.detectChanges();
+  }
+  //ESTABLECER IDIOMA SELECCIONADO
+  public setLanguage( lan: string ): void {
+    this.__ipcService.send( 'setLanguage', { data: lan } );
+    this.__ipcService.on( 'setLanguage', ( event, args ) => {
+      if( args.data === 'norRead' || args.data === 'notJson' || args.data === 'notWrite' ) {
+        console.log( 'Ha habido un error al procesar el idioma, se establecerá como predeterminado el idioma: Español' );
+      }else {
+        if( args.data === 'change__sp' ) console.log( 'Se ha cambiado al idioma: Español' );
+        else console.log( 'Se ha cambiado al idioma: Inglés' );
+      }
+    });
+  }
+  //COMPROBAR QUE AVAYA ESTÉ INSTALADO
+  private checkAvayaInstall(): void {
+    this.__ipcService.send( 'checkAvayaInstall' );
+    this.__ipcService.on( 'checkAvayaInstall', ( event, args ) => {
+      if( args.data === 'fail' ) {
+        this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
+        this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
+      }else {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+          if( args.data === 'notRead' ) {
+            console.log( 'No se ha podido leer el archivo' );
+            this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+          }else if( args.data === 'notJson' ) {
+            console.log( 'No se ha podido pasar a json' );
+          }else {
+            if( args.data === '' ) {
+              this.renderer.removeClass( this.appLanguage.nativeElement, 'none' );
+              //this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' ); //TODO: Mostrar app
+            }else if( args.data === 'sp' ) {
+              console.log( 'El idioma está en español' );
+              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+              this.setVersion();
+              this.checkUpdates();
+            }else {
+              console.log( 'El idioma está en inglés' );
+              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+              this.setVersion();
+              this.checkUpdates();
+            }
+          }
+        });
+      }
+    });
+  }
+  //MOSTRAR VERSION DE LA APLICACION
+  private setVersion(): void {
     this.__ipcService.send( 'setVersion' );
     this.__ipcService.on( 'setVersion', ( event, args ) => this.renderer.setProperty( this.versionValue.nativeElement, 'innerHTML', `V.${args.data}` ) );
-
+  }
+  //ACTUALIZACIONES AUTOMATICAS
+  private checkUpdates(): void {
     //ACTUALIZACION DISPONIBLE
     this.__ipcService.on( 'update_available', () => {
       this.__ipcService.removeAllListeners( 'update_available' );
@@ -94,14 +145,5 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.__ipcService.removeAllListeners( 'update_downloaded' );
       this.__alertService.alertDownloadUpdate();
     });
-  }
-
-  public openIt(): void {
-    this.__ipcService.send( 'openIt' );
-    this.changeDetectorRef.detectChanges();
-  }
-  public openAvaya(): void {
-    this.__ipcService.send( 'openAvaya' );
-    this.changeDetectorRef.detectChanges();
   }
 }

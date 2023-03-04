@@ -27,6 +27,8 @@ const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/o
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
 const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
+const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
+const RUTE__LAN__DEV = './src/assets/language.xml';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
 
@@ -72,10 +74,10 @@ createWindow = () => {
     appWin.loadURL( `file://${ __dirname }/dist/index.html` );
     appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
     appWin.setMenu( null );
-    /*if(isDev) {
+    if(isDev) {
         appWin.webContents.openDevTools( { mode: "detach" } );
-        appPrelaod.webContents.openDevTools( { mode: "detach" } );
-    }*/
+        //appPrelaod.webContents.openDevTools( { mode: "detach" } );
+    }
     appWin.once( "ready-to-show", () => {
         //checks();
     });
@@ -120,7 +122,51 @@ ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
 //Trouble20
 //ipcMain.on( 'trouble20', ( event, args ) => trouble20( event, args ) );
 //PRUEBA CON TASKKILL
-ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
+//ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
+//SELECCIÓN DE IDIOMA
+ipcMain.on( 'checkLanguage', ( event, args ) => checkLanguage( event, args ) );
+//ESTABLECER IDIOMA
+ipcMain.on( 'setLanguage', ( event, args ) => {
+    if( args.data === 'sp' ) {
+        fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
+            if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
+            else {
+                xml2js.parseString( data, ( errorJson, result ) => {
+                    if( errorJson ) event.sender.send( 'setLanguage', { data: 'notJson' } );
+                    else {
+                        const json = result;
+                        json.Settings.lan[0].$.language = 'sp';
+                        const builder = new xml2js.Builder();
+                        const newXml = builder.buildObject( json );
+                        fs.writeFile( RUTE__LAN__DEV, newXml, ( error ) => {
+                            if( error ) event.sender.send( 'setLanguage', { data: 'notWrite' } );
+                            else event.sender.send( 'setLanguage', { data: 'change__sp' } );
+                        });
+                    }
+                });
+            }
+        });
+    }else {
+        fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
+            if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
+            else {
+                xml2js.parseString( data, ( errorJson, result ) => {
+                    if( errorJson ) event.sender.send( 'setLanguage', { data: 'notJson' } );
+                    else {
+                        const json = result;
+                        json.Settings.lan[0].$.language = 'in';
+                        const builder = new xml2js.Builder();
+                        const newXml = builder.buildObject( json );
+                        fs.writeFile( RUTE__LAN__DEV, newXml, ( error ) => {
+                            if( error ) event.sender.send( 'setLanguage', { data: 'notWrite' } );
+                            else event.sender.send( 'setLanguage', { data: 'change__in' } );
+                        });
+                    }
+                });
+            }
+        });
+    }
+});
 //DESCARGAR ACTUALIZACION
 ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
 //INSTALAR ACTUALIZACION
@@ -217,6 +263,22 @@ let checkAvayaInstall = ( event, args ) => {
         else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
     }
     else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
+};
+//SELECCIÓN DE IDIOMA
+let checkLanguage = ( event, args ) => {
+    fs.readFile( './src/assets/language.xml', ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'checkLanguage', { data: 'notRead' } );
+        else {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'checkLanguage', { data: 'notJson' } );
+                else {
+                    const json = result;
+                    const lan = json.Settings.lan[0].$.language;
+                    event.sender.send( 'checkLanguage', { data: lan } );
+                }
+            });
+        }
+    });
 };
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
 let getDataOsExcludeAvaya = ( event, args ) => {
