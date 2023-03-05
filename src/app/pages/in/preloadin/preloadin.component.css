@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Righteous';
+    src: url('../../../../assets/fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
+        url('../../../../assets/fonts/Righteous/Righteous-Regular.woff') format('woff'),
+        url('../../../../assets/fonts/Righteous/Righteous-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+.contenedor {
+    font-family: 'Rightous';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1000;
+    text-align: center;
+}
+.contenedor img {
+    width: 15rem;
+    margin-top: 150px;
+}
+.contenedor .spinners {
+    width: 100%;
+    margin-top: 10%;
+}
+.contenedor .spinners > div {
+    margin: 0 10px;
+}
+.contenedor .comments {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.comments .text {
+    color: gray;
+}

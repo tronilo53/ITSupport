@@ -1,15 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertService } from 'src/app/services/alert.service';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AlertinService } from 'src/app/services/alertin.service';
 import { IpcService } from 'src/app/services/ipc.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './homein.component.html',
+  styleUrls: ['./homein.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeinComponent implements OnInit, AfterViewInit {
 
   //DECLARACION DE ELEMENTOS DOM
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
@@ -29,13 +28,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     timerProgressBar: false
   })
 
-  //CONSTRUCTOR DE CLASE IMPLEMENTANDO: Servicios ipc, detector de cambios en dom, renderer para manipular dom y Servicios de alerta.
+  //CONSTRUCTOR DE CLASE IMPLEMENTANDO: Servicios ipc, detector de cambios en dom, renderer para manipular dom, Servicios de alerta y navegación entre rutas.
   constructor( 
     private __ipcService: IpcService,
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
-    private __alertService: AlertService,
-    private router: Router
+    private __alertService: AlertinService
   ) { }
 
   ngOnInit(): void {
@@ -64,8 +62,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.__ipcService.send( 'openAvaya' );
     this.changeDetectorRef.detectChanges();
   }
-  //ESTABLECER IDIOMA SELECCIONADO
-  public setLanguage( lan: string ): void {
+  //ESTABLECER IDIOMA SELECCIONADO //TODO: Aprovechar función para cambiar idioma con boton
+  /*public setLanguage( lan: string ): void {
     //Comunicación entre procesos: Modificar archivo language.xml con el idioma seleccionado
     this.__ipcService.send( 'setLanguage', { data: lan } );
     this.__ipcService.on( 'setLanguage', ( event, args ) => {
@@ -81,16 +79,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }else {
         //Si se modifica a español...
         if( args.data === 'change__sp' ) {
-          //TODO: Establecer idioma a español, modificar contenedores(mostrar, ocultar) para recargar manualmente. Falla la recarga por useHash, y la redirección.
-          
+          //TODO: Establecer idioma a español
+          console.log( 'Se ha cambiado al idioma: Español' );
+          //Ocultar ventana de selección de idioma
+          this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
+          //Mostrar ventana principal de avaya
+          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
         //Si se modifica a ingles...
         }else {
           //TODO: Establecer idioma a ingles
-          this.router.navigateByUrl( 'HomeIn' );
+          console.log( 'Se ha cambiado al idioma: Inglés' );
+          //Ocultar ventana de selección de idioma
+          this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
+          //Mostrar ventana principal de avaya
+          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
         }
       }
     });
-  }
+  }*/
   //COMPROBAR QUE AVAYA ESTÉ INSTALADO
   private checkAvayaInstall(): void {
     //Comunicacion entre procesos: verificar si avaya está instalado.
@@ -101,43 +107,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
         //muestra la ventana de: Avaya no está instalado
         this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
         //Muestra una alerta diciendo que: Avaya no está instalado
-        this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
+        this.__alertService.alertError( 'Avaya One X Agent not found' );
         //Si avaya está instalado...
       }else {
-        //Comunicación entre procesos: Verificar si hay un idioma en el archivo: language.xml
-        this.__ipcService.send( 'checkLanguage' );
-        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-          //Si no lee el archivo language.xml...
-          if( args.data === 'notRead' ) {
-            //TODO: Establecer idioma a español.
-            console.log( 'No se ha podido leer el archivo' );
-            //Mostrar ventana principal de avaya;
-            this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-            //Si lee el archivo language.xml pero no procesa el JSON...
-          }else if( args.data === 'notJson' ) {
-            //TODO: Establecer idioma a español.
-            console.log( 'No se ha podido pasar a json' );
-            //Si lee el archivo language.xml y se procesa el JSON...
-          }else {
-            //Si el idioma del archivo language.xml está vacío...
-            if( args.data === '' ) {
-              //Muestra la ventana de selección de idioma.
-              this.renderer.removeClass( this.appLanguage.nativeElement, 'none' );
-            }else if( args.data === 'sp' ) {
-              console.log( 'El idioma está en español' );
-              //TODO: PONER APP EN ESPAÑOL
-              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-              this.setVersion();
-              this.checkUpdates();
-            }else {
-              console.log( 'El idioma está en inglés' );
-              //TODO: PONER APP EN INGLÉS
-              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-              this.setVersion();
-              this.checkUpdates();
-            }
-          }
-        });
+        //Mostrar la ventana principal de avaya
+        this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+        this.setVersion();
+        this.checkUpdates();
       }
     });
   }
@@ -159,7 +135,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.__ipcService.removeAllListeners( 'update_not_available' );
       this.Toast.fire({
         icon: 'warning',
-        title: 'No hay actualizaciones Disponibles'
+        title: 'No updates available'
       });
     });
 
@@ -168,7 +144,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.__ipcService.removeAllListeners( 'error_update' );
       this.Toast.fire({
         icon: 'error',
-        title: 'Error en actualizaciones'
+        title: 'Error in updates'
       });
     });
 
