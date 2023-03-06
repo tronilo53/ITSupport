@@ -1,4 +1,4 @@
-<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS -->
+<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Español ) -->
 <div class="modalProgress" #modal>
     <div class="containerModalProgressBar">
         <h2 class="text-center text-white mb-2">Descargando actualización</h2>
@@ -9,13 +9,14 @@
     </div>
 </div>
 
-<!-- SELECCIÓN DE IDIOMA -->
-<div class="language" #appLanguage>
-    <div class="content">
-        <h2>Seleccione un idioma</h2>
-        <h5>Select a language</h5>
-        <img (click)="setLanguage( 'sp' )" class="sp" src="assets/sp.jpg" alt="sp.jpg">
-        <img (click)="setLanguage( 'in' )" class="in" src="assets/in.jpg" alt="in.jpg">
+<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Ingles ) -->
+<div class="modalProgress" #modalIn>
+    <div class="containerModalProgressBar">
+        <h2 class="text-center text-white mb-2">Downloading upgrade</h2>
+        <p class="text-center text-white">A new update is being downloaded, please be patient.</p>
+        <div #containerProgressBarIn class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" #progressBarIn style="width: 0%;"></div>
+        </div>
     </div>
 </div>
 
@@ -25,7 +26,7 @@
     <span #versionValue class="version"></span>
 </div>
 
-<!-- INSTALACION DE AVAYA OK -->
+<!-- INSTALACION DE AVAYA OK ( Español ) -->
 <div class="avaya__ok" #avaya__ok>
     <div class="container content mb-5">
         <div class="row">
@@ -58,11 +59,53 @@
     </div>
 </div>
 
-<!-- INSTALACION DE AVAYA FAIL -->
+<!-- INSTALACION DE AVAYA OK ( Ingles ) -->
+<div class="avaya__ok" #avaya__ok__in>
+    <div class="container content mb-5">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Avaya Configuration</h5>
+                        <p class="card-text">Basic configuration of Avaya One X Agent. Common application errors and manuals for the configuration itself.</p>
+                        <button (click)="openAvayaIn()" class="btn btn-dark">More...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipment Information</h5>
+                        <p class="card-text">Basic operating system information for the Support Department. <strong>Sensitive information is not collected at any time.</strong></p>
+                        <button (click)="openItIn()" class="btn btn-dark">More...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container info">
+        <div class="alert alert-primary" role="alert">
+            This program is exclusive for the <strong>Support Department</strong>. At no time is sensitive information collected, it is merely informative for further configuration and faster service.
+        </div>
+    </div>
+</div>
+
+<!-- INSTALACION DE AVAYA FAIL ( Español ) -->
 <div class="avaya__fail" #avaya__fail>
     <div class="alert alert-warning" role="alert">
         Avaya no está instalado en su Sistema.
         <br>
         Cierre este programa e instale <strong>Avaya One X Agent</strong>
+    </div>
+</div>
+
+<!-- INSTALACION DE AVAYA FAIL ( Ingles ) -->
+<div class="avaya__fail" #avaya__fail__in>
+    <div class="alert alert-warning" role="alert">
+        Avaya is not installed on your system.
+        <br>
+        Close this program and install <strong>Avaya One X Agent</strong>
     </div>
 </div>

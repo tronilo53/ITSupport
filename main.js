@@ -71,36 +71,8 @@ createWindow = () => {
         appWin.setIcon( 'resources/app/src/assets/favicon.png' );
         appPrelaod.setIcon( 'resources/app/src/assets/favicon.png' );
     }
-    //lEER ARCHIVO language.xml PARA ELEGIR EL IDIOMA DE LA APLICACIÓN.
-    fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
-        if( errorRead ) {
-            appWin.loadURL( `file://${ __dirname }/dist/index.html#/Home` );
-            appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-        }
-        else {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) {
-                    appWin.loadURL( `file://${ __dirname }/dist/index.html#/Home` );
-                    appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-                }
-                else {
-                    const json = result;
-                    if( json.Settings.lan[0].$.language === '' ) {
-                        appWin.loadURL( `file://${ __dirname }/dist/index.html#/Home` );
-                        appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-                    }
-                    else if( json.Settings.lan[0].$.language === 'sp' ) {
-                        appWin.loadURL( `file://${ __dirname }/dist/index.html#/Home` );
-                        appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-                    }
-                    else {
-                        appWin.loadURL( `file://${ __dirname }/dist/index.html#/HomeIn` );
-                        appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/PreloadIn` );
-                    }
-                }
-            });
-        }
-    });
+    appWin.loadURL( `file://${ __dirname }/dist/index.html` );
+    appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
     appWin.setMenu( null );
     if(isDev) {
         appWin.webContents.openDevTools( { mode: "detach" } );

@@ -13,11 +13,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   //DECLARACION DE ELEMENTOS DOM
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
+  @ViewChild('avaya__ok__in') avaya__ok__in: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
+  @ViewChild('avaya__fail__in') avaya__fail__in: ElementRef;
   @ViewChild('versionValue') versionValue: ElementRef;
   @ViewChild('modal') modal: ElementRef;
+  @ViewChild('modalIn') modalIn: ElementRef;
   @ViewChild('containerProgressBar') containerProgressBar: ElementRef;
+  @ViewChild('containerProgressBarIn') containerProgressBarIn: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
+  @ViewChild('progressBarIn') progressBarIn: ElementRef;
   @ViewChild('appLanguage') appLanguage: ElementRef;
 
   //PREPARACIÓN DE ALERT POP (SWEETALERT2)
@@ -42,26 +47,42 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //Ocultar la ventana de: instalacion de avaya fallida
+    //Ocultar la ventana de: instalacion de avaya fallida Español
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
-    //Ocultar la ventana de: instalacion de avaya ok
+    //Ocultar la ventana de: instalacion de avaya fallida Ingles
+    this.renderer.addClass( this.avaya__fail__in.nativeElement, 'none' );
+    //Ocultar la ventana de: instalacion de avaya ok Español
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
-    //Ocultar la ventana de: progress bar, descarga de actualizacion
+    //Ocultar la ventana de: instalacion de avaya ok Ingles
+    this.renderer.addClass( this.avaya__ok__in.nativeElement, 'none' );
+    //Ocultar la ventana de: progress bar, descarga de actualizacion Español
     this.renderer.addClass( this.modal.nativeElement, 'none' );
+    //Ocultar la ventana de: progress bar, descarga de actualizacion Ingles
+    this.renderer.addClass( this.modalIn.nativeElement, 'none' );
     //Ocultar la ventana de: seleccion de idioma
     this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
     //Comprobar que avaya esté instalado
     this.checkAvayaInstall();
   }
 
-  //ABRIR VENTANA DE IT
+  //ABRIR VENTANA DE IT (Español)
   public openIt(): void {
     this.__ipcService.send( 'openIt' );
     this.changeDetectorRef.detectChanges();
   }
-  //ABRIR DENTANA DE CONFIGURACION DE AVAYA
+  //ABRIR VENTANA DE IT (Ingles)
+  public openItIn(): void {
+    this.__ipcService.send( 'openItIn' );
+    this.changeDetectorRef.detectChanges();
+  }
+  //ABRIR DENTANA DE CONFIGURACION DE AVAYA (Español)
   public openAvaya(): void {
     this.__ipcService.send( 'openAvaya' );
+    this.changeDetectorRef.detectChanges();
+  }
+  //ABRIR DENTANA DE CONFIGURACION DE AVAYA (Ingles)
+  public openAvayaIn(): void {
+    this.__ipcService.send( 'openAvayaIn' );
     this.changeDetectorRef.detectChanges();
   }
   //ESTABLECER IDIOMA SELECCIONADO
@@ -70,11 +91,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.__ipcService.send( 'setLanguage', { data: lan } );
     this.__ipcService.on( 'setLanguage', ( event, args ) => {
       //Si hay algun error en lectura, json o modificar el archivo...
-      if( args.data === 'norRead' || args.data === 'notJson' || args.data === 'notWrite' ) {
+      if( args.data === 'norRead' || args.data === 'notJson' || args.data === 'notWrite' ) {  // Error: 0045
         //Ocultar ventana de selección de idioma
         this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
         //Mostrar ventana principal de avaya - español
         this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
+        //Mostrar alerta de error en cambio de idioma
+        this.__alertService.alertError( 'Ha habido un problema al establecer el idioma "Error: 0045" Se establecerá el idioma a español' );
       //Si no hay ningún problema en lectura, json y modificar el archivo...
       }else {
         //Si se modifica a español...
@@ -104,38 +127,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
         //Si avaya está instalado...
       }else {
-        //Comunicación entre procesos: Verificar si hay un idioma en el archivo: language.xml
-        this.__ipcService.send( 'checkLanguage' );
-        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-          //Si no lee el archivo language.xml...
-          if( args.data === 'notRead' ) {
-            //Mostrar ventana principal de avaya;
-            this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-            //Si lee el archivo language.xml pero no procesa el JSON...
-          }else if( args.data === 'notJson' ) {
-            //Muestra la ventana principal de avaya - español
-            this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-            //Si lee el archivo language.xml y se procesa el JSON...
-          }else {
-            //Si el idioma del archivo language.xml está vacío...
-            if( args.data === '' ) {
-              //Muestra la ventana principal de avaya - español
-              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-              //Muestra la ventana de selección de idioma.
-              this.renderer.removeClass( this.appLanguage.nativeElement, 'none' );
-            //Si el idioma del archivo language.xml es español
-            }else if( args.data === 'sp' ) {
-              //Muestra la ventana principal de avaya - español
-              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-              this.setVersion();
-              this.checkUpdates();
-            //Si el idioma del archivo language.xml es ingles
-            }else {
-              //Redireccionar al HomeIn
-              this.router.navigateByUrl( 'HomeIn' );
-            }
-          }
-        });
+        //Mostrar ventana principal de avaya
+        this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
       }
     });
   }
@@ -184,5 +177,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.__ipcService.removeAllListeners( 'update_downloaded' );
       this.__alertService.alertDownloadUpdate();
     });
+  }
+  //Mostrar ventana de: Avaya no está instalado - con codigo de error en language
+  private showFailInstallAvayaErrorLanguage( error: string ): void {
+    //Mostrar ventana de: Avaya no está instalado - Por defecto español
+    this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
+    //Mostrar alerta de error en la lectura de language.xml
+    this.__alertService.alertError( `Ha habido un problema con la selección del idioma. Se establecerá el idioma Español por defecto. Error: ${error}` );
   }
 }
