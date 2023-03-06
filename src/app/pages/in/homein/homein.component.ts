@@ -17,7 +17,6 @@ export class HomeinComponent implements OnInit, AfterViewInit {
   @ViewChild('modal') modal: ElementRef;
   @ViewChild('containerProgressBar') containerProgressBar: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
-  @ViewChild('appLanguage') appLanguage: ElementRef;
 
   //PREPARACIÓN DE ALERT POP (SWEETALERT2)
   private Toast = Swal.mixin({
@@ -46,8 +45,6 @@ export class HomeinComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.avaya__ok.nativeElement, 'none' );
     //Ocultar la ventana de: progress bar, descarga de actualizacion
     this.renderer.addClass( this.modal.nativeElement, 'none' );
-    //Ocultar la ventana de: seleccion de idioma
-    this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
     //Comprobar que avaya esté instalado
     this.checkAvayaInstall();
   }

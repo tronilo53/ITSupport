@@ -71,21 +71,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.__ipcService.on( 'setLanguage', ( event, args ) => {
       //Si hay algun error en lectura, json o modificar el archivo...
       if( args.data === 'norRead' || args.data === 'notJson' || args.data === 'notWrite' ) {
-        //TODO: Establecer idioma a español
-        console.log( 'Ha habido un error al procesar el idioma, se establecerá como predeterminado el idioma: Español' );
         //Ocultar ventana de selección de idioma
         this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
-        //Mostrar ventana principal de avaya
+        //Mostrar ventana principal de avaya - español
         this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
       //Si no hay ningún problema en lectura, json y modificar el archivo...
       }else {
         //Si se modifica a español...
         if( args.data === 'change__sp' ) {
-          //TODO: Establecer idioma a español, modificar contenedores(mostrar, ocultar) para recargar manualmente. Falla la recarga por useHash, y la redirección.
-          
+          //Ocultar ventana de seleccion de idioma
+          this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
+          //Mostrar ventana principal de avaya - español
+          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
         //Si se modifica a ingles...
         }else {
-          //TODO: Establecer idioma a ingles
+          //Redireccionar a HomeIn
           this.router.navigateByUrl( 'HomeIn' );
         }
       }
@@ -109,32 +109,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.__ipcService.on( 'checkLanguage', ( event, args ) => {
           //Si no lee el archivo language.xml...
           if( args.data === 'notRead' ) {
-            //TODO: Establecer idioma a español.
-            console.log( 'No se ha podido leer el archivo' );
             //Mostrar ventana principal de avaya;
             this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
             //Si lee el archivo language.xml pero no procesa el JSON...
           }else if( args.data === 'notJson' ) {
-            //TODO: Establecer idioma a español.
-            console.log( 'No se ha podido pasar a json' );
+            //Muestra la ventana principal de avaya - español
+            this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
             //Si lee el archivo language.xml y se procesa el JSON...
           }else {
             //Si el idioma del archivo language.xml está vacío...
             if( args.data === '' ) {
+              //Muestra la ventana principal de avaya - español
+              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
               //Muestra la ventana de selección de idioma.
               this.renderer.removeClass( this.appLanguage.nativeElement, 'none' );
+            //Si el idioma del archivo language.xml es español
             }else if( args.data === 'sp' ) {
-              console.log( 'El idioma está en español' );
-              //TODO: PONER APP EN ESPAÑOL
+              //Muestra la ventana principal de avaya - español
               this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
               this.setVersion();
               this.checkUpdates();
+            //Si el idioma del archivo language.xml es ingles
             }else {
-              console.log( 'El idioma está en inglés' );
-              //TODO: PONER APP EN INGLÉS
-              this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-              this.setVersion();
-              this.checkUpdates();
+              //Redireccionar al HomeIn
+              this.router.navigateByUrl( 'HomeIn' );
             }
           }
         });
