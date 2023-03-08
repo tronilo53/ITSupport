@@ -15,10 +15,22 @@
 .none {
     display: none;
 }
-.version {
+.menu {
     position: absolute;
     top: 1rem;
     left: 1rem;
+    border: none;
+    background: none;
+    outline: 0;
+}
+.menu span {
+    font-size: 2rem;
+}
+.menu:hover span {
+    font-size: 2.1rem;
+}
+.menu:active span {
+    font-size: 2rem;
 }
 .modalProgress {
     position: fixed;
@@ -35,42 +47,42 @@
     top: 35%;
     width: 80%;
 }
-
-.language {
+.settings {
     position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
     z-index: 1000;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
 }
-.language .content {
+.settings .closeSettings {
     position: absolute;
+    right: 2rem;
+    top: 10rem;
+    border: none;
+    background: none;
+    outline: 0;
+}
+.settings .closeSettings span {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 1px 2px 3px black;
+}
+.settings .closeSettings:hover span {
+    font-size: 2.6rem;
+}
+.settings .closeSettings:active span {
+    font-size: 2.5rem;
+}
+.settings .content {
+    position: absolute;
+    width: 90%;
+    margin: 0 auto;
     left: 0;
     right: 0;
-    background-color: white;
-    width: 80%;
-    margin: 0 auto;
-    top: 20%;
-    padding: 80px 0;
-    border-radius: 5px;
+    top: 25%;
 }
-.language .content h5 {
-    margin-bottom: 30px;
-}
-.language .content img {
-    margin: 0 30px;
-    cursor: pointer;
-}
-.language .content img:hover {
-    border: 3px double gray;
-}
-.language .content img:active {
-    border: none;
-}
-.language .content .sp {
-    width: 8rem;    
-}
-.language .content .in {
-    width: 10rem;
+.settings .content h2 {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 2px 3px black;
 }

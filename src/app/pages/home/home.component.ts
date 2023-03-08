@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('containerProgressBarIn') containerProgressBarIn: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
   @ViewChild('progressBarIn') progressBarIn: ElementRef;
-  @ViewChild('appLanguage') appLanguage: ElementRef;
+  @ViewChild('settings') settings: ElementRef;
 
   //PREPARACIÓN DE ALERT POP (SWEETALERT2)
   private Toast = Swal.mixin({
@@ -39,8 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private __ipcService: IpcService,
     private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
-    private __alertService: AlertService,
-    private router: Router
+    private __alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -59,8 +58,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.modal.nativeElement, 'none' );
     //Ocultar la ventana de: progress bar, descarga de actualizacion Ingles
     this.renderer.addClass( this.modalIn.nativeElement, 'none' );
-    //Ocultar la ventana de: seleccion de idioma
-    this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
+    //Ocultar ventana de Settings
+    this.renderer.addClass( this.settings.nativeElement, 'none' );
+
     //Comprobar que avaya esté instalado
     this.checkAvayaInstall();
   }
@@ -85,34 +85,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.__ipcService.send( 'openAvayaIn' );
     this.changeDetectorRef.detectChanges();
   }
-  //ESTABLECER IDIOMA SELECCIONADO
-  public setLanguage( lan: string ): void {
-    //Comunicación entre procesos: Modificar archivo language.xml con el idioma seleccionado
-    this.__ipcService.send( 'setLanguage', { data: lan } );
-    this.__ipcService.on( 'setLanguage', ( event, args ) => {
-      //Si hay algun error en lectura, json o modificar el archivo...
-      if( args.data === 'norRead' || args.data === 'notJson' || args.data === 'notWrite' ) {  // Error: 0045
-        //Ocultar ventana de selección de idioma
-        this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
-        //Mostrar ventana principal de avaya - español
-        this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-        //Mostrar alerta de error en cambio de idioma
-        this.__alertService.alertError( 'Ha habido un problema al establecer el idioma "Error: 0045" Se establecerá el idioma a español' );
-      //Si no hay ningún problema en lectura, json y modificar el archivo...
-      }else {
-        //Si se modifica a español...
-        if( args.data === 'change__sp' ) {
-          //Ocultar ventana de seleccion de idioma
-          this.renderer.addClass( this.appLanguage.nativeElement, 'none' );
-          //Mostrar ventana principal de avaya - español
-          this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-        //Si se modifica a ingles...
-        }else {
-          //Redireccionar a HomeIn
-          this.router.navigateByUrl( 'HomeIn' );
-        }
-      }
-    });
+  //ABRIR VENTANA DE SETTINGS
+  public showSettings(): void {
+    this.renderer.removeClass( this.settings.nativeElement, 'none' );
+  }
+  //CERRAR VENTANA DE SETTINGS
+  public closeSettings(): void {
+    this.renderer.addClass( this.settings.nativeElement, 'none' );
   }
   //COMPROBAR QUE AVAYA ESTÉ INSTALADO
   private checkAvayaInstall(): void {
@@ -184,5 +163,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
     //Mostrar alerta de error en la lectura de language.xml
     this.__alertService.alertError( `Ha habido un problema con la selección del idioma. Se establecerá el idioma Español por defecto. Error: ${error}` );
+  }
+  private changeLanguage(): void {
+    this.__ipcService.on( 'changeLanguage', ( event, args ) => {
+
+    });
   }
 }

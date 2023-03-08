@@ -20,10 +20,26 @@
     </div>
 </div>
 
+<!-- Herramientas -->
+<div class="settings" #settings>
+    <button type="button" class="closeSettings" (click)="closeSettings()"><span class="material-symbols-outlined">close</span></button>
+    <div class="content animate__animated animate__fadeIn">
+        <h2 class="mb-3">Herramientas</h2>
+        <div class="mb-3">
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action">Cambiar el idioma</button>
+                <button type="button" class="list-group-item list-group-item-action">Poner una incidencia</button>
+                <button type="button" class="list-group-item list-group-item-action">Buscar actualizaciones</button>
+                <button type="button" class="list-group-item list-group-item-action">Cerrar aplicación</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- BANNER -->
 <div class="container banner mb-4">
     <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
-    <span #versionValue class="version"></span>
+    <button type="button" class="menu" (click)="showSettings()"><span class="material-symbols-outlined">menu</span></button>
 </div>
 
 <!-- INSTALACION DE AVAYA OK ( Español ) -->
@@ -56,6 +72,9 @@
         <div class="alert alert-primary" role="alert">
             Este programa es exclusivo para el <strong>Departamento de Soporte</strong>. En ningún momento se recopila información delicada, es meramente informativo para una mayor configuración y una atención más rápida.
         </div>
+    </div>
+    <div class="container text-center mt-4">
+        <p #versionValue class="version"></p>
     </div>
 </div>
 

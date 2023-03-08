@@ -1,6 +1,6 @@
 /* -----------IMPORTACIONES DE MÓDULOS----------- */
 
-const { app, BrowserWindow, ipcMain, dialog } = require( "electron" );
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
 const path = require( "path" );
@@ -31,6 +31,15 @@ const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Progra
 const RUTE__LAN__DEV = './src/assets/language.xml';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 
+/* -----------TEMPLATE MENU----------- */
+let menuTemplateDev = [
+    {
+        label: 'Vista',
+        submenu: [
+            { role: 'toggledevtools' }
+        ]
+    }
+];
 
 /* -----------FUNCIÓN DE VENTANA PRINCIPAL Y PRELOAD----------- */
 
@@ -39,7 +48,7 @@ createWindow = () => {
     appWin = new BrowserWindow(
         { 
             width: 800, 
-            height: 600,
+            height: 650,
             resizable: false,
             center: true, 
             webPreferences: { 
@@ -73,10 +82,9 @@ createWindow = () => {
     }
     appWin.loadURL( `file://${ __dirname }/dist/index.html` );
     appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-    appWin.setMenu( null );
     if(isDev) {
-        appWin.webContents.openDevTools( { mode: "detach" } );
-        //appPrelaod.webContents.openDevTools( { mode: "detach" } );
+        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+        appWin.setMenu( menuDev );
     }
     appWin.once( "ready-to-show", () => {
         //checks();
