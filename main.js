@@ -9,6 +9,7 @@ const fs = require( "fs" );
 const os = require( "os" );
 const { exec } = require( "child_process" );
 const xml2js = require( "xml2js" );
+const cp = require( "child_process" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
 
@@ -30,6 +31,7 @@ const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
 const RUTE__LAN__DEV = './src/assets/language.xml';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
+const RUTE__CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 /* -----------TEMPLATE MENU----------- */
 let menuTemplateDev = [
@@ -48,7 +50,7 @@ createWindow = () => {
     appWin = new BrowserWindow(
         { 
             width: 800, 
-            height: 650,
+            height: 670,
             resizable: false,
             center: true, 
             webPreferences: { 
@@ -135,46 +137,20 @@ ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
 ipcMain.on( 'checkLanguage', ( event, args ) => checkLanguage( event, args ) );
 //ESTABLECER IDIOMA
 ipcMain.on( 'setLanguage', ( event, args ) => {
-    if( args.data === 'sp' ) {
-        fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
-            if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
-            else {
-                xml2js.parseString( data, ( errorJson, result ) => {
-                    if( errorJson ) event.sender.send( 'setLanguage', { data: 'notJson' } );
-                    else {
-                        const json = result;
-                        json.Settings.lan[0].$.language = 'sp';
-                        const builder = new xml2js.Builder();
-                        const newXml = builder.buildObject( json );
-                        fs.writeFile( RUTE__LAN__DEV, newXml, ( error ) => {
-                            if( error ) event.sender.send( 'setLanguage', { data: 'notWrite' } );
-                            else event.sender.send( 'setLanguage', { data: 'change__sp' } );
-                        });
-                    }
-                });
-            }
-        });
-    }else {
-        fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
-            if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
-            else {
-                xml2js.parseString( data, ( errorJson, result ) => {
-                    if( errorJson ) event.sender.send( 'setLanguage', { data: 'notJson' } );
-                    else {
-                        const json = result;
-                        json.Settings.lan[0].$.language = 'in';
-                        const builder = new xml2js.Builder();
-                        const newXml = builder.buildObject( json );
-                        fs.writeFile( RUTE__LAN__DEV, newXml, ( error ) => {
-                            if( error ) event.sender.send( 'setLanguage', { data: 'notWrite' } );
-                            else event.sender.send( 'setLanguage', { data: 'change__in' } );
-                        });
-                    }
-                });
-            }
-        });
-    }
+    fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
+        else {
+
+        }
+    });
 });
+//ABRIR PORTAL DE INCIDENCIAS
+ipcMain.on( 'openIncident', ( event, args ) => {
+    const url = 'https://henryschein.service-now.com/serviceportaleurope?id=index_eu';
+    cp.spawn( RUTE__CHROME, [ '-new-tab', url ] );
+});
+//CERRAR APLICACIÓN
+ipcMain.on( 'closeApp', ( event, args ) => app.quit());
 //DESCARGAR ACTUALIZACION
 ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
 //INSTALAR ACTUALIZACION

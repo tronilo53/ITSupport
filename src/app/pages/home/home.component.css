@@ -49,29 +49,10 @@
 }
 .settings {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
     z-index: 1000;
-}
-.settings .closeSettings {
-    position: absolute;
-    right: 2rem;
-    top: 10rem;
-    border: none;
-    background: none;
-    outline: 0;
-}
-.settings .closeSettings span {
-    font-size: 2.5rem;
-    color: white;
-    text-shadow: 1px 2px 3px black;
-}
-.settings .closeSettings:hover span {
-    font-size: 2.6rem;
-}
-.settings .closeSettings:active span {
-    font-size: 2.5rem;
 }
 .settings .content {
     position: absolute;
@@ -79,10 +60,18 @@
     margin: 0 auto;
     left: 0;
     right: 0;
-    top: 25%;
+    top: 10%;
 }
 .settings .content h2 {
     text-align: center;
     color: white;
     text-shadow: 1px 2px 3px black;
+}
+.settings .content .changeLanguageWindow h3 {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 2px 3px black;
+}
+.material-symbols-outlined {
+    vertical-align: middle;
 }
