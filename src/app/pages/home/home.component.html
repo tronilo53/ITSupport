@@ -70,7 +70,7 @@
         <div class="mb-3">
             <div class="list-group">
                 <button type="button" (click)="showChangeLanguageIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Change language</button>
-                <button type="button" (click)="openIncident()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submit an incident</button>
+                <button type="button" (click)="openIncidentIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submit an incident</button>
                 <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Close application</button>
             </div>
         </div>
@@ -102,7 +102,7 @@
         <div class="mb-3">
             <div class="list-group">
                 <button type="button" (click)="showChangeLanguagePt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Mudar língua</button>
-                <button type="button" (click)="openIncident()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submeter um incidente</button>
+                <button type="button" (click)="openIncidentPt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submeter um incidente</button>
                 <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Fechar aplicação</button>
             </div>
         </div>
@@ -130,7 +130,9 @@
 <!-- BANNER -->
 <div class="container banner mb-4">
     <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
-    <button type="button" class="menu" (click)="showSettings()"><span class="material-symbols-outlined">menu</span></button>
+    <button type="button" class="menu" #btnMenu (click)="showSettings()"><span class="material-symbols-outlined">menu</span></button>
+    <button type="button" class="menu" #btnMenuIn (click)="showSettingsIn()"><span class="material-symbols-outlined">menu</span></button>
+    <button type="button" class="menu" #btnMenuPt (click)="showSettingsPt()"><span class="material-symbols-outlined">menu</span></button>
 </div>
 
 <!-- INSTALACION DE AVAYA OK ( Español ) -->

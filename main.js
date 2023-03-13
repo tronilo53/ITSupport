@@ -1,5 +1,4 @@
 /* -----------IMPORTACIONES DE MÓDULOS----------- */
-
 const { app, BrowserWindow, ipcMain, dialog, Menu } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
@@ -12,12 +11,10 @@ const xml2js = require( "xml2js" );
 const cp = require( "child_process" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
-
 autoUpdater.autoDownload = false;
 autoUpdater.autoRunAppAfterInstall = true;
 
 /* -----------DECLARACIONES DE VARIABLES----------- */
-
 let appWin;
 let appPrelaod;
 let modalOpenIt;
@@ -44,7 +41,6 @@ let menuTemplateDev = [
 ];
 
 /* -----------FUNCIÓN DE VENTANA PRINCIPAL Y PRELOAD----------- */
-
 createWindow = () => {
     //autoUpdater.checkForUpdates();
     appWin = new BrowserWindow(
@@ -102,67 +98,16 @@ createWindow = () => {
 };
 
 /* -----------PREPARACIÓN DE LA VENTANA PRINCIPAL Y PRELOAD----------- */
-
 app.whenReady().then( () => createWindow() );
 
 /* -----------ACCIONES PARA CERRAR LA APLICACIÓN MacOs----------- */
-
 app.on( "window-all-closed", () => {
     if( process.platform !== 'darwin' ) app.quit();
 });
 
 /* -----------COMUNICACIÓN ENTRE PROCESOS----------- */
-
 //ABRIR VENTANA NUEVA DE IT SUPPORT
-ipcMain.on( 'openIt', ( event, args ) => openIt() );
-//ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
-ipcMain.on( 'openAvaya', ( event, args ) => openAvaya() );
-//ABRIR VENTANA NUEVA DE trouble16
-//ipcMain.on( 'openTrouble16', ( event, args ) => openTrouble16( event, args ) );
-//VERIFICAR SI AVAYA ESTÁ INSTALADO
-ipcMain.on( 'checkAvayaInstall', ( event, args ) => checkAvayaInstall( event, args ) );
-//OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
-ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => getDataOsExcludeAvaya( event, args ) );
-//OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
-ipcMain.on( 'getDataOsAvaya', ( event, args ) => getDataOsAvaya( event, args ) );
-//Trouble1
-ipcMain.on( 'trouble1', ( event, args ) => trouble1( event, args ) );
-//Trouble16
-//ipcMain.on( 'trouble16', ( event, args ) => trouble16( event, args ) );
-//Trouble20
-//ipcMain.on( 'trouble20', ( event, args ) => trouble20( event, args ) );
-//PRUEBA CON TASKKILL
-//ipcMain.on( 'pruebaTask', ( event, args ) => pruebaTask( event, args ) );
-//SELECCIÓN DE IDIOMA
-ipcMain.on( 'checkLanguage', ( event, args ) => checkLanguage( event, args ) );
-//ESTABLECER IDIOMA
-ipcMain.on( 'setLanguage', ( event, args ) => {
-    fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
-        else {
-
-        }
-    });
-});
-//ABRIR PORTAL DE INCIDENCIAS
-ipcMain.on( 'openIncident', ( event, args ) => {
-    const url = 'https://henryschein.service-now.com/serviceportaleurope?id=index_eu';
-    cp.spawn( RUTE__CHROME, [ '-new-tab', url ] );
-});
-//CERRAR APLICACIÓN
-ipcMain.on( 'closeApp', ( event, args ) => app.quit());
-//DESCARGAR ACTUALIZACION
-ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
-//INSTALAR ACTUALIZACION
-ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
-//OBTENER VERSION DE APP
-ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { data: app.getVersion() } ) );
-
-
-/* -----------FUNCIONES INTERNAS----------- */
-
-//ABRIR VENTANA NUEVA DE IT SUPPORT
-let openIt = () => {
+ipcMain.on( 'openIt', ( event, args ) => {
     modalOpenIt = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -185,9 +130,9 @@ let openIt = () => {
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
     modalOpenIt.setMenu( null );
     //modal.webContents.openDevTools();
-};
+});
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
-let openAvaya = () => {
+ipcMain.on( 'openAvaya', ( event, args ) => {
     modalOpenAvaya = new BrowserWindow( 
         { 
             parent: appWin, 
@@ -207,13 +152,12 @@ let openAvaya = () => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
-    //modalmodalOpenAvaya.webContents.openDevTools();
-};
-//ABRIR VENTANA NUEVA DE trouble1
-let openTrouble1 = () => {
+});
+//ABRIR VENTANA NUEVA DE trouble16
+ipcMain.on( 'openTrouble16', ( event, args ) => {
     modalOpenTrouble1 = new BrowserWindow( 
         { 
             parent: modalOpenAvaya, 
@@ -236,9 +180,15 @@ let openTrouble1 = () => {
     modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
     modalOpenTrouble1.setMenu( null );
     //modalOpenTrouble1.webContents.openDevTools();
-};
+});
+//ABRIR PORTAL DE INCIDENCIAS
+ipcMain.on( 'openIncident', ( event, args ) => {
+    const url = 'https://henryschein.service-now.com/serviceportaleurope?id=index_eu';
+    cp.spawn( RUTE__CHROME, [ '-new-tab', url ] );
+});
+
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
-let checkAvayaInstall = ( event, args ) => {
+ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
     if( fs.existsSync( RUTE__INSTALL ) ) {
         if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent` ) ) {
             if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent/OneXAgentUI.exe` ) ) event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
@@ -247,32 +197,16 @@ let checkAvayaInstall = ( event, args ) => {
         else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
     }
     else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
-};
-//SELECCIÓN DE IDIOMA
-let checkLanguage = ( event, args ) => {
-    fs.readFile( './src/assets/language.xml', ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'checkLanguage', { data: 'notRead' } );
-        else {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'checkLanguage', { data: 'notJson' } );
-                else {
-                    const json = result;
-                    const lan = json.Settings.lan[0].$.language;
-                    event.sender.send( 'checkLanguage', { data: lan } );
-                }
-            });
-        }
-    });
-};
+});
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
-let getDataOsExcludeAvaya = ( event, args ) => {
+ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
         if( error || stderr ) event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), 'error', os.userInfo().username ] } );
         else event.sender.send( 'getDataOsExcludeAvaya', { data: [ os.hostname(), stdout, os.userInfo().username ] } );
     });
-};
+});
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
-let getDataOsAvaya = ( event, args ) => {
+ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
     fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'getDataOsAvaya', { data: 'notRead' } );
         else {
@@ -287,15 +221,10 @@ let getDataOsAvaya = ( event, args ) => {
             });
         }
     });
-};
-
-/* -----------PROBLEMAS AVAYA----------- */
-
-//PROBLEMA: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
-let trouble1 = ( event, args ) => {
-
+});
+//PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
+ipcMain.on( 'trouble1', ( event, args ) => {
     // PRED; RecepcionGanancia: 3.34 - TransmisionGanancia: 1.00
-
     fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'trouble1', { data: 'notRead' } );
         else {
@@ -315,10 +244,9 @@ let trouble1 = ( event, args ) => {
             });
         }
     });
-};
-
-//PROBLEMA: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
-/*let trouble16 = ( event, args ) => {
+});
+//PROBLEMA 16: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
+ipcMain.on( 'trouble16', ( event, args ) => {
     //ELIMINAR Settings.xml ORIGINAL;
     fs.unlink( RUTE__PROFILE__SETTINGS, ( error ) => {
         if( error ) event.sender.send( 'trouble1', { data: 'notDeleteOriginalXML' } );
@@ -356,9 +284,9 @@ let trouble1 = ( event, args ) => {
             });
         }
     });
-};*/
-//PROBLEMA: Inicio de sesión automático(Aplicar) [ Value: 20 - CAT: Conexion ]
-/*let trouble20 = ( event, args ) => {
+});
+//PROBLEMA 20: Inicio de sesión automático(Aplicar) [ Value: 20 - CAT: Conexion ]
+ipcMain.on( 'trouble20', ( event, args ) => {
     fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
         if( errorRead ) event.sender.send( 'trouble20', { data: 'notRead' } );
         else {
@@ -380,19 +308,42 @@ let trouble1 = ( event, args ) => {
             });
         }
     });
-};*/
-
-//PROBLEMAS: PRUEBAS CON TASKKILL
-/*let pruebaTask = ( event, args ) => {
-    exec( 'taskkill /im QosServM.exe', ( error, stdout, stderr ) => {
-        if( error ) event.sender.send( 'pruebaTask', { data: error } );
-        else if( stderr ) event.sender.send( 'pruebaTask', { data: stderr } );
-        else event.sender.send( 'pruebaTask', { data: stdout } );
+});
+//COMPROBAR EL IDIOMA GUARDADO EN EL ARCHIVO language.xml
+ipcMain.on( 'checkLanguage', ( event, args ) => {
+    fs.readFile( './src/assets/language.xml', ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'checkLanguage', { data: 'notRead' } );
+        else {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                if( errorJson ) event.sender.send( 'checkLanguage', { data: 'notJson' } );
+                else {
+                    const json = result;
+                    const lan = json.Settings.lan[0].$.language;
+                    event.sender.send( 'checkLanguage', { data: lan } );
+                }
+            });
+        }
     });
-};*/
+});
+//ESTABLECER IDIOMA
+ipcMain.on( 'setLanguage', ( event, args ) => {
+    fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
+        if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
+        else {
+
+        }
+    });
+});
+//CERRAR APLICACIÓN
+ipcMain.on( 'closeApp', ( event, args ) => app.quit());
+//DESCARGAR ACTUALIZACION
+ipcMain.on( 'downloadApp', () => autoUpdater.downloadUpdate() );
+//INSTALAR ACTUALIZACION
+ipcMain.on( 'installApp', () => autoUpdater.quitAndInstall() );
+//OBTENER VERSION DE APP
+ipcMain.on( 'setVersion', ( event, args ) => event.sender.send( 'setVersion', { data: app.getVersion() } ) );
 
 /* -----------EVENTOS DE ACTUALIZACIONES AUTOMÁTICAS----------- */
-
 let checks = () => {
     autoUpdater.checkForUpdatesAndNotify();
 
