@@ -1,0 +1,15 @@
+[03/13/2023 19:53:26:799]	RtpReceiveThread starting (72c)
+[03/13/2023 19:53:26:799]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/13/2023 19:53:26:799]	RtpSendThread starting (734)
+[03/13/2023 19:53:26:799]	RtcpReceiveThread starting (73c)
+[03/13/2023 19:53:26:799]	RtcpSendThread starting (744)
+[03/13/2023 19:53:26:799]	TraceRouteThread starting (74c)
+[03/13/2023 19:53:27:050]	AudioMixer::Open 0
+[03/13/2023 19:53:27:066]	Speakers mic line 4294901760
+[03/13/2023 19:53:27:066]	AudioMixer::Open 0
+[03/13/2023 19:53:27:066]	Wave in has separate mic source line
+[03/13/2023 19:53:27:066]	The mic has the volume control.
+[03/13/2023 19:53:27:066]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/13/2023 19:53:27:066]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/13/2023 19:53:27:066]	AudioMixer::EnableMicrophone
+[03/13/2023 19:53:27:129]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS

@@ -1,0 +1,43 @@
+2023-03-13 19:53:25,686 INFO 1 OneXAgentUI.App Starting one-XAgent
+2023-03-13 19:53:25,701 DEBUG 1 OneXAgentUI.App Current directory C:\Program Files (x86)\Avaya\Avaya one-X Agent
+2023-03-13 19:53:25,701 INFO 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess SparkProcess object generated for session with id = 1
+2023-03-13 19:53:25,701 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess New Mutex=True
+2023-03-13 19:53:25,701 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Waiting Mutex
+2023-03-13 19:53:25,701 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Acquired Mutex
+2023-03-13 19:53:25,701 ERROR 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl Wave file C:\Users\mordi\AppData\Roaming\Avaya\one-X Agent\2.5/WaveFiles/buttonClick.wav missing. A sound will not be played when sending DTMF.
+2023-03-13 19:53:25,717 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl AGENT_LOGIN_CALL_WAIT_TIMEOUT = 20000
+2023-03-13 19:53:25,717 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl AFTER_UUI_PAUSE = 250
+2023-03-13 19:53:25,717 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl AFTER_PROMPTED_DIGITS_PAUSE = 250
+2023-03-13 19:53:25,717 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl BEFORE_PLAYGREETING_PAUSE = 1000
+2023-03-13 19:53:25,717 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl AFTER_LOGIN_CANCEL_PAUSE = 2000
+2023-03-13 19:53:25,718 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl DTMF_PAUSE = 2000
+2023-03-13 19:53:25,718 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl AFTER_DTMF_PAUSE = 125
+2023-03-13 19:53:25,718 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl CALL_ESTABLISHMENT_PAUSE = 50
+2023-03-13 19:53:25,718 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl ADD_PARTICIPANT_PAUSE = 3000
+2023-03-13 19:53:25,718 DEBUG 1 Avaya.OneXAgent.CMService.PhoneService.PhoneServiceImpl BEFORE_PD_INVOKE_TOTAL_PAUSE= 800
+2023-03-13 19:53:25,718 INFO 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Strating to modify mediaencryption settings
+2023-03-13 19:53:25,718 INFO 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Strating to modify AECMode settings
+2023-03-13 19:53:25,718 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Got AECMode settings 0
+2023-03-13 19:53:25,718 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Got media AECMode settings 0
+2023-03-13 19:53:25,858 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess No defualt config file for Spark
+2023-03-13 19:53:25,874 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Creating new AECModenode
+2023-03-13 19:53:25,874 DEBUG 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Resetting media encryption settings
+2023-03-13 19:53:25,874 INFO 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Starting SparkEmulator at port 6225
+2023-03-13 19:53:26,093 INFO 1 OneXAgentUI.App one-X Agent current Version=2.5.60411.0
+2023-03-13 19:53:26,093 INFO 1 OneXAgentUI.App one-X Agent current Shema=1.1.0.0
+2023-03-13 19:53:26,093 INFO 1 OneXAgentUI.App Operating System:Windows 10 Enterprise
+2023-03-13 19:53:26,093 INFO 1 OneXAgentUI.App Operating System Type: 64 bit=False;Server=False
+2023-03-13 19:53:26,109 INFO 1 Avaya.OneXAgent.Configuration.ConfigHelper Copy File:C:\Program Files (x86)\Avaya\Avaya one-X Agent\Settings.xml->C:\Users\mordi\AppData\Roaming\Avaya\one-X Agent\2.5\Profiles\default\Settings.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\AuxReasonCodes.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\LogOutReasonCodes.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\WorkReasonCodes.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\Preferences.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\ScreenPops.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\Contacts.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\ContactLog.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\SelectedPhoneFeatures.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\AudioGreetings.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\TouchToneShortcuts.xml
+2023-03-13 19:53:26,118 WARN 1 Avaya.OneXAgent.Configuration.ConfigHelper Src File not found:C:\Program Files (x86)\Avaya\Avaya one-X Agent\AdvancedContactSearchSettings.xml
+2023-03-13 19:53:26,125 INFO 1 Avaya.OneXAgent.Configuration.ConfigHelper Copy File:C:\Program Files (x86)\Avaya\Avaya one-X Agent\log4net.xml->C:\Users\mordi\AppData\Roaming\Avaya\one-X Agent\2.5\Profiles\default\log4net.xml
+2023-03-13 19:53:26,610 INFO 5 Avaya.OneXAgent.CMService.PhoneService.SparkProcess Spark Emulator Started successfully

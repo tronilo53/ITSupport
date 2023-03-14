@@ -1,0 +1,9 @@
+[03/13/2023 19:53:30:267] ERR: SCRIPTDATA: Reader: Script file could not be read!
+[03/13/2023 19:53:30:267] ERR:     CONFIG: Initialize: Script data read has failed.
+[03/13/2023 19:53:30:267] ERR:    UPGRADE: Upgrade disabled. Proceed without upgrading...
+[03/13/2023 19:53:30:282] ERR:    SESSION: Setting up mini dumper
+[03/13/2023 19:53:30:408] ERR:       CORE: Unable to open file 'C:\Users\mordi\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml' with permission 'rb'.
+[03/13/2023 19:53:30:408] ERR:    HISTORY: Initialize Unable to open history file 'C:\Users\mordi\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml'.
+[03/13/2023 19:53:30:440] ERR:   CERTMGMT: CertMgmt:cmt_process_trust_certs:Cleaning up trusted certificates
+
+[03/13/2023 19:53:34:315] ERR:       DHCP: CDhcpDataAdaptor::ReadData Error

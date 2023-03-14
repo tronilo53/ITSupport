@@ -20,6 +20,9 @@ export class ItComponent implements OnInit, AfterViewInit {
   @ViewChild( 'extAvayaErr' ) extAvayaErr: ElementRef;
   @ViewChild( 'logAvaya' ) logAvaya: ElementRef;
   @ViewChild( 'logAvayaErr' ) logAvayaErr: ElementRef;
+  @ViewChild( 'sp' ) sp: ElementRef;
+  @ViewChild( 'in' ) in: ElementRef;
+  @ViewChild( 'pt' ) pt: ElementRef;
 
   constructor( 
     private renderer: Renderer2,
@@ -37,18 +40,29 @@ export class ItComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.userErr.nativeElement, 'none' );
     this.renderer.addClass( this.extAvayaErr.nativeElement, 'none' );
     this.renderer.addClass( this.logAvayaErr.nativeElement, 'none' );
+    this.renderer.addClass( this.sp.nativeElement, 'none' );
+    this.renderer.addClass( this.in.nativeElement, 'none' );
+    this.renderer.addClass( this.pt.nativeElement, 'none' );
 
-    /*
-      COMUNICACION ENTRE PROCESOS;
-      HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
-    */
+    //Detectar el idioma guardado
+    this.__ipcService.send( 'checkLanguage' );
+    this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+      if( args.data === '' || args.data === 'sp' ) {
+        //Mostrar contenido en español
+        this.renderer.removeClass( this.sp.nativeElement, 'none' );
+      }else if( args.data === 'in' ) {
+        //Mostrar contenido en Ingles
+        this.renderer.removeClass( this.in.nativeElement, 'none' );
+      }else {
+        //Mostrar contenido en Portugues
+        this.renderer.removeClass( this.pt.nativeElement, 'none' );
+      }
+    });
+
+    /* HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS*/
     this.__ipcService.send( 'getDataOsExcludeAvaya' );
     this.__ipcService.on( 'getDataOsExcludeAvaya', ( event, args ) => this.getDataOsExcludeAvaya( event, args ));
-
-    /*
-      COMUNICACION ENTRE PROCESOS;
-      EXTENSION Y LOGIN DE AVAYA
-    */
+    /* EXTENSION Y LOGIN DE AVAYA */
     this.__ipcService.send( 'getDataOsAvaya' );
     this.__ipcService.on( 'getDataOsAvaya', ( event, args ) => this.getDataOsAvaya( event, args ));
   }
@@ -74,11 +88,10 @@ export class ItComponent implements OnInit, AfterViewInit {
       const userValue = data[2];
       this.renderer.setProperty( this.user.nativeElement, 'innerHTML', userValue );
   }
-  
   //EXTENSION Y LOGIN DE AVAYA
   private getDataOsAvaya( event: any, args: any ): void {
     if( args.data === 'notRead' || args.data === 'notJson' ) {
-      this.__alertService.alertError( 'Ha habido un error al recopilar la información del equipo, puede que no se muestren algunos datos correctamente' );
+      this.__ipcService.send( 'cleanAvaya' ); //TODO: configurar esta función de copiar carpeta.
       this.renderer.removeClass( this.extAvayaErr.nativeElement, 'none' );
       this.renderer.addClass( this.extAvaya.nativeElement, 'none' );
       this.renderer.removeClass( this.logAvayaErr.nativeElement, 'none' );

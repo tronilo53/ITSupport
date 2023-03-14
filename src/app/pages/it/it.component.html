@@ -1,38 +1,116 @@
+<!-- BANNER -->
 <div class="container banner mb-4">
     <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
 </div>
+<!-- BANNER 2 -->
 <div class="container banner__2 text-center">
     <img src="assets/it_support.png" alt="it_support.png">
 </div>
-<div class="container title text-center">
-    <h3>Información del equipo</h3>
+
+<!-- CONTENIDO ESPAÑOL -->
+<div class="container__sp" #sp>
+    <div class="container title text-center">
+        <h3>Información del equipo</h3>
+    </div>
+    <div class="container data">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Hostname
+                <span class="badge bg-primary rounded-pill" #hostname>...</span>
+                <span class="badge bg-danger rounded-pill" #hostnameErr>Sin Info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Serial Tag
+                <span class="badge bg-primary rounded-pill" #serialTag>...</span>
+                <span class="badge bg-danger rounded-pill" #serialTagErr>Sin Info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Usuario Windows
+                <span class="badge bg-primary rounded-pill" #user>...</span>
+                <span class="badge bg-danger rounded-pill" #userErr>Sin Info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Extensión Avaya
+                <span class="badge bg-primary rounded-pill" #extAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #extAvayaErr>Sin Info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Login Avaya
+                <span class="badge bg-primary rounded-pill" #logAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #logAvayaErr>Sin Info...</span>
+            </li>
+        </ul>
+    </div>
 </div>
-<div class="container data">
-    <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Hostname
-            <span class="badge bg-primary rounded-pill" #hostname>...</span>
-            <span class="badge bg-danger rounded-pill" #hostnameErr>Sin Info...</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Serial Tag
-            <span class="badge bg-primary rounded-pill" #serialTag>...</span>
-            <span class="badge bg-danger rounded-pill" #serialTagErr>Sin Info...</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Usuario Windows
-            <span class="badge bg-primary rounded-pill" #user>...</span>
-            <span class="badge bg-danger rounded-pill" #userErr>Sin Info...</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Extensión Avaya
-            <span class="badge bg-primary rounded-pill" #extAvaya>...</span>
-            <span class="badge bg-danger rounded-pill" #extAvayaErr>Sin Info...</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Login Avaya
-            <span class="badge bg-primary rounded-pill" #logAvaya>...</span>
-            <span class="badge bg-danger rounded-pill" #logAvayaErr>Sin Info...</span>
-        </li>
-    </ul>
+
+<!-- CONTENIDO INGLES -->
+<div class="container__in" #in>
+    <div class="container title text-center">
+        <h3>Equipment information</h3>
+    </div>
+    <div class="container data">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Hostname
+                <span class="badge bg-primary rounded-pill" #hostname>...</span>
+                <span class="badge bg-danger rounded-pill" #hostnameErr>Not info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Serial Tag
+                <span class="badge bg-primary rounded-pill" #serialTag>...</span>
+                <span class="badge bg-danger rounded-pill" #serialTagErr>Not info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                User Windows
+                <span class="badge bg-primary rounded-pill" #user>...</span>
+                <span class="badge bg-danger rounded-pill" #userErr>Not info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Station Avaya
+                <span class="badge bg-primary rounded-pill" #extAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #extAvayaErr>Not info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Login Avaya
+                <span class="badge bg-primary rounded-pill" #logAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #logAvayaErr>Not info...</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- CONTENIDO PORTUGUES -->
+<div class="container__pt" #pt>
+    <div class="container title text-center">
+        <h3>Informação sobre equipamento</h3>
+    </div>
+    <div class="container data">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Hostname
+                <span class="badge bg-primary rounded-pill" #hostname>...</span>
+                <span class="badge bg-danger rounded-pill" #hostnameErr>Nenhuma info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Serial Tag
+                <span class="badge bg-primary rounded-pill" #serialTag>...</span>
+                <span class="badge bg-danger rounded-pill" #serialTagErr>Nenhuma info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Utilizador Windows
+                <span class="badge bg-primary rounded-pill" #user>...</span>
+                <span class="badge bg-danger rounded-pill" #userErr>Nenhuma info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Extensão Avaya
+                <span class="badge bg-primary rounded-pill" #extAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #extAvayaErr>Nenhuma info...</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Login Avaya
+                <span class="badge bg-primary rounded-pill" #logAvaya>...</span>
+                <span class="badge bg-danger rounded-pill" #logAvayaErr>Nenhuma info...</span>
+            </li>
+        </ul>
+    </div>
 </div>

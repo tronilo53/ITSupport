@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ReasonCodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="0" IsLeaf="false" ReadOnly="false" DefaultGuid="7cad7bad-4ecc-4336-8697-fb379fc2963e" Version="2.5.60411.0" xmlns="http://avaya.com/OneXAgent/ObjectModel/ReasonCode">
+  <ReasonCodes Id="10" Label="default" IsLeaf="true" ReadOnly="false" Guid="7cad7bad-4ecc-4336-8697-fb379fc2963e" />
+  <ReasonCodes Id="0" Label="sys-default" IsLeaf="true" ReadOnly="false" Guid="04d2fb5e-8166-41b2-b328-09e690d89646" />
+</ReasonCodes>

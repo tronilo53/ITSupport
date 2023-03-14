@@ -166,9 +166,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  /* ------------------------------------------------------------------------------------------------------------------------------------------ */
-
-  /* ------- Español ------- */
   //ABRIR VENTANA DE IT
   public openIt(): void {
     this.__ipcService.send( 'openIt' );
@@ -179,6 +176,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.__ipcService.send( 'openAvaya' );
     this.changeDetectorRef.detectChanges();
   }
+  /* ------------------------------------------------------------------------------------------------------------------------------------------ */
+
+  /* ------- Español ------- */
   //ABRIR VENTANA DE SETTINGS
   public showSettings(): void {
     this.renderer.removeClass( this.settings.nativeElement, 'none' ); 
@@ -294,16 +294,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //Ocultar boton de menu
     this.renderer.addClass( this.btnMenuIn.nativeElement, 'none' );
   }
-  //ABRIR VENTANA DE IT (Ingles)
-  public openItIn(): void {
-    this.__ipcService.send( 'openItIn' );
-    this.changeDetectorRef.detectChanges();
-  }
-  //ABRIR DENTANA DE CONFIGURACION DE AVAYA (Ingles)
-  public openAvayaIn(): void {
-    this.__ipcService.send( 'openAvayaIn' );
-    this.changeDetectorRef.detectChanges();
-  }
   //MOSTRAR VENTANA DE CAMBIO DE IDIOMA (Ingles)
   public showChangeLanguageIn(): void {
     this.renderer.removeClass( this.changeLanguageWindowIn.nativeElement, 'none' );
@@ -403,16 +393,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.changeLanguageWindowPt.nativeElement, 'none' );
     //Ocultar boton de menu
     this.renderer.addClass( this.btnMenuPt.nativeElement, 'none' );
-  }
-  //ABRIR VENTANA DE IT (Portugues)
-  public openItPt(): void {
-    this.__ipcService.send( 'openItPt' );
-    this.changeDetectorRef.detectChanges();
-  }
-  //ABRIR DENTANA DE CONFIGURACION DE AVAYA (Portugues)
-  public openAvayaPt(): void {
-    this.__ipcService.send( 'openAvayaPt' );
-    this.changeDetectorRef.detectChanges();
   }
   //MOSTRAR VENTANA DE CAMBIO DE IDIOMA (Portugues)
   public showChangeLanguagePt(): void {
