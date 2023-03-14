@@ -1,9 +1,7 @@
 /* -----------IMPORTACIONES DE MÓDULOS----------- */
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require( "electron" );
+const { app, BrowserWindow, ipcMain, Menu } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
-const path = require( "path" );
-const url = require( "url" );
 const fs = require( "fs" );
 const os = require( "os" );
 const { exec } = require( "child_process" );
@@ -28,7 +26,7 @@ const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
 const RUTE__LAN__DEV = './src/assets/language.xml';
 const RUTE__TEMPLATE__AVAYA__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/Avaya`;
-const RUTE__TEMPLATE__AVAYA__DEV = './assets/Avaya';
+const RUTE__TEMPLATE__AVAYA__DEV = './src/assets/Avaya';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 const RUTE__CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
@@ -200,16 +198,6 @@ ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
     }
     else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
 });
-//Mover carpeta "Avaya" Virgen (Si no se ha abierto avaya nunca)
-ipcMain.on( 'cleanAvaya', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) {
-        fs.copyFile( RUTE__TEMPLATE__AVAYA__DEV, `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya`, ( error ) => {
-            if( error ) console.log( 'No se ha copiado la carpeta' );
-            else console.log( 'La carpeta se ha copiado con exito' );
-            //TODO: COPIAR CARPETA DE AVAYA DESDE "/assets"
-        });
-    }
-});
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => {
     exec( 'wmic bios get serialnumber', ( error, stdout, stderr ) => {
@@ -219,20 +207,17 @@ ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => {
 });
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
-    fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'getDataOsAvaya', { data: 'notRead' } );
-        else {
+    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'getDataOsAvaya', { data: 'noExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'getDataOsAvaya', { data: 'notJson' } );
-                else {
-                    const json = result;
-                    const ext = json.Settings.Login[0].Telephony[0].User[0].$.Station; // extension
-                    const log = json.Settings.Login[0].Agent[0].$.Login // login
-                    event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
-                }
+                const json = result;
+                const ext = json.Settings.Login[0].Telephony[0].User[0].$.Station; // extension
+                const log = json.Settings.Login[0].Agent[0].$.Login // login
+                event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
             });
-        }
-    });
+        });
+    }
 });
 //PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
 ipcMain.on( 'trouble1', ( event, args ) => {
