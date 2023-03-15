@@ -25,10 +25,10 @@ const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roam
 const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
 const RUTE__LAN__DEV = './src/assets/language.xml';
-const RUTE__TEMPLATE__AVAYA__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/Avaya`;
-const RUTE__TEMPLATE__AVAYA__DEV = './src/assets/Avaya';
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 const RUTE__CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const RUTE__FIREFOX = 'C:/Program Files/Mozilla Firefox/firefox.exe';
+const RUTE__EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 
 /* -----------TEMPLATE MENU----------- */
 let menuTemplateDev = [
@@ -184,7 +184,13 @@ ipcMain.on( 'openTrouble16', ( event, args ) => {
 //ABRIR PORTAL DE INCIDENCIAS
 ipcMain.on( 'openIncident', ( event, args ) => {
     const url = 'https://henryschein.service-now.com/serviceportaleurope?id=index_eu';
-    cp.spawn( RUTE__CHROME, [ '-new-tab', url ] );
+    if( fs.existsSync( RUTE__CHROME ) ) cp.spawn( RUTE__CHROME, [ '-new-tab', url ] );
+    else {
+        if( fs.existsSync( RUTE__FIREFOX ) ) cp.spawn( RUTE__FIREFOX, [ '-new-tab', url ] );
+        else {
+            if( fs.existsSync( RUTE__EDGE ) ) cp.spawn( RUTE__EDGE, [ '-new-tab', url ] );
+        }
+    }
 });
 
 //VERIFICAR SI AVAYA ESTÁ INSTALADO

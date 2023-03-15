@@ -1,38 +1,43 @@
-<!--
-    TODO: Validar botón "Adelante" y procesar los problemas con node.
--->
 <div class="container banner mb-4">
     <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
 </div>
 <div class="container banner__2 text-center">
     <img src="assets/avaya.png" alt="avaya.png">
 </div>
-<div class="container title text-center mb-5">
-    <h3>Configuración de Avaya One X Agent</h3>
+<div class="container__sp" #sp>
+    <div class="container title text-center mb-5">
+        <h3>Configuración de Avaya One X Agent</h3>
+    </div>
+    <div class="container content mb-2">
+        <select class="form-select" name="problema" [(ngModel)]="problema">
+            <option value="???" disabled selected>Seleccione un problema</option>
+            <option value="" disabled>---Sonido---</option>
+            <option *ngFor="let t_sonido of troublesSonido" [value]="t_sonido.id">{{ t_sonido.trouble }}</option>
+            <option value="" disabled>---Llamadas---</option>
+            <option *ngFor="let t_llamadas of troublesLlamadas" [value]="t_llamadas.id">{{ t_llamadas.trouble }}</option>
+            <option value="" disabled>---Interfaz de Usuario---</option>
+            <option *ngFor="let t_interfaz of troublesInterfaz" [value]="t_interfaz.id">{{ t_interfaz.trouble }}</option>
+            <option value="" disabled>---Conexión---</option>
+            <option *ngFor="let t_conexion of troublesConexion" [value]="t_conexion.id">{{ t_conexion.trouble }}</option>
+            <option value="" disabled>---Contactos---</option>
+            <option *ngFor="let t_contactos of troublesContactos" [value]="t_contactos.id">{{ t_contactos.trouble }}</option>
+            <option value="" disabled>---Registro de Tareas---</option>
+            <option *ngFor="let t_registro of troublesRegistro" [value]="t_registro.id">{{ t_registro.trouble }}</option>
+            <option value="" disabled>---Estado del Usuario---</option>
+            <option *ngFor="let t_estado of troublesEstado" [value]="t_estado.id">{{ t_estado.trouble }}</option>
+            <option value="" disabled>---Perfiles---</option>
+            <option *ngFor="let t_perfiles of troublesPerfiles" [value]="t_perfiles.id">{{ t_perfiles.trouble }}</option>
+            <option value="" disabled>---Otros---</option>
+            <option *ngFor="let t_otros of troublesOtros" [value]="t_otros.id">{{ t_otros.trouble }}</option>
+        </select>
+    </div>
+    <div class="container button">
+        <button type="button" (click)="solucionar()" class="btn btn-dark">Solucionar...</button>
+    </div>
 </div>
-<div class="container content mb-2">
-    <select class="form-select" name="problema" [(ngModel)]="problema">
-        <option value="???" disabled selected>Seleccione un problema</option>
-        <option value="" disabled>---Sonido---</option>
-        <option *ngFor="let t_sonido of troublesSonido" [value]="t_sonido.id">{{ t_sonido.trouble }}</option>
-        <option value="" disabled>---Llamadas---</option>
-        <option *ngFor="let t_llamadas of troublesLlamadas" [value]="t_llamadas.id">{{ t_llamadas.trouble }}</option>
-        <option value="" disabled>---Interfaz de Usuario---</option>
-        <option *ngFor="let t_interfaz of troublesInterfaz" [value]="t_interfaz.id">{{ t_interfaz.trouble }}</option>
-        <option value="" disabled>---Conexión---</option>
-        <option *ngFor="let t_conexion of troublesConexion" [value]="t_conexion.id">{{ t_conexion.trouble }}</option>
-        <option value="" disabled>---Contactos---</option>
-        <option *ngFor="let t_contactos of troublesContactos" [value]="t_contactos.id">{{ t_contactos.trouble }}</option>
-        <option value="" disabled>---Registro de Tareas---</option>
-        <option *ngFor="let t_registro of troublesRegistro" [value]="t_registro.id">{{ t_registro.trouble }}</option>
-        <option value="" disabled>---Estado del Usuario---</option>
-        <option *ngFor="let t_estado of troublesEstado" [value]="t_estado.id">{{ t_estado.trouble }}</option>
-        <option value="" disabled>---Perfiles---</option>
-        <option *ngFor="let t_perfiles of troublesPerfiles" [value]="t_perfiles.id">{{ t_perfiles.trouble }}</option>
-        <option value="" disabled>---Otros---</option>
-        <option *ngFor="let t_otros of troublesOtros" [value]="t_otros.id">{{ t_otros.trouble }}</option>
-    </select>
+<div class="container__in" #in>
+
 </div>
-<div class="container button">
-    <button type="button" (click)="solucionar()" class="btn btn-dark">Solucionar...</button>
+<div class="container__pt" #pt>
+
 </div>
