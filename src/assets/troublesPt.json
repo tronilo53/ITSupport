@@ -1,0 +1,153 @@
+[
+    {
+        "id": 1,
+        "category": "sonido",
+        "trouble": "Ouço clientes demasiado alto"
+    },
+    {
+        "id": 2,
+        "category": "sonido",
+        "trouble": "Ouço clientes demasiado silenciosamente"
+    },
+    {
+        "id": 3,
+        "category": "sonido",
+        "trouble": "Os clientes ouvem-me demasiado alto"
+    },
+    {
+        "id": 4,
+        "category": "sonido",
+        "trouble": "Os clientes ouvem-me demasiado silenciosamente"
+    },
+    {
+        "id": 5,
+        "category": "sonido",
+        "trouble": "O som do zumbido está a chegar através dos auscultadores"
+    },
+    {
+        "id": 6,
+        "category": "sonido",
+        "trouble": "O som do zumbido é tocado pelo computador"
+    },
+    {
+        "id": 7,
+        "category": "llamadas",
+        "trouble": "A chamada é transferida directamente"
+    },
+    {
+        "id": 8,
+        "category": "llamadas",
+        "trouble": "O autor da chamada é adicionado directamente à chamada."
+    },
+    {
+        "id": 9,
+        "category": "llamadas",
+        "trouble": "Quando me chamam, o ecrã não vem para a frente."
+    },
+    {
+        "id": 10,
+        "category": "interfaz_de_usuario",
+        "trouble": "Não são exibidas pontas de ferramentas"
+    },
+    {
+        "id": 11,
+        "category": "interfaz_de_usuario",
+        "trouble": "Nenhuma letra é exibida no teclado de marcação."
+    },
+    {
+        "id": 12,
+        "category": "interfaz_de_usuario",
+        "trouble": "Nenhum ícone exibido na barra de tarefas"
+    },
+    {
+        "id": 13,
+        "category": "interfaz_de_usuario",
+        "trouble": "O ecrã do telefone não é exibido"
+    },
+    {
+        "id": 14,
+        "category": "interfaz_de_usuario",
+        "trouble": "A barra de ferramentas de botões não é exibida"
+    },
+    {
+        "id": 15,
+        "category": "interfaz_de_usuario",
+        "trouble": "Quero configurar os meus botões favoritos"
+    },
+    {
+        "id": 16,
+        "category": "conexion",
+        "trouble": "Não consigo iniciar sessão(recebo um erro)"
+    },
+    {
+        "id": 17,
+        "category": "conexion",
+        "trouble": "Estou ligado, mas não há chamadas a entrar ou a sair"
+    },
+    {
+        "id": 18,
+        "category": "conexion",
+        "trouble": "Ao iniciar sessão, permanece ligado..."
+    },
+    {
+        "id": 19,
+        "category": "conexion",
+        "trouble": "Avaya começa, mas o ecrã não é visível"
+    },
+    {
+        "id": 20,
+        "category": "conexion",
+        "trouble": "Login automático(Aplicar)"
+    },
+    {
+        "id": 21,
+        "category": "conexion",
+        "trouble": "Login automático(Remover)"
+    },
+    {
+        "id": 22,
+        "category": "contactos",
+        "trouble": "Quero modificar os contactos"
+    },
+    {
+        "id": 23,
+        "category": "registro_de_tareas",
+        "trouble": "Registo de chamadas recebidas(Aplicar)"
+    },
+    {
+        "id": 24,
+        "category": "registro_de_tareas",
+        "trouble": "Registo de chamadas recebidas (Remover)"
+    },
+    {
+        "id": 25,
+        "category": "registro_de_tareas",
+        "trouble": "Registar chamadas efectuadas(Aplicar)"
+    },
+    {
+        "id": 26,
+        "category": "registro_de_tareas",
+        "trouble": "Registar chamadas efectuadas (Remover)"
+    },
+    {
+        "id": 27,
+        "category": "estado_del_usuario",
+        "trouble": "Eu quero modificar os estados(AUX)"
+    },
+    {
+        "id": 28,
+        "category": "perfiles",
+        "trouble": "Quero modificar os perfis"
+    },
+    {
+        "id": 29,
+        "category": "otros",
+        "trouble": "Não posso chamar os telemóveis nacionais"
+    },
+    {
+        "id": 30,
+        "category": "otros",
+        "trouble": "Não posso ligar para linhas internacionais"
+    }
+    
+]

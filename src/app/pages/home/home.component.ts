@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   //DECLARACION DE ELEMENTOS DOM
   /* ----- Español ----- */
+  @ViewChild('sp') sp: ElementRef;
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
   @ViewChild('modal') modal: ElementRef;
@@ -21,9 +22,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('progressBar') progressBar: ElementRef;
   @ViewChild('settings') settings: ElementRef;
   @ViewChild('changeLanguageWindow') changeLanguageWindow: ElementRef;
-  @ViewChild('btnMenu') btnMenu: ElementRef;
 
   /* ----- Ingles ----- */
+  @ViewChild('in') in: ElementRef;
   @ViewChild('avaya__ok__in') avaya__ok__in: ElementRef;
   @ViewChild('avaya__fail__in') avaya__fail__in: ElementRef;
   @ViewChild('modalIn') modalIn: ElementRef;
@@ -31,9 +32,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('progressBarIn') progressBarIn: ElementRef;
   @ViewChild('settingsIn') settingsIn: ElementRef;
   @ViewChild('changeLanguageWindowIn') changeLanguageWindowIn: ElementRef;
-  @ViewChild('btnMenuIn') btnMenuIn: ElementRef;
 
   /* ----- Portugues ----- */
+  @ViewChild('pt') pt: ElementRef;
   @ViewChild('avaya__ok__pt') avaya__ok__pt: ElementRef;
   @ViewChild('avaya__fail__pt') avaya__fail__pt: ElementRef;
   @ViewChild('modalPt') modalPt: ElementRef;
@@ -41,7 +42,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('progressBarPt') progressBarPt: ElementRef;
   @ViewChild('settingsPt') settingsPt: ElementRef;
   @ViewChild('changeLanguageWindowPt') changeLanguageWindowPt: ElementRef;
-  @ViewChild('btnMenuPt') btnMenuPt: ElementRef;
 
   //PROPIEDADES DE CAMBIO DE IDIOMA (SELECT) - ngModel
   /* ----- Español ----- */
@@ -96,16 +96,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.__ipcService.send( 'checkLanguage' );
         this.__ipcService.on( 'checkLanguage', ( event, args ) => {
           if( args.data === '' || args.data === 'sp' ) {
+            //Muestra el contenedor Español
+            this.renderer.removeClass( this.sp.nativeElement, 'none' );
             //muestra la ventana de: Avaya no está instalado (Español)
             this.renderer.removeClass( this.avaya__fail.nativeElement, 'none' );
             //Muestra una alerta diciendo que: Avaya no está instalado (Español)
             this.__alertService.alertError( 'No se ha encontrado Avaya One X Agent' );
           }else if( args.data === 'in' ) {
+            //Muestra el contenedor Ingles
+            this.renderer.removeClass( this.in.nativeElement, 'none' );
             //muestra la ventana de: Avaya no está instalado (Español)
             this.renderer.removeClass( this.avaya__fail__in.nativeElement, 'none' );
             //Muestra una alerta diciendo que: Avaya no está instalado (Español)
             this.__alertServiceIn.alertError( 'Avaya One X Agent not found' );
           }else {
+            //Muestra el contenedor Portugues
+            this.renderer.removeClass( this.pt.nativeElement, 'none' );
             //muestra la ventana de: Avaya no está instalado (Español)
             this.renderer.removeClass( this.avaya__fail__pt.nativeElement, 'none' );
             //Muestra una alerta diciendo que: Avaya no está instalado (Español)
@@ -117,28 +123,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.__ipcService.send( 'checkLanguage' );
         this.__ipcService.on( 'checkLanguage', ( event, args ) => {
           if( args.data === '' || args.data === 'sp' ) {
+            //Muestra el contenedor Español
+            this.renderer.removeClass( this.sp.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Español)
             this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
-            //Mostrar boton de menu (Español)
-            this.renderer.removeClass( this.btnMenu.nativeElement, 'none' );
             //Mostrar version de la aplicación
             this.setVersion();
             //Actualizaciones automáticas (Español)
             this.checkUpdates();
           }else if( args.data === 'in' ) {
+            //Muestra el contenedor Ingles
+            this.renderer.removeClass( this.in.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Ingles)
             this.renderer.removeClass( this.avaya__ok__in.nativeElement, 'none' );
-            //Mostrar boton de menu (Ingles)
-            this.renderer.removeClass( this.btnMenuIn.nativeElement, 'none' );
             //Mostrar version de la aplicación
             this.setVersion();
             //Actualizaciones automáticas (Ingles)
             this.checkUpdatesIn();
           }else {
+            //Muestra el contenedor Portugues
+            this.renderer.removeClass( this.pt.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Portugues)
             this.renderer.removeClass( this.avaya__ok__pt.nativeElement, 'none' );
-            //Mostrar boton de menu (Portugues)
-            this.renderer.removeClass( this.btnMenuPt.nativeElement, 'none' );
             //Mostrar version de la aplicación
             this.setVersion();
             //Actualizaciones automáticas (Portugues)
@@ -203,6 +209,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if( this.dataLan === '1' ) this.__alertService.alertError( 'El idioma español ya está establecido' );
       else if( this.dataLan === '2' ) {
         //TODO: Ocultar español y mostrar ingles
+        this
         this.setLanguage();
       }else {
         //TODO: Ocultar español y mostrar Portugues
@@ -255,6 +262,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   public hiddenDom(): void {
     /* ----- Español ----- */
+    //Ocultar contenedor
+    this.renderer.addClass( this.sp.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -265,8 +274,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.settings.nativeElement, 'none' );
     //Ocultar ventana de cambio de idioma
     this.renderer.addClass( this.changeLanguageWindow.nativeElement, 'none' );
-    //Ocultar boton de menu
-    this.renderer.addClass( this.btnMenu.nativeElement, 'none' );
   }
   //ABRIR PORTAL DE INCIDENCIAS (Español)
   public openIncident(): void {
@@ -281,6 +288,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //OCULTAR ELEMENTOS DEL DOM
   public hiddenDomIn(): void {
     /* ----- Ingles ----- */
+    //Ocultar contenedor
+    this.renderer.addClass( this.in.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail__in.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -291,8 +300,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.settingsIn.nativeElement, 'none' );
     //Ocultar ventana de cambio de idioma
     this.renderer.addClass( this.changeLanguageWindowIn.nativeElement, 'none' );
-    //Ocultar boton de menu
-    this.renderer.addClass( this.btnMenuIn.nativeElement, 'none' );
   }
   //MOSTRAR VENTANA DE CAMBIO DE IDIOMA (Ingles)
   public showChangeLanguageIn(): void {
@@ -381,6 +388,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //OCULTAR ELEMENTOS DEL DOM
   public hiddenDomPt(): void {
     /* ----- Portugues ----- */
+    //Ocultar contenedor
+    this.renderer.addClass( this.pt.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail__pt.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -391,8 +400,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.settingsPt.nativeElement, 'none' );
     //Ocultar ventana de cambio de idioma
     this.renderer.addClass( this.changeLanguageWindowPt.nativeElement, 'none' );
-    //Ocultar boton de menu
-    this.renderer.addClass( this.btnMenuPt.nativeElement, 'none' );
   }
   //MOSTRAR VENTANA DE CAMBIO DE IDIOMA (Portugues)
   public showChangeLanguagePt(): void {

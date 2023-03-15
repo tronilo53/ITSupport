@@ -11,4 +11,10 @@ export class DataService {
   public getTroubles () {
     return this.__httpClient.get( 'assets/troubles.json' );
   }
+  public getTroublesIn () {
+    return this.__httpClient.get( 'assets/troublesIn.json' );
+  }
+  public getTroublesPt () {
+    return this.__httpClient.get( 'assets/troublesPt.json' );
+  }
 }

@@ -315,17 +315,11 @@ ipcMain.on( 'trouble20', ( event, args ) => {
 //COMPROBAR EL IDIOMA GUARDADO EN EL ARCHIVO language.xml
 ipcMain.on( 'checkLanguage', ( event, args ) => {
     fs.readFile( './src/assets/language.xml', ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'checkLanguage', { data: 'notRead' } );
-        else {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'checkLanguage', { data: 'notJson' } );
-                else {
-                    const json = result;
-                    const lan = json.Settings.lan[0].$.language;
-                    event.sender.send( 'checkLanguage', { data: lan } );
-                }
-            });
-        }
+        xml2js.parseString( data, ( errorJson, result ) => {
+            const json = result;
+            const lan = json.Settings.lan[0].$.language;
+            event.sender.send( 'checkLanguage', { data: lan } );
+        });
     });
 });
 //ESTABLECER IDIOMA

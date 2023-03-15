@@ -1,268 +1,273 @@
-<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Español ) -->
-<div class="modalProgress" #modal>
-    <div class="containerModalProgressBar">
-        <h2 class="text-center text-white mb-2">Descargando actualización</h2>
-        <p class="text-center text-white">Se está descargando una nueva actualización, por favor, ten paciencia.</p>
-        <div #containerProgressBar class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" #progressBar style="width: 0%;"></div>
-        </div>
-    </div>
-</div>
-
-<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Ingles ) -->
-<div class="modalProgress" #modalIn>
-    <div class="containerModalProgressBar">
-        <h2 class="text-center text-white mb-2">Downloading upgrade</h2>
-        <p class="text-center text-white">A new update is being downloaded, please be patient.</p>
-        <div #containerProgressBarIn class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" #progressBarIn style="width: 0%;"></div>
-        </div>
-    </div>
-</div>
-
-<!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Portugues ) -->
-<div class="modalProgress" #modalPt>
-    <div class="containerModalProgressBar">
-        <h2 class="text-center text-white mb-2">Actualização de descarregamento</h2>
-        <p class="text-center text-white">Uma nova actualização está a ser descarregada, por favor seja paciente.</p>
-        <div #containerProgressBarPt class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" #progressBarPt style="width: 0%;"></div>
-        </div>
-    </div>
-</div>
-
-<!-- Herramientas (Español) -->
-<div class="settings" #settings>
-    <div class="content animate__animated animate__fadeIn">
-        <h2 class="mb-3">Herramientas</h2>
-        <div class="mb-3">
-            <div class="list-group">
-                <button type="button" (click)="showChangeLanguage()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Cambiar el idioma</button>
-                <button type="button" (click)="openIncident()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Poner una incidencia</button>
-                <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Cerrar aplicación</button>
+<!-- CONTENIDO EN Español -->
+<div class="container__sp" #sp>
+    <!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Español ) -->
+    <div class="modalProgress" #modal>
+        <div class="containerModalProgressBar">
+            <h2 class="text-center text-white mb-2">Descargando actualización</h2>
+            <p class="text-center text-white">Se está descargando una nueva actualización, por favor, ten paciencia.</p>
+            <div #containerProgressBar class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" #progressBar style="width: 0%;"></div>
             </div>
         </div>
-        <div class="mb-3 text-center">
-            <button type="button" class="btn btn-danger" (click)="closeSettings()">Volver</button>
-        </div>
-        <!-- CAMBIO DE IDIOMA -->
-        <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindow>
-            <h3>Seleccione el idioma</h3>
+    </div>
+    <!-- Herramientas (Español) -->
+    <div class="settings" #settings>
+        <div class="content animate__animated animate__fadeIn">
+            <h2 class="mb-3">Herramientas</h2>
             <div class="mb-3">
-                <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLan">
-                    <option value="???" disabled selected>Seleccione un idioma</option>
-                    <option value="1" disabled>Español</option>
-                    <option value="2">Inglés</option>
-                    <option value="3">Portugués</option>
-                </select>
+                <div class="list-group">
+                    <button type="button" (click)="showChangeLanguage()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Cambiar el idioma</button>
+                    <button type="button" (click)="openIncident()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Poner una incidencia</button>
+                    <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Cerrar aplicación</button>
+                </div>
             </div>
             <div class="mb-3 text-center">
+                <button type="button" class="btn btn-danger" (click)="closeSettings()">Volver</button>
+            </div>
+            <!-- CAMBIO DE IDIOMA -->
+            <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindow>
+                <h3>Seleccione el idioma</h3>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLan">
+                        <option value="???" disabled selected>Seleccione un idioma</option>
+                        <option value="1" disabled>Español</option>
+                        <option value="2">Inglés</option>
+                        <option value="3">Portugués</option>
+                    </select>
+                </div>
+                <div class="mb-3 text-center">
                 <button type="button" (click)="changeLanguageBtn()" class="btn btn-primary">Cambiar Idioma</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Herramientas (Ingles) -->
-<div class="settings" #settingsIn>
-    <div class="content animate__animated animate__fadeIn">
-        <h2 class="mb-3">Tools</h2>
-        <div class="mb-3">
-            <div class="list-group">
-                <button type="button" (click)="showChangeLanguageIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Change language</button>
-                <button type="button" (click)="openIncidentIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submit an incident</button>
-                <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Close application</button>
+    <!-- BANNER -->
+    <div class="container banner mb-4">
+        <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+        <button type="button" class="menu" (click)="showSettings()"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    <!-- INSTALACION DE AVAYA OK ( Español ) -->
+    <div class="avaya__ok" #avaya__ok>
+        <div class="container content mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Configuración de Avaya</h5>
+                            <p class="card-text">Configuración básica de Avaya One X Agent. Errores comunes de la aplicación y manuales para la propia configuración.</p>
+                            <button (click)="openAvaya()" class="btn btn-dark">Más...</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Información del Equipo</h5>
+                            <p class="card-text">Información básica del sistema operativo para el Departamento de soporte. <strong>En ningún momento se recoge información delicada.</strong></p>
+                            <button (click)="openIt()" class="btn btn-dark">Más...</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="mb-3 text-center">
-            <button type="button" class="btn btn-danger" (click)="closeSettingsIn()">Go back</button>
+        <div class="container info">
+            <div class="alert alert-primary" role="alert">
+                Este programa es exclusivo para el <strong>Departamento de Soporte</strong>. En ningún momento se recopila información delicada, es meramente informativo para una mayor configuración y una atención más rápida.
+            </div>
         </div>
-        <!-- CAMBIO DE IDIOMA -->
-        <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindowIn>
-            <h3>Select language</h3>
+        <div class="container text-center mt-4">
+            <p #versionValue class="version"></p>
+        </div>
+    </div>
+    <!-- INSTALACION DE AVAYA FAIL ( Español ) -->
+    <div class="avaya__fail" #avaya__fail>
+        <div class="alert alert-warning" role="alert">
+            Avaya no está instalado en su Sistema.
+            <br>
+            Cierre este programa e instale <strong>Avaya One X Agent</strong>
+        </div>
+    </div>
+</div>
+<!-- CONTENIDO EN Ingles -->
+<div class="container__in" #in>
+    <!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Ingles ) -->
+    <div class="modalProgress" #modalIn>
+        <div class="containerModalProgressBar">
+            <h2 class="text-center text-white mb-2">Downloading upgrade</h2>
+            <p class="text-center text-white">A new update is being downloaded, please be patient.</p>
+            <div #containerProgressBarIn class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" #progressBarIn style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Herramientas (Ingles) -->
+    <div class="settings" #settingsIn>
+        <div class="content animate__animated animate__fadeIn">
+            <h2 class="mb-3">Tools</h2>
             <div class="mb-3">
-                <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLanIn">
-                    <option value="???" disabled selected>Select a language</option>
-                    <option value="1">Spanish</option>
-                    <option value="2" disabled>English</option>
-                    <option value="3">Portuguese</option>
-                </select>
+                <div class="list-group">
+                    <button type="button" (click)="showChangeLanguageIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Change language</button>
+                    <button type="button" (click)="openIncidentIn()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submit an incident</button>
+                    <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Close application</button>
+                </div>
             </div>
             <div class="mb-3 text-center">
-                <button type="button" (click)="changeLanguageBtnIn()" class="btn btn-primary">Change Language</button>
+                <button type="button" class="btn btn-danger" (click)="closeSettingsIn()">Go back</button>
+            </div>
+            <!-- CAMBIO DE IDIOMA -->
+            <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindowIn>
+                <h3>Select language</h3>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLanIn">
+                        <option value="???" disabled selected>Select a language</option>
+                        <option value="1">Spanish</option>
+                        <option value="2" disabled>English</option>
+                        <option value="3">Portuguese</option>
+                    </select>
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="button" (click)="changeLanguageBtnIn()" class="btn btn-primary">Change Language</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Herramientas (Portugues) -->
-<div class="settings" #settingsPt>
-    <div class="content animate__animated animate__fadeIn">
-        <h2 class="mb-3">Ferramentas</h2>
-        <div class="mb-3">
-            <div class="list-group">
-                <button type="button" (click)="showChangeLanguagePt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Mudar língua</button>
-                <button type="button" (click)="openIncidentPt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submeter um incidente</button>
-                <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Fechar aplicação</button>
+    <!-- BANNER -->
+    <div class="container banner mb-4">
+        <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+        <button type="button" class="menu" (click)="showSettingsIn()"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    <!-- INSTALACION DE AVAYA OK ( Ingles ) -->
+    <div class="avaya__ok" #avaya__ok__in>
+        <div class="container content mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Avaya Configuration</h5>
+                            <p class="card-text">Basic configuration of Avaya One X Agent. Common application errors and manuals for the configuration itself.</p>
+                            <button (click)="openAvaya()" class="btn btn-dark">More...</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Equipment Information</h5>
+                            <p class="card-text">Basic operating system information for the Support Department. <strong>Sensitive information is not collected at any time.</strong></p>
+                            <button (click)="openIt()" class="btn btn-dark">More...</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="mb-3 text-center">
-            <button type="button" class="btn btn-danger" (click)="closeSettingsPt()">Retornar</button>
+        <div class="container info">
+            <div class="alert alert-primary" role="alert">
+                This program is exclusive for the <strong>Support Department</strong>. At no time is sensitive information collected, it is merely informative for further configuration and faster service.
+            </div>
         </div>
-        <!-- CAMBIO DE IDIOMA -->
-        <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindowPt>
-            <h3>Seleccione uma língua</h3>
+    </div>
+    <!-- INSTALACION DE AVAYA FAIL ( Ingles ) -->
+    <div class="avaya__fail" #avaya__fail__in>
+        <div class="alert alert-warning" role="alert">
+            Avaya is not installed on your system.
+            <br>
+            Close this program and install <strong>Avaya One X Agent</strong>
+        </div>
+    </div>
+</div>
+<!-- CONTENIDO EN Portugues -->
+<div class="container__pt" #pt>
+    <!-- PROGRESS BAR - ACTUALIZACIONES AUTOMATICAS ( Portugues ) -->
+    <div class="modalProgress" #modalPt>
+        <div class="containerModalProgressBar">
+            <h2 class="text-center text-white mb-2">Actualização de descarregamento</h2>
+            <p class="text-center text-white">Uma nova actualização está a ser descarregada, por favor seja paciente.</p>
+            <div #containerProgressBarPt class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" #progressBarPt style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Herramientas (Portugues) -->
+    <div class="settings" #settingsPt>
+        <div class="content animate__animated animate__fadeIn">
+            <h2 class="mb-3">Ferramentas</h2>
             <div class="mb-3">
-                <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLanPt">
-                    <option value="???" disabled selected>Seleccione uma língua</option>
-                    <option value="1">Espanhol</option>
-                    <option value="2">Inglês</option>
-                    <option value="3" disabled>português</option>
-                </select>
+                <div class="list-group">
+                    <button type="button" (click)="showChangeLanguagePt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">language</span> Mudar língua</button>
+                    <button type="button" (click)="openIncidentPt()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">sms_failed</span> Submeter um incidente</button>
+                    <button type="button" (click)="closeApp()" class="list-group-item list-group-item-action"><span class="material-symbols-outlined">logout</span> Fechar aplicação</button>
+                </div>
             </div>
             <div class="mb-3 text-center">
-                <button type="button" (click)="changeLanguageBtnPt()" class="btn btn-primary">Mudar língua</button>
+                <button type="button" class="btn btn-danger" (click)="closeSettingsPt()">Retornar</button>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- BANNER -->
-<div class="container banner mb-4">
-    <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
-    <button type="button" class="menu" #btnMenu (click)="showSettings()"><span class="material-symbols-outlined">menu</span></button>
-    <button type="button" class="menu" #btnMenuIn (click)="showSettingsIn()"><span class="material-symbols-outlined">menu</span></button>
-    <button type="button" class="menu" #btnMenuPt (click)="showSettingsPt()"><span class="material-symbols-outlined">menu</span></button>
-</div>
-
-<!-- INSTALACION DE AVAYA OK ( Español ) -->
-<div class="avaya__ok" #avaya__ok>
-    <div class="container content mb-5">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Configuración de Avaya</h5>
-                        <p class="card-text">Configuración básica de Avaya One X Agent. Errores comunes de la aplicación y manuales para la propia configuración.</p>
-                        <button (click)="openAvaya()" class="btn btn-dark">Más...</button>
-                    </div>
+            <!-- CAMBIO DE IDIOMA -->
+            <div class="mb-3" class="changeLanguageWindow animate__animated animate__fadeIn" #changeLanguageWindowPt>
+                <h3>Seleccione uma língua</h3>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" name="dataLan" [(ngModel)]="dataLanPt">
+                        <option value="???" disabled selected>Seleccione uma língua</option>
+                        <option value="1">Espanhol</option>
+                        <option value="2">Inglês</option>
+                        <option value="3" disabled>português</option>
+                    </select>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Información del Equipo</h5>
-                        <p class="card-text">Información básica del sistema operativo para el Departamento de soporte. <strong>En ningún momento se recoge información delicada.</strong></p>
-                        <button (click)="openIt()" class="btn btn-dark">Más...</button>
-                    </div>
+                <div class="mb-3 text-center">
+                    <button type="button" (click)="changeLanguageBtnPt()" class="btn btn-primary">Mudar língua</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container info">
-        <div class="alert alert-primary" role="alert">
-            Este programa es exclusivo para el <strong>Departamento de Soporte</strong>. En ningún momento se recopila información delicada, es meramente informativo para una mayor configuración y una atención más rápida.
-        </div>
+    <!-- BANNER -->
+    <div class="container banner mb-4">
+        <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+        <button type="button" class="menu" (click)="showSettingsPt()"><span class="material-symbols-outlined">menu</span></button>
     </div>
-    <div class="container text-center mt-4">
-        <p #versionValue class="version"></p>
-    </div>
-</div>
-
-<!-- INSTALACION DE AVAYA OK ( Ingles ) -->
-<div class="avaya__ok" #avaya__ok__in>
-    <div class="container content mb-5">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Avaya Configuration</h5>
-                        <p class="card-text">Basic configuration of Avaya One X Agent. Common application errors and manuals for the configuration itself.</p>
-                        <button (click)="openAvaya()" class="btn btn-dark">More...</button>
+    <!-- INSTALACION DE AVAYA OK ( Portugues ) -->
+    <div class="avaya__ok" #avaya__ok__pt>
+        <div class="container content mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Configuração Avaya</h5>
+                            <p class="card-text">Configuração básica do Agente Avaya One X. Erros comuns de aplicação e manuais para a própria configuração.</p>
+                            <button (click)="openAvaya()" class="btn btn-dark">Mais...</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Equipment Information</h5>
-                        <p class="card-text">Basic operating system information for the Support Department. <strong>Sensitive information is not collected at any time.</strong></p>
-                        <button (click)="openIt()" class="btn btn-dark">More...</button>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
+                        <div class="card-body">
+                            <h5 class="card-title">Informação sobre a equipa</h5>
+                            <p class="card-text">Informação básica do sistema operativo para o Departamento de Apoio. <strong>Em momento algum é recolhida informação sensível.</strong></p>
+                            <button (click)="openIt()" class="btn btn-dark">Mais...</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container info">
-        <div class="alert alert-primary" role="alert">
-            This program is exclusive for the <strong>Support Department</strong>. At no time is sensitive information collected, it is merely informative for further configuration and faster service.
-        </div>
-    </div>
-</div>
-
-<!-- INSTALACION DE AVAYA OK ( Portugues ) -->
-<div class="avaya__ok" #avaya__ok__pt>
-    <div class="container content mb-5">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/avaya.png" class="avaya card-img-top" alt="avaya.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Configuração Avaya</h5>
-                        <p class="card-text">Configuração básica do Agente Avaya One X. Erros comuns de aplicação e manuais para a própria configuração.</p>
-                        <button (click)="openAvaya()" class="btn btn-dark">Mais...</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/it_support.png" class="itSupport card-img-top" alt="it_support.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Informação sobre a equipa</h5>
-                        <p class="card-text">Informação básica do sistema operativo para o Departamento de Apoio. <strong>Em momento algum é recolhida informação sensível.</strong></p>
-                        <button (click)="openIt()" class="btn btn-dark">Mais...</button>
-                    </div>
-                </div>
+        <div class="container info">
+            <div class="alert alert-primary" role="alert">
+                Este programa é exclusivamente para o <strong>Departamento de Apoio</strong>. Em nenhum momento é recolhida informação sensível, é meramente informativa para configuração posterior e serviço mais rápido.
             </div>
         </div>
-    </div>
-    <div class="container info">
-        <div class="alert alert-primary" role="alert">
-            Este programa é exclusivamente para o <strong>Departamento de Apoio</strong>. Em nenhum momento é recolhida informação sensível, é meramente informativa para configuração posterior e serviço mais rápido.
+        <div class="container text-center mt-4">
+            <p #versionValue class="version"></p>
         </div>
     </div>
-    <div class="container text-center mt-4">
-        <p #versionValue class="version"></p>
-    </div>
-</div>
-
-<!-- INSTALACION DE AVAYA FAIL ( Español ) -->
-<div class="avaya__fail" #avaya__fail>
-    <div class="alert alert-warning" role="alert">
-        Avaya no está instalado en su Sistema.
-        <br>
-        Cierre este programa e instale <strong>Avaya One X Agent</strong>
-    </div>
-</div>
-
-<!-- INSTALACION DE AVAYA FAIL ( Ingles ) -->
-<div class="avaya__fail" #avaya__fail__in>
-    <div class="alert alert-warning" role="alert">
-        Avaya is not installed on your system.
-        <br>
-        Close this program and install <strong>Avaya One X Agent</strong>
-    </div>
-</div>
-
-<!-- INSTALACION DE AVAYA FAIL ( Portugues ) -->
-<div class="avaya__fail" #avaya__fail__pt>
-    <div class="alert alert-warning" role="alert">
-        O Avaya não está instalado no seu sistema.
-        <br>
-        Feche este programa e instale <strong>Avaya One X Agent</strong>
+    <!-- INSTALACION DE AVAYA FAIL ( Portugues ) -->
+    <div class="avaya__fail" #avaya__fail__pt>
+        <div class="alert alert-warning" role="alert">
+            O Avaya não está instalado no seu sistema.
+            <br>
+            Feche este programa e instale <strong>Avaya One X Agent</strong>
+        </div>
     </div>
 </div>
