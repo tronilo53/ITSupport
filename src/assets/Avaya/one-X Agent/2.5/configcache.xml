@@ -1,0 +1,84 @@
+<ConfigCache xmlns="http://xml.avaya.com/endpointAPI">
+<source>
+<name>DhcpData</name>
+<data>
+	<version>Parameters retrieved at AutoDiscovery</version>
+	<parameter>
+		<name>MCIPADD</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SIPDOMAIN</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SIPPROXYSRVR</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>ENABLE_AVAYA_ENVIRONMENT</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SIPSIGNAL</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>PHNOL</name>
+		<value>9</value>
+	</parameter>
+	<parameter>
+		<name>PHNCC</name>
+		<value>44</value>
+	</parameter>
+	<parameter>
+		<name>PHNDPLENGTH</name>
+		<value>7</value>
+	</parameter>
+	<parameter>
+		<name>PHNIC</name>
+		<value>00</value>
+	</parameter>
+	<parameter>
+		<name>PHNLD</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>PHNLDLENGTH</name>
+		<value>11</value>
+	</parameter>
+	<parameter>
+		<name>DIALPLANAREACODE</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>DIALPLANLOCALCALLPREFIX</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>DIALPLANNATIONALPHONENUMLENGTHLIST</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SP_DIRSRVR</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SP_DIRSRVRPRT</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SP_DIRTOPDN</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>SP_DIRTYPE</name>
+		<value></value>
+	</parameter>
+	<parameter>
+		<name>ONEXPORTAL_URL</name>
+		<value></value>
+	</parameter>
+</data>
+</source>
+</ConfigCache>

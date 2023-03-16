@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<log4net>
+  <appender name="LocalLogging_AvayaFormat" type="log4net.Appender.RollingFileAppender">
+    <file value="${APPDATA}/Avaya/one-X Agent/2.5/Log Files/OneXAgent.log" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maximumFileSize value="5MB" />
+    <maxSizeRollBackups value="3" />
+    <layout type="Avaya.OneXAgent.CustomLogging.OneXAgentLayout">
+      <conversionPattern value="&lt;%numLevel&gt; %date{MMM dd hh:mm:ss} %host %process %date{yyyy} %UTCOffset %date{yyyy} 1 .1xAgent %thread|0 %logger %message%newline" />
+    </layout>
+  </appender>
+  <appender name="LocalLogging_GeneralFormat" type="log4net.Appender.RollingFileAppender">
+    <file value="${APPDATA}/Avaya/one-X Agent/2.5/Log Files/OneXAgent.log" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maximumFileSize value="5MB" />
+    <maxSizeRollBackups value="3" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%d %level %thread %logger %message%newline" />
+    </layout>
+  </appender>
+  <appender name="CentralLoggingTLS" type="log4net.Appender.RemoteTLSAppender">
+    <facility value="local6" />
+    <identity value="OneXAgent" />
+    <layout type="Avaya.OneXAgent.CustomLogging.OneXAgentLayout">
+      <conversionPattern value="&lt;%numLevel&gt;%host %process [%thread] %logger %user %message%newline" />
+    </layout>
+    <remoteAddress value="" />
+  </appender>
+  <appender name="CentralLogging" type="log4net.Appender.RemoteSyslogAppender">
+    <facility value="local6" />
+    <identity value="OneXAgent" />
+    <layout type="Avaya.OneXAgent.CustomLogging.OneXAgentLayout">
+      <conversionPattern value="%UTCOffset %date{yyyy} %date{fff} 1 %process | 1 %host[%thread] OneXAgent101 %logger %user %message%newline" />
+    </layout>
+    <remoteAddress value="" />
+  </appender>
+  <root>
+    <level value="OFF" />
+    <appender-ref ref="LocalLogging_GeneralFormat" />
+  </root>
+  <!--Volume of ContactLog and Contacts might be large. Limit logging to improve startup time.-->
+  <logger name="Avaya.OneXAgent.ContactLogs">
+    <level value="INFO" />
+  </logger>
+  <logger name="Avaya.OneXAgent.Contacts">
+    <level value="INFO" />
+  </logger>
+  <!-- logger name="Avaya.OneXAgent.CMService.PhoneService">
+    <level value="DEBUG" />
+	<appender-ref ref="CentralLogging" />
+  </logger-->
+</log4net>

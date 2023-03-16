@@ -180,27 +180,27 @@ export class AvayaComponent implements OnInit, AfterViewInit {
 
   private trouble_1_2(): void {
     this.__ipcService.send( 'trouble_1_2' );
-      this.__ipcService.on( 'trouble_1_2', ( event, args ) => {
-        if( args.data === 'notExist' ) {
+      this.__ipcService.on( 'trouble_1_2', ( event, argsTrouble ) => {
+        if( argsTrouble.data === 'notExist' ) {
           this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, inícialo y vuelve a intentarlo' );
-            else if( args.data === 'in' ) this.__alertService.alertError( 'Avaya One X Agent never started, start it and try again.' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, inícialo y vuelve a intentarlo' );
+            else if( argsLan.data === 'in' ) this.__alertService.alertError( 'Avaya One X Agent never started, start it and try again.' );
             else this.__alertService.alertError( 'Avaya One X Agent nunca começou, por favor reinicie-o e tente novamente.' );
           });
-        }else if( args.data === 'gananMod' ) {
+        }else if( argsTrouble.data === 'gananMod' ) {
           this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con exito' );
-            else if( args.data === 'in' ) this.__alertService.alertSuccess( 'Problem solved successfully' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con exito' );
+            else if( argsLan.data === 'in' ) this.__alertService.alertSuccess( 'Problem solved successfully' );
             else this.__alertService.alertSuccess( 'Problema resolvido com sucesso' );
           });
         }
         else {
           this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba solucionado, no se han aplicado cambios. Si el problema persiste, ponte en contacto con "IT"' );
-            else if( args.data === 'in' ) this.__alertService.alertInfo( 'This problem was already fixed, no changes have been applied. If the problem persists, please contact "IT".' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba solucionado, no se han aplicado cambios. Si el problema persiste, ponte en contacto con "IT"' );
+            else if( argsLan.data === 'in' ) this.__alertService.alertInfo( 'This problem was already fixed, no changes have been applied. If the problem persists, please contact "IT".' );
             else this.__alertService.alertInfo( 'Este problema já foi resolvido, não foram aplicadas quaisquer alterações. Se o problema persistir, por favor contactar "IT".' );
           });
         }

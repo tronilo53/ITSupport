@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ContactGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ReadOnly="false" Type="User" Version="2.5.60411.0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Contacts">
+  <Group ReadOnly="false" Type="User" Name="My Contacts" Id="CT2:f9ff730e-9025-4578-8071-a52c318fb2e8">
+    <Contacts ReadOnly="false" />
+  </Group>
+  <Contacts ReadOnly="false" />
+</ContactGroup>

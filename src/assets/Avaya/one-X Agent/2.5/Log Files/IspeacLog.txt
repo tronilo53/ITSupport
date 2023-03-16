@@ -1,0 +1,1005 @@
+[03/14/2023 18:13:27:059]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/14/2023 18:13:27:059]	RtpReceiveThread starting (6f8)
+[03/14/2023 18:13:27:059]	RtpSendThread starting (700)
+[03/14/2023 18:13:27:059]	RtcpReceiveThread starting (708)
+[03/14/2023 18:13:27:059]	RtcpSendThread starting (710)
+[03/14/2023 18:13:27:059]	TraceRouteThread starting (718)
+[03/14/2023 18:13:27:238]	AudioMixer::Open 0
+[03/14/2023 18:13:27:241]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/14/2023 18:13:27:241]	Speakers mic line 4294901760
+[03/14/2023 18:13:27:242]	AudioMixer::Open 0
+[03/14/2023 18:13:27:243]	Wave in has separate mic source line
+[03/14/2023 18:13:27:244]	The mic has the volume control.
+[03/14/2023 18:13:27:244]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/14/2023 18:13:27:244]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/14/2023 18:13:27:244]	AudioMixer::EnableMicrophone
+[03/14/2023 18:13:27:301]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 10:42:46:234]	RtpReceiveThread starting (734)
+[03/16/2023 10:42:46:234]	RtcpSendThread starting (74c)
+[03/16/2023 10:42:46:234]	RtpSendThread starting (73c)
+[03/16/2023 10:42:46:234]	RtcpReceiveThread starting (744)
+[03/16/2023 10:42:46:234]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 10:42:46:234]	TraceRouteThread starting (754)
+[03/16/2023 10:42:46:396]	AudioMixer::Open 0
+[03/16/2023 10:42:46:398]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 10:42:46:398]	Speakers mic line 4294901760
+[03/16/2023 10:42:46:399]	AudioMixer::Open 0
+[03/16/2023 10:42:46:400]	Wave in has separate mic source line
+[03/16/2023 10:42:46:400]	The mic has the volume control.
+[03/16/2023 10:42:46:400]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 10:42:46:400]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 10:42:46:400]	AudioMixer::EnableMicrophone
+[03/16/2023 10:42:46:463]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 12:07:58:314]	RtpReceiveThread starting (720)
+[03/16/2023 12:07:58:314]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 12:07:58:314]	RtpSendThread starting (728)
+[03/16/2023 12:07:58:314]	RtcpReceiveThread starting (730)
+[03/16/2023 12:07:58:314]	RtcpSendThread starting (738)
+[03/16/2023 12:07:58:314]	TraceRouteThread starting (740)
+[03/16/2023 12:07:58:496]	AudioMixer::Open 0
+[03/16/2023 12:07:58:501]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 12:07:58:501]	Speakers mic line 4294901760
+[03/16/2023 12:07:58:501]	AudioMixer::Open 0
+[03/16/2023 12:07:58:503]	Wave in has separate mic source line
+[03/16/2023 12:07:58:504]	The mic has the volume control.
+[03/16/2023 12:07:58:504]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:07:58:504]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:07:58:504]	AudioMixer::EnableMicrophone
+[03/16/2023 12:07:58:565]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 12:08:53:423]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 12:08:53:423]	WinSock Version Requested: 1 1
+[03/16/2023 12:08:53:423]	WinSock Version Started: 1 1
+[03/16/2023 12:08:53:423]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 12:08:53:423]	TTY settings are  SendAfterWait=140 SendBeforeWait = 176
+[03/16/2023 12:08:53:423]	CQOSUDPSocket::Reset: 0
+[03/16/2023 12:08:53:423]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 12:08:53:423]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 12:08:54:760]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 12:08:54:760]	CAudioController::Open()
+[03/16/2023 12:08:54:760]	AudioMixer::Open 0
+[03/16/2023 12:08:54:760]	Wave in has separate mic source line
+[03/16/2023 12:08:54:760]	The mic has the volume control.
+[03/16/2023 12:08:54:760]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:08:54:760]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:08:54:760]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 12:08:54:760]	CWaveIn::Open 0 0
+[03/16/2023 12:08:54:806]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 12:08:54:822]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 12:08:54:822]	CWaveIn::Open(): leaving
+[03/16/2023 12:08:54:822]	WaveOut::Open 0 0
+[03/16/2023 12:08:54:861]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 12:08:54:861]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.53.11:2054, rtcp=10.34.53.11:2055
+[03/16/2023 12:08:54:861]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 12:08:54:861]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 12:08:54:861]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 12:08:54:861]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 12:08:54:861]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 12:08:54:861]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 12:08:54:861]	CALL1: CAudioSession::Start():
+[03/16/2023 12:08:54:861]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 12:08:54:861]	CALL1: CMediaProcessor::Start():
+[03/16/2023 12:08:54:861]	CQOSUDPSocket::Reset: 0
+[03/16/2023 12:08:54:861]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 12:08:54:861]	CQOSUDPSocket::Reset: 0
+[03/16/2023 12:08:54:861]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 12:08:54:861]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 12:08:54:861]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 12:08:54:992]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 12:08:54:992]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 12:08:54:992]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 12:08:55:007]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 12:08:55:007]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:08:55:007]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:08:55:009]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:08:55:152]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:08:55:152]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 12:08:55:152]	CAPEXMSG: CapEx Succeded 
+[03/16/2023 12:08:55:152]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 39.993286
+[03/16/2023 12:08:58:431]	CALL1: FRACTION DROPPED = 0.000000
+[03/16/2023 12:08:59:791]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:08:59:791]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 46.005249
+[03/16/2023 12:08:59:882]	CALL1: CAudioSession::Stop():
+[03/16/2023 12:08:59:920]	CAudioExecutive::Suspend() suspended for 38 ms[03/16/2023 12:08:59:920]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 12:08:59:920]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 12:08:59:920]	CAudioController::Close()
+[03/16/2023 12:08:59:920]	CWaveIn::Close()  Entering
+[03/16/2023 12:08:59:920]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 12:08:59:921]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 12:08:59:921]	CWaveIn::Close()  WaveInReset
+[03/16/2023 12:08:59:921]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 12:08:59:921]	CWaveIn::Close()  WaveInClose
+[03/16/2023 12:08:59:931]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 12:08:59:931]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 12:08:59:931]	CWaveIn::Close(): Leaving
+[03/16/2023 12:08:59:971]	CWaveOut::Close(): Leaving
+[03/16/2023 12:08:59:971]	AudioMixer::Close
+[03/16/2023 12:08:59:971]	CWaveOut::Close(): Leaving
+[03/16/2023 12:08:59:971]	CWaveOut::Close(): Leaving
+[03/16/2023 12:08:59:971]	CWaveIn::Close()  Entering
+[03/16/2023 12:08:59:971]	CWaveIn::Close(): Leaving
+[03/16/2023 12:08:59:971]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 12:08:59:971]	CAudioStream::StopSoundRemote:
+[03/16/2023 12:08:59:971]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 12:08:59:971]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 12:08:59:971]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 12:09:01:524]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 12:09:01:524]	CAudioController::Open()
+[03/16/2023 12:09:01:540]	AudioMixer::Open 0
+[03/16/2023 12:09:01:540]	Wave in has separate mic source line
+[03/16/2023 12:09:01:540]	The mic has the volume control.
+[03/16/2023 12:09:01:540]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:09:01:540]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:09:01:540]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 12:09:01:540]	CWaveIn::Open 0 0
+[03/16/2023 12:09:01:545]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 12:09:01:545]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 12:09:01:545]	CWaveIn::Open(): leaving
+[03/16/2023 12:09:01:545]	WaveOut::Open 0 0
+[03/16/2023 12:09:01:593]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 12:09:01:593]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2208, rtcp=10.34.100.11:2209
+[03/16/2023 12:09:01:593]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 12:09:01:593]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 12:09:01:593]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 12:09:01:593]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 12:09:01:593]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 12:09:01:593]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 12:09:01:593]	CALL1: CAudioSession::Start():
+[03/16/2023 12:09:01:593]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 12:09:01:593]	CALL1: CMediaProcessor::Start():
+[03/16/2023 12:09:01:593]	CQOSUDPSocket::Reset: 0
+[03/16/2023 12:09:01:593]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 12:09:01:593]	CQOSUDPSocket::Reset: 0
+[03/16/2023 12:09:01:593]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 12:09:01:593]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 12:09:01:593]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 12:09:01:593]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 12:09:01:593]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 12:09:01:593]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 12:09:01:609]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 12:09:01:609]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:09:01:743]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 12:09:01:743]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 12:09:01:743]	CAPEXMSG: CapEx Succeded 
+[03/16/2023 12:09:01:743]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 32.989502
+[03/16/2023 12:09:03:465]	CALL1: CAudioSession::Stop():
+[03/16/2023 12:09:03:501]	CAudioExecutive::Suspend() suspended for 35 ms[03/16/2023 12:09:03:501]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 12:09:03:501]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 12:09:03:501]	CAudioController::Close()
+[03/16/2023 12:09:03:501]	CWaveIn::Close()  Entering
+[03/16/2023 12:09:03:502]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 12:09:03:516]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 12:09:03:516]	CWaveIn::Close()  WaveInReset
+[03/16/2023 12:09:03:516]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 12:09:03:517]	CWaveIn::Close()  WaveInClose
+[03/16/2023 12:09:03:518]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 12:09:03:518]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 12:09:03:518]	CWaveIn::Close(): Leaving
+[03/16/2023 12:09:03:555]	CWaveOut::Close(): Leaving
+[03/16/2023 12:09:03:556]	AudioMixer::Close
+[03/16/2023 12:09:03:556]	CWaveOut::Close(): Leaving
+[03/16/2023 12:09:03:556]	CWaveOut::Close(): Leaving
+[03/16/2023 12:09:03:556]	CWaveIn::Close()  Entering
+[03/16/2023 12:09:03:556]	CWaveIn::Close(): Leaving
+[03/16/2023 12:09:03:556]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 12:09:03:556]	CAudioStream::StopSoundRemote:
+[03/16/2023 12:09:03:556]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 12:09:03:556]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 12:09:03:556]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 12:46:13:749]	AudioMixer::Close
+[03/16/2023 12:46:13:749]	AudioMixer::Open 0
+[03/16/2023 12:46:13:750]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 12:46:13:750]	Speakers mic line 4294901760
+[03/16/2023 12:46:13:751]	AudioMixer::Close
+[03/16/2023 12:46:13:751]	AudioMixer::Open 0
+[03/16/2023 12:46:13:752]	Wave in has separate mic source line
+[03/16/2023 12:46:13:752]	The mic has the volume control.
+[03/16/2023 12:46:13:752]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:46:13:752]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:46:31:900]	AudioMixer::Close
+[03/16/2023 12:46:31:900]	AudioMixer::Open 0
+[03/16/2023 12:46:31:900]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 12:46:31:900]	Speakers mic line 4294901760
+[03/16/2023 12:46:31:900]	AudioMixer::Close
+[03/16/2023 12:46:31:900]	AudioMixer::Open 0
+[03/16/2023 12:46:31:900]	Wave in has separate mic source line
+[03/16/2023 12:46:31:900]	The mic has the volume control.
+[03/16/2023 12:46:31:900]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:46:31:900]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:56:23:548]	AudioMixer::Close
+[03/16/2023 12:56:23:548]	AudioMixer::Open 0
+[03/16/2023 12:56:23:549]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 12:56:23:549]	Speakers mic line 4294901760
+[03/16/2023 12:56:23:551]	AudioMixer::Close
+[03/16/2023 12:56:23:551]	AudioMixer::Open 0
+[03/16/2023 12:56:23:551]	Wave in has separate mic source line
+[03/16/2023 12:56:23:551]	The mic has the volume control.
+[03/16/2023 12:56:23:551]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:56:23:551]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 12:57:23:803]	AudioMixer::Close
+[03/16/2023 12:57:23:803]	AudioMixer::Open 0
+[03/16/2023 12:57:23:803]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 12:57:23:803]	Speakers mic line 4294901760
+[03/16/2023 12:57:23:803]	AudioMixer::Close
+[03/16/2023 12:57:23:803]	AudioMixer::Open 0
+[03/16/2023 12:57:23:803]	Wave in has separate mic source line
+[03/16/2023 12:57:23:803]	The mic has the volume control.
+[03/16/2023 12:57:23:803]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 12:57:23:803]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:08:02:490]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:02:492]	CAudioController::Close()
+[03/16/2023 13:08:02:492]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:08:02:493]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:08:33:128]	RtpReceiveThread starting (7b0)
+[03/16/2023 13:08:33:128]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 13:08:33:128]	RtpSendThread starting (7b8)
+[03/16/2023 13:08:33:128]	RtcpReceiveThread starting (7c0)
+[03/16/2023 13:08:33:128]	RtcpSendThread starting (7c8)
+[03/16/2023 13:08:33:128]	TraceRouteThread starting (7d0)
+[03/16/2023 13:08:33:311]	AudioMixer::Open 0
+[03/16/2023 13:08:33:314]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 13:08:33:314]	Speakers mic line 4294901760
+[03/16/2023 13:08:33:315]	AudioMixer::Open 0
+[03/16/2023 13:08:33:316]	Wave in has separate mic source line
+[03/16/2023 13:08:33:316]	The mic has the volume control.
+[03/16/2023 13:08:33:316]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:08:33:316]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:08:33:316]	AudioMixer::EnableMicrophone
+[03/16/2023 13:08:33:379]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 13:08:46:295]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:08:46:295]	WinSock Version Requested: 1 1
+[03/16/2023 13:08:46:295]	WinSock Version Started: 1 1
+[03/16/2023 13:08:46:295]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:08:46:295]	TTY settings are  SendAfterWait=140 SendBeforeWait = 176
+[03/16/2023 13:08:46:295]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:46:295]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:08:46:295]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:08:48:800]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 13:08:48:800]	CAudioController::Open()
+[03/16/2023 13:08:48:800]	AudioMixer::Open 0
+[03/16/2023 13:08:48:800]	Wave in has separate mic source line
+[03/16/2023 13:08:48:800]	The mic has the volume control.
+[03/16/2023 13:08:48:800]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:08:48:800]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:08:48:800]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 13:08:48:800]	CWaveIn::Open 0 0
+[03/16/2023 13:08:49:069]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 13:08:49:069]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 13:08:49:069]	CWaveIn::Open(): leaving
+[03/16/2023 13:08:49:069]	WaveOut::Open 0 0
+[03/16/2023 13:08:49:148]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 13:08:49:148]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2206, rtcp=10.34.100.11:2207
+[03/16/2023 13:08:49:148]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 13:08:49:148]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 13:08:49:148]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 13:08:49:148]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:08:49:148]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:08:49:148]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 13:08:49:148]	CALL1: CAudioSession::Start():
+[03/16/2023 13:08:49:148]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 13:08:49:148]	CALL1: CMediaProcessor::Start():
+[03/16/2023 13:08:49:148]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:49:148]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 13:08:49:148]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:49:148]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:08:49:148]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:08:49:148]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:08:49:148]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 13:08:49:148]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 13:08:49:148]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 13:08:49:169]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 13:08:49:169]	WARNING: CRtpStream::GetInst2Stats: stats values are not updated yet! 0 0
+[03/16/2023 13:08:49:169]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:49:185]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:49:185]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 13:08:49:185]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 13:08:49:228]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:49:228]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 13:08:49:248]	CAPEXMSG: Succesfull[03/16/2023 13:08:51:308]	CALL1: FRACTION DROPPED = 0.000000
+[03/16/2023 13:08:53:828]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:53:828]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 34.011841
+[03/16/2023 13:08:53:908]	CALL1: CAudioSession::Stop():
+[03/16/2023 13:08:53:938]	CAudioExecutive::Suspend() suspended for 22 ms[03/16/2023 13:08:53:938]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 13:08:53:938]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 13:08:53:938]	CAudioController::Close()
+[03/16/2023 13:08:53:938]	CWaveIn::Close()  Entering
+[03/16/2023 13:08:53:939]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 13:08:53:948]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 13:08:53:948]	CWaveIn::Close()  WaveInReset
+[03/16/2023 13:08:53:948]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 13:08:53:948]	CWaveIn::Close()  WaveInClose
+[03/16/2023 13:08:53:958]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 13:08:53:958]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 13:08:53:958]	CWaveIn::Close(): Leaving
+[03/16/2023 13:08:53:978]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:53:978]	AudioMixer::Close
+[03/16/2023 13:08:53:978]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:53:978]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:53:978]	CWaveIn::Close()  Entering
+[03/16/2023 13:08:53:978]	CWaveIn::Close(): Leaving
+[03/16/2023 13:08:53:978]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 13:08:53:978]	CAudioStream::StopSoundRemote:
+[03/16/2023 13:08:53:978]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 13:08:53:978]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 13:08:53:978]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:08:54:687]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 13:08:54:687]	CAudioController::Open()
+[03/16/2023 13:08:54:687]	AudioMixer::Open 0
+[03/16/2023 13:08:54:687]	Wave in has separate mic source line
+[03/16/2023 13:08:54:687]	The mic has the volume control.
+[03/16/2023 13:08:54:687]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:08:54:687]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:08:54:687]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 13:08:54:687]	CWaveIn::Open 0 0
+[03/16/2023 13:08:54:703]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 13:08:54:703]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 13:08:54:703]	CWaveIn::Open(): leaving
+[03/16/2023 13:08:54:718]	WaveOut::Open 0 0
+[03/16/2023 13:08:54:760]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 13:08:54:760]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2080, rtcp=10.34.100.11:2081
+[03/16/2023 13:08:54:760]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 13:08:54:760]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 13:08:54:760]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 13:08:54:760]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:08:54:760]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:08:54:760]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 13:08:54:760]	CALL1: CAudioSession::Start():
+[03/16/2023 13:08:54:760]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 13:08:54:760]	CALL1: CMediaProcessor::Start():
+[03/16/2023 13:08:54:760]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:54:760]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 13:08:54:760]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:08:54:760]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:08:54:760]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:08:54:760]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:08:54:760]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 13:08:54:760]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 13:08:54:760]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 13:08:54:794]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 13:08:54:794]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:54:794]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 13:08:54:794]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:54:794]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 13:08:54:794]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 13:08:54:857]	CAPEXMSG: Succesfull[03/16/2023 13:08:54:857]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:08:54:857]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 13:08:57:413]	CALL1: CAudioSession::Stop():
+[03/16/2023 13:08:57:445]	CAudioExecutive::Suspend() suspended for 31 ms[03/16/2023 13:08:57:445]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 13:08:57:445]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 13:08:57:445]	CAudioController::Close()
+[03/16/2023 13:08:57:445]	CWaveIn::Close()  Entering
+[03/16/2023 13:08:57:445]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 13:08:57:455]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 13:08:57:455]	CWaveIn::Close()  WaveInReset
+[03/16/2023 13:08:57:455]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 13:08:57:455]	CWaveIn::Close()  WaveInClose
+[03/16/2023 13:08:57:457]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 13:08:57:457]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 13:08:57:457]	CWaveIn::Close(): Leaving
+[03/16/2023 13:08:57:492]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:57:492]	AudioMixer::Close
+[03/16/2023 13:08:57:492]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:57:492]	CWaveOut::Close(): Leaving
+[03/16/2023 13:08:57:492]	CWaveIn::Close()  Entering
+[03/16/2023 13:08:57:492]	CWaveIn::Close(): Leaving
+[03/16/2023 13:08:57:492]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 13:08:57:492]	CAudioStream::StopSoundRemote:
+[03/16/2023 13:08:57:492]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 13:08:57:492]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 13:08:57:492]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:11:01:435]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:11:01:435]	CAudioController::Close()
+[03/16/2023 13:11:01:435]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:11:01:437]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:11:26:613]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 13:11:26:613]	RtpReceiveThread starting (7cc)
+[03/16/2023 13:11:26:613]	RtpSendThread starting (7d4)
+[03/16/2023 13:11:26:613]	RtcpReceiveThread starting (7dc)
+[03/16/2023 13:11:26:613]	RtcpSendThread starting (7e4)
+[03/16/2023 13:11:26:613]	TraceRouteThread starting (7ec)
+[03/16/2023 13:11:26:669]	AudioMixer::Open 0
+[03/16/2023 13:11:26:672]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 13:11:26:672]	Speakers mic line 4294901760
+[03/16/2023 13:11:26:672]	AudioMixer::Open 0
+[03/16/2023 13:11:26:673]	Wave in has separate mic source line
+[03/16/2023 13:11:26:674]	The mic has the volume control.
+[03/16/2023 13:11:26:674]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:11:26:674]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:11:26:674]	AudioMixer::EnableMicrophone
+[03/16/2023 13:11:26:713]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 13:12:18:856]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:12:18:856]	WinSock Version Requested: 1 1
+[03/16/2023 13:12:18:856]	WinSock Version Started: 1 1
+[03/16/2023 13:12:18:856]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:12:18:856]	TTY settings are  SendAfterWait=140 SendBeforeWait = 176
+[03/16/2023 13:12:18:856]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:12:18:856]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:12:18:856]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:12:21:311]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 13:12:21:311]	CAudioController::Open()
+[03/16/2023 13:12:21:311]	AudioMixer::Open 0
+[03/16/2023 13:12:21:311]	Wave in has separate mic source line
+[03/16/2023 13:12:21:311]	The mic has the volume control.
+[03/16/2023 13:12:21:311]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:12:21:311]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:12:21:311]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 13:12:21:311]	CWaveIn::Open 0 0
+[03/16/2023 13:12:21:359]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 13:12:21:359]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 13:12:21:359]	CWaveIn::Open(): leaving
+[03/16/2023 13:12:21:359]	WaveOut::Open 0 0
+[03/16/2023 13:12:21:390]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 13:12:21:390]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2162, rtcp=10.34.100.11:2163
+[03/16/2023 13:12:21:390]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 13:12:21:390]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 13:12:21:390]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 13:12:21:390]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:12:21:390]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:12:21:390]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 13:12:21:390]	CALL1: CAudioSession::Start():
+[03/16/2023 13:12:21:390]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 13:12:21:390]	CALL1: CMediaProcessor::Start():
+[03/16/2023 13:12:21:390]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:12:21:390]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 13:12:21:390]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:12:21:390]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:12:21:390]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:12:21:390]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:12:21:390]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 13:12:21:390]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 13:12:21:390]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 13:12:21:406]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 13:12:21:406]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:12:21:542]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:12:21:542]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 13:12:21:542]	CAPEXMSG: CapEx Succeded 
+[03/16/2023 13:12:21:542]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 35.995483
+[03/16/2023 13:12:23:880]	CALL1: FRACTION DROPPED = 0.000000
+[03/16/2023 13:12:26:350]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:12:26:350]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 18.997192
+[03/16/2023 13:12:26:421]	CALL1: CAudioSession::Stop():
+[03/16/2023 13:12:26:460]	CAudioExecutive::Suspend() suspended for 36 ms[03/16/2023 13:12:26:460]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 13:12:26:460]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 13:12:26:460]	CAudioController::Close()
+[03/16/2023 13:12:26:460]	CWaveIn::Close()  Entering
+[03/16/2023 13:12:26:460]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 13:12:26:470]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 13:12:26:470]	CWaveIn::Close()  WaveInReset
+[03/16/2023 13:12:26:470]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 13:12:26:470]	CWaveIn::Close()  WaveInClose
+[03/16/2023 13:12:26:470]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 13:12:26:470]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 13:12:26:470]	CWaveIn::Close(): Leaving
+[03/16/2023 13:12:26:500]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:26:500]	AudioMixer::Close
+[03/16/2023 13:12:26:500]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:26:500]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:26:500]	CWaveIn::Close()  Entering
+[03/16/2023 13:12:26:500]	CWaveIn::Close(): Leaving
+[03/16/2023 13:12:26:500]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 13:12:26:500]	CAudioStream::StopSoundRemote:
+[03/16/2023 13:12:26:500]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 13:12:26:500]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 13:12:26:500]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:12:27:520]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 13:12:27:520]	CAudioController::Open()
+[03/16/2023 13:12:27:520]	AudioMixer::Open 0
+[03/16/2023 13:12:27:520]	Wave in has separate mic source line
+[03/16/2023 13:12:27:520]	The mic has the volume control.
+[03/16/2023 13:12:27:520]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:12:27:520]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:12:27:520]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 13:12:27:520]	CWaveIn::Open 0 0
+[03/16/2023 13:12:27:535]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 13:12:27:535]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 13:12:27:535]	CWaveIn::Open(): leaving
+[03/16/2023 13:12:27:535]	WaveOut::Open 0 0
+[03/16/2023 13:12:27:583]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 13:12:27:583]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2118, rtcp=10.34.100.11:2119
+[03/16/2023 13:12:27:583]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 13:12:27:583]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 13:12:27:583]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 13:12:27:583]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:12:27:583]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 13:12:27:583]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 13:12:27:583]	CALL1: CAudioSession::Start():
+[03/16/2023 13:12:27:583]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 13:12:27:583]	CALL1: CMediaProcessor::Start():
+[03/16/2023 13:12:27:583]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:12:27:583]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 13:12:27:583]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:12:27:583]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:12:27:583]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 13:12:27:583]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:12:27:583]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 13:12:27:583]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 13:12:27:583]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 13:12:27:599]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 13:12:27:599]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:12:27:599]	WARNING: CRtpStream::GetInst2Stats: stats values are not updated yet! 0 0
+[03/16/2023 13:12:27:717]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 13:12:27:717]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 13:12:27:717]	CAPEXMSG: CapEx Succeded 
+[03/16/2023 13:12:27:717]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 31.021118
+[03/16/2023 13:12:30:358]	CALL1: CAudioSession::Stop():
+[03/16/2023 13:12:30:392]	CAudioExecutive::Suspend() suspended for 30 ms[03/16/2023 13:12:30:392]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 13:12:30:392]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 13:12:30:392]	CAudioController::Close()
+[03/16/2023 13:12:30:392]	CWaveIn::Close()  Entering
+[03/16/2023 13:12:30:392]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 13:12:30:402]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 13:12:30:402]	CWaveIn::Close()  WaveInReset
+[03/16/2023 13:12:30:402]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 13:12:30:404]	CWaveIn::Close()  WaveInClose
+[03/16/2023 13:12:30:406]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 13:12:30:406]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 13:12:30:406]	CWaveIn::Close(): Leaving
+[03/16/2023 13:12:30:436]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:30:436]	AudioMixer::Close
+[03/16/2023 13:12:30:436]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:30:436]	CWaveOut::Close(): Leaving
+[03/16/2023 13:12:30:436]	CWaveIn::Close()  Entering
+[03/16/2023 13:12:30:436]	CWaveIn::Close(): Leaving
+[03/16/2023 13:12:30:436]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 13:12:30:436]	CAudioStream::StopSoundRemote:
+[03/16/2023 13:12:30:436]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 13:12:30:437]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 13:12:30:437]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 13:48:49:694]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 13:48:49:694]	RtpSendThread starting (7b4)
+[03/16/2023 13:48:49:694]	RtpReceiveThread starting (7ac)
+[03/16/2023 13:48:49:694]	RtcpReceiveThread starting (7bc)
+[03/16/2023 13:48:49:694]	RtcpSendThread starting (7c4)
+[03/16/2023 13:48:49:694]	TraceRouteThread starting (7cc)
+[03/16/2023 13:48:49:745]	AudioMixer::Open 0
+[03/16/2023 13:48:49:745]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 13:48:49:745]	Speakers mic line 4294901760
+[03/16/2023 13:48:49:745]	AudioMixer::Open 0
+[03/16/2023 13:48:49:745]	Wave in has separate mic source line
+[03/16/2023 13:48:49:745]	The mic has the volume control.
+[03/16/2023 13:48:49:745]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 13:48:49:745]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 13:48:49:745]	AudioMixer::EnableMicrophone
+[03/16/2023 13:48:49:778]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 13:59:37:242]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:59:37:242]	WinSock Version Requested: 1 1
+[03/16/2023 13:59:37:242]	WinSock Version Started: 1 1
+[03/16/2023 13:59:37:242]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 13:59:37:242]	TTY settings are  SendAfterWait=140 SendBeforeWait = 176
+[03/16/2023 13:59:37:242]	CQOSUDPSocket::Reset: 0
+[03/16/2023 13:59:37:242]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 13:59:37:242]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 14:00:07:663]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 14:00:07:663]	CAudioController::Open()
+[03/16/2023 14:00:07:663]	AudioMixer::Open 0
+[03/16/2023 14:00:07:664]	Wave in has separate mic source line
+[03/16/2023 14:00:07:664]	The mic has the volume control.
+[03/16/2023 14:00:07:664]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 14:00:07:664]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 14:00:07:665]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 14:00:07:665]	CWaveIn::Open 0 0
+[03/16/2023 14:00:07:756]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 14:00:07:756]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 14:00:07:756]	CWaveIn::Open(): leaving
+[03/16/2023 14:00:07:756]	WaveOut::Open 0 0
+[03/16/2023 14:00:07:810]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 14:00:07:810]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2180, rtcp=10.34.100.11:2181
+[03/16/2023 14:00:07:810]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 14:00:07:810]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 14:00:07:810]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 14:00:07:810]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 14:00:07:810]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 14:00:07:810]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 14:00:07:810]	CALL1: CAudioSession::Start():
+[03/16/2023 14:00:07:810]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 14:00:07:810]	CALL1: CMediaProcessor::Start():
+[03/16/2023 14:00:07:810]	CQOSUDPSocket::Reset: 0
+[03/16/2023 14:00:07:810]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 14:00:07:810]	CQOSUDPSocket::Reset: 0
+[03/16/2023 14:00:07:810]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 14:00:07:810]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 14:00:07:810]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 14:00:07:810]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 14:00:07:810]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 14:00:07:810]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 14:00:07:849]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 14:00:07:849]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:07:849]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 14:00:07:849]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:07:849]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 14:00:07:849]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 14:00:07:909]	CAPEXMSG: Succesfull[03/16/2023 14:00:07:910]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:07:910]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 14:00:08:010]	CALL1: FRACTION DROPPED = 0.000000
+[03/16/2023 14:00:12:689]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:12:689]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 21.026611
+[03/16/2023 14:00:12:719]	CALL1: CAudioSession::Stop():
+[03/16/2023 14:00:12:750]	CAudioExecutive::Suspend() suspended for 25 ms[03/16/2023 14:00:12:750]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 14:00:12:750]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 14:00:12:750]	CAudioController::Close()
+[03/16/2023 14:00:12:750]	CWaveIn::Close()  Entering
+[03/16/2023 14:00:12:752]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 14:00:12:761]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 14:00:12:761]	CWaveIn::Close()  WaveInReset
+[03/16/2023 14:00:12:761]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 14:00:12:761]	CWaveIn::Close()  WaveInClose
+[03/16/2023 14:00:12:761]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 14:00:12:761]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 14:00:12:761]	CWaveIn::Close(): Leaving
+[03/16/2023 14:00:12:799]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:12:799]	AudioMixer::Close
+[03/16/2023 14:00:12:799]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:12:799]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:12:799]	CWaveIn::Close()  Entering
+[03/16/2023 14:00:12:799]	CWaveIn::Close(): Leaving
+[03/16/2023 14:00:12:799]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 14:00:12:799]	CAudioStream::StopSoundRemote:
+[03/16/2023 14:00:12:799]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 14:00:12:799]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 14:00:12:799]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 14:00:15:391]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 14:00:15:391]	CAudioController::Open()
+[03/16/2023 14:00:15:391]	AudioMixer::Open 0
+[03/16/2023 14:00:15:396]	Wave in has separate mic source line
+[03/16/2023 14:00:15:396]	The mic has the volume control.
+[03/16/2023 14:00:15:396]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 14:00:15:396]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 14:00:15:396]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 14:00:15:396]	CWaveIn::Open 0 0
+[03/16/2023 14:00:15:401]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 14:00:15:401]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 14:00:15:414]	CWaveIn::Open(): leaving
+[03/16/2023 14:00:15:415]	WaveOut::Open 0 0
+[03/16/2023 14:00:15:451]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 14:00:15:451]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2224, rtcp=10.34.100.11:2225
+[03/16/2023 14:00:15:451]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 14:00:15:451]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 14:00:15:451]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 14:00:15:451]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 14:00:15:451]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 14:00:15:451]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 14:00:15:451]	CALL1: CAudioSession::Start():
+[03/16/2023 14:00:15:451]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 14:00:15:451]	CALL1: CMediaProcessor::Start():
+[03/16/2023 14:00:15:451]	CQOSUDPSocket::Reset: 0
+[03/16/2023 14:00:15:451]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 14:00:15:451]	CQOSUDPSocket::Reset: 0
+[03/16/2023 14:00:15:451]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 14:00:15:451]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.240.186:2048, rtcp=10.34.240.186:2049 
+[03/16/2023 14:00:15:451]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 14:00:15:451]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 14:00:15:451]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 14:00:15:451]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 14:00:15:464]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 14:00:15:464]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:15:480]	WARNING: CRtpStream::GetInst2Stats: stats values are not updated yet! 0 0
+[03/16/2023 14:00:15:580]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 14:00:15:580]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 14:00:15:580]	CAPEXMSG: CapEx Succeded 
+[03/16/2023 14:00:15:580]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 27.984619
+[03/16/2023 14:00:17:163]	CALL1: CAudioSession::Stop():
+[03/16/2023 14:00:17:191]	CAudioExecutive::Suspend() suspended for 24 ms[03/16/2023 14:00:17:191]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 14:00:17:191]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 14:00:17:191]	CAudioController::Close()
+[03/16/2023 14:00:17:191]	CWaveIn::Close()  Entering
+[03/16/2023 14:00:17:193]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 14:00:17:206]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 14:00:17:206]	CWaveIn::Close()  WaveInReset
+[03/16/2023 14:00:17:206]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 14:00:17:207]	CWaveIn::Close()  WaveInClose
+[03/16/2023 14:00:17:210]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 14:00:17:210]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 14:00:17:210]	CWaveIn::Close(): Leaving
+[03/16/2023 14:00:17:243]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:17:243]	AudioMixer::Close
+[03/16/2023 14:00:17:243]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:17:243]	CWaveOut::Close(): Leaving
+[03/16/2023 14:00:17:243]	CWaveIn::Close()  Entering
+[03/16/2023 14:00:17:243]	CWaveIn::Close(): Leaving
+[03/16/2023 14:00:17:243]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 14:00:17:243]	CAudioStream::StopSoundRemote:
+[03/16/2023 14:00:17:243]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 14:00:17:243]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 14:00:17:243]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 14:14:38:913]	CQOSUDPSocket::Reset: 0
+[03/16/2023 14:14:38:913]	CAudioController::Close()
+[03/16/2023 14:14:38:913]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 14:14:38:914]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 20:10:25:619]	RtpReceiveThread starting (73c)
+[03/16/2023 20:10:25:619]	*** ISPEAC Version: Unicode-7.0.1 ***
+[03/16/2023 20:10:25:619]	RtpSendThread starting (744)
+[03/16/2023 20:10:25:619]	RtcpReceiveThread starting (74c)
+[03/16/2023 20:10:25:619]	RtcpSendThread starting (754)
+[03/16/2023 20:10:25:619]	TraceRouteThread starting (75c)
+[03/16/2023 20:10:25:825]	AudioMixer::Open 0
+[03/16/2023 20:10:25:829]	Speakers is not the compatible out device for this Mixer  Vista Changes
+[03/16/2023 20:10:25:829]	Speakers mic line 4294901760
+[03/16/2023 20:10:25:830]	AudioMixer::Open 0
+[03/16/2023 20:10:25:832]	Wave in has separate mic source line
+[03/16/2023 20:10:25:832]	The mic has the volume control.
+[03/16/2023 20:10:25:832]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 20:10:25:832]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 20:10:25:832]	AudioMixer::EnableMicrophone
+[03/16/2023 20:10:25:890]	CDirectSoundDevice::Constructor: Running on Vista or Later Windows OS
+[03/16/2023 20:13:00:238]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 20:13:00:239]	WinSock Version Requested: 1 1
+[03/16/2023 20:13:00:239]	WinSock Version Started: 1 1
+[03/16/2023 20:13:00:240]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 20:13:00:240]	TTY settings are  SendAfterWait=140 SendBeforeWait = 176
+[03/16/2023 20:13:00:240]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:00:240]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 20:13:00:241]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.236.179:2048, rtcp=10.34.236.179:2049 
+[03/16/2023 20:13:01:174]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 20:13:01:174]	CAudioController::Open()
+[03/16/2023 20:13:01:174]	AudioMixer::Open 0
+[03/16/2023 20:13:01:175]	Wave in has separate mic source line
+[03/16/2023 20:13:01:175]	The mic has the volume control.
+[03/16/2023 20:13:01:175]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 20:13:01:175]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 20:13:01:175]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 20:13:01:176]	CWaveIn::Open 0 0
+[03/16/2023 20:13:01:403]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 20:13:01:404]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 20:13:01:405]	CWaveIn::Open(): leaving
+[03/16/2023 20:13:01:406]	WaveOut::Open 0 0
+[03/16/2023 20:13:01:476]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 20:13:01:477]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2214, rtcp=10.34.100.11:2215
+[03/16/2023 20:13:01:477]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 20:13:01:478]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 20:13:01:478]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 20:13:01:478]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 20:13:01:478]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 20:13:01:478]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 20:13:01:478]	CALL1: CAudioSession::Start():
+[03/16/2023 20:13:01:478]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 20:13:01:478]	CALL1: CMediaProcessor::Start():
+[03/16/2023 20:13:01:478]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:01:478]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 20:13:01:478]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:01:478]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 20:13:01:478]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.236.179:2048, rtcp=10.34.236.179:2049 
+[03/16/2023 20:13:01:480]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 20:13:01:480]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 20:13:01:480]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 20:13:01:480]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 20:13:01:484]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 20:13:01:484]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:546]	WARNING: CRtpStream::GetInst2Stats: stats values are not updated yet! 0 0
+[03/16/2023 20:13:01:596]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:603]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:603]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 20:13:01:603]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:01:607]	CAPEXMSG: Succesfull[03/16/2023 20:13:01:607]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:607]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:01:607]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:607]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:01:661]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:01:661]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:05:255]	CALL1: FRACTION DROPPED = 0.000000
+[03/16/2023 20:13:06:213]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:06:213]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 74.996948
+[03/16/2023 20:13:06:295]	CALL1: CAudioSession::Stop():
+[03/16/2023 20:13:06:322]	CAudioExecutive::Suspend() suspended for 27 ms[03/16/2023 20:13:06:322]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 20:13:06:322]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 20:13:06:322]	CAudioController::Close()
+[03/16/2023 20:13:06:322]	CWaveIn::Close()  Entering
+[03/16/2023 20:13:06:322]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 20:13:06:337]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 20:13:06:337]	CWaveIn::Close()  WaveInReset
+[03/16/2023 20:13:06:337]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 20:13:06:338]	CWaveIn::Close()  WaveInClose
+[03/16/2023 20:13:06:339]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 20:13:06:339]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 20:13:06:339]	CWaveIn::Close(): Leaving
+[03/16/2023 20:13:06:370]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:06:370]	AudioMixer::Close
+[03/16/2023 20:13:06:371]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:06:371]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:06:371]	CWaveIn::Close()  Entering
+[03/16/2023 20:13:06:371]	CWaveIn::Close(): Leaving
+[03/16/2023 20:13:06:371]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 20:13:06:371]	CAudioStream::StopSoundRemote:
+[03/16/2023 20:13:06:371]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 20:13:06:371]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 20:13:06:371]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 20:13:06:948]	CAudioSession::SetPlayRecordRate(): play and record set to 8000 samples/second
+[03/16/2023 20:13:06:948]	CAudioController::Open()
+[03/16/2023 20:13:06:948]	AudioMixer::Open 0
+[03/16/2023 20:13:06:948]	Wave in has separate mic source line
+[03/16/2023 20:13:06:948]	The mic has the volume control.
+[03/16/2023 20:13:06:948]	Wave in mic line 4294901760, volume range: 0<->65535
+[03/16/2023 20:13:06:949]	CAudioMixer::GetWaveInMuxControl::WaveIn DST does not have MUX or Mixer.
+[03/16/2023 20:13:06:949]	AGC mic volume range: 3276 <-> 65535
+[03/16/2023 20:13:06:949]	CWaveIn::Open 0 0
+[03/16/2023 20:13:06:963]	CWaveIn_Callback: WIM_OPEN message received 
+[03/16/2023 20:13:06:963]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+[03/16/2023 20:13:06:964]	CWaveIn::Open(): leaving
+[03/16/2023 20:13:06:965]	WaveOut::Open 0 0
+[03/16/2023 20:13:07:006]	
+ DeviceID = 0
+ Mid = 65535
+ Pid = 65535
+ Version = 32.5
+ Formats = 1048575
+ Channels = 2
+ Support = 46
+
+[03/16/2023 20:13:07:007]	CALL1: CMediaProcessor::OpenRemoteNetworkConnection: rtp=10.34.100.11:2220, rtcp=10.34.100.11:2221
+[03/16/2023 20:13:07:007]	CQOSUDPSocket::SetFixedFilterStyle: RSVP fixed style.
+[03/16/2023 20:13:07:007]	CALL1: CRTPSession::OpenRemoteNetworkConnection is finished
+[03/16/2023 20:13:07:007]	SetQosDSCP is called: DSCP 46 nType: 2
+[03/16/2023 20:13:07:007]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 20:13:07:007]	SENDING a SetDSCP...: 7F000001:8888
+[03/16/2023 20:13:07:007]	RTCP monitor: 10.32.17.5 5005
+[03/16/2023 20:13:07:007]	CALL1: CAudioSession::Start():
+[03/16/2023 20:13:07:008]	CAudioExecutive::Suspend() suspended for 0 ms[03/16/2023 20:13:07:008]	CALL1: CMediaProcessor::Start():
+[03/16/2023 20:13:07:008]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:07:008]	CMediaProcessor::Start(): Reopen local network resources.
+[03/16/2023 20:13:07:008]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:07:008]	INFO:Socket Version avaliable is too low for GQoS.
+[03/16/2023 20:13:07:008]	CALL1: CMediaProcessor::OpenLocalNetworkResources: rtp=10.34.236.179:2048, rtcp=10.34.236.179:2049 
+[03/16/2023 20:13:07:009]	CRTCPReporting::Reset: Logging is o. File: C
+[03/16/2023 20:13:07:009]	CALL1: CMediaProcessor::Start(): Samples per packet: 160, Encryption: local: off, remote: off
+[03/16/2023 20:13:07:010]	CALL1: CAudioSession::Start(): maximum packet size 160 samples
+[03/16/2023 20:13:07:010]	CALL1: CMediaProcessor::JoinConference(): wideband = 0 
+[03/16/2023 20:13:07:035]	Warning: CSSRCTable::GetARecordWithSSRC: i=1 m_nTotalElements=1
+[03/16/2023 20:13:07:044]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:07:110]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:07:110]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:07:110]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:07:110]	CAPEXMSG: Got CapEx ACK packet 
+[03/16/2023 20:13:07:110]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:07:158]	CAPEXMSG: Succesfull[03/16/2023 20:13:07:172]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:07:172]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:07:172]	Warning: CSSRCTable::SearchRecords: i=2 m_nTotalElements=2
+[03/16/2023 20:13:07:172]	CALL1: RECEIVED RTCP ROUND TRIP DELAY = 0.000000
+[03/16/2023 20:13:10:762]	CALL1: CAudioSession::Stop():
+[03/16/2023 20:13:10:817]	CAudioExecutive::Suspend() suspended for 54 ms[03/16/2023 20:13:10:817]	CALL1: CMediaProcessor::Stop():
+[03/16/2023 20:13:10:817]	CAudioSession::Stop(): Last active call closed
+[03/16/2023 20:13:10:817]	CAudioController::Close()
+[03/16/2023 20:13:10:817]	CWaveIn::Close()  Entering
+[03/16/2023 20:13:10:817]	CWaveIn::Close ()  WaveInStop
+[03/16/2023 20:13:10:833]	CWaveIn::Close()  WaveInStop exited, 0
+[03/16/2023 20:13:10:833]	CWaveIn::Close()  WaveInReset
+[03/16/2023 20:13:10:833]	CWaveIn::Close()  UnprepareAllHeadersWaveIn
+[03/16/2023 20:13:10:833]	CWaveIn::Close()  WaveInClose
+[03/16/2023 20:13:10:835]	CWaveIn_Callback: WIM_CLOSE message received 
+[03/16/2023 20:13:10:835]	CWaveIn::Close()  Releasing Semaphore
+[03/16/2023 20:13:10:835]	CWaveIn::Close(): Leaving
+[03/16/2023 20:13:10:866]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:10:866]	AudioMixer::Close
+[03/16/2023 20:13:10:866]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:10:866]	CWaveOut::Close(): Leaving
+[03/16/2023 20:13:10:866]	CWaveIn::Close()  Entering
+[03/16/2023 20:13:10:866]	CWaveIn::Close(): Leaving
+[03/16/2023 20:13:10:866]	CMediaProcessor::StopSoundRemote: Entering 
+[03/16/2023 20:13:10:866]	CAudioStream::StopSoundRemote:
+[03/16/2023 20:13:10:866]	CMediaProcessor::StopSoundRemote: Exiting 
+[03/16/2023 20:13:10:866]	CALL1: CMediaProcessor::LeaveConference():
+[03/16/2023 20:13:10:866]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 20:13:12:737]	CQOSUDPSocket::Reset: 0
+[03/16/2023 20:13:12:737]	CAudioController::Close()
+[03/16/2023 20:13:12:737]	INFO:CRTPSession::StopTraceRoute: Stop the TraceRoute.
+[03/16/2023 20:13:12:738]	CRTCPReporting::Reset: Logging is o. File: C

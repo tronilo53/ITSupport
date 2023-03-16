@@ -7,6 +7,7 @@ const os = require( "os" );
 const { exec } = require( "child_process" );
 const xml2js = require( "xml2js" );
 const cp = require( "child_process" );
+const copyDir = require( "copy-dir" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
 autoUpdater.autoDownload = false;
@@ -25,6 +26,8 @@ const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roam
 const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
 const RUTE__LAN__DEV = './src/assets/language.xml';
+const RUTE__AVAYA__TEMPLATE__DEV = './src/assets/Avaya';
+const RUTE__AVAYA__TEMPLATE__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/Avaya`;
 const PASS__AVAYA = 'NErKSOxs6svv3KKQseDwh9gjGisvxFdwdXLxQY0YhX24YISBVzNt432Zyl3g5AKVKtfe82PvqRhG2urEM+pHKVYEZTy3f2Cw==';
 const RUTE__CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const RUTE__FIREFOX = 'C:/Program Files/Mozilla Firefox/firefox.exe';
@@ -195,14 +198,9 @@ ipcMain.on( 'openIncident', ( event, args ) => {
 
 //VERIFICAR SI AVAYA ESTÁ INSTALADO
 ipcMain.on( 'checkAvayaInstall', ( event, args ) => {
-    if( fs.existsSync( RUTE__INSTALL ) ) {
-        if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent` ) ) {
-            if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent/OneXAgentUI.exe` ) ) event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
-            else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
-        }
-        else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
-    }
-    else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
+    if( fs.existsSync( `${RUTE__INSTALL}/Avaya one-X Agent/OneXAgentUI.exe` ) ) {
+        event.sender.send( 'checkAvayaInstall', { data: 'ok' } );
+    }else event.sender.send( 'checkAvayaInstall', { data: 'fail' } );
 });
 //OBTENER DATOS: HOSTNAME, SERIALTAG Y USUARIO DE WINDOWS
 ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => {
@@ -230,7 +228,7 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
     PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
 */
 ipcMain.on( 'trouble_1_2', ( event, args ) => {
-    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'noExist' } );
+    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'notExist' } );
     else {
         // PRED; RecepcionGanancia: 1.00
         fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
@@ -256,7 +254,7 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
                 //Si el elemento existe...
                 if( resultArr == 1 ) {
                     //Elimina el elemento del array;
-                    //json.ConfigData.parameter.slice( posArr, 1 );
+                    json.ConfigData.parameter.slice( posArr, 1 );
                     //Se envía al renderer un mensaje
                     event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
                 }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
@@ -266,7 +264,7 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
 });
 //PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
 ipcMain.on( 'trouble_3', ( event, args ) => {
-    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3', { data: 'noExist' } );
+    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3', { data: 'not Exist' } );
     else {
         // PRED; TransmisionGanancia: 0.75
         fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {

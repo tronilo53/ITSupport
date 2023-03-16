@@ -1,0 +1,85 @@
+[03/14/2023 18:13:30:528] ERR: SCRIPTDATA: Reader: Script file could not be read!
+[03/14/2023 18:13:30:528] ERR:     CONFIG: Initialize: Script data read has failed.
+[03/14/2023 18:13:30:529] ERR:    UPGRADE: Upgrade disabled. Proceed without upgrading...
+[03/14/2023 18:13:30:555] ERR:    SESSION: Setting up mini dumper
+[03/14/2023 18:13:30:808] ERR:       CORE: Unable to open file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml' with permission 'rb'.
+[03/14/2023 18:13:30:808] ERR:    HISTORY: Initialize Unable to open history file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml'.
+[03/14/2023 18:13:30:839] ERR:   CERTMGMT: CertMgmt:cmt_process_trust_certs:Cleaning up trusted certificates
+
+[03/16/2023 10:42:49:710] ERR: SCRIPTDATA: Reader: Script file could not be read!
+[03/16/2023 10:42:49:710] ERR:     CONFIG: Initialize: Script data read has failed.
+[03/16/2023 10:42:49:710] ERR:    UPGRADE: Upgrade disabled. Proceed without upgrading...
+[03/16/2023 10:42:49:725] ERR:    SESSION: Setting up mini dumper
+[03/16/2023 10:42:49:960] ERR:       CORE: Unable to open file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml' with permission 'rb'.
+[03/16/2023 10:42:49:960] ERR:    HISTORY: Initialize Unable to open history file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml'.
+[03/16/2023 10:42:49:992] ERR:   CERTMGMT: CertMgmt:cmt_process_trust_certs:Cleaning up trusted certificates
+
+[03/16/2023 12:08:01:836] ERR: SCRIPTDATA: Reader: Script file could not be read!
+[03/16/2023 12:08:01:837] ERR:     CONFIG: Initialize: Script data read has failed.
+[03/16/2023 12:08:01:837] ERR:    UPGRADE: Upgrade disabled. Proceed without upgrading...
+[03/16/2023 12:08:01:851] ERR:    SESSION: Setting up mini dumper
+[03/16/2023 12:08:02:065] ERR:       CORE: Unable to open file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml' with permission 'rb'.
+[03/16/2023 12:08:02:065] ERR:    HISTORY: Initialize Unable to open history file 'C:\Users\luis.tronilo\AppData\Roaming\Avaya\one-X Agent\2.5\history.xml'.
+[03/16/2023 12:08:02:088] ERR:   CERTMGMT: CertMgmt:cmt_process_trust_certs:Cleaning up trusted certificates
+
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:985] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:986] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "MODEL4"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "GROUP"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "GROUP"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "GROUP"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "GROUP"
+[03/16/2023 12:08:12:987] ERR: SCRIPTDATA: Cannot find "GROUP"
+[03/16/2023 12:08:12:987] ERR:     CONFIG: SetParameterToMasterTable: Numeric value to set is empty or invalid, aborting!
+[03/16/2023 12:08:12:987] ERR:     CONFIG: SetParameterToMasterTable: Numeric value to set is empty or invalid, aborting!
+[03/16/2023 12:08:13:431] ERR:     CONFIG: CConfigurationCache::GetCachePath() : SHCreateDirectoryEx failed with rc = 183
+[03/16/2023 12:08:37:035] ERR:       DIAL: CSimpleDialRules:: Country code is empty. Default to US
+[03/16/2023 12:08:37:037] ERR:       DIAL: CSimpleDialRules:: empty extension list. Default to 5
+[03/16/2023 12:08:37:037] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 12:08:37:579] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 12:08:37:579] EMG:           : Remote Logging level is set to 'emergency'.
+[03/16/2023 13:08:42:760] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:12:15:725] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:48:49:927] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:48:49:927] EMG:           : Remote Logging level is set to 'emergency'.
+[03/16/2023 13:48:57:739] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:59:22:241] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 20:12:58:145] EMG:           : Local Logging level is set to 'emergency'.

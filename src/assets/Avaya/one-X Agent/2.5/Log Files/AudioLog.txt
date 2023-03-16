@@ -1,0 +1,9 @@
+[03/14/2023 18:13:26:986] EMG:           : Local Logging level is set to 'error'.
+[03/16/2023 10:42:46:219] EMG:           : Local Logging level is set to 'error'.
+[03/16/2023 12:07:58:304] EMG:           : Local Logging level is set to 'error'.
+[03/16/2023 12:08:36:967] ERR:      AUDIO: IsSideToneEnabled(): Device does not support sidetone.
+[03/16/2023 12:08:37:553] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:08:33:109] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:11:26:588] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 13:48:49:678] EMG:           : Local Logging level is set to 'emergency'.
+[03/16/2023 20:10:25:600] EMG:           : Local Logging level is set to 'emergency'.
