@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<AdvancedSearchContact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SearchLastSelectedIndex="0" EnablePredictiveSearch="false">
-  <AdvancedSearchContactSettingRecord SearchInIndex="0" Field="All" Criteria="Contains" xmlns="http://avaya.com/OneXAgent/Settings" />
-  <AdvancedSearchContactSettingRecord SearchInIndex="1" Field="LastName" Criteria="Contains" xmlns="http://avaya.com/OneXAgent/Settings" />
-  <AdvancedSearchContactSettingRecord SearchInIndex="2" Field="LastName" Criteria="Contains" xmlns="http://avaya.com/OneXAgent/Settings" />
-</AdvancedSearchContact>

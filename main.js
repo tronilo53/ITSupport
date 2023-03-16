@@ -152,7 +152,7 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
 });
@@ -225,28 +225,80 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
         });
     }
 });
-//PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
-ipcMain.on( 'trouble1', ( event, args ) => {
-    // PRED; RecepcionGanancia: 3.34 - TransmisionGanancia: 1.00
-    fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'trouble1', { data: 'notRead' } );
-        else {
+/*
+    PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
+    PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
+*/
+ipcMain.on( 'trouble_1_2', ( event, args ) => {
+    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'noExist' } );
+    else {
+        // PRED; RecepcionGanancia: 1.00
+        fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
-                if( errorJson ) event.sender.send( 'trouble1', { data: 'notJson' } );
-                else {
-                    const json = result;
-                    // json.ConfigData.parameter[15] - recepcion
-                    // json.ConfigData.parameter[16] - transmision
-                    if( json.ConfigData.paremeter[15].name === 'ReceiveGain' ) {
-                        //TODO: MODIFICAR VALOR AL PREDETERMINADO - 3.34
-                    }else {
-                        //TODO: CREAR NODO "ReceiveGain" AL FINAL (SE ORDENA AUTOMÁTICAMENTE)
+                //Guardamos el resultado de la conversión a json
+                const json = result;
+                //creamos variable para saber si existe el elemento en el array;
+                let resultArr = 0;
+                //Guardamos todos los elementos del array en una variable;
+                const arrParameters = json.ConfigData.parameter;
+                //Inicializamos variable para guardar la posición del elemento encontrado;
+                let posArr;
+                //Bucle for que recorre todos los elementos del array;
+                for( i = 0; i < arrParameters.length; i++ ) {
+                    //Si alguna posicion se encuentra el elemento...
+                    if( arrParameters[i].name[0] === 'ReceiveGain' ) {
+                        //Guardamos en variable la confirmación de que existe el elemento;
+                        resultArr = 1;
+                        //Guardamos la posición actual del elemento.
+                        posArr = i;
                     }
-                    event.sender.send( 'trouble1', { data: json } );
                 }
+                //Si el elemento existe...
+                if( resultArr == 1 ) {
+                    //Elimina el elemento del array;
+                    //json.ConfigData.parameter.slice( posArr, 1 );
+                    //Se envía al renderer un mensaje
+                    event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
+                }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
             });
-        }
-    });
+        });
+    }
+});
+//PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
+ipcMain.on( 'trouble_3', ( event, args ) => {
+    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3', { data: 'noExist' } );
+    else {
+        // PRED; TransmisionGanancia: 0.75
+        fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                //Guardamos el resultado de la conversión a json
+                const json = result;
+                //creamos variable para saber si existe el elemento en el array;
+                let resultArr = 0;
+                //Guardamos todos los elementos del array en una variable;
+                const arrParameters = json.ConfigData.parameter;
+                //Inicializamos variable para guardar la posición del elemento encontrado;
+                let posArr;
+                //Bucle for que recorre todos los elementos del array;
+                for( i = 0; i < arrParameters.length; i++ ) {
+                    //Si alguna posicion se encuentra el elemento...
+                    if( arrParameters[i].name[0] === 'TransmitGain' ) {
+                        //Guardamos en variable la confirmación de que existe el elemento;
+                        resultArr = 1;
+                        //Guardamos la posición actual del elemento.
+                        posArr = i;
+                    }
+                }
+                //Si el elemento existe...
+                if( resultArr == 1 ) {
+                    //Se modifica su valor al predeterminado.
+                    json.ConfigData.parameter[posArr].value[0] = '0.75';
+                    //Se envía al renderer un mensaje
+                    event.sender.send( 'trouble_3', { data: 'gananMod' } );
+                }else event.sender.send( 'trouble_3', { data: 'gananPred' } );
+            });
+        });
+    }
 });
 //PROBLEMA 16: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
 ipcMain.on( 'trouble16', ( event, args ) => {
