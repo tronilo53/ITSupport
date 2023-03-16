@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //DECLARACION DE ELEMENTOS DOM
   /* ----- Español ----- */
   @ViewChild('sp') sp: ElementRef;
+  @ViewChild('bannerLan') bannerLan: ElementRef;
   @ViewChild('avaya__ok') avaya__ok: ElementRef;
   @ViewChild('avaya__fail') avaya__fail: ElementRef;
   @ViewChild('modal') modal: ElementRef;
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   /* ----- Ingles ----- */
   @ViewChild('in') in: ElementRef;
+  @ViewChild('bannerLanIn') bannerLanIn: ElementRef;
   @ViewChild('avaya__ok__in') avaya__ok__in: ElementRef;
   @ViewChild('avaya__fail__in') avaya__fail__in: ElementRef;
   @ViewChild('modalIn') modalIn: ElementRef;
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   /* ----- Portugues ----- */
   @ViewChild('pt') pt: ElementRef;
+  @ViewChild('bannerLanPt') bannerLanPt: ElementRef;
   @ViewChild('avaya__ok__pt') avaya__ok__pt: ElementRef;
   @ViewChild('avaya__fail__pt') avaya__fail__pt: ElementRef;
   @ViewChild('modalPt') modalPt: ElementRef;
@@ -125,6 +128,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
           if( args.data === '' || args.data === 'sp' ) {
             //Muestra el contenedor Español
             this.renderer.removeClass( this.sp.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Español
+            this.renderer.removeClass( this.bannerLan.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Español)
             this.renderer.removeClass( this.avaya__ok.nativeElement, 'none' );
             //Mostrar version de la aplicación
@@ -134,6 +139,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }else if( args.data === 'in' ) {
             //Muestra el contenedor Ingles
             this.renderer.removeClass( this.in.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Ingles
+            this.renderer.removeClass( this.bannerLanIn.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Ingles)
             this.renderer.removeClass( this.avaya__ok__in.nativeElement, 'none' );
             //Mostrar version de la aplicación
@@ -143,6 +150,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }else {
             //Muestra el contenedor Portugues
             this.renderer.removeClass( this.pt.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Portugues
+            this.renderer.removeClass( this.bannerLanPt.nativeElement, 'none' );
             //Mostrar ventana principal de avaya (Portugues)
             this.renderer.removeClass( this.avaya__ok__pt.nativeElement, 'none' );
             //Mostrar version de la aplicación
@@ -162,15 +171,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //CERRAR APLICACIÓN
   public closeApp(): void {
     this.__ipcService.send( 'closeApp' );
-  }
-  //Cambiar idioma
-  private setLanguage(): void {
-    this.__ipcService.send( 'setLanguage' );
-    this.__ipcService.on( 'setLanguage', ( event, args ) => {
-      if( args.data === 'notRead' ) {
-
-      }
-    });
   }
   //ABRIR VENTANA DE IT
   public openIt(): void {
@@ -203,24 +203,47 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.removeClass( this.changeLanguageWindow.nativeElement, 'none' );
   }
   //Cambiar el idioma de la app
-  public changeLanguageBtn(): void { //TODO: Pendiente...
+  public changeLanguageBtn(): void {
     if( this.dataLan === '???' ) this.__alertService.alertError( 'Por favor, seleccione un idioma' );
     else {
       if( this.dataLan === '1' ) this.__alertService.alertError( 'El idioma español ya está establecido' );
-      else if( this.dataLan === '2' ) {
-        //TODO: Ocultar español y mostrar ingles
-        this
-        this.setLanguage();
+      else if( this.dataLan === '2' ) { //Si es ingles
+        //Establecer nuevo idioma en Ingles y ocultar Español - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'in' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
+          else {
+            //Ocultamos contenedor en español y reseteamos select de idioma
+            this.hiddenContentReset();
+            //Mostramos Contenedor Ingles
+            this.renderer.removeClass( this.in.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Ingles
+            this.renderer.removeClass( this.bannerLanIn.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Ingles
+            this.renderer.removeClass( this.avaya__ok__in. nativeElement, 'none' );
+          }
+        });
       }else {
-        //TODO: Ocultar español y mostrar Portugues
+        //Establecer nuevo idioma en Portugues y ocultar Español - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'pt' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
+          else {
+            //Ocultamos contenedor en español y reseteamos select de idioma
+            this.hiddenContentReset();
+            //Mostramos Contenedor Portugues
+            this.renderer.removeClass( this.pt.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Portugues
+            this.renderer.removeClass( this.bannerLanPt.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Portugues
+            this.renderer.removeClass( this.avaya__ok__pt. nativeElement, 'none' );
+          }
+        });
       }
     }
-    this.__ipcService.on( 'changeLanguage', ( event, args ) => {
- 
-    });
   }
   //ACTUALIZACIONES AUTOMATICAS
-  public checkUpdates(): void {
+  private checkUpdates(): void {
     //ACTUALIZACION DISPONIBLE
     this.__ipcService.on( 'update_available', () => {
       this.__ipcService.removeAllListeners( 'update_available' );
@@ -260,10 +283,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.__alertService.alertDownloadUpdate();
     });
   }
-  public hiddenDom(): void {
+  private hiddenDom(): void {
     /* ----- Español ----- */
     //Ocultar contenedor
     this.renderer.addClass( this.sp.nativeElement, 'none' );
+    //Ocultar Banner de idioma
+    this.renderer.addClass( this.bannerLan.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -283,13 +308,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //Rsetear campo de seleccion de idioma
     this.dataLan = '???';
   }
+  //Ocultamos contenedor en español y reseteamos select de idioma
+  private hiddenContentReset(): void {
+    //Reseteamos el select (Español)
+    this.dataLan = '???';
+    //Ocultamos la ventana de cambio de idioma (Español)
+    this.renderer.addClass( this.changeLanguageWindow.nativeElement, 'none' );
+    //Ocultamos la ventana de Settings (Español)
+    this.renderer.addClass( this.settings.nativeElement, 'none' );
+    //Ocultamos contenedor Español
+    this.renderer.addClass( this.sp.nativeElement, 'none' );
+  }
 
   /* ------- Ingles ------- */
   //OCULTAR ELEMENTOS DEL DOM
-  public hiddenDomIn(): void {
+  private hiddenDomIn(): void {
     /* ----- Ingles ----- */
     //Ocultar contenedor
     this.renderer.addClass( this.in.nativeElement, 'none' );
+    //Ocultar Banner de idioma
+    this.renderer.addClass( this.bannerLanIn.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail__in.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -319,7 +357,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dataLanIn = '???';
   }
   //ACTUALIZACIONES AUTOMATICAS
-  public checkUpdatesIn(): void {
+  private checkUpdatesIn(): void {
     //ACTUALIZACION DISPONIBLE
     this.__ipcService.on( 'update_available', () => {
       this.__ipcService.removeAllListeners( 'update_available' );
@@ -360,20 +398,44 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
   //Cambiar el idioma de la app
-  public changeLanguageBtnIn(): void { //TODO: Pendiente...
-    if( this.dataLan === '???' ) this.__alertServiceIn.alertError( 'Por favor, seleccione un idioma' );
+  public changeLanguageBtnIn(): void {
+    if( this.dataLanIn === '???' ) this.__alertServiceIn.alertError( 'Please select a language' );
     else {
-      if( this.dataLan === '1' ) this.__alertServiceIn.alertError( 'El idioma español ya está establecido' );
-      else if( this.dataLan === '2' ) {
-        //TODO: Ocultar español y mostrar ingles
-        this.setLanguage();
-      }else {
-        //TODO: Ocultar español y mostrar Portugues
+      if( this.dataLanIn === '2' ) this.__alertServiceIn.alertError( 'English language is already established' );
+      else if( this.dataLanIn === '1' ) { //Si es español
+        //Establecer nuevo idioma en Español y ocultar Ingles - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'sp' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
+          else {
+            //Ocultamos contenedor en Ingles y reseteamos select de idioma
+            this.hiddenContentResetIn();
+            //Mostramos Contenedor Español
+            this.renderer.removeClass( this.sp.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Español
+            this.renderer.removeClass( this.bannerLan.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Español
+            this.renderer.removeClass( this.avaya__ok. nativeElement, 'none' );
+          }
+        });
+      }else { //Si es portugues
+        //Establecer nuevo idioma en Portugues y ocultar Ingles - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'pt' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
+          else {
+            //Ocultamos contenedor en Ingles y reseteamos select de idioma
+            this.hiddenContentResetIn();
+            //Mostramos Contenedor Portugues
+            this.renderer.removeClass( this.pt.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Portugues
+            this.renderer.removeClass( this.bannerLanPt.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Portugues
+            this.renderer.removeClass( this.avaya__ok__pt. nativeElement, 'none' );
+          }
+        });
       }
     }
-    this.__ipcService.on( 'changeLanguage', ( event, args ) => {
- 
-    });
   }
   //ABRIR PORTAL DE INCIDENCIAS (Ingles)
   public openIncidentIn(): void {
@@ -383,13 +445,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //Rsetear campo de seleccion de idioma
     this.dataLanIn = '???';
   }
+  //Ocultamos contenedor en Ingles y reseteamos select de idioma
+  private hiddenContentResetIn(): void {
+    //Reseteamos el select (Español)
+    this.dataLanIn = '???';
+    //Ocultamos la ventana de cambio de idioma (Español)
+    this.renderer.addClass( this.changeLanguageWindowIn.nativeElement, 'none' );
+    //Ocultamos la ventana de Settings (Español)
+    this.renderer.addClass( this.settingsIn.nativeElement, 'none' );
+    //Ocultamos contenedor Español
+    this.renderer.addClass( this.in.nativeElement, 'none' );
+  }
 
   /* ------- Portugues ------- */
   //OCULTAR ELEMENTOS DEL DOM
-  public hiddenDomPt(): void {
+  private hiddenDomPt(): void {
     /* ----- Portugues ----- */
     //Ocultar contenedor
     this.renderer.addClass( this.pt.nativeElement, 'none' );
+    //Ocultar Banner de idioma
+    this.renderer.addClass( this.bannerLanPt.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya fallida
     this.renderer.addClass( this.avaya__fail__pt.nativeElement, 'none' );
     //Ocultar la ventana de: instalacion de avaya ok
@@ -419,7 +494,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dataLanPt = '???';
   }
   //ACTUALIZACIONES AUTOMATICAS
-  public checkUpdatesPt(): void {
+  private checkUpdatesPt(): void {
     //ACTUALIZACION DISPONIBLE
     this.__ipcService.on( 'update_available', () => {
       this.__ipcService.removeAllListeners( 'update_available' );
@@ -461,19 +536,43 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   //Cambiar el idioma de la app
   public changeLanguageBtnPt(): void { //TODO: Pendiente...
-    if( this.dataLan === '???' ) this.__alertServicePt.alertError( 'Por favor, seleccione un idioma' );
+    if( this.dataLanPt === '???' ) this.__alertServicePt.alertError( 'Por favor seleccione uma língua' );
     else {
-      if( this.dataLan === '1' ) this.__alertServicePt.alertError( 'El idioma español ya está establecido' );
-      else if( this.dataLan === '2' ) {
-        //TODO: Ocultar español y mostrar ingles
-        this.setLanguage();
-      }else {
-        //TODO: Ocultar español y mostrar Portugues
+      if( this.dataLanPt === '3' ) this.__alertServicePt.alertError( 'A língua espanhola já está estabelecida' );
+      else if( this.dataLanPt === '1' ) { //Si es Español
+        //Establecer nuevo idioma en Español y ocultar Portugues - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'sp' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
+          else {
+            //Ocultamos contenedor en Portugues y reseteamos select de idioma
+            this.hiddenContentResetPt();
+            //Mostramos Contenedor Español
+            this.renderer.removeClass( this.sp.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Español
+            this.renderer.removeClass( this.bannerLan.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Español
+            this.renderer.removeClass( this.avaya__ok. nativeElement, 'none' );
+          }
+        });
+      }else { //Si es ingles
+        //Establecer nuevo idioma en Ingles y ocultar Portugues - archivo language.xml
+        this.__ipcService.send( 'setLanguage', { data: 'in' } );
+        this.__ipcService.on( 'setLanguage', ( event, args ) => {
+          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
+          else {
+            //Ocultamos contenedor en Portugues y reseteamos select de idioma
+            this.hiddenContentResetPt();
+            //Mostramos Contenedor Ingles
+            this.renderer.removeClass( this.in.nativeElement, 'none' );
+            //Mostrar bandera lenguaje Ingles
+            this.renderer.removeClass( this.bannerLanIn.nativeElement, 'none' );
+            //Mostramos ventana principal de avaya__ok Ingles
+            this.renderer.removeClass( this.avaya__ok__in. nativeElement, 'none' );
+          }
+        });
       }
     }
-    this.__ipcService.on( 'changeLanguage', ( event, args ) => {
- 
-    });
   }
   //ABRIR PORTAL DE INCIDENCIAS (Portugues)
   public openIncidentPt(): void {
@@ -482,5 +581,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.renderer.addClass( this.changeLanguageWindowPt.nativeElement, 'none' );
     //Rsetear campo de seleccion de idioma
     this.dataLanPt = '???';
+  }
+  //Ocultamos contenedor en Portugues y reseteamos select de idioma
+  private hiddenContentResetPt(): void {
+    //Reseteamos el select (Español)
+    this.dataLanPt = '???';
+    //Ocultamos la ventana de cambio de idioma (Español)
+    this.renderer.addClass( this.changeLanguageWindowPt.nativeElement, 'none' );
+    //Ocultamos la ventana de Settings (Español)
+    this.renderer.addClass( this.settingsPt.nativeElement, 'none' );
+    //Ocultamos contenedor Español
+    this.renderer.addClass( this.pt.nativeElement, 'none' );
   } 
 }

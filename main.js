@@ -324,11 +324,19 @@ ipcMain.on( 'checkLanguage', ( event, args ) => {
 });
 //ESTABLECER IDIOMA
 ipcMain.on( 'setLanguage', ( event, args ) => {
+    //TODO: CAMBIAR A LA RUTA DE PROD CUANDO SE PROCEDA
     fs.readFile( RUTE__LAN__DEV, ( errorRead, data ) => {
-        if( errorRead ) event.sender.send( 'setLanguage', { data: 'notRead' } );
-        else {
-
-        }
+        xml2js.parseString( data, ( errorJson, result ) => {
+            const json = result;
+            json.Settings.lan[0].$.language = args.data;
+            const builder = new xml2js.Builder();
+            const xml = builder.buildObject( json );
+            //TODO: CAMBIAR A LA RUTA DE PROD CUANDO SE PROCEDA
+            fs.writeFile( RUTE__LAN__DEV, xml, ( errorWrite ) => {
+                if( errorWrite ) event.sender.send( 'setLanguage', { data: 'notRead' } );
+                else event.sender.send( 'setLanguage', { data: 'ok' } );
+            });
+        });
     });
 });
 //CERRAR APLICACIÓN

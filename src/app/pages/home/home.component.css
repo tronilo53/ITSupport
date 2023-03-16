@@ -78,3 +78,6 @@
 .material-symbols-outlined {
     vertical-align: middle;
 }
+.container__sp .bandera, .container__in .bandera, .container__pt .bandera {
+    width: 2.5rem;
+}
