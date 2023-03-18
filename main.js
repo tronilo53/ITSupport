@@ -8,6 +8,7 @@ const { exec } = require( "child_process" );
 const xml2js = require( "xml2js" );
 const cp = require( "child_process" );
 const copyDir = require( "copy-dir" );
+const processWindows = require( "node-process-windows" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
 autoUpdater.autoDownload = false;
@@ -230,36 +231,48 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
 ipcMain.on( 'trouble_1_2', ( event, args ) => {
     if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'notExist' } );
     else {
+        let existProcess = false;
+        const activeProcesses = processWindows.getProcesses( ( error, processes ) => {
+            for( i = 0; i < processes.length; i++ ) {
+                if( processes[i].processName === 'OneXAgentUI' ) existProcess = true;
+            }
+            if( existProcess ) event.sender.send( 'trouble_1_2', { data: 'Avaya está abierto' } );
+            else event.sender.send( 'trouble_1_2', { data: 'Avaya está cerrado' } );
+        });
         // PRED; RecepcionGanancia: 1.00
-        fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
+        /*fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 //Guardamos el resultado de la conversión a json
                 const json = result;
-                //creamos variable para saber si existe el elemento en el array;
-                let resultArr = 0;
-                //Guardamos todos los elementos del array en una variable;
-                const arrParameters = json.ConfigData.parameter;
-                //Inicializamos variable para guardar la posición del elemento encontrado;
-                let posArr;
-                //Bucle for que recorre todos los elementos del array;
-                for( i = 0; i < arrParameters.length; i++ ) {
-                    //Si alguna posicion se encuentra el elemento...
-                    if( arrParameters[i].name[0] === 'ReceiveGain' ) {
-                        //Guardamos en variable la confirmación de que existe el elemento;
-                        resultArr = 1;
-                        //Guardamos la posición actual del elemento.
-                        posArr = i;
+                if( json.ConfigData.parameter.length > 0 ) {
+                    //creamos variable para saber si existe el elemento en el array;
+                    let resultArr = 0;
+                    //Guardamos todos los elementos del array en una variable;
+                    const arrParameters = json.ConfigData.parameter;
+                    //Inicializamos variable para guardar la posición del elemento encontrado;
+                    let posArr;
+                    //Bucle for que recorre todos los elementos del array;
+                    for( i = 0; i < arrParameters.length; i++ ) {
+                        //Si alguna posicion se encuentra el elemento...
+                        if( arrParameters[i].name[0] === 'ReceiveGain' ) {
+                            //Guardamos en variable la confirmación de que existe el elemento;
+                            resultArr = 1;
+                            //Guardamos la posición actual del elemento.
+                            posArr = i;
+                        }
                     }
+                    //Si el elemento existe...
+                    if( resultArr == 1 ) {
+                        //Elimina el elemento del array;
+                        json.ConfigData.parameter.slice( posArr, 1 );
+                        //Se envía al renderer un mensaje
+                        event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
+                    }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
+                }else {
+                    
                 }
-                //Si el elemento existe...
-                if( resultArr == 1 ) {
-                    //Elimina el elemento del array;
-                    json.ConfigData.parameter.slice( posArr, 1 );
-                    //Se envía al renderer un mensaje
-                    event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
-                }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
             });
-        });
+        });*/
     }
 });
 //PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
