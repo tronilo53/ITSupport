@@ -8,7 +8,6 @@ const { exec } = require( "child_process" );
 const xml2js = require( "xml2js" );
 const cp = require( "child_process" );
 const copyDir = require( "copy-dir" );
-const processWindows = require( "node-process-windows" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
 autoUpdater.autoDownload = false;
@@ -21,6 +20,7 @@ let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble1;
 let count = 0;
+let existProcess = 0;
 const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Config.xml`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
@@ -156,7 +156,7 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
 });
@@ -231,16 +231,8 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
 ipcMain.on( 'trouble_1_2', ( event, args ) => {
     if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'notExist' } );
     else {
-        let existProcess = false;
-        const activeProcesses = processWindows.getProcesses( ( error, processes ) => {
-            for( i = 0; i < processes.length; i++ ) {
-                if( processes[i].processName === 'OneXAgentUI' ) existProcess = true;
-            }
-            if( existProcess ) event.sender.send( 'trouble_1_2', { data: 'Avaya está abierto' } );
-            else event.sender.send( 'trouble_1_2', { data: 'Avaya está cerrado' } );
-        });
         // PRED; RecepcionGanancia: 1.00
-        /*fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
+        fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 //Guardamos el resultado de la conversión a json
                 const json = result;
@@ -268,45 +260,67 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
                         //Se envía al renderer un mensaje
                         event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
                     }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
-                }else {
-                    
-                }
+                }else event.sender.send( 'trouble_1_2', { data: 'notExist' } );
             });
-        });*/
+        });
     }
 });
-//PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
-ipcMain.on( 'trouble_3', ( event, args ) => {
-    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3', { data: 'not Exist' } );
+/*
+    PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
+    PROBLEMA 4: Los clientes me oyen demasiado Bajo [ Value: 3 - CAT: Sonido ]
+*/
+ipcMain.on( 'trouble_3_4', ( event, args ) => {
+    if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
     else {
-        // PRED; TransmisionGanancia: 0.75
+        // PRED; TransmisionGanancia: 0.34
         fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 //Guardamos el resultado de la conversión a json
                 const json = result;
-                //creamos variable para saber si existe el elemento en el array;
-                let resultArr = 0;
-                //Guardamos todos los elementos del array en una variable;
-                const arrParameters = json.ConfigData.parameter;
-                //Inicializamos variable para guardar la posición del elemento encontrado;
-                let posArr;
-                //Bucle for que recorre todos los elementos del array;
-                for( i = 0; i < arrParameters.length; i++ ) {
-                    //Si alguna posicion se encuentra el elemento...
-                    if( arrParameters[i].name[0] === 'TransmitGain' ) {
-                        //Guardamos en variable la confirmación de que existe el elemento;
-                        resultArr = 1;
-                        //Guardamos la posición actual del elemento.
-                        posArr = i;
+                if( json.ConfigData.parameter.length > 0 ) {
+                    //creamos variable para saber si existe el elemento en el array;
+                    let resultArr = 0;
+                    //Guardamos todos los elementos del array en una variable;
+                    const arrParameters = json.ConfigData.parameter;
+                    //Inicializamos variable para guardar la posición del elemento encontrado;
+                    let posArr;
+                    //Bucle for que recorre todos los elementos del array;
+                    for( i = 0; i < arrParameters.length; i++ ) {
+                        //Si alguna posicion se encuentra el elemento...
+                        if( arrParameters[i].name[0] === 'TransmitGain' ) {
+                            //Guardamos en variable la confirmación de que existe el elemento;
+                            resultArr = 1;
+                            //Guardamos la posición actual del elemento.
+                            posArr = i;
+                        }
                     }
+                    //Si el elemento existe...
+                    if( resultArr == 1 ) {
+                        //Elimina el elemento del array;
+                        json.ConfigData.parameter.slice( posArr, 1 );
+                        //Se envía al renderer un mensaje
+                        event.sender.send( 'trouble_3_4', { data: 'gananMod', json: json } );
+                    }else event.sender.send( 'trouble_3_4', { data: 'gananPred' } );
+                }else event.sender.send( 'trouble_3_4', { data: 'notExist' } );
+            });
+        });
+    }
+});
+//PROBLEMA 5: La llamada se transfiere directamente [ Value: 5 - CAT: llamadas ]
+ipcMain.on( 'trouble_5', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__SETTINGS, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Settings.WorkHandling[0].Transfer[0].$.Consult === 'true' ) {
+                    event.sender.send( 'trouble_5', { data: 'solved' } )
+                }else {
+                    json.Settings.WorkHandling[0].Transfer[0].$.Consult = true;
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorRead ) => event.sender.send( 'trouble_5', { data: 'ok' } ) );
                 }
-                //Si el elemento existe...
-                if( resultArr == 1 ) {
-                    //Se modifica su valor al predeterminado.
-                    json.ConfigData.parameter[posArr].value[0] = '0.75';
-                    //Se envía al renderer un mensaje
-                    event.sender.send( 'trouble_3', { data: 'gananMod' } );
-                }else event.sender.send( 'trouble_3', { data: 'gananPred' } );
             });
         });
     }

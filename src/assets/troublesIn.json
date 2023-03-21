@@ -21,131 +21,121 @@
     },
     {
         "id": 5,
-        "category": "sonido",
-        "trouble": "The ringing sound is heard in the headphones"
-    },
-    {
-        "id": 6,
-        "category": "sonido",
-        "trouble": "The ringing sound is played by the computer"
-    },
-    {
-        "id": 7,
         "category": "llamadas",
         "trouble": "The call is transferred directly"
     },
     {
-        "id": 8,
+        "id": 6,
         "category": "llamadas",
         "trouble": "The caller is added to the call directly"
     },
     {
-        "id": 9,
+        "id": 7,
         "category": "llamadas",
         "trouble": "When they call me, the screen doesn't come to the front"
     },
     {
-        "id": 10,
+        "id": 8,
         "category": "interfaz_de_usuario",
         "trouble": "No tool information is displayed"
     },
     {
-        "id": 11,
+        "id": 9,
         "category": "interfaz_de_usuario",
         "trouble": "No letters displayed on the dialing keypad"
     },
     {
-        "id": 12,
+        "id": 10,
         "category": "interfaz_de_usuario",
         "trouble": "No icon displayed in taskbar"
     },
     {
-        "id": 13,
+        "id": 11,
         "category": "interfaz_de_usuario",
         "trouble": "Phone screen is not displayed"
     },
     {
-        "id": 14,
+        "id": 12,
         "category": "interfaz_de_usuario",
         "trouble": "Button toolbar is not displayed"
     },
     {
-        "id": 15,
+        "id": 13,
         "category": "interfaz_de_usuario",
         "trouble": "I want to configure my favorite buttons"
     },
     {
-        "id": 16,
+        "id": 14,
         "category": "conexion",
         "trouble": "I can't login(I get an error)"
     },
     {
-        "id": 17,
+        "id": 15,
         "category": "conexion",
         "trouble": "I log in, but no calls come in or go out"
     },
     {
-        "id": 18,
+        "id": 16,
         "category": "conexion",
         "trouble": "When logging in, it remains connected..."
     },
     {
-        "id": 19,
+        "id": 17,
         "category": "conexion",
         "trouble": "Avaya starts, but the screen is not visible"
     },
     {
-        "id": 20,
+        "id": 18,
         "category": "conexion",
         "trouble": "Automatic login(Apply)"
     },
     {
-        "id": 21,
+        "id": 19,
         "category": "conexion",
         "trouble": "Automatic login(Remove)"
     },
     {
-        "id": 22,
+        "id": 20,
         "category": "contactos",
         "trouble": "I want to modify the contacts"
     },
     {
-        "id": 23,
+        "id": 21,
         "category": "registro_de_tareas",
         "trouble": "Logging incoming calls(Apply)"
     },
     {
-        "id": 24,
+        "id": 22,
         "category": "registro_de_tareas",
         "trouble": "Log incoming calls (Remove)"
     },
     {
-        "id": 25,
+        "id": 23,
         "category": "registro_de_tareas",
         "trouble": "Log outgoing calls(Apply)"
     },
     {
-        "id": 26,
+        "id": 24,
         "category": "registro_de_tareas",
         "trouble": "Record outgoing calls (Remove)"
     },
     {
-        "id": 27,
+        "id": 25,
         "category": "estado_del_usuario",
         "trouble": "I want to modify the states(AUX)"
     },
     {
-        "id": 28,
+        "id": 26,
         "category": "perfiles",
         "trouble": "I want to modify the profiles"
     },
     {
-        "id": 29,
+        "id": 27,
         "category": "otros",
         "trouble": "I can't call national mobiles"
     },
     {
-        "id": 30,
+        "id": 28,
         "category": "otros",
         "trouble": "I cannot call international lines"
     }

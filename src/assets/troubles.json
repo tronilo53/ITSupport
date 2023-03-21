@@ -21,131 +21,121 @@
     },
     {
         "id": 5,
-        "category": "sonido",
-        "trouble": "El sonido de llamada suena por los auriculares"
-    },
-    {
-        "id": 6,
-        "category": "sonido",
-        "trouble": "El sonido de llamada suena por el ordenador"
-    },
-    {
-        "id": 7,
         "category": "llamadas",
         "trouble": "La llamada se transfiere directamente"
     },
     {
-        "id": 8,
+        "id": 6,
         "category": "llamadas",
         "trouble": "Se agrega a la persona a la llamada directamente"
     },
     {
-        "id": 9,
+        "id": 7,
         "category": "llamadas",
         "trouble": "Cuando me llaman, la pantalla no viene al frente"
     },
     {
-        "id": 10,
+        "id": 8,
         "category": "interfaz_de_usuario",
         "trouble": "No se muestra información sobre las herramientas"
     },
     {
-        "id": 11,
+        "id": 9,
         "category": "interfaz_de_usuario",
         "trouble": "No se muestran las letras en el teclado de marcación"
     },
     {
-        "id": 12,
+        "id": 10,
         "category": "interfaz_de_usuario",
         "trouble": "No se muestra el icono en la barra de tareas"
     },
     {
-        "id": 13,
+        "id": 11,
         "category": "interfaz_de_usuario",
         "trouble": "No se muestra la pantalla del teléfono"
     },
     {
-        "id": 14,
+        "id": 12,
         "category": "interfaz_de_usuario",
         "trouble": "No se muestra la barra de herramientas de botones"
     },
     {
-        "id": 15,
+        "id": 13,
         "category": "interfaz_de_usuario",
         "trouble": "Quiero configurar mis botones favoritos"
     },
     {
-        "id": 16,
+        "id": 14,
         "category": "conexion",
         "trouble": "No puedo iniciar sesión(Me muestra un error)"
     },
     {
-        "id": 17,
+        "id": 15,
         "category": "conexion",
         "trouble": "Inicio sesión, pero no entran ni salen llamadas"
     },
     {
-        "id": 18,
+        "id": 16,
         "category": "conexion",
         "trouble": "Al iniciar sesión, se queda conectando..."
     },
     {
-        "id": 19,
+        "id": 17,
         "category": "conexion",
         "trouble": "Avaya inicia, pero no se ve la pantalla"
     },
     {
-        "id": 20,
+        "id": 18,
         "category": "conexion",
         "trouble": "Inicio de sesión automático(Aplicar)"
     },
     {
-        "id": 21,
+        "id": 19,
         "category": "conexion",
         "trouble": "Inicio de sesión automático(Remover)"
     },
     {
-        "id": 22,
+        "id": 20,
         "category": "contactos",
         "trouble": "Quiero modificar los contactos"
     },
     {
-        "id": 23,
+        "id": 21,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas entrantes(Aplicar)"
     },
     {
-        "id": 24,
+        "id": 22,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas entrantes(Remover)"
     },
     {
-        "id": 25,
+        "id": 23,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas salientes(Aplicar)"
     },
     {
-        "id": 26,
+        "id": 24,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas salientes(Remover)"
     },
     {
-        "id": 27,
+        "id": 25,
         "category": "estado_del_usuario",
         "trouble": "Quiero modificar los estados(AUX)"
     },
     {
-        "id": 28,
+        "id": 26,
         "category": "perfiles",
         "trouble": "Quiero modificar los perfiles"
     },
     {
-        "id": 29,
+        "id": 27,
         "category": "otros",
         "trouble": "No puedo llamar a moviles nacionales"
     },
     {
-        "id": 30,
+        "id": 28,
         "category": "otros",
         "trouble": "No puedo llamar a líneas internacionales"
     }

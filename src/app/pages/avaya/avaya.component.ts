@@ -83,27 +83,27 @@ export class AvayaComponent implements OnInit, AfterViewInit {
       if( args.data === '' || args.data === 'sp' ) {
         //Mostrar contenido en Español
         this.renderer.removeClass( this.sp.nativeElement, 'none' );
-        //Mostrar alerta de cerrar avaya para solucionar problemas
-        this.__alertService.alertInfo( 'Los problemas se solucionarán solo si Avaya One X Agent está cerrado.' );
+        //Mostrar alerta de que los problemas solo se solucionarán con avaya cerrado.
+        this.__alertService.alertInfo( 'Los problemas se solucionarán, solo si Avaya One X Agent está cerrado.' );
       }else if( args.data === 'in' ) {
         //Mostrar contenido en Ingles
         this.renderer.removeClass( this.in.nativeElement, 'none' );
-        //Mostrar alerta de cerrar avaya para solucionar problemas Ingles
-        this.__alertServiceIn.alertInfo( 'Problems will be solved only if Avaya One X Agent is closed.' );
+        //Mostrar alerta de que los problemas solo se solucionarán con avaya cerrado.
+        this.__alertService.alertInfo( 'The problems will be solved, only if Avaya One X Agent is closed.' );
       }else {
         //Mostrar contenido en Portugues
         this.renderer.removeClass( this.pt.nativeElement, 'none' );
-        //Mostrar alerta de cerrar avaya para solucionar problemas Portugues
-        this.__alertServicePt.alertInfo( 'Os problemas só serão resolvidos se o Avaya One X Agent for fechado.' );
+        //Mostrar alerta de que los problemas solo se solucionarán con avaya cerrado.
+        this.__alertService.alertInfo( 'Os problemas serão resolvidos, apenas se o Avaya One X Agent for fechado.' );
       }
     });
   }
 
   //Botón de solucionar problema Español
   public solucionar(): void {
-    //PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
     if( this.problema === '1' || this.problema === '2' ) this.trouble_1_2();
-    else if( this.problema === '3' ) this.trouble_3();
+    else if( this.problema === '3' || this.problema === '4' ) this.trouble_3_4();
+    else if( this.problema === '5' ) this.trouble_5();
   }
   //Botón de solucionar problema Ingles
   public solucionarIn(): void {
@@ -178,60 +178,98 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /*
+    PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
+    PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
+*/
   private trouble_1_2(): void {
     this.__ipcService.send( 'trouble_1_2' );
       this.__ipcService.on( 'trouble_1_2', ( event, argsTrouble ) => {
-        console.log( argsTrouble.data );
-        /*if( argsTrouble.data === 'notExist' ) {
+        if( argsTrouble.data === 'notExist' ) {
           this.__ipcService.send( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
-            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, inícialo y vuelve a intentarlo' );
-            else if( argsLan.data === 'in' ) this.__alertService.alertError( 'Avaya One X Agent never started, start it and try again.' );
-            else this.__alertService.alertError( 'Avaya One X Agent nunca começou, por favor reinicie-o e tente novamente.' );
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
+            else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
           });
         }else if( argsTrouble.data === 'gananMod' ) {
           this.__ipcService.send( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
-            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con exito' );
-            else if( argsLan.data === 'in' ) this.__alertService.alertSuccess( 'Problem solved successfully' );
-            else this.__alertService.alertSuccess( 'Problema resolvido com sucesso' );
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
+            else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
           });
         }else {
           this.__ipcService.send( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
-            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba solucionado, no se han aplicado cambios. Si el problema persiste, ponte en contacto con "IT"' );
-            else if( argsLan.data === 'in' ) this.__alertService.alertInfo( 'This problem was already fixed, no changes have been applied. If the problem persists, please contact "IT".' );
-            else this.__alertService.alertInfo( 'Este problema já foi resolvido, não foram aplicadas quaisquer alterações. Se o problema persistir, por favor contactar "IT".' );
-          });
-        }*/
-      });
-  }
-  private trouble_3(): void {
-    this.__ipcService.send( 'trouble_3' );
-      this.__ipcService.on( 'trouble_3', ( event, args ) => {
-        if( args.data === 'notExist' ) {
-          this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, inícialo y vuelve a intentarlo' );
-            else if( args.data === 'in' ) this.__alertService.alertError( 'Avaya One X Agent never started, start it and try again.' );
-            else this.__alertService.alertError( 'Avaya One X Agent nunca começou, por favor reinicie-o e tente novamente.' );
-          });
-        }else if( args.data === 'gananMod' ) {
-          this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con exito' );
-            else if( args.data === 'in' ) this.__alertService.alertSuccess( 'Problem solved successfully' );
-            else this.__alertService.alertSuccess( 'Problema resolvido com sucesso' );
-          });
-          console.log( args.json );
-        }else {
-          this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            if( args.data === '' || args.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba solucionado, no se han aplicado cambios. Si el problema persiste, ponte en contacto con "IT"' );
-            else if( args.data === 'in' ) this.__alertService.alertInfo( 'This problem was already fixed, no changes have been applied. If the problem persists, please contact "IT".' );
-            else this.__alertService.alertInfo( 'Este problema já foi resolvido, não foram aplicadas quaisquer alterações. Se o problema persistir, por favor contactar "IT".' );
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
+            else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
           });
         }
       });
+  }
+
+  /*
+    PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
+    PROBLEMA 4: Los clientes me oyen demasiado Bajo [ Value: 4 - CAT: Sonido ]
+*/
+  private trouble_3_4(): void {
+    this.__ipcService.send( 'trouble_3_4' );
+      this.__ipcService.on( 'trouble_3_4', ( event, argsTrouble ) => {
+        if( argsTrouble.data === 'notExist' ) {
+          this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
+            else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+          });
+        }else if( argsTrouble.data === 'gananMod' ) {
+          this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
+            else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+          });
+        }else {
+          this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
+            else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+          });
+        }
+      });
+  }
+
+  /*
+    PROBLEMA 5: La llamada se transfiere directamente [ Value: 5 - CAT: llamadas ]
+*/
+  private trouble_5(): void {
+    this.__ipcService.send( 'trouble_5' );
+    this.__ipcService.on( 'trouble_5', ( event, argsTrouble ) => {
+      if( argsTrouble.data === 'notExist' ) {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+          if( args.data === '' || args.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
+          else if( args.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
+          else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+        });
+      }else if( argsTrouble.data === 'solved' ) {
+        this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
+            else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+          });
+      }else {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+          if( args.data === '' || args.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
+          else if( args.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
+          else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+        });
+      }
+    });
   }
 }
