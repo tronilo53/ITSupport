@@ -7,7 +7,7 @@ const os = require( "os" );
 const { exec } = require( "child_process" );
 const xml2js = require( "xml2js" );
 const cp = require( "child_process" );
-const copyDir = require( "copy-dir" );
+//const copyDir = require( "copy-dir" );
 
 /* -----------PROPIEDADES DE AUTOUPDATER----------- */
 autoUpdater.autoDownload = false;
@@ -19,11 +19,10 @@ let appPrelaod;
 let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble1;
-let count = 0;
-let existProcess = 0;
 const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Config.xml`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
+const RUTE__PROFILE__PREFERENCES = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Preferences.xml`;
 const RUTE__INSTALL = 'C:/Program Files (x86)/Avaya';
 const RUTE__LAN__PROD = `C:/Users/${os.userInfo().username}/AppData/Local/Programs/ITSupport/resources/app/src/assets/language.xml`;
 const RUTE__LAN__DEV = './src/assets/language.xml';
@@ -257,6 +256,7 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
                         json.ConfigData.parameter.slice( posArr, 1 );
+                        //TODO: CONSTRUIR BUILDER
                         //Se envía al renderer un mensaje
                         event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
                     }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
@@ -298,6 +298,7 @@ ipcMain.on( 'trouble_3_4', ( event, args ) => {
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
                         json.ConfigData.parameter.slice( posArr, 1 );
+                        //TODO: CONSTRUIR BUILDER
                         //Se envía al renderer un mensaje
                         event.sender.send( 'trouble_3_4', { data: 'gananMod', json: json } );
                     }else event.sender.send( 'trouble_3_4', { data: 'gananPred' } );
@@ -320,6 +321,25 @@ ipcMain.on( 'trouble_5', ( event, args ) => {
                     const builder = new xml2js.Builder();
                     const xml = builder.buildObject( json );
                     fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorRead ) => event.sender.send( 'trouble_5', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 6: Se agrega la persona a la llamada directamente [ Value: 6 - CAT: llamadas ]
+ipcMain.on( 'trouble_6', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__SETTINGS, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Settings.WorkHandling[0].Conference[0].$.Consult === 'true' ) {
+                    event.sender.send( 'trouble_6', { data: 'solved' } )
+                }else {
+                    json.Settings.WorkHandling[0].Conference[0].$.Consult = true;
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorRead ) => event.sender.send( 'trouble_6', { data: 'ok' } ) );
                 }
             });
         });

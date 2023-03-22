@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit, AfterViewInit {
 
   //DECLARACION DE ELEMENTOS DOM
+  @ViewChild('loading') loading: ElementRef;
+
   /* ----- Español ----- */
   @ViewChild('sp') sp: ElementRef;
   @ViewChild('bannerLan') bannerLan: ElementRef;
@@ -120,6 +122,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
             //Muestra una alerta diciendo que: Avaya no está instalado (Español)
             this.__alertServicePt.alertError( 'Avaya One X Agent não encontrado' );
           }
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
         });
         //Si avaya está instalado...
       }else {
@@ -159,6 +163,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
             //Actualizaciones automáticas (Portugues)
             this.checkUpdatesPt();
           }
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
         });
       }
     });
@@ -204,15 +210,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   //Cambiar el idioma de la app
   public changeLanguageBtn(): void {
-    if( this.dataLan === '???' ) this.__alertService.alertError( 'Por favor, seleccione un idioma' );
-    else {
-      if( this.dataLan === '1' ) this.__alertService.alertError( 'El idioma español ya está establecido' );
-      else if( this.dataLan === '2' ) { //Si es ingles
+    //Mostrar loading
+    this.renderer.removeClass( this.loading.nativeElement, 'none' );
+
+    if( this.dataLan === '???' ) {
+      //Ocultar loading
+      this.renderer.addClass( this.loading.nativeElement, 'none' );
+      //Mostramos alerta
+      this.__alertService.alertError( 'Por favor, seleccione un idioma' );
+    }else {
+      if( this.dataLan === '1' ) {
+        //Ocultar loading
+        this.renderer.addClass( this.loading.nativeElement, 'none' );
+        //Mostramos alerta
+        this.__alertService.alertError( 'El idioma español ya está establecido' );
+      }else if( this.dataLan === '2' ) { //Si es ingles
         //Establecer nuevo idioma en Ingles y ocultar Español - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'in' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostrar alerta
+            this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
+          }else {
+            //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en español y reseteamos select de idioma
             this.hiddenContentReset();
             //Mostramos Contenedor Ingles
@@ -227,8 +250,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         //Establecer nuevo idioma en Portugues y ocultar Español - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'pt' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostramos alerta
+            this.__alertService.alertError( 'Ha habido un problema en cambiar el idioma, inténtalo de nuevo más tarde o ponte en contacto con "IT"' );
+          }else {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en español y reseteamos select de idioma
             this.hiddenContentReset();
             //Mostramos Contenedor Portugues
@@ -399,15 +428,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   //Cambiar el idioma de la app
   public changeLanguageBtnIn(): void {
-    if( this.dataLanIn === '???' ) this.__alertServiceIn.alertError( 'Please select a language' );
-    else {
-      if( this.dataLanIn === '2' ) this.__alertServiceIn.alertError( 'English language is already established' );
-      else if( this.dataLanIn === '1' ) { //Si es español
+    //Mostrar loading
+    this.renderer.removeClass( this.loading.nativeElement, 'none' );
+
+    if( this.dataLanIn === '???' ) {
+      //Ocultar loading
+      this.renderer.addClass( this.loading.nativeElement, 'none' );
+      //Mostramos alerta
+      this.__alertServiceIn.alertError( 'Please select a language' );
+    }else {
+      if( this.dataLanIn === '2' ) {
+        //Ocultar loading
+        this.renderer.addClass( this.loading.nativeElement, 'none' );
+        //Mostramos alerta
+        this.__alertServiceIn.alertError( 'English language is already established' );
+      }else if( this.dataLanIn === '1' ) { //Si es español
         //Establecer nuevo idioma en Español y ocultar Ingles - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'sp' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostramos alerta
+            this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
+          }else {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en Ingles y reseteamos select de idioma
             this.hiddenContentResetIn();
             //Mostramos Contenedor Español
@@ -422,8 +468,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         //Establecer nuevo idioma en Portugues y ocultar Ingles - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'pt' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostramos alerta
+            this.__alertService.alertError( 'There was a problem changing the language, try again later or contact "IT".' );
+          }else {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en Ingles y reseteamos select de idioma
             this.hiddenContentResetIn();
             //Mostramos Contenedor Portugues
@@ -535,16 +587,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
   //Cambiar el idioma de la app
-  public changeLanguageBtnPt(): void { //TODO: Pendiente...
-    if( this.dataLanPt === '???' ) this.__alertServicePt.alertError( 'Por favor seleccione uma língua' );
-    else {
-      if( this.dataLanPt === '3' ) this.__alertServicePt.alertError( 'A língua espanhola já está estabelecida' );
-      else if( this.dataLanPt === '1' ) { //Si es Español
+  public changeLanguageBtnPt(): void {
+    //Mostrar loading
+    this.renderer.removeClass( this.loading.nativeElement, 'none' );
+
+    if( this.dataLanPt === '???' ) {
+      //Ocultar loading
+      this.renderer.addClass( this.loading.nativeElement, 'none' );
+      //Mostrar alerta
+      this.__alertServicePt.alertError( 'Por favor seleccione uma língua' );
+    }else {
+      if( this.dataLanPt === '3' ) {
+        //Ocultar loading
+        this.renderer.addClass( this.loading.nativeElement, 'none' );
+        //Mostramos alerta
+        this.__alertServicePt.alertError( 'A língua portuguesa já está estabelecida' );
+      }else if( this.dataLanPt === '1' ) { //Si es Español
         //Establecer nuevo idioma en Español y ocultar Portugues - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'sp' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostramos alerta
+            this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
+          }else {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en Portugues y reseteamos select de idioma
             this.hiddenContentResetPt();
             //Mostramos Contenedor Español
@@ -559,8 +628,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         //Establecer nuevo idioma en Ingles y ocultar Portugues - archivo language.xml
         this.__ipcService.send( 'setLanguage', { data: 'in' } );
         this.__ipcService.on( 'setLanguage', ( event, args ) => {
-          if( args.data === 'notWrite' ) this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
-          else {
+          if( args.data === 'notWrite' ) {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
+            //Mostramos alerta
+            this.__alertService.alertError( 'Houve um problema na mudança da língua, tente novamente mais tarde ou contacte "IT".' );
+          }else {
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
             //Ocultamos contenedor en Portugues y reseteamos select de idioma
             this.hiddenContentResetPt();
             //Mostramos Contenedor Ingles

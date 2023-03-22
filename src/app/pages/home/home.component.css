@@ -81,3 +81,27 @@
 .container__sp .bandera, .container__in .bandera, .container__pt .bandera {
     width: 2.5rem;
 }
+.spinner {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+}
+.spinner .spinner__content {
+    position: absolute;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 40%;
+    text-align: center;
+    color: white;
+}
+.spinner .spinner__content h2 {
+    text-shadow: 1px 2px 3px black;
+}
+.spinner .spinner__content .spinner-border {
+    width: 6rem;
+    height: 6rem;
+}

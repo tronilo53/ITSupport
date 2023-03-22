@@ -11,8 +11,8 @@ import { IpcService } from 'src/app/services/ipc.service';
   styleUrls: ['./avaya.component.css']
 })
 export class AvayaComponent implements OnInit, AfterViewInit {
+  @ViewChild('loading') loading: ElementRef;
   
-  //DECLARACIÓN E INICIALIZACIÓN DE VARIABLES ngModel
   //Español
   @ViewChild('sp') sp: ElementRef;
   public problema: string = '???';
@@ -96,14 +96,21 @@ export class AvayaComponent implements OnInit, AfterViewInit {
         //Mostrar alerta de que los problemas solo se solucionarán con avaya cerrado.
         this.__alertService.alertInfo( 'Os problemas serão resolvidos, apenas se o Avaya One X Agent for fechado.' );
       }
+      //Ocultar loading
+      this.renderer.addClass( this.loading.nativeElement, 'none' );
     });
   }
 
   //Botón de solucionar problema Español
   public solucionar(): void {
+
+    //Mostrar loading
+    this.renderer.removeClass( this.loading.nativeElement, 'none' );
+
     if( this.problema === '1' || this.problema === '2' ) this.trouble_1_2();
     else if( this.problema === '3' || this.problema === '4' ) this.trouble_3_4();
     else if( this.problema === '5' ) this.trouble_5();
+    else if( this.problema === '6' ) this.trouble_6();
   }
   //Botón de solucionar problema Ingles
   public solucionarIn(): void {
@@ -184,27 +191,37 @@ export class AvayaComponent implements OnInit, AfterViewInit {
 */
   private trouble_1_2(): void {
     this.__ipcService.send( 'trouble_1_2' );
+    this.__ipcService.removeAllListeners( 'trouble_1_2' );
       this.__ipcService.on( 'trouble_1_2', ( event, argsTrouble ) => {
         if( argsTrouble.data === 'notExist' ) {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
             else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }else if( argsTrouble.data === 'gananMod' ) {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
             else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }else {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
             else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }
       });
@@ -216,27 +233,37 @@ export class AvayaComponent implements OnInit, AfterViewInit {
 */
   private trouble_3_4(): void {
     this.__ipcService.send( 'trouble_3_4' );
+    this.__ipcService.removeAllListeners( 'trouble_3_4' );
       this.__ipcService.on( 'trouble_3_4', ( event, argsTrouble ) => {
         if( argsTrouble.data === 'notExist' ) {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
             else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }else if( argsTrouble.data === 'gananMod' ) {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
             else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }else {
           this.__ipcService.send( 'checkLanguage' );
+          this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
             else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
         }
       });
@@ -247,27 +274,77 @@ export class AvayaComponent implements OnInit, AfterViewInit {
 */
   private trouble_5(): void {
     this.__ipcService.send( 'trouble_5' );
+    this.__ipcService.removeAllListeners( 'trouble_5' );
     this.__ipcService.on( 'trouble_5', ( event, argsTrouble ) => {
       if( argsTrouble.data === 'notExist' ) {
         this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
         this.__ipcService.on( 'checkLanguage', ( event, args ) => {
           if( args.data === '' || args.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
           else if( args.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
           else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
         });
       }else if( argsTrouble.data === 'solved' ) {
         this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
           this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
             if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
             else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
             else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
           });
       }else {
         this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
         this.__ipcService.on( 'checkLanguage', ( event, args ) => {
           if( args.data === '' || args.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
           else if( args.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
           else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
+        });
+      }
+    });
+  }
+  /*
+    PROBLEMA 6: Se agrega la persona a la llamada directamente [ Value: 6 - CAT: llamadas ]
+*/
+  private trouble_6(): void {
+    this.__ipcService.send( 'trouble_6' );
+    this.__ipcService.removeAllListeners( 'trouble_6' );
+    this.__ipcService.on( 'trouble_6', ( event, argsTrouble ) => {
+      if( argsTrouble.data === 'notExist' ) {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
+        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+          if( args.data === '' || args.data === 'sp' ) this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
+          else if( args.data === 'in' ) this.__alertServiceIn.alertError( 'Avaya One X Agent has never been started, contact "IT" to configure avaya for the first time.' );
+          else this.__alertServicePt.alertError( 'Avaya One X Agent nunca foi iniciado, contacte "IT" para criar a avaya pela primeira vez.' );
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
+        });
+      }else if( argsTrouble.data === 'solved' ) {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
+          this.__ipcService.on( 'checkLanguage', ( event, argsLan ) => {
+            if( argsLan.data === '' || argsLan.data === 'sp' ) this.__alertService.alertInfo( 'Este problema ya estaba resuelto. Si el problema persiste, ponte en contacto con "IT"' );
+            else if( argsLan.data === 'in' ) this.__alertServiceIn.alertInfo( 'This problem was already solved. If the problem persists, please contact "IT".' );
+            else this.__alertServicePt.alertInfo( 'Este problema já se encontrava resolvido. Se o problema persistir, por favor contactar "IT".' );
+            //Ocultar loading
+            this.renderer.addClass( this.loading.nativeElement, 'none' );
+          });
+      }else {
+        this.__ipcService.send( 'checkLanguage' );
+        this.__ipcService.removeAllListeners( 'checkLanguage' );
+        this.__ipcService.on( 'checkLanguage', ( event, args ) => {
+          if( args.data === '' || args.data === 'sp' ) this.__alertService.alertSuccess( 'Problema solucionado con éxito' );
+          else if( args.data === 'in' ) this.__alertServiceIn.alertSuccess( 'Problem solved successfully' );
+          else this.__alertServicePt.alertSuccess( 'Problema resolvido com sucesso' );
+          //Ocultar loading
+          this.renderer.addClass( this.loading.nativeElement, 'none' );
         });
       }
     });
