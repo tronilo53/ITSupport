@@ -155,7 +155,7 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
 });
@@ -223,10 +223,8 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
         });
     }
 });
-/*
-    PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ]
-    PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
-*/
+
+//PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ] - PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
 ipcMain.on( 'trouble_1_2', ( event, args ) => {
     if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_1_2', { data: 'notExist' } );
     else {
@@ -256,23 +254,22 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
                         json.ConfigData.parameter.slice( posArr, 1 );
-                        //TODO: CONSTRUIR BUILDER
-                        //Se envía al renderer un mensaje
-                        event.sender.send( 'trouble_1_2', { data: 'gananMod', json: json } );
-                    }else event.sender.send( 'trouble_1_2', { data: 'gananPred' } );
+                        const builder = new xml2js.Builder();
+                        const xml = builder.buildObject( json );
+                        fs.writeFile( RUTE__CONFIG, xml, ( error ) => {
+                            event.sender.send( 'trouble_1_2', { data: 'ok' } );
+                        });
+                    }else event.sender.send( 'trouble_1_2', { data: 'solved' } );
                 }else event.sender.send( 'trouble_1_2', { data: 'notExist' } );
             });
         });
     }
 });
-/*
-    PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ]
-    PROBLEMA 4: Los clientes me oyen demasiado Bajo [ Value: 3 - CAT: Sonido ]
-*/
+//PROBLEMA 3: Los clientes me oyen demasiado alto [ Value: 3 - CAT: Sonido ] - PROBLEMA 4: Los clientes me oyen demasiado Bajo [ Value: 3 - CAT: Sonido ]
 ipcMain.on( 'trouble_3_4', ( event, args ) => {
     if( !fs.existsSync( RUTE__CONFIG ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
     else {
-        // PRED; TransmisionGanancia: 0.34
+        // PRED; RecepcionGanancia: 1.00
         fs.readFile( RUTE__CONFIG, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 //Guardamos el resultado de la conversión a json
@@ -298,10 +295,12 @@ ipcMain.on( 'trouble_3_4', ( event, args ) => {
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
                         json.ConfigData.parameter.slice( posArr, 1 );
-                        //TODO: CONSTRUIR BUILDER
-                        //Se envía al renderer un mensaje
-                        event.sender.send( 'trouble_3_4', { data: 'gananMod', json: json } );
-                    }else event.sender.send( 'trouble_3_4', { data: 'gananPred' } );
+                        const builder = new xml2js.Builder();
+                        const xml = builder.buildObject( json );
+                        fs.writeFile( RUTE__CONFIG, xml, ( error ) => {
+                            event.sender.send( 'trouble_3_4', { data: 'ok' } );
+                        });
+                    }else event.sender.send( 'trouble_3_4', { data: 'solved' } );
                 }else event.sender.send( 'trouble_3_4', { data: 'notExist' } );
             });
         });
@@ -336,10 +335,30 @@ ipcMain.on( 'trouble_6', ( event, args ) => {
                 if( json.Settings.WorkHandling[0].Conference[0].$.Consult === 'true' ) {
                     event.sender.send( 'trouble_6', { data: 'solved' } )
                 }else {
-                    json.Settings.WorkHandling[0].Conference[0].$.Consult = true;
+                    json.Settings.WorkHandling[0].Conference[0].$.Consult = 'true';
                     const builder = new xml2js.Builder();
                     const xml = builder.buildObject( json );
                     fs.writeFile( RUTE__PROFILE__SETTINGS, xml, ( errorRead ) => event.sender.send( 'trouble_6', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 7: Cuando me llaman la pantalla no viene al frente [ Value: 7 - CAT: llamadas ]
+ipcMain.on( 'trouble_7', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_7', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                event.sender.send( 'trouble_7', { data: json } );
+                if( json.Preferences.IncomingCall[0].$.DisplayMainWindow === 'true' ) {
+                    event.sender.send( 'trouble_7', { data: 'solved' } )
+                }else {
+                    json.Preferences.IncomingCall[0].$.DisplayMainWindow = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_7', { data: 'ok' } ) );
                 }
             });
         });
