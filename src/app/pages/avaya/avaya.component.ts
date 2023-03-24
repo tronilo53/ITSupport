@@ -112,6 +112,8 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     else if( this.problema === '5' ) this.trouble_5();
     else if( this.problema === '6' ) this.trouble_6();
     else if( this.problema === '7' ) this.trouble_7();
+    else if( this.problema === '8' ) this.trouble_8();
+    else if( this.problema === '9' ) this.trouble_9();
   }
   //Botón de solucionar problema Ingles
   public solucionarIn(): void {
@@ -196,8 +198,10 @@ export class AvayaComponent implements OnInit, AfterViewInit {
   private trouble_6(): void { this.solved( 'trouble_6' ) }
   //PROBLEMA 7: Cuando me llaman la pantalla no viene al frente [ Value: 7 - CAT: llamadas ]
   private trouble_7(): void { this.solved( 'trouble_7' ) }
-
-
+  //PROBLEMA 8: No se muestra información sobre las herramientas [ Value: 8 - CAT: Interfaz de usuario ]
+  private trouble_8(): void { this.solved( 'trouble_8' ) }
+  //PROBLEMA 9: No se muestran las letras en el teclado de marcación [ Value: 9 - CAT: Interfaz de usuario ]
+  private trouble_9(): void { this.solved( 'trouble_9' ) }
 
   private solved( trouble: string ): void {
     this.__ipcService.send( trouble );

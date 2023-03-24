@@ -253,7 +253,7 @@ ipcMain.on( 'trouble_1_2', ( event, args ) => {
                     //Si el elemento existe...
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
-                        json.ConfigData.parameter.slice( posArr, 1 );
+                        json.ConfigData.parameter.splice( posArr, 1 );
                         const builder = new xml2js.Builder();
                         const xml = builder.buildObject( json );
                         fs.writeFile( RUTE__CONFIG, xml, ( error ) => {
@@ -294,7 +294,7 @@ ipcMain.on( 'trouble_3_4', ( event, args ) => {
                     //Si el elemento existe...
                     if( resultArr == 1 ) {
                         //Elimina el elemento del array;
-                        json.ConfigData.parameter.slice( posArr, 1 );
+                        json.ConfigData.parameter.splice( posArr, 1 );
                         const builder = new xml2js.Builder();
                         const xml = builder.buildObject( json );
                         fs.writeFile( RUTE__CONFIG, xml, ( error ) => {
@@ -351,7 +351,6 @@ ipcMain.on( 'trouble_7', ( event, args ) => {
         fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 const json = result;
-                event.sender.send( 'trouble_7', { data: json } );
                 if( json.Preferences.IncomingCall[0].$.DisplayMainWindow === 'true' ) {
                     event.sender.send( 'trouble_7', { data: 'solved' } )
                 }else {
@@ -359,6 +358,44 @@ ipcMain.on( 'trouble_7', ( event, args ) => {
                     const builder = new xml2js.Builder();
                     const xml = builder.buildObject( json );
                     fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_7', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 8: No se muestra información sobre las herramientas [ Value: 8 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_8', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_8', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.ToolTip === 'true' ) {
+                    event.sender.send( 'trouble_8', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.ToolTip = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_8', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 9: No se muestran las letras en el teclado de marcación [ Value: 9 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_9', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_9', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.DialPadLetters === 'true' ) {
+                    event.sender.send( 'trouble_9', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.DialPadLetters = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_9', { data: 'ok' } ) );
                 }
             });
         });
