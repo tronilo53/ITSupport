@@ -159,7 +159,32 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
 });
-//ABRIR VENTANA NUEVA DE trouble16
+//ABRIR VENTANA NUEVA DE trouble_14
+ipcMain.on( 'openTrouble14', ( event, args ) => {
+    modalOpenTrouble14 = new BrowserWindow( 
+        { 
+            parent: modalOpenAvaya, 
+            modal: true, 
+            show: false, 
+            x: 400, 
+            y: 150, 
+            resizable: false,
+            webPreferences: { 
+                contextIsolation: false, 
+                nodeIntegration: true 
+            } 
+        } 
+    );
+
+    if(isDev) modalOpenTrouble14.setIcon( 'src/assets/favicon.png' );
+    else modalOpenTrouble14.setIcon( 'resources/app/src/assets/favicon.png' );
+
+    modalOpenTrouble14.loadURL( `file://${ __dirname }/dist/index.html#/Trouble14` );
+    modalOpenTrouble14.once( "ready-to-show", () => modalOpenTrouble14.show() );
+    modalOpenTrouble14.setMenu( null );
+    //modalOpenTrouble14.webContents.openDevTools();
+});
+//ABRIR VENTANA NUEVA DE trouble_16
 ipcMain.on( 'openTrouble16', ( event, args ) => {
     modalOpenTrouble1 = new BrowserWindow( 
         { 
@@ -211,7 +236,7 @@ ipcMain.on( 'getDataOsExcludeAvaya', ( event, args ) => {
 });
 //OBTENER DATOS: EXTENSION Y LOGIN DE AVAYA
 ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'getDataOsAvaya', { data: 'noExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'getDataOsAvaya', { data: 'noExist' } );
     else {
         fs.readFile( RUTE__PROFILE__SETTINGS, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -308,7 +333,7 @@ ipcMain.on( 'trouble_3_4', ( event, args ) => {
 });
 //PROBLEMA 5: La llamada se transfiere directamente [ Value: 5 - CAT: llamadas ]
 ipcMain.on( 'trouble_5', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_5', { data: 'notExist' } );
     else {
         fs.readFile( RUTE__PROFILE__SETTINGS, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -327,7 +352,7 @@ ipcMain.on( 'trouble_5', ( event, args ) => {
 });
 //PROBLEMA 6: Se agrega la persona a la llamada directamente [ Value: 6 - CAT: llamadas ]
 ipcMain.on( 'trouble_6', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__SETTINGS ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_3_4', { data: 'notExist' } );
     else {
         fs.readFile( RUTE__PROFILE__SETTINGS, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -346,7 +371,7 @@ ipcMain.on( 'trouble_6', ( event, args ) => {
 });
 //PROBLEMA 7: Cuando me llaman la pantalla no viene al frente [ Value: 7 - CAT: llamadas ]
 ipcMain.on( 'trouble_7', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_7', { data: 'notExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_7', { data: 'notExist' } );
     else {
         fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -365,7 +390,7 @@ ipcMain.on( 'trouble_7', ( event, args ) => {
 });
 //PROBLEMA 8: No se muestra información sobre las herramientas [ Value: 8 - CAT: Interfaz de usuario ]
 ipcMain.on( 'trouble_8', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_8', { data: 'notExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_8', { data: 'notExist' } );
     else {
         fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -384,7 +409,7 @@ ipcMain.on( 'trouble_8', ( event, args ) => {
 });
 //PROBLEMA 9: No se muestran las letras en el teclado de marcación [ Value: 9 - CAT: Interfaz de usuario ]
 ipcMain.on( 'trouble_9', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE__PREFERENCES ) ) event.sender.send( 'trouble_9', { data: 'notExist' } );
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_9', { data: 'notExist' } );
     else {
         fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
@@ -396,6 +421,99 @@ ipcMain.on( 'trouble_9', ( event, args ) => {
                     const builder = new xml2js.Builder();
                     const xml = builder.buildObject( json );
                     fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_9', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 10: No se muestra el icono en la barra de tareas [ Value: 10 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_10', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_10', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.SystemTrayShortcut === 'true' ) {
+                    event.sender.send( 'trouble_10', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.SystemTrayShortcut = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_10', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 11: No se guardan las posiciones de las ventanas [ Value: 11 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_11', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_11', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.SaveWindowPreference === 'true' ) {
+                    event.sender.send( 'trouble_11', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.SaveWindowPreference = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_11', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 12: No se muestra la pantalla del teléfono [ Value: 12 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_12', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_12', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.ShowPhoneDisplay === 'true' ) {
+                    event.sender.send( 'trouble_12', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.ShowPhoneDisplay = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_12', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 13: No se muestra la barra de herramientas de botones [ Value: 13 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_13', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_13', { data: 'notExist' } );
+    else {
+        fs.readFile( RUTE__PROFILE__PREFERENCES, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.Preferences.GeneralUI[0].$.DisplayFavoritesToolBar === 'true' ) {
+                    event.sender.send( 'trouble_13', { data: 'solved' } )
+                }else {
+                    json.Preferences.GeneralUI[0].$.DisplayFavoritesToolBar = 'true';
+                    const builder = new xml2js.Builder();
+                    const xml = builder.buildObject( json );
+                    fs.writeFile( RUTE__PROFILE__PREFERENCES, xml, ( errorRead ) => event.sender.send( 'trouble_13', { data: 'ok' } ) );
+                }
+            });
+        });
+    }
+});
+//PROBLEMA 14: Quiero configurar mis botones favoritos [ Value: 14 - CAT: Interfaz de usuario ]
+ipcMain.on( 'trouble_14', ( event, args ) => {
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_14', { data: 'notExist' } );
+    else {
+        fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( error, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                event.sender.send( 'trouble_14', { data: json } );
+                if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
+                    event.sender.send( 'trouble_14', { data: 'Hay Botones' } );
+                }else {
+                    event.sender.send( 'trouble_14', { data: 'No Hay Botones' } );
                 }
             });
         });

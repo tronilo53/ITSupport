@@ -114,6 +114,11 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     else if( this.problema === '7' ) this.trouble_7();
     else if( this.problema === '8' ) this.trouble_8();
     else if( this.problema === '9' ) this.trouble_9();
+    else if( this.problema === '10' ) this.trouble_10();
+    else if( this.problema === '11' ) this.trouble_11();
+    else if( this.problema === '12' ) this.trouble_12();
+    else if( this.problema === '13' ) this.trouble_13();
+    else if( this.problema === '14' ) this.trouble_14();
   }
   //Botón de solucionar problema Ingles
   public solucionarIn(): void {
@@ -202,6 +207,19 @@ export class AvayaComponent implements OnInit, AfterViewInit {
   private trouble_8(): void { this.solved( 'trouble_8' ) }
   //PROBLEMA 9: No se muestran las letras en el teclado de marcación [ Value: 9 - CAT: Interfaz de usuario ]
   private trouble_9(): void { this.solved( 'trouble_9' ) }
+  //PROBLEMA 10: No se muestra el icono en la barra de tareas [ Value: 10 - CAT: Interfaz de usuario ]
+  private trouble_10(): void { this.solved( 'trouble_10' ) }
+  //PROBLEMA 11: No se guardan las posiciones de las ventanas [ Value: 11 - CAT: Interfaz de usuario ]
+  private trouble_11(): void { this.solved( 'trouble_11' ) }
+  //PROBLEMA 12: No se muestra la pantalla del teléfono [ Value: 12 - CAT: Interfaz de usuario ]
+  private trouble_12(): void { this.solved( 'trouble_12' ) }
+  //PROBLEMA 13: No se muestra la barra de herramientas de botones [ Value: 13 - CAT: Interfaz de usuario ]
+  private trouble_13(): void { this.solved( 'trouble_13' ) }
+  //PROBLEMA 14: Quiero configurar mis botones favoritos [ Value: 14 - CAT: Interfaz de usuario ]
+  private trouble_14(): void {
+    this.__ipcService.send( 'openTrouble14' );
+    this.__ipcService.removeAllListeners( 'openTrouble14' );
+  }
 
   private solved( trouble: string ): void {
     this.__ipcService.send( trouble );

@@ -52,90 +52,95 @@
     {
         "id": 11,
         "category": "interfaz_de_usuario",
-        "trouble": "O ecrã do telefone não é exibido"
+        "trouble": "As posições das janelas não são guardadas"
     },
     {
         "id": 12,
         "category": "interfaz_de_usuario",
-        "trouble": "A barra de ferramentas de botões não é exibida"
+        "trouble": "O ecrã do telefone não é exibido"
     },
     {
         "id": 13,
         "category": "interfaz_de_usuario",
-        "trouble": "Quero configurar os meus botões favoritos"
+        "trouble": "A barra de ferramentas de botões não é exibida"
     },
     {
         "id": 14,
-        "category": "conexion",
-        "trouble": "Não consigo iniciar sessão(recebo um erro)"
+        "category": "interfaz_de_usuario",
+        "trouble": "Quero configurar os meus botões favoritos"
     },
     {
         "id": 15,
         "category": "conexion",
-        "trouble": "Estou ligado, mas não há chamadas a entrar ou a sair"
+        "trouble": "Não consigo iniciar sessão(recebo um erro)"
     },
     {
         "id": 16,
         "category": "conexion",
-        "trouble": "Ao iniciar sessão, permanece ligado..."
+        "trouble": "Estou ligado, mas não há chamadas a entrar ou a sair"
     },
     {
         "id": 17,
         "category": "conexion",
-        "trouble": "Avaya começa, mas o ecrã não é visível"
+        "trouble": "Ao iniciar sessão, permanece ligado..."
     },
     {
         "id": 18,
+        "category": "conexion",
+        "trouble": "Avaya começa, mas o ecrã não é visível"
+    },
+    {
+        "id": 19,
         "category": "conexion",
         "trouble": "Login automático(Aplicar)"
     },
     {
-        "id": 18,
+        "id": 20,
         "category": "conexion",
         "trouble": "Login automático(Remover)"
     },
     {
-        "id": 20,
+        "id": 21,
         "category": "contactos",
         "trouble": "Quero modificar os contactos"
     },
     {
-        "id": 21,
+        "id": 22,
         "category": "registro_de_tareas",
         "trouble": "Registo de chamadas recebidas(Aplicar)"
     },
     {
-        "id": 22,
+        "id": 23,
         "category": "registro_de_tareas",
         "trouble": "Registo de chamadas recebidas (Remover)"
     },
     {
-        "id": 23,
+        "id": 24,
         "category": "registro_de_tareas",
         "trouble": "Registar chamadas efectuadas(Aplicar)"
     },
     {
-        "id": 24,
+        "id": 25,
         "category": "registro_de_tareas",
         "trouble": "Registar chamadas efectuadas (Remover)"
     },
     {
-        "id": 25,
+        "id": 26,
         "category": "estado_del_usuario",
         "trouble": "Eu quero modificar os estados(AUX)"
     },
     {
-        "id": 26,
+        "id": 27,
         "category": "perfiles",
         "trouble": "Quero modificar os perfis"
     },
     {
-        "id": 27,
+        "id": 28,
         "category": "otros",
         "trouble": "Não posso chamar os telemóveis nacionais"
     },
     {
-        "id": 28,
+        "id": 29,
         "category": "otros",
         "trouble": "Não posso ligar para linhas internacionais"
     }

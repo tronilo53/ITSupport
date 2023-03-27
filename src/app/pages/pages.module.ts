@@ -6,6 +6,7 @@ import { ItComponent } from './it/it.component';
 import { AvayaComponent } from './avaya/avaya.component';
 import { Trouble1Component } from './trouble1/trouble1.component';
 import { PreloadComponent } from './preload/preload.component';
+import { Trouble14Component } from './trouble14/trouble14.component';
 
 
 
@@ -15,7 +16,8 @@ import { PreloadComponent } from './preload/preload.component';
     ItComponent,
     AvayaComponent,
     Trouble1Component,
-    PreloadComponent
+    PreloadComponent,
+    Trouble14Component
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { PreloadComponent } from './preload/preload.component';
     ItComponent,
     AvayaComponent,
     Trouble1Component,
-    PreloadComponent
+    PreloadComponent,
+    Trouble14Component
   ]
 })
 export class PagesModule { }

@@ -52,90 +52,95 @@
     {
         "id": 11,
         "category": "interfaz_de_usuario",
-        "trouble": "No se muestra la pantalla del teléfono"
+        "trouble": "No se guardan las posiciones de las ventanas"
     },
     {
         "id": 12,
         "category": "interfaz_de_usuario",
-        "trouble": "No se muestra la barra de herramientas de botones"
+        "trouble": "No se muestra la pantalla del teléfono"
     },
     {
         "id": 13,
         "category": "interfaz_de_usuario",
-        "trouble": "Quiero configurar mis botones favoritos"
+        "trouble": "No se muestra la barra de herramientas de botones"
     },
     {
         "id": 14,
-        "category": "conexion",
-        "trouble": "No puedo iniciar sesión(Me muestra un error)"
+        "category": "interfaz_de_usuario",
+        "trouble": "Quiero configurar mis botones favoritos"
     },
     {
         "id": 15,
         "category": "conexion",
-        "trouble": "Inicio sesión, pero no entran ni salen llamadas"
+        "trouble": "No puedo iniciar sesión(Me muestra un error)"
     },
     {
         "id": 16,
         "category": "conexion",
-        "trouble": "Al iniciar sesión, se queda conectando..."
+        "trouble": "Inicio sesión, pero no entran ni salen llamadas"
     },
     {
         "id": 17,
         "category": "conexion",
-        "trouble": "Avaya inicia, pero no se ve la pantalla"
+        "trouble": "Al iniciar sesión, se queda conectando..."
     },
     {
         "id": 18,
         "category": "conexion",
-        "trouble": "Inicio de sesión automático(Aplicar)"
+        "trouble": "Avaya inicia, pero no se ve la pantalla"
     },
     {
         "id": 19,
         "category": "conexion",
-        "trouble": "Inicio de sesión automático(Remover)"
+        "trouble": "Inicio de sesión automático(Aplicar)"
     },
     {
         "id": 20,
+        "category": "conexion",
+        "trouble": "Inicio de sesión automático(Remover)"
+    },
+    {
+        "id": 21,
         "category": "contactos",
         "trouble": "Quiero modificar los contactos"
     },
     {
-        "id": 21,
+        "id": 22,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas entrantes(Aplicar)"
     },
     {
-        "id": 22,
+        "id": 23,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas entrantes(Remover)"
     },
     {
-        "id": 23,
+        "id": 24,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas salientes(Aplicar)"
     },
     {
-        "id": 24,
+        "id": 25,
         "category": "registro_de_tareas",
         "trouble": "Registrar las llamadas salientes(Remover)"
     },
     {
-        "id": 25,
+        "id": 26,
         "category": "estado_del_usuario",
         "trouble": "Quiero modificar los estados(AUX)"
     },
     {
-        "id": 26,
+        "id": 27,
         "category": "perfiles",
         "trouble": "Quiero modificar los perfiles"
     },
     {
-        "id": 27,
+        "id": 28,
         "category": "otros",
         "trouble": "No puedo llamar a moviles nacionales"
     },
     {
-        "id": 28,
+        "id": 29,
         "category": "otros",
         "trouble": "No puedo llamar a líneas internacionales"
     }

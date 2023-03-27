@@ -52,90 +52,95 @@
     {
         "id": 11,
         "category": "interfaz_de_usuario",
-        "trouble": "Phone screen is not displayed"
+        "trouble": "Window positions are not saved"
     },
     {
         "id": 12,
         "category": "interfaz_de_usuario",
-        "trouble": "Button toolbar is not displayed"
+        "trouble": "Phone screen is not displayed"
     },
     {
         "id": 13,
         "category": "interfaz_de_usuario",
-        "trouble": "I want to configure my favorite buttons"
+        "trouble": "Button toolbar is not displayed"
     },
     {
         "id": 14,
-        "category": "conexion",
-        "trouble": "I can't login(I get an error)"
+        "category": "interfaz_de_usuario",
+        "trouble": "I want to configure my favorite buttons"
     },
     {
         "id": 15,
         "category": "conexion",
-        "trouble": "I log in, but no calls come in or go out"
+        "trouble": "I can't login(I get an error)"
     },
     {
         "id": 16,
         "category": "conexion",
-        "trouble": "When logging in, it remains connected..."
+        "trouble": "I log in, but no calls come in or go out"
     },
     {
         "id": 17,
         "category": "conexion",
-        "trouble": "Avaya starts, but the screen is not visible"
+        "trouble": "When logging in, it remains connected..."
     },
     {
         "id": 18,
         "category": "conexion",
-        "trouble": "Automatic login(Apply)"
+        "trouble": "Avaya starts, but the screen is not visible"
     },
     {
         "id": 19,
         "category": "conexion",
-        "trouble": "Automatic login(Remove)"
+        "trouble": "Automatic login(Apply)"
     },
     {
         "id": 20,
+        "category": "conexion",
+        "trouble": "Automatic login(Remove)"
+    },
+    {
+        "id": 21,
         "category": "contactos",
         "trouble": "I want to modify the contacts"
     },
     {
-        "id": 21,
+        "id": 22,
         "category": "registro_de_tareas",
         "trouble": "Logging incoming calls(Apply)"
     },
     {
-        "id": 22,
+        "id": 23,
         "category": "registro_de_tareas",
         "trouble": "Log incoming calls (Remove)"
     },
     {
-        "id": 23,
+        "id": 24,
         "category": "registro_de_tareas",
         "trouble": "Log outgoing calls(Apply)"
     },
     {
-        "id": 24,
+        "id": 25,
         "category": "registro_de_tareas",
         "trouble": "Record outgoing calls (Remove)"
     },
     {
-        "id": 25,
+        "id": 26,
         "category": "estado_del_usuario",
         "trouble": "I want to modify the states(AUX)"
     },
     {
-        "id": 26,
+        "id": 27,
         "category": "perfiles",
         "trouble": "I want to modify the profiles"
     },
     {
-        "id": 27,
+        "id": 28,
         "category": "otros",
         "trouble": "I can't call national mobiles"
     },
     {
-        "id": 28,
+        "id": 29,
         "category": "otros",
         "trouble": "I cannot call international lines"
     }
