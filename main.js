@@ -155,34 +155,40 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
     else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
 
     modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
     modalOpenAvaya.setMenu( null );
 });
 //ABRIR VENTANA NUEVA DE trouble_14
 ipcMain.on( 'openTrouble14', ( event, args ) => {
-    modalOpenTrouble14 = new BrowserWindow( 
-        { 
-            parent: modalOpenAvaya, 
-            modal: true, 
-            show: false, 
-            x: 400, 
-            y: 150, 
-            resizable: false,
-            webPreferences: { 
-                contextIsolation: false, 
-                nodeIntegration: true 
+    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_14', { data: 'notExist' } );
+    else {
+        modalOpenTrouble14 = new BrowserWindow( 
+            { 
+                parent: modalOpenAvaya, 
+                modal: true, 
+                show: false,
+                width: 800,
+                height: 690, 
+                x: 400, 
+                y: 100, 
+                resizable: false,
+                webPreferences: { 
+                    contextIsolation: false, 
+                    nodeIntegration: true 
+                } 
             } 
-        } 
-    );
-
-    if(isDev) modalOpenTrouble14.setIcon( 'src/assets/favicon.png' );
-    else modalOpenTrouble14.setIcon( 'resources/app/src/assets/favicon.png' );
-
-    modalOpenTrouble14.loadURL( `file://${ __dirname }/dist/index.html#/Trouble14` );
-    modalOpenTrouble14.once( "ready-to-show", () => modalOpenTrouble14.show() );
-    modalOpenTrouble14.setMenu( null );
-    //modalOpenTrouble14.webContents.openDevTools();
+        );
+    
+        if(isDev) modalOpenTrouble14.setIcon( 'src/assets/favicon.png' );
+        else modalOpenTrouble14.setIcon( 'resources/app/src/assets/favicon.png' );
+    
+        modalOpenTrouble14.loadURL( `file://${ __dirname }/dist/index.html#/Trouble14` );
+        modalOpenTrouble14.once( "ready-to-show", () => modalOpenTrouble14.show() );
+        modalOpenTrouble14.setMenu( null );
+        modalOpenTrouble14.webContents.openDevTools({ mode: 'detach' });
+        event.sender.send( 'openTrouble14', { data: 'ok' } );
+    }
 });
 //ABRIR VENTANA NUEVA DE trouble_16
 ipcMain.on( 'openTrouble16', ( event, args ) => {
@@ -244,6 +250,22 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
                 const ext = json.Settings.Login[0].Telephony[0].User[0].$.Station; // extension
                 const log = json.Settings.Login[0].Agent[0].$.Login // login
                 event.sender.send( 'getDataOsAvaya', { data: [ ext, log ] } );
+            });
+        });
+    }
+});
+//OBTENER BOTONES FAVORITOS DE AVAYA
+ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
+    if( !fs.existsSync( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml` ) ) event.sender.send( '', { data: 'notExist' } );
+    else {
+        fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( errorRead, data ) => {
+            xml2js.parseString( data, ( errorJson, result ) => {
+                const json = result;
+                if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
+                    event.sender.send( 'getButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
+                }else {
+                    event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
+                }
             });
         });
     }
@@ -504,20 +526,7 @@ ipcMain.on( 'trouble_13', ( event, args ) => {
 });
 //PROBLEMA 14: Quiero configurar mis botones favoritos [ Value: 14 - CAT: Interfaz de usuario ]
 ipcMain.on( 'trouble_14', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_14', { data: 'notExist' } );
-    else {
-        fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( error, data ) => {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                const json = result;
-                event.sender.send( 'trouble_14', { data: json } );
-                if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
-                    event.sender.send( 'trouble_14', { data: 'Hay Botones' } );
-                }else {
-                    event.sender.send( 'trouble_14', { data: 'No Hay Botones' } );
-                }
-            });
-        });
-    }
+    
 });
 //PROBLEMA 16: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
 ipcMain.on( 'trouble16', ( event, args ) => {

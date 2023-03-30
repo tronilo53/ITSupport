@@ -1,1 +1,54 @@
-<p>trouble14 works!</p>
+<div class="spinner" #loading>
+    <div class="spinner__content">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h2>Por favor, espere...</h2>
+    </div>
+</div>
+
+<div class="container banner mb-4">
+    <img src="assets/Henry-Schein.png" alt="Henry-Schein.png">
+</div>
+<div class="container banner__2 text-center">
+    <img src="assets/avaya.png" alt="avaya.png">
+</div>
+<div class="container__sp container">
+    <h2 class="text-center mt-4">Botones Favoritos</h2>
+    <div class="row">
+        <div class="col">
+            <div class="col" *ngFor="let b of buttons">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="b.Name" (change)="selectChecks( $event )">
+                    <label class="form-check-label" [for]="b.Name">{{ b.Label }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col columna_derecha">
+            <div class="row">
+                <div class="col">
+                    <div class="existButtons" #existButtons>
+                        <div class="mb-3">
+                            <div class="alert alert-success" role="alert">{{ countButtonsActive }} Botones Favoritos Seleccionados</div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary" (click)="modifyButtons()">Modificar Botones</button>
+                        </div>
+                    </div>
+                    <div class="notExistButtons" #notExistButtons>
+                        <div class="alert alert-danger" role="alert">No hay Botones Añadidos</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row fila_2">
+                <div class="col">
+                    <div class="alert alert-info" role="alert">
+                        <strong>*Seleccione o Deseleccione los botones que quiera agregar/quitar</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container__in"></div>
+<div class="container__pt"></div>

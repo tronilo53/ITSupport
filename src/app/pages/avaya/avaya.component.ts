@@ -219,6 +219,14 @@ export class AvayaComponent implements OnInit, AfterViewInit {
   private trouble_14(): void {
     this.__ipcService.send( 'openTrouble14' );
     this.__ipcService.removeAllListeners( 'openTrouble14' );
+    this.__ipcService.on( 'openTrouble14', ( event, args ) => {
+      if( args.data === 'notExist' ) {
+        //Ocultar loading
+        this.renderer.addClass( this.loading.nativeElement, 'none' );
+        //Mostrar Alerta
+        this.__alertService.alertError( 'Avaya One X Agent nunca se ha iniciado, ponte en contacto con " IT" para configurar avaya por primera vez' );
+      }else this.renderer.addClass( this.loading.nativeElement, 'none' ); 
+    });
   }
 
   private solved( trouble: string ): void {

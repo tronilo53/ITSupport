@@ -1,0 +1,114 @@
+[
+    {
+        "Name": "abrv-dial",
+        "Location": "10",
+        "Label": "Marc Abrev 4",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "auto-in",
+        "Location": "11",
+        "Label": "AutoInACD",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "aux-work",
+        "Location": "12",
+        "Label": "TrabAux",
+        "State": "On",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "after-call",
+        "Location": "13",
+        "Label": "DespLlam",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "abrv-dial",
+        "Location": "14",
+        "Label": "Marc Abrev 8",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "directory",
+        "Location": "15",
+        "Label": "Directorio",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "next",
+        "Location": "16",
+        "Label": "Proximo",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "call-disp",
+        "Location": "17",
+        "Label": "Hacer Llamada",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "call-park",
+        "Location": "18",
+        "Label": "Estacion Llam",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "call-pkup",
+        "Location": "19",
+        "Label": "Tomar Llam",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "q-calls",
+        "Location": "20",
+        "Label": "Env Cola 521",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "release",
+        "Location": "21",
+        "Label": "Liberar",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "normal",
+        "Location": "22",
+        "Label": "normal",
+        "State": "On",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    },
+    {
+        "Name": "voice-mail",
+        "Location": "23",
+        "Label": "voice-mail 112",
+        "State": "Off",
+        "Auxinfo": "0",
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+    }
+]

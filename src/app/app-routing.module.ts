@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'Trouble1', component: Trouble1Component },
   { path: 'Trouble14', component: Trouble14Component },
   { path: 'Preload', component: PreloadComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'Home' }
+  { path: '**', pathMatch: 'full', redirectTo: 'Trouble14' }
 ];
 
 @NgModule({

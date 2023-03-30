@@ -17,4 +17,7 @@ export class DataService {
   public getTroublesPt () {
     return this.__httpClient.get( 'assets/troublesPt.json' );
   }
+  public getButtons() {
+    return this.__httpClient.get( 'assets/buttons.json' );
+  }
 }
