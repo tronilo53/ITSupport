@@ -169,7 +169,7 @@ ipcMain.on( 'openTrouble14', ( event, args ) => {
                 modal: true, 
                 show: false,
                 width: 800,
-                height: 690, 
+                height: 700, 
                 x: 400, 
                 y: 100, 
                 resizable: false,

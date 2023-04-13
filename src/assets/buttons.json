@@ -5,7 +5,8 @@
         "Label": "Marc Abrev 4",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "auto-in",
@@ -13,7 +14,8 @@
         "Label": "AutoInACD",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "aux-work",
@@ -21,7 +23,8 @@
         "Label": "TrabAux",
         "State": "On",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "after-call",
@@ -29,7 +32,8 @@
         "Label": "DespLlam",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "abrv-dial",
@@ -37,7 +41,8 @@
         "Label": "Marc Abrev 8",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "directory",
@@ -45,7 +50,8 @@
         "Label": "Directorio",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "next",
@@ -53,7 +59,8 @@
         "Label": "Proximo",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "call-disp",
@@ -61,7 +68,8 @@
         "Label": "Hacer Llamada",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "call-park",
@@ -69,7 +77,8 @@
         "Label": "Estacion Llam",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "call-pkup",
@@ -77,7 +86,8 @@
         "Label": "Tomar Llam",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "q-calls",
@@ -85,7 +95,8 @@
         "Label": "Env Cola 521",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "release",
@@ -93,7 +104,8 @@
         "Label": "Liberar",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "normal",
@@ -101,7 +113,8 @@
         "Label": "normal",
         "State": "On",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     },
     {
         "Name": "voice-mail",
@@ -109,6 +122,7 @@
         "Label": "voice-mail 112",
         "State": "Off",
         "Auxinfo": "0",
-        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone"
+        "xmlns": "http://avaya.com/OneXAgent/ObjectModel/Phone",
+        "checked": false
     }
 ]

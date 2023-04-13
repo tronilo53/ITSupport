@@ -17,10 +17,62 @@
     <h2 class="text-center mt-4">Botones Favoritos</h2>
     <div class="row">
         <div class="col">
-            <div class="col" *ngFor="let b of buttons">
+            <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" [id]="b.Name" (change)="selectChecks( $event )">
-                    <label class="form-check-label" [for]="b.Name">{{ b.Label }}</label>
+                    <input class="form-check-input" type="checkbox" id="Marc_Abrev_4" (change)="selectChecks( $event, 'Marc Abrev 4' )" [(ngModel)]="buttons.Marc_Abrev_4">
+                    <label class="form-check-label" for="Marc_Abrev_4">Marc Abrev 4</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="AutoInACD" (change)="selectChecks( $event, 'AutoInACD' )" [(ngModel)]="buttons.AutoInACD">
+                    <label class="form-check-label" for="AutoInACD">AutoInACD</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="TrabAux" (change)="selectChecks( $event, 'TrabAux' )" [(ngModel)]="buttons.TrabAux">
+                    <label class="form-check-label" for="TrabAux">TrabAux</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="DespLlam" (change)="selectChecks( $event, 'DespLlam' )" [(ngModel)]="buttons.DespLlam">
+                    <label class="form-check-label" for="DespLlam">DespLlam</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Marc_Abrev_8" (change)="selectChecks( $event, 'Marc Abrev 8' )" [(ngModel)]="buttons.Marc_Abrev_8">
+                    <label class="form-check-label" for="Marc_Abrev_8">Marc Abrev 8</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Directorio" (change)="selectChecks( $event, 'Directorio' )" [(ngModel)]="buttons.Directorio">
+                    <label class="form-check-label" for="Directorio">Directorio</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Proximo" (change)="selectChecks( $event, 'Proximo' )" [(ngModel)]="buttons.Proximo">
+                    <label class="form-check-label" for="Proximo">Proximo</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Hacer_Llamada" (change)="selectChecks( $event, 'Hacer Llamada' )" [(ngModel)]="buttons.Hacer_Llamada">
+                    <label class="form-check-label" for="Hacer_Llamada">Hacer Llamada</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Estacion_Llam" (change)="selectChecks( $event, 'Estacion Llam' )" [(ngModel)]="buttons.Estacion_Llam">
+                    <label class="form-check-label" for="Estacion_Llam">Estacion Llam</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Tomar_Llam" (change)="selectChecks( $event, 'Tomar Llam' )" [(ngModel)]="buttons.Tomar_Llam">
+                    <label class="form-check-label" for="Tomar_Llam">Tomar Llam</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Env_Cola_521" (change)="selectChecks( $event, 'Env Cola 521' )" [(ngModel)]="buttons.Env_Cola_521">
+                    <label class="form-check-label" for="Env_Cola_521">Env Cola 521</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Liberar" (change)="selectChecks( $event, 'Liberar' )" [(ngModel)]="buttons.Liberar">
+                    <label class="form-check-label" for="Liberar">Liberar</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="normal" (change)="selectChecks( $event, 'normal ' )" [(ngModel)]="buttons.normal">
+                    <label class="form-check-label" for="normal">normal</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="voice_mail_112" (change)="selectChecks( $event, 'voice-mail 112' )" [(ngModel)]="buttons.voice_mail_112">
+                    <label class="form-check-label" for="voice_mail_112">voice-mail 112</label>
                 </div>
             </div>
         </div>

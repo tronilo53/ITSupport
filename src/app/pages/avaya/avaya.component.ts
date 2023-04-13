@@ -107,18 +107,23 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     //Mostrar loading
     this.renderer.removeClass( this.loading.nativeElement, 'none' );
 
-    if( this.problema === '1' || this.problema === '2' ) this.trouble_1_2();
-    else if( this.problema === '3' || this.problema === '4' ) this.trouble_3_4();
-    else if( this.problema === '5' ) this.trouble_5();
-    else if( this.problema === '6' ) this.trouble_6();
-    else if( this.problema === '7' ) this.trouble_7();
-    else if( this.problema === '8' ) this.trouble_8();
-    else if( this.problema === '9' ) this.trouble_9();
-    else if( this.problema === '10' ) this.trouble_10();
-    else if( this.problema === '11' ) this.trouble_11();
-    else if( this.problema === '12' ) this.trouble_12();
-    else if( this.problema === '13' ) this.trouble_13();
-    else if( this.problema === '14' ) this.trouble_14();
+    if( this.problema === '???' ) {
+      this.renderer.addClass( this.loading.nativeElement, 'none' );
+      this.__alertService.alertError( 'Seleccione un problema de la lista.' );
+    }else {
+      if( this.problema === '1' || this.problema === '2' ) this.trouble_1_2();
+      else if( this.problema === '3' || this.problema === '4' ) this.trouble_3_4();
+      else if( this.problema === '5' ) this.trouble_5();
+      else if( this.problema === '6' ) this.trouble_6();
+      else if( this.problema === '7' ) this.trouble_7();
+      else if( this.problema === '8' ) this.trouble_8();
+      else if( this.problema === '9' ) this.trouble_9();
+      else if( this.problema === '10' ) this.trouble_10();
+      else if( this.problema === '11' ) this.trouble_11();
+      else if( this.problema === '12' ) this.trouble_12();
+      else if( this.problema === '13' ) this.trouble_13();
+      else if( this.problema === '14' ) this.trouble_14();
+    }
   }
   //Botón de solucionar problema Ingles
   public solucionarIn(): void {
