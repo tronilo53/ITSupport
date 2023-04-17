@@ -270,6 +270,11 @@ ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
         });
     }
 });
+//MODIFICAR BOTONES DE AVAYA(APLICAR)
+ipcMain.on( 'modifyButtonsAvaya', ( event, args ) => {
+    //TODO: VERIFICAR NOMBRES PARA CON LOCATION Y AGREGAR NODOS
+    event.sender.send( 'modifyButtonsAvaya', { data: args } );
+});
 
 //PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ] - PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]
 ipcMain.on( 'trouble_1_2', ( event, args ) => {

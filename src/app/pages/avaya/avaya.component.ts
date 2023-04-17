@@ -234,6 +234,7 @@ export class AvayaComponent implements OnInit, AfterViewInit {
     });
   }
 
+  //FUNCION MODULARIZADA PARA LOS PROBLEMAS;
   private solved( trouble: string ): void {
     this.__ipcService.send( trouble );
     this.__ipcService.removeAllListeners( trouble );

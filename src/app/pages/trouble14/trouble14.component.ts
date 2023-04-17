@@ -156,9 +156,13 @@ export class Trouble14Component implements OnInit, AfterViewInit {
     this.countButtonsActive = this.checksSelected.length;
   }
   public modifyButtons(): void {
-    if( this.checksSelected.length > 8 ) this.__alertService.alertError( 'Solo se permite seleccionar 8 botones' );
+    if( this.checksSelected.length > 8 ) this.__alertService.alertError( 'Solo se permiten 8 botones, compruebe la cantidad de botones seleccionados.' );
     else {
-      console.log( this.checksSelected );
+      this.__ipcService.send( 'modifyButtonsAvaya', { data: this.checksSelected } );
+      this.__ipcService.removeAllListeners( 'modifyButtonsAvaya' );
+      this.__ipcService.on( 'modifyButtonsAvaya', ( event, args ) => {
+        console.log( args.data );
+      });
     }
   }
 }
