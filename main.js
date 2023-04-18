@@ -272,8 +272,76 @@ ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
 });
 //MODIFICAR BOTONES DE AVAYA(APLICAR)
 ipcMain.on( 'modifyButtonsAvaya', ( event, args ) => {
-    //TODO: VERIFICAR NOMBRES PARA CON LOCATION Y AGREGAR NODOS
-    event.sender.send( 'modifyButtonsAvaya', { data: args } );
+    //TODO: COMPARAR BOTONES ENTRE AVAYA Y SELECCIONADOS, SOLO AÑADIR LOS QUE NO ESTÁN.
+    fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( error, data ) => {
+        xml2js.parseString( data, ( errorJson, result ) => {
+            const json = result;
+            /*for( let i = 0; i < args.data.length; i++ ) {
+                switch( args.data[i] ) {
+                    case 'Marc Abrev 4':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"abrv-dial", Location:"10", Label:"Marc Abrev 4", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'AutoInACD':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"auto-in", Location:"11", Label:"AutoInACD", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'TrabAux':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"aux-work", Location:"12", Label:"TrabAux", State:"On", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'DespLlam':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"after-call", Location:"13", Label:"DespLlam", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Marc Abrev 8':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"abrv-dial", Location:"14", Label:"Marc Abrev 8", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Directorio':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"directory", Location:"15", Label:"Directorio", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Proximo':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"next", Location:"16", Label:"Proximo", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Hacer Llamada':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"call-disp", Location:"17", Label:"Hacer Llamada", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Estacion Llam':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"call-park", Location:"18", Label:"Estacion Llam", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Tomar Llam':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"call-pkup", Location:"19", Label:"Tomar Llam", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Env Cola 521':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"q-calls", Location:"20", Label:"Env Cola 521", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'Liberar':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"release", Location:"21", Label:"Liberar", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'normal':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"normal", Location:"22", Label:"normal ", State:"On", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                    case 'voice-mail 112':
+                        json.SelectedFeatures.SelectedFeature.push( { $: { Name:"voice-mail", Location:"23", Label:"voice-mail 112", State:"Off", Auxinfo:"0", xmlns:"http://avaya.com/OneXAgent/ObjectModel/Phone" } } );
+                        break;
+                }
+            }*/
+            event.sender.send( 'modifyButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
+        });
+    });
+
+    /*
+    <SelectedFeature Name="abrv-dial" Location="10" Label="Marc Abrev 4" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="auto-in" Location="11" Label="AutoInACD" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="aux-work" Location="12" Label="TrabAux" State="On" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="after-call" Location="13" Label="DespLlam" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="abrv-dial" Location="14" Label="Marc Abrev 8" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="directory" Location="15" Label="Directorio" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="next" Location="16" Label="Proximo" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="call-disp" Location="17" Label="Hacer Llamada" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="call-park" Location="18" Label="Estacion Llam" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="call-pkup" Location="19" Label="Tomar Llam" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="q-calls" Location="20" Label="Env Cola 521" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="release" Location="21" Label="Liberar" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="normal" Location="22" Label="normal " State="On" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    <SelectedFeature Name="voice-mail" Location="23" Label="voice-mail 112" State="Off" Auxinfo="0" xmlns="http://avaya.com/OneXAgent/ObjectModel/Phone" />
+    */
 });
 
 //PROBLEMA 1: Oigo demasiado alto a los clientes [ Value: 1 - CAT: Sonido ] - PROBLEMA 2: Oigo demasiado Bajo a los clientes [ Value: 2 - CAT: Sonido ]

@@ -145,15 +145,25 @@ export class Trouble14Component implements OnInit, AfterViewInit {
 
   //DETECTAR LOS CAMBIOS EN LOS CHECKS.
   public selectChecks( value: any, label: string ): void {
-    //TODO: REVISAR ESTA FUNCION.. NO ESTA BIEN
-    if( value.target.checked ) {
-      this.checksSelected.push( label );
-    }else {
-      if( this.checksSelected.indexOf( label ) > -1 ) {
-        this.checksSelected.splice( this.checksSelected.indexOf( label ), 1 );
+    this.__ipcService.send( 'getButtonsAvaya' );
+    this.__ipcService.removeAllListeners( 'getButtonsAvaya' );
+    this.__ipcService.on( 'getButtonsAvaya', ( event, args ) => {
+      //Si el boton está seleccionado...
+      if( value.target.checked ) {
+        //Se añade al array
+        this.checksSelected.push( label );
+      //Si el boton se deselecciona...
+      }else {
+        //Si el boton que se deselecciona está en el array...
+        if( this.checksSelected.indexOf( label ) > -1 ) {
+          //Se borra el boton del array.
+          this.checksSelected.splice( this.checksSelected.indexOf( label ), 1 );
+        }
       }
-    }
-    this.countButtonsActive = this.checksSelected.length;
+      //Se guarda la longitud del array en el contador de botones.
+      this.countButtonsActive = this.checksSelected.length;
+      console.log( args.data );
+    });
   }
   public modifyButtons(): void {
     if( this.checksSelected.length > 8 ) this.__alertService.alertError( 'Solo se permiten 8 botones, compruebe la cantidad de botones seleccionados.' );
