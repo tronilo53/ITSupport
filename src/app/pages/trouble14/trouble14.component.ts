@@ -20,6 +20,9 @@ export class Trouble14Component implements OnInit, AfterViewInit {
   //Se crea un objeto, para guardar todos los checkbox
   public checksSelected: string[] = [];
 
+  //Se crea un objeto para guardar los botones obtenidos de avaya, (string)
+  private buttonsAvaya: string[] = [];
+
   //Se declara variable para guardar los botones favoritos obtenidos del servicio
   public buttons: any = {
     Marc_Abrev_4: false,
@@ -52,6 +55,8 @@ export class Trouble14Component implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
 
+    //TODO: PONER EN DISABLED LOS BOTONES QUE YA ESTÉN EN FAVORITOS
+
     //Ocultar alerta error: no hay botones añadidos
     this.renderer.addClass( this.existButtons.nativeElement, 'none' );
     //Ocultar alerta success: hay botones añadidos
@@ -71,6 +76,10 @@ export class Trouble14Component implements OnInit, AfterViewInit {
         this.renderer.removeClass( this.existButtons.nativeElement, 'none' );
 
         for( let i = 0; i < args.data.length; i++ ) {
+
+          //Añadir botones ya añadidos de avaya a la variable buttonsAvaya
+          this.buttonsAvaya.push( args.data[i].$.Label );
+
           switch( args.data[i].$.Label ) {
             case 'Marc Abrev 4':
               this.buttons.Marc_Abrev_4 = true;
@@ -145,25 +154,31 @@ export class Trouble14Component implements OnInit, AfterViewInit {
 
   //DETECTAR LOS CAMBIOS EN LOS CHECKS.
   public selectChecks( value: any, label: string ): void {
-    this.__ipcService.send( 'getButtonsAvaya' );
-    this.__ipcService.removeAllListeners( 'getButtonsAvaya' );
-    this.__ipcService.on( 'getButtonsAvaya', ( event, args ) => {
-      //Si el boton está seleccionado...
-      if( value.target.checked ) {
+    //Mostrar el Loading
+    this.renderer.removeClass( this.loading.nativeElement, 'none' );
+    //Si el boton está seleccionado...
+    if( value.target.checked ) {
+      //Si el boton seleccionado ya se encuentra en favoritos
+      if( this.buttonsAvaya.indexOf( value ) > -1 ) {
+        //Mostrar alerta de error
+        this.__alertService.alertError( 'Este botón ya lo tienes en favoritos' );
+      //En el caso de que no se encuentre el boton seleccionado en favoritos
+      }else {
         //Se añade al array
         this.checksSelected.push( label );
-      //Si el boton se deselecciona...
-      }else {
-        //Si el boton que se deselecciona está en el array...
-        if( this.checksSelected.indexOf( label ) > -1 ) {
-          //Se borra el boton del array.
-          this.checksSelected.splice( this.checksSelected.indexOf( label ), 1 );
-        }
       }
-      //Se guarda la longitud del array en el contador de botones.
-      this.countButtonsActive = this.checksSelected.length;
-      console.log( args.data );
-    });
+    //Si el boton se deselecciona...
+    }else {
+      //Si el boton que se deselecciona está en el array...
+      if( this.checksSelected.indexOf( label ) > -1 ) {
+        //Se borra el boton del array.
+        this.checksSelected.splice( this.checksSelected.indexOf( label ), 1 );
+      }
+    }
+    //Se guarda la longitud del array en el contador de botones.
+    this.countButtonsActive = this.checksSelected.length;
+    //Ocultar Loading
+    this.renderer.addClass( this.loading.nativeElement, 'none' );
   }
   public modifyButtons(): void {
     if( this.checksSelected.length > 8 ) this.__alertService.alertError( 'Solo se permiten 8 botones, compruebe la cantidad de botones seleccionados.' );
@@ -172,6 +187,7 @@ export class Trouble14Component implements OnInit, AfterViewInit {
       this.__ipcService.removeAllListeners( 'modifyButtonsAvaya' );
       this.__ipcService.on( 'modifyButtonsAvaya', ( event, args ) => {
         console.log( args.data );
+        this.__alertService.alertSuccess( 'Botones cambiados con éxito!' );
       });
     }
   }
