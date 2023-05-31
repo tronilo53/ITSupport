@@ -13,94 +13,78 @@
 <div class="container banner__2 text-center">
     <img src="assets/avaya.png" alt="avaya.png">
 </div>
-<div class="container__sp container">
+<div class="container__sp container none" #sp>
     <h2 class="text-center mt-4">Botones Favoritos</h2>
     <div class="row">
-        <div class="col">
-            <div class="col">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Marc_Abrev_4" (change)="selectChecks( $event, 'Marc Abrev 4' )" [(ngModel)]="buttons.Marc_Abrev_4">
-                    <label class="form-check-label" for="Marc_Abrev_4">Marc Abrev 4</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="AutoInACD" (change)="selectChecks( $event, 'AutoInACD' )" [(ngModel)]="buttons.AutoInACD">
-                    <label class="form-check-label" for="AutoInACD">AutoInACD</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="TrabAux" (change)="selectChecks( $event, 'TrabAux' )" [(ngModel)]="buttons.TrabAux">
-                    <label class="form-check-label" for="TrabAux">TrabAux</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="DespLlam" (change)="selectChecks( $event, 'DespLlam' )" [(ngModel)]="buttons.DespLlam">
-                    <label class="form-check-label" for="DespLlam">DespLlam</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Marc_Abrev_8" (change)="selectChecks( $event, 'Marc Abrev 8' )" [(ngModel)]="buttons.Marc_Abrev_8">
-                    <label class="form-check-label" for="Marc_Abrev_8">Marc Abrev 8</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Directorio" (change)="selectChecks( $event, 'Directorio' )" [(ngModel)]="buttons.Directorio">
-                    <label class="form-check-label" for="Directorio">Directorio</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Proximo" (change)="selectChecks( $event, 'Proximo' )" [(ngModel)]="buttons.Proximo">
-                    <label class="form-check-label" for="Proximo">Proximo</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Hacer_Llamada" (change)="selectChecks( $event, 'Hacer Llamada' )" [(ngModel)]="buttons.Hacer_Llamada">
-                    <label class="form-check-label" for="Hacer_Llamada">Hacer Llamada</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Estacion_Llam" (change)="selectChecks( $event, 'Estacion Llam' )" [(ngModel)]="buttons.Estacion_Llam">
-                    <label class="form-check-label" for="Estacion_Llam">Estacion Llam</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Tomar_Llam" (change)="selectChecks( $event, 'Tomar Llam' )" [(ngModel)]="buttons.Tomar_Llam">
-                    <label class="form-check-label" for="Tomar_Llam">Tomar Llam</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Env_Cola_521" (change)="selectChecks( $event, 'Env Cola 521' )" [(ngModel)]="buttons.Env_Cola_521">
-                    <label class="form-check-label" for="Env_Cola_521">Env Cola 521</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Liberar" (change)="selectChecks( $event, 'Liberar' )" [(ngModel)]="buttons.Liberar">
-                    <label class="form-check-label" for="Liberar">Liberar</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="normal" (change)="selectChecks( $event, 'normal ' )" [(ngModel)]="buttons.normal">
-                    <label class="form-check-label" for="normal">normal</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="voice_mail_112" (change)="selectChecks( $event, 'voice-mail 112' )" [(ngModel)]="buttons.voice_mail_112">
-                    <label class="form-check-label" for="voice_mail_112">voice-mail 112</label>
-                </div>
+        <div class="mb-5">
+            <select name="buttons" id="buttons" class="form-control" #selectButtonsSp>
+                <option value="???">Seleccione un botón</option>
+                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-danger w-100" #buttonAddSp>Añadir</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="alert alert-info none" role="alert" #alertInfoSp>
+            <p>Botones ya añadidos</p>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
             </div>
         </div>
-        <div class="col columna_derecha">
-            <div class="row">
-                <div class="col">
-                    <div class="existButtons" #existButtons>
-                        <div class="mb-3">
-                            <div class="alert alert-success" role="alert">{{ countButtonsActive }} Botones Favoritos Seleccionados</div>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-primary" (click)="modifyButtons()">Modificar Botones</button>
-                        </div>
-                    </div>
-                    <div class="notExistButtons" #notExistButtons>
-                        <div class="alert alert-danger" role="alert">No hay Botones Añadidos</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row fila_2">
-                <div class="col">
-                    <div class="alert alert-info" role="alert">
-                        <strong>*Seleccione o Deseleccione los botones que quiera agregar/quitar</strong>
-                    </div>
-                </div>
-            </div>
+        <div class="alert alert-warning none" role="alert" #alertWarningSp>
+            Sin Información
         </div>
     </div>
 </div>
-<div class="container__in"></div>
-<div class="container__pt"></div>
+<div class="container__in none" #in>
+    <h2 class="text-center mt-4">Favorite Buttons</h2>
+    <div class="row">
+        <div class="mb-5">
+            <select name="buttons" id="buttons" class="form-control" #selectButtonsIn>
+                <option value="???">Select a button</option>
+                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-danger w-100" #buttonAddIn>Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="alert alert-info none" role="alert" #alertInfoIn>
+            <p>Buttons already added</p>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
+            </div>
+        </div>
+        <div class="alert alert-warning none" role="alert" #alertWarningIn>
+            No Information
+        </div>
+    </div>
+</div>
+<div class="container__pt none" #pt>
+    <h2 class="text-center mt-4">Botões Favoritos</h2>
+    <div class="row">
+        <div class="mb-5">
+            <select name="buttons" id="buttons" class="form-control" #selectButtonsPt>
+                <option value="???">Seleccionar um botão</option>
+                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-danger w-100" #buttonAddPt>Adicionar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="alert alert-info none" role="alert" #alertInfoPt>
+            <p>Botões já adicionados</p>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
+            </div>
+        </div>
+        <div class="alert alert-warning none" role="alert" #alertWarningPt>
+            Nenhuma informação
+        </div>
+    </div>
+</div>

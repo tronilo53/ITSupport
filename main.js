@@ -256,7 +256,7 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
 });
 //OBTENER BOTONES FAVORITOS DE AVAYA
 ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
-    if( !fs.existsSync( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml` ) ) event.sender.send( '', { data: 'notExist' } );
+    if( !fs.existsSync( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml` ) ) event.sender.send( 'getButtonsAvaya', { data: 'notExist' } );
     else {
         fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {

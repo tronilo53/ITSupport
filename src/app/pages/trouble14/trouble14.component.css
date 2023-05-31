@@ -52,3 +52,10 @@
 .alert-success {
     width: 100%;
 }
+.badge {
+    margin: 0 5px;
+    cursor: pointer;
+}
+.badge:hover {
+    font-size: 0.8rem;
+}
