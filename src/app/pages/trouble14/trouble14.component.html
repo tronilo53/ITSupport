@@ -14,77 +14,77 @@
     <img src="assets/avaya.png" alt="avaya.png">
 </div>
 <div class="container__sp container none" #sp>
-    <h2 class="text-center mt-4">Botones Favoritos</h2>
-    <div class="row">
-        <div class="mb-5">
-            <select name="buttons" id="buttons" class="form-control" #selectButtonsSp>
-                <option value="???">Seleccione un botón</option>
-                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <button type="button" class="btn btn-danger w-100" #buttonAddSp>Añadir</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="alert alert-info none" role="alert" #alertInfoSp>
-            <p>Botones ya añadidos</p>
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
-            </div>
-        </div>
-        <div class="alert alert-warning none" role="alert" #alertWarningSp>
-            Sin Información
-        </div>
+<h2 class="text-center mt-4">Botones Favoritos</h2>
+<div class="row">
+<div class="mb-5">
+    <select name="buttons" id="buttons" class="form-control" #selectButtonsSp>
+        <option value="???">Seleccione un botón</option>
+        <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+    </select>
+</div>
+<div class="mb-3">
+    <button type="button" class="btn btn-danger w-100" #buttonAddSp>Añadir</button>
+</div>
+</div>
+<div class="row">
+<div class="alert alert-info none" role="alert" #alertInfoSp>
+    <p>Botones ya añadidos</p>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
     </div>
 </div>
-<div class="container__in none" #in>
-    <h2 class="text-center mt-4">Favorite Buttons</h2>
-    <div class="row">
-        <div class="mb-5">
-            <select name="buttons" id="buttons" class="form-control" #selectButtonsIn>
-                <option value="???">Select a button</option>
-                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <button type="button" class="btn btn-danger w-100" #buttonAddIn>Add</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="alert alert-info none" role="alert" #alertInfoIn>
-            <p>Buttons already added</p>
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
-            </div>
-        </div>
-        <div class="alert alert-warning none" role="alert" #alertWarningIn>
-            No Information
-        </div>
+<div class="alert alert-warning none" role="alert" #alertWarningSp>
+    Sin Información
+</div>
+</div>
+</div>
+<div class="container__in container none" #in>
+<h2 class="text-center mt-4">Favorite Buttons</h2>
+<div class="row">
+<div class="mb-5">
+    <select name="buttons" id="buttons" class="form-control" #selectButtonsIn>
+        <option value="???">Select a button</option>
+        <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+    </select>
+</div>
+<div class="mb-3">
+    <button type="button" class="btn btn-danger w-100" #buttonAddIn>Add</button>
+</div>
+</div>
+<div class="row">
+<div class="alert alert-info none" role="alert" #alertInfoIn>
+    <p>Buttons already added</p>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
     </div>
 </div>
-<div class="container__pt none" #pt>
-    <h2 class="text-center mt-4">Botões Favoritos</h2>
-    <div class="row">
-        <div class="mb-5">
-            <select name="buttons" id="buttons" class="form-control" #selectButtonsPt>
-                <option value="???">Seleccionar um botão</option>
-                <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <button type="button" class="btn btn-danger w-100" #buttonAddPt>Adicionar</button>
-        </div>
+<div class="alert alert-warning none" role="alert" #alertWarningIn>
+    No Information
+</div>
+</div>
+</div>
+<div class="container__pt container none" #pt>
+<h2 class="text-center mt-4">Botões Favoritos</h2>
+<div class="row">
+<div class="mb-5">
+    <select name="buttons" id="buttons" class="form-control" #selectButtonsPt>
+        <option value="???">Seleccionar um botão</option>
+        <option [value]="b.Name" *ngFor="let b of allButtons">{{ b.Label }}</option>
+    </select>
+</div>
+<div class="mb-3">
+    <button type="button" class="btn btn-danger w-100" #buttonAddPt>Adicionar</button>
+</div>
+</div>
+<div class="row">
+<div class="alert alert-info none" role="alert" #alertInfoPt>
+    <p>Botões já adicionados</p>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
     </div>
-    <div class="row">
-        <div class="alert alert-info none" role="alert" #alertInfoPt>
-            <p>Botões já adicionados</p>
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button *ngFor="let button of buttonsAvayaExists" type="button" class="btn btn-outline-primary">{{ button.$.Label }}</button>
-            </div>
-        </div>
-        <div class="alert alert-warning none" role="alert" #alertWarningPt>
-            Nenhuma informação
-        </div>
-    </div>
+</div>
+<div class="alert alert-warning none" role="alert" #alertWarningPt>
+    Nenhuma informação
+</div>
+</div>
 </div>

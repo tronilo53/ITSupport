@@ -41,7 +41,7 @@ export class Trouble14Component implements OnInit, AfterViewInit {
   //public buttonsSelected: string[] = [];
 
   //Se crea un objeto para guardar los botones obtenidos de avaya, (string)
-  public buttonsAvayaExists: any[] = [];
+  public buttonsAvayaExists: any = [];
   //public buttonsAvayaTest: string[] = [ 'Marc Abrev 8', 'Marc Abrev 4', 'Normal' ];
 
   //Se declara variable para guardar count de botones activos
@@ -64,7 +64,7 @@ export class Trouble14Component implements OnInit, AfterViewInit {
       this.allButtons = data;
 
       //Petición IPC para obtener botones ya añadidos en Avaya
-      this.__ipcService.send( 'getButtonsAvaya' );
+      this.__ipcService.sendSync( 'getButtonsAvaya' );
       this.__ipcService.removeAllListeners( 'getButtonsAvaya' );
       this.__ipcService.on( 'getButtonsAvaya', ( event, args ) => {
 
