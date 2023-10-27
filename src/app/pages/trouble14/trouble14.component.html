@@ -1,4 +1,4 @@
-<div class="spinner" #loading>
+<div class="spinner none" #loading> //TODO: QUITAR LA CLASE NONE
     <div class="spinner__content">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -37,6 +37,14 @@
     Sin Información
 </div>
 </div>
+</div>
+<div class="container__sp container">
+    <div class="alert alert-info" role="alert" #alertInfoSp>
+        <p>Botones ya añadidos</p>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button *ngFor="let button of allButtons" type="button" class="btn btn-outline-primary">{{ button }}</button>
+        </div>
+    </div>
 </div>
 <div class="container__in container none" #in>
 <h2 class="text-center mt-4">Favorite Buttons</h2>

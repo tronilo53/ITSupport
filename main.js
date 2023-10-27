@@ -18,7 +18,7 @@ let appWin;
 let appPrelaod;
 let modalOpenIt;
 let modalOpenAvaya;
-let modalOpenTrouble1;
+let modalOpenTrouble14;
 const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Config.xml`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;

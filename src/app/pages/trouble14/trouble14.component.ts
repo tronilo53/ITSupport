@@ -58,6 +58,15 @@ export class Trouble14Component implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
 
+    this.__dataService.getButtons().subscribe((e: any) => this.allButtons = e);
+    this.__ipcService.send('getButtonsAvaya');
+    this.__ipcService.removeAllListeners('getButtonsAvaya');
+    this.__ipcService.on('getButtonsAvaya', (e, args) => {
+      this.buttonsAvayaExists = args.data;
+      console.log(this.buttonsAvayaExists);
+    });
+
+    /*
     //Petición al servicio "dataService" para obtener todos los botones
     this.__dataService.getButtons().subscribe( (data: any) => {
       //Guarda todos los botones en la variable "allButtons"
@@ -155,6 +164,7 @@ export class Trouble14Component implements OnInit, AfterViewInit {
         }
       });
     });
+    */
 
     //this.countButtonsActive = this.checksSelected.length;
   }
