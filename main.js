@@ -1,5 +1,5 @@
 /* -----------IMPORTACIONES DE MÓDULOS----------- */
-const { app, BrowserWindow, ipcMain, Menu } = require( "electron" );
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require( "electron" );
 const isDev = require( "electron-is-dev" );
 const { autoUpdater } = require( "electron-updater" );
 const fs = require( "fs" );
@@ -19,6 +19,7 @@ let appPrelaod;
 let modalOpenIt;
 let modalOpenAvaya;
 let modalOpenTrouble14;
+//let modalOpenTrouble16;
 const RUTE__CONFIG = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Config.xml`;
 const RUTE__PROFILE = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default`;
 const RUTE__PROFILE__SETTINGS = `C:/Users/${os.userInfo().username}/AppData/Roaming/Avaya/one-X Agent/2.5/Profiles/default/Settings.xml`;
@@ -77,15 +78,15 @@ createWindow = () => {
     if(isDev) {
         appWin.setIcon( 'src/assets/favicon.png' );
         appPrelaod.setIcon( 'src/assets/favicon.png' );
+        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+        appWin.setMenu( menuDev );
+        appWin.loadURL( 'http://localhost:4200/' );
+        appPrelaod.loadURL( 'http://localhost:4200/#/Preload' );
     }else {
         appWin.setIcon( 'resources/app/src/assets/favicon.png' );
         appPrelaod.setIcon( 'resources/app/src/assets/favicon.png' );
-    }
-    appWin.loadURL( `file://${ __dirname }/dist/index.html` );
-    appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
-    if(isDev) {
-        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
-        appWin.setMenu( menuDev );
+        appWin.loadURL( `file://${ __dirname }/dist/index.html` );
+        appPrelaod.loadURL( `file://${ __dirname }/dist/index.html#/Preload` );
     }
     appWin.once( "ready-to-show", () => {
         //checks();
@@ -109,6 +110,14 @@ app.on( "window-all-closed", () => {
 });
 
 /* -----------COMUNICACIÓN ENTRE PROCESOS----------- */
+//MOSTRAR NOTIFICACIÓN NATIVA
+ipcMain.on('dialog', (e, args) => {
+    if(args.type === 'error') {
+        if(args.parent === 'trouble14') {
+            dialog.showMessageBox(modalOpenTrouble14, { type: 'error', title: 'Error', message: args.text });
+        }
+    }
+});
 //ABRIR VENTANA NUEVA DE IT SUPPORT
 ipcMain.on( 'openIt', ( event, args ) => {
     modalOpenIt = new BrowserWindow( 
@@ -126,12 +135,17 @@ ipcMain.on( 'openIt', ( event, args ) => {
         } 
     );
     
-    if(isDev) modalOpenIt.setIcon( 'src/assets/favicon.png' );
-    else modalOpenIt.setIcon( 'resources/app/src/assets/favicon.png' );
-    
-    modalOpenIt.loadURL( `file://${ __dirname }/dist/index.html#/It` );
+    if(isDev) {
+        modalOpenIt.setIcon( 'src/assets/favicon.png' );
+        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+        modalOpenIt.setMenu( menuDev );
+        modalOpenIt.loadURL( 'http://localhost:4200/#/It' );
+    }
+    else {
+        modalOpenIt.setIcon( 'resources/app/src/assets/favicon.png' );
+        modalOpenIt.loadURL( `file://${ __dirname }/dist/index.html#/It` );
+    }
     modalOpenIt.once( "ready-to-show", () => modalOpenIt.show() );
-    modalOpenIt.setMenu( null );
     //modal.webContents.openDevTools();
 });
 //ABRIR VENTANA NUEVA DE CONFIGURACIÓN DE AVAYA
@@ -151,13 +165,17 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
         } 
     );
 
-    if(isDev) modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
-    else modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
-
-    modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
-    //if(isDev) modalOpenAvaya.webContents.openDevTools( { mode: "detach" } );
+    if(isDev) {
+        modalOpenAvaya.setIcon( 'src/assets/favicon.png' );
+        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+        modalOpenAvaya.setMenu( menuDev );
+        modalOpenAvaya.loadURL( 'http://localhost:4200/#/Avaya' );
+    }
+    else {
+        modalOpenAvaya.setIcon( 'resources/app/src/assets/favicon.png' );
+        modalOpenAvaya.loadURL( `file://${ __dirname }/dist/index.html#/Avaya` );
+    }
     modalOpenAvaya.once( "ready-to-show", () => modalOpenAvaya.show() );
-    modalOpenAvaya.setMenu( null );
 });
 //ABRIR VENTANA NUEVA DE trouble_14
 ipcMain.on( 'openTrouble14', ( event, args ) => {
@@ -180,13 +198,18 @@ ipcMain.on( 'openTrouble14', ( event, args ) => {
             } 
         );
     
-        if(isDev) modalOpenTrouble14.setIcon( 'src/assets/favicon.png' );
-        else modalOpenTrouble14.setIcon( 'resources/app/src/assets/favicon.png' );
+        if(isDev) {
+            modalOpenTrouble14.setIcon( 'src/assets/favicon.png' );
+            const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+            modalOpenTrouble14.setMenu( menuDev );
+            modalOpenTrouble14.loadURL( 'http://localhost:4200/#/Trouble14' );
+        }
+        else {
+            modalOpenTrouble14.setIcon( 'resources/app/src/assets/favicon.png' );
+            modalOpenTrouble14.loadURL( `file://${ __dirname }/dist/index.html#/Trouble14` );
+        }
     
-        modalOpenTrouble14.loadURL( `file://${ __dirname }/dist/index.html#/Trouble14` );
         modalOpenTrouble14.once( "ready-to-show", () => modalOpenTrouble14.show() );
-        modalOpenTrouble14.setMenu( null );
-        modalOpenTrouble14.webContents.openDevTools({ mode: 'detach' });
         event.sender.send( 'openTrouble14', { data: 'ok' } );
     }
 });
@@ -207,13 +230,18 @@ ipcMain.on( 'openTrouble16', ( event, args ) => {
         } 
     );
 
-    if(isDev) modalOpenTrouble1.setIcon( 'src/assets/favicon.png' );
-    else modalOpenTrouble1.setIcon( 'resources/app/src/assets/favicon.png' );
+    if(isDev) {
+        modalOpenTrouble16.setIcon( 'src/assets/favicon.png' );
+        const menuDev = Menu.buildFromTemplate( menuTemplateDev );
+        modalOpenTrouble16.setMenu( menuDev );
+        modalOpenTrouble16.loadURL( 'http://localhost:4200/#/Trouble16' );
+    }
+    else {
+        modalOpenTrouble16.setIcon( 'resources/app/src/assets/favicon.png' );
+        modalOpenTrouble16.loadURL( `file://${ __dirname }/dist/index.html#/Trouble16` );
+    }
 
-    modalOpenTrouble1.loadURL( `file://${ __dirname }/dist/index.html#/Trouble1` );
-    modalOpenTrouble1.once( "ready-to-show", () => modalOpenTrouble1.show() );
-    modalOpenTrouble1.setMenu( null );
-    //modalOpenTrouble1.webContents.openDevTools();
+    modalOpenTrouble16.once( "ready-to-show", () => modalOpenTrouble16.show() );
 });
 //ABRIR PORTAL DE INCIDENCIAS
 ipcMain.on( 'openIncident', ( event, args ) => {

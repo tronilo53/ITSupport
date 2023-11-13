@@ -50,6 +50,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
+    "electronApp": "electron .",
     "pub": "ng build && electron-builder -p always"
   },
   "private": true,

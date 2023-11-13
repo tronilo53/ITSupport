@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { DataService } from 'src/app/services/data.service';
 import { IpcService } from 'src/app/services/ipc.service';
@@ -8,7 +8,7 @@ import { IpcService } from 'src/app/services/ipc.service';
   templateUrl: './trouble14.component.html',
   styleUrls: ['./trouble14.component.css']
 })
-export class Trouble14Component implements OnInit, AfterViewInit {
+export class Trouble14Component implements OnInit, OnDestroy {
   
   @ViewChild('loading') loading: ElementRef;
 
@@ -36,179 +36,134 @@ export class Trouble14Component implements OnInit, AfterViewInit {
 
   //Array de todos los botones
   public allButtons: any[] = [];
-
-  //Se crea un objeto, para guardar todos los checkbox
-  //public buttonsSelected: string[] = [];
-
-  //Se crea un objeto para guardar los botones obtenidos de avaya, (string)
+  //Variable ngModel para el select
+  public select: string = '???';
+  //Se crea un objeto para guardar los botones obtenidos de avaya
   public buttonsAvayaExists: any = [];
-  //public buttonsAvayaTest: string[] = [ 'Marc Abrev 8', 'Marc Abrev 4', 'Normal' ];
-
   //Se declara variable para guardar count de botones activos
-  //public countButtonsActive: number = 0;
+  public countButtonsActive: number = 0;
 
   constructor( 
     private __ipcService: IpcService,
     private renderer: Renderer2,
     private __dataService: DataService,
-    private __alertService: AlertService 
+    private _changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-  }
-  ngAfterViewInit(): void {
-
-    this.__dataService.getButtons().subscribe((e: any) => this.allButtons = e);
-    this.__ipcService.send('getButtonsAvaya');
-    this.__ipcService.removeAllListeners('getButtonsAvaya');
-    this.__ipcService.on('getButtonsAvaya', (e, args) => {
-      this.buttonsAvayaExists = args.data;
-      console.log(this.buttonsAvayaExists);
-    });
-
-    /*
-    //Petición al servicio "dataService" para obtener todos los botones
+    //Petición al servicio dataService para obtener todos los botones
     this.__dataService.getButtons().subscribe( (data: any) => {
       //Guarda todos los botones en la variable "allButtons"
       this.allButtons = data;
-
-      //Petición IPC para obtener botones ya añadidos en Avaya
-      this.__ipcService.sendSync( 'getButtonsAvaya' );
-      this.__ipcService.removeAllListeners( 'getButtonsAvaya' );
-      this.__ipcService.on( 'getButtonsAvaya', ( event, args ) => {
-
-        this.buttonsAvayaExists = args.data;
-        console.log( this.buttonsAvayaExists );
-
-        //Si no existe el fichero de avaya "SelectedPhoneFeatures.xml"
-        if( args.data === 'notExist' ) {
-
-          //DETECTAR EL IDIOMA SELECCIONADO
-          this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.removeAllListeners( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            //ESPAÑOL
-            if( args.data === '' || args.data === 'sp' ) {
-              //Muestra el contenedor Español
-              this.renderer.removeClass( this.sp.nativeElement, 'none' );
-              //Muestra contenedor de alerta de "Sin información"
+      //Peticion IPC para detectar el idioma
+      this.__ipcService.send( 'checkLanguage' );
+      this.__ipcService.on('checkLanguage', (e, argslan) => {
+        //Peticion IPC para obtener los botones ya añadidos en avaya
+        this.__ipcService.send('getButtonsAvaya');
+        this.__ipcService.on('getButtonsAvaya', (e, argsBtn) => {
+          //Si no existe el fichero de avaya "SelectedPhoneFeatures.xml"
+          if( argsBtn.data === 'notExist' ) {
+            /* Si el idioma está en español... */
+            if(argslan.data === '' || argslan.data === 'sp') {
+              /* Muestra el contenedor en español */
+              this.showContainer('sp');
+              //Muestra la alerta de "Sin información" en español
               this.renderer.removeClass( this.alertWarningSp.nativeElement, 'none' );
-              //Desactiva el Select
-              this.renderer.setProperty( this.selectButtonsSp.nativeElement, 'disabled', 'true' );
-              //Desactiva el botón de añadir
-              this.renderer.setProperty( this.buttonAddSp.nativeElement, 'disabled', 'true' );
-              //Muestra una alerta de error
-              this.__alertService.alertError( 'Avaya no se ha iniciado nunca, por favor, cierre este programa y ejecute avaya por primera vez' );
-            //INGLES
-            }else if( args.data === 'in' ) {
-              //Muestra el contenedor Ingles
-              this.renderer.removeClass( this.in.nativeElement, 'none' );
-              //Muestra contenedor de alerta de "Sin información"
+              /* Desactiva los botones en español */
+              this.DesactivateButtons('sp');
+            /* Si el idioma está en inglés... */
+            }else if(argslan.data === 'in') {
+              /* Muestra el contenedor en ingles */
+              this.showContainer('in');
+              //Muestra la alerta de "Sin información" en ingles
               this.renderer.removeClass( this.alertWarningIn.nativeElement, 'none' );
-              //Desactiva el Select
-              this.renderer.setProperty( this.selectButtonsIn.nativeElement, 'disabled', 'true' );
-              //Desactiva el botón de añadir
-              this.renderer.setProperty( this.buttonAddIn.nativeElement, 'disabled', 'true' );
-              //Muestra una alerta de error
-              this.__alertService.alertError( 'Avaya has never started, please close this program and run avaya for the first time.' );
-            //PORTUGUES
+              /* Desactiva los botones en ingles */
+              this.DesactivateButtons('in');
+            /* Si el idioma está en portugues... */
             }else {
-              //Muestra el contenedor Portugues
-              this.renderer.removeClass( this.pt.nativeElement, 'none' );
-              //Muestra contenedor de alerta de "Sin información"
+              /* Muestra el contenedor en portugues */
+              this.showContainer('pt');
+              //Muestra la alerta de "Sin información" en portugues
               this.renderer.removeClass( this.alertWarningPt.nativeElement, 'none' );
-              //Desactiva el Select
-              this.renderer.setProperty( this.selectButtonsPt.nativeElement, 'disabled', 'true' );
-              //Desactiva el botón de añadir
-              this.renderer.setProperty( this.buttonAddPt.nativeElement, 'disabled', 'true' );
-              //Muestra una alerta de error
-              this.__alertService.alertError( 'O Avaya nunca foi iniciado, feche este programa e execute o avaya pela primeira vez.' );
+              /* Desactiva los botones en portugues */
+              this.DesactivateButtons('pt');
             }
-
-            //Ocultar loading
-            this.renderer.addClass( this.loading.nativeElement, 'none' );
-          });
-        //En caso contrario...
-        }else {
-
-          //Guarda los botones ya añadidos de avaya en la variable.
-          this.buttonsAvayaExists = args.data;  //TODO: NO SE MUESTRAN LOS BOTONES YA AÑADIDOS EN EL DOM!!
-
-          //DETECTAR EL IDIOMA SELECCIONADO
-          this.__ipcService.send( 'checkLanguage' );
-          this.__ipcService.removeAllListeners( 'checkLanguage' );
-          this.__ipcService.on( 'checkLanguage', ( event, args ) => {
-            //ESPAÑOL
-            if( args.data === '' || args.data === 'sp' ) {
-              //Muestra el contenedor Español
-              this.renderer.removeClass( this.sp.nativeElement, 'none' );
-              //Muestra contenedor de alerta con los botones ya añadidos en avaya
+          //Si existe el fichero de avaya "SelectedPhoneFeatures.xml"
+          }else {
+            //Guarda los botones ya añadidos de avaya en la variable.
+            this.buttonsAvayaExists = argsBtn.data.map((item: any) => {
+              return { Name: item.$.Name, Label: item.$.Label, check: false }
+            });
+            /* Si el idioma está en español... */
+            if(argslan.data === '' || argslan.data === 'sp') {
+              /* Muestra el contenedor en español */
+              this.showContainer('sp');
+              //Muestra contenedor de alerta con los botones ya añadidos en avaya en español
               this.renderer.removeClass( this.alertInfoSp.nativeElement, 'none' );
-            //INGLES
-            }else if( args.data === 'in' ) {
-              //Muestra el contenedor Ingles
-              this.renderer.removeClass( this.in.nativeElement, 'none' );
-              //Muestra contenedor de alerta con los botones ya añadidos en avaya
+            /* Si el idioma está en inglés... */
+            }else if(argslan.data === 'in') {
+              /* Muestra el contenedor en ingles */
+              this.showContainer('in');
+              //Muestra contenedor de alerta con los botones ya añadidos en avaya en ingles
               this.renderer.removeClass( this.alertInfoIn.nativeElement, 'none' );
-            //PORTUGUES
+            /* Si el idioma está en portugues... */
             }else {
-              //Muestra el contenedor Portugues
-              this.renderer.removeClass( this.pt.nativeElement, 'none' );
-              //Muestra contenedor de alerta con los botones ya añadidos en avaya
+              /* Muestra el contenedor en portugues */
+              this.showContainer('pt');
+              //Muestra contenedor de alerta con los botones ya añadidos en avaya en portugues
               this.renderer.removeClass( this.alertInfoPt.nativeElement, 'none' );
             }
-
-            //Ocultar loading
-            this.renderer.addClass( this.loading.nativeElement, 'none' );
-          });
-        }
+          }
+          this.countButtonsActive = this.buttonsAvayaExists.length;
+          /* Detectar los cambios */
+          this._changeDetectorRef.detectChanges();
+        });
       });
     });
-    */
-
-    //this.countButtonsActive = this.checksSelected.length;
   }
-
-  //DETECTAR LOS CAMBIOS EN LOS CHECKS.
-  /*public selectChecks( value: any, label: string ): void {
-    //Mostrar el Loading
-    this.renderer.removeClass( this.loading.nativeElement, 'none' );
-    //Si el boton está seleccionado...
-    if( value.target.checked ) {
-      //Si el boton seleccionado ya se encuentra en favoritos
-      if( this.buttonsAvaya.indexOf( value ) > -1 ) {
-        //Mostrar alerta de error
-        this.__alertService.alertError( 'Este botón ya lo tienes en favoritos' );
-      //En el caso de que no se encuentre el boton seleccionado en favoritos
-      }else {
-        //Se añade al array
-        this.checksSelected.push( label );
-      }
-    //Si el boton se deselecciona...
+  /* Agregar nuevos botones a avaya */
+  public addButtons(): void {
+    if(this.select === '???') this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No se pueden añadir 0 Botones.' });
+  }
+  /* Eliminar botones ya insertados en avaya */
+  public deleteChecksSelected(): void {
+    const itemsSelected: any[] = this.buttonsAvayaExists.filter((item: any) => item.check);
+    console.log(itemsSelected);
+  }
+  /* Desactiva los botones*/
+  private DesactivateButtons(lan: string): void {
+    if(lan === 'sp') {
+      //Desactiva el Select
+      this.renderer.setProperty( this.selectButtonsSp.nativeElement, 'disabled', 'true' );
+      //Desactiva el botón de añadir
+      this.renderer.setProperty( this.buttonAddSp.nativeElement, 'disabled', 'true' );
+    }else if(lan === 'in') {
+      //Desactiva el Select
+      this.renderer.setProperty( this.selectButtonsIn.nativeElement, 'disabled', 'true' );
+      //Desactiva el botón de añadir
+      this.renderer.setProperty( this.buttonAddIn.nativeElement, 'disabled', 'true' );
     }else {
-      //Si el boton que se deselecciona está en el array...
-      if( this.checksSelected.indexOf( label ) > -1 ) {
-        //Se borra el boton del array.
-        this.checksSelected.splice( this.checksSelected.indexOf( label ), 1 );
-      }
+      //Desactiva el Select
+      this.renderer.setProperty( this.selectButtonsPt.nativeElement, 'disabled', 'true' );
+      //Desactiva el botón de añadir
+      this.renderer.setProperty( this.buttonAddPt.nativeElement, 'disabled', 'true' );
     }
-    //Se guarda la longitud del array en el contador de botones.
-    this.countButtonsActive = this.checksSelected.length;
-    //Ocultar Loading
-    this.renderer.addClass( this.loading.nativeElement, 'none' );
-  }*/
-  /*public modifyButtons(): void {
-    if( this.checksSelected.length > 8 ) this.__alertService.alertError( 'Solo se permiten 8 botones, compruebe la cantidad de botones seleccionados.' );
-    else {
-      this.__ipcService.send( 'modifyButtonsAvaya', { data: this.checksSelected } );
-      this.__ipcService.removeAllListeners( 'modifyButtonsAvaya' );
-      this.__ipcService.on( 'modifyButtonsAvaya', ( event, args ) => {
-        console.log( args.data );
-        this.__alertService.alertSuccess( 'Botones cambiados con éxito!' );
-      });
+  }
+  /* Muestra el contenedor en el idioma elegido */
+  private showContainer(lan: string): void {
+    if(lan === 'sp') {
+      //Muestra el contenedor Español
+      this.renderer.removeClass( this.sp.nativeElement, 'none' );
+    }else if(lan === 'in') {
+      //Muestra el contenedor Ingles
+      this.renderer.removeClass( this.in.nativeElement, 'none' );
+    }else {
+      //Muestra el contenedor Portugues
+      this.renderer.removeClass( this.pt.nativeElement, 'none' );
     }
-  }*/
-  // public deleteButton( button: string ): void {
-  //   console.log( event.target );
-  // }
+  }
+  ngOnDestroy(): void {
+    this.__ipcService.removeAllListeners('getButtonsAvaya');
+    this.__ipcService.removeAllListeners('checkLanguage');
+  }
 }
