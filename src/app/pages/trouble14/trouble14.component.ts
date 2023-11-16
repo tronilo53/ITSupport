@@ -36,8 +36,12 @@ export class Trouble14Component implements OnInit, OnDestroy {
 
   //Array de todos los botones
   public allButtons: any[] = [];
-  //Variable ngModel para el select
-  public select: string = '???';
+  //Variables ngModel para los select
+  public select: any = {
+    sp: '???',
+    in: '???',
+    pt: '???'
+  };
   //Se crea un objeto para guardar los botones obtenidos de avaya
   public buttonsAvayaExists: any = [];
   //Se declara variable para guardar count de botones activos
@@ -88,7 +92,28 @@ export class Trouble14Component implements OnInit, OnDestroy {
               /* Desactiva los botones en portugues */
               this.DesactivateButtons('pt');
             }
-          //Si existe el fichero de avaya "SelectedPhoneFeatures.xml"
+          //Si existe el fichero de avaya pero no existen botones...
+          }else if(argsBtn.data === 'notButtons') {
+            /* Si el idioma es español... */
+            if(argslan.data === '' || argslan.data === 'sp') {
+              /* Muestra el contenedor en español */
+              this.showContainer('sp');
+              //Muestra contenedor de no hay botones en español
+              this.renderer.removeClass( this.alertWarningSp.nativeElement, 'none' );
+            /* Si el idioma es ingles... */
+            }else if(argslan.data === 'in') {
+              /* Muestra el contenedor en ingles */
+              this.showContainer('in');
+              //Muestra contenedor de no hay botones en ingles
+              this.renderer.removeClass( this.alertWarningIn.nativeElement, 'none' );
+            /* Si el idioma es portugues... */
+            }else {
+              /* Muestra el contenedor en portugues */
+              this.showContainer('pt');
+              //Muestra contenedor de no hay botones en portugues
+              this.renderer.removeClass( this.alertWarningPt.nativeElement, 'none' );
+            }
+          //Si existe el fichero de avaya y existen botones...
           }else {
             //Guarda los botones ya añadidos de avaya en la variable.
             this.buttonsAvayaExists = argsBtn.data.map((item: any) => {
@@ -121,14 +146,98 @@ export class Trouble14Component implements OnInit, OnDestroy {
       });
     });
   }
+  /* Elimina el borde rojo del select por odioma */
+  public deleteBorderErrorSelect(lan: string): void {
+    if(lan === 'sp') this.renderer.removeClass(this.selectButtonsSp.nativeElement, 'border__error');
+    else if(lan === 'in') this.renderer.removeClass(this.selectButtonsIn.nativeElement, 'border__error');
+    else this.renderer.removeClass(this.selectButtonsPt.nativeElement, 'border__error');
+  }
   /* Agregar nuevos botones a avaya */
-  public addButtons(): void {
-    if(this.select === '???') this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No se pueden añadir 0 Botones.' });
+  public addButtons(lan: string): void {
+    /* Si el idioma es español... */
+    if(lan === 'sp') {
+      /* Si no se selecciona ningun boton... */
+      if(this.select.sp === '???') {
+        /* Se muestra un dialog */
+        this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'Tienes que elegir un botón' });
+        /* Se pone el borde rojo en el select español */
+        this.setBorderErrorSelect('sp');
+      }
+    /* Si el idioma es ingles... */
+    }else if(lan === 'in') {
+    
+    /* Si el idioma es portugues... */
+    }else {
+
+    }
   }
   /* Eliminar botones ya insertados en avaya */
-  public deleteChecksSelected(): void {
-    const itemsSelected: any[] = this.buttonsAvayaExists.filter((item: any) => item.check);
-    console.log(itemsSelected);
+  public deleteChecksSelected(lan: string): void {
+    /* Si el idioma es español... */
+    if(lan === 'sp') {
+      /* Variable para guardar la cantidad de botones que hay checkeados */
+      let count: number = 0;
+      /* Se recorren todos los botones */
+      for(let i = 0; i < this.buttonsAvayaExists.length; i++) {
+        /* Si hay alguno checkeado.. */
+        if(this.buttonsAvayaExists[i].check) count++;
+      }
+      /* Si no se selecciona ningun boton... */
+      if(count < 1) {
+        /* Se muestra un Dialog */
+        this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No has seleccionado ningún botón para eliminar' });
+        this.__ipcService.removeAllListeners('dialog');
+      }else {
+        /* Se guarda en la variable itemsSelected, los botones que están seleccionados */
+        const itemsSelected: any[] = this.buttonsAvayaExists.filter((item: any) => item.check);
+        /* Se recorren los botones que están ya agregados en avaya */
+        for(let i = 0; i < this.buttonsAvayaExists.length; i++) {
+          if(itemsSelected.length > 1) {
+            /* Se iguala la variable i a la cantidad de botones que hay ya en avaya */
+            i = itemsSelected.length;
+            /* Se agregan objetos vacios al array para completar las posiciones con las que hay en los botones ya añadidos */
+            itemsSelected.push({ Label: '' });
+          }
+        }
+        /* IPC para eliminar los botones seleccionado en avaya */
+        this.__ipcService.send('trouble_14', { mode: 'delete', buttonsDelete: itemsSelected });
+        this.__ipcService.removeAllListeners('trouble_14');
+        this.__ipcService.on('trouble_14', (e, args) => {
+          /* Si no se eliminan los botones... */
+          if(args.status === '001') {
+            /* Se muestra un Dialog */
+            this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No ha sido posible quitar los botones seleccionados.' })
+          /* Si se eliminan los botones... */
+          }else {
+            this.buttonsAvayaExists = args.buttons.map((item: any) => {
+              return { Label: item.$.Label, Name: item.$.Name, check: false };
+            });
+            if(this.buttonsAvayaExists.length < 1) {
+              /* Oculta la ventana de botones en español */
+              this.renderer.addClass( this.alertInfoSp.nativeElement, 'none' );
+              //Muestra la alerta de "Sin información" en español
+              this.renderer.removeClass( this.alertWarningSp.nativeElement, 'none' );
+            }else {
+              this.countButtonsActive = this.buttonsAvayaExists.length;
+            }
+            this._changeDetectorRef.detectChanges();
+          }
+        });
+      }
+    /* Si el idioma es ingles... */
+    }else if(lan === 'in') {
+
+    /* Si el idioma es portugues... */
+    }else {
+
+
+    }
+  }
+  /* aplica el borde rojo del select por idioma */
+  private setBorderErrorSelect(lan: string): void {
+    if(lan === 'sp') this.renderer.addClass(this.selectButtonsSp.nativeElement, 'border__error');
+    else if(lan === 'in') this.renderer.addClass(this.selectButtonsIn.nativeElement, 'border__error');
+    else this.renderer.addClass(this.selectButtonsPt.nativeElement, 'border__error');
   }
   /* Desactiva los botones*/
   private DesactivateButtons(lan: string): void {
@@ -165,5 +274,6 @@ export class Trouble14Component implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.__ipcService.removeAllListeners('getButtonsAvaya');
     this.__ipcService.removeAllListeners('checkLanguage');
+    this.__ipcService.removeAllListeners('trouble_14');
   }
 }

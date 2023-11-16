@@ -289,11 +289,14 @@ ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
         fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( errorRead, data ) => {
             xml2js.parseString( data, ( errorJson, result ) => {
                 const json = result;
-                if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
-                    event.sender.send( 'getButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
-                }else {
-                    event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
+                if(json.SelectedFeatures.SelectedFeature) {
+                    if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
+                        event.sender.send( 'getButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
+                    }else {
+                        event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
+                    }
                 }
+                else event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
             });
         });
     }
@@ -627,7 +630,30 @@ ipcMain.on( 'trouble_13', ( event, args ) => {
 });
 //PROBLEMA 14: Quiero configurar mis botones favoritos [ Value: 14 - CAT: Interfaz de usuario ]
 ipcMain.on( 'trouble_14', ( event, args ) => {
-    
+    /* Si queremos añadir... */
+    if(args.mode === 'add') {
+
+    /* Si queremos quitar... */
+    }else {
+        fs.readFile(`${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, (error, data) => {
+            xml2js.parseString(data, (errorJson, resp) => {
+                let json = resp;
+                for(let i = 0; i < json.SelectedFeatures.SelectedFeature.length; i++) {
+                    for(let j = 0; j < args.buttonsDelete.length; j++) {
+                        if(json.SelectedFeatures.SelectedFeature[i].$.Label === args.buttonsDelete[j].Label) {
+                            json.SelectedFeatures.SelectedFeature.splice(i, 1);
+                        }
+                    }
+                }
+                const builder = new xml2js.Builder();
+                const xml = builder.buildObject(json);
+                fs.writeFile(`${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, xml, errorWrite => {
+                    if(errorWrite) event.sender.send('trouble_14', { status: '001' });
+                    else event.sender.send('trouble_14', { status: '000', buttons: json.SelectedFeatures.SelectedFeature });
+                });
+            });
+        });
+    }
 });
 //PROBLEMA 16: No puedo iniciar sesión(Me muestra un error) [ Value: 16 - CAT: Conexion ]
 ipcMain.on( 'trouble16', ( event, args ) => {
