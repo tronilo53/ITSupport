@@ -55,7 +55,11 @@ export class Trouble14Component implements OnInit, OnDestroy {
     private __dataService: DataService,
     private __changeDetectorRef: ChangeDetectorRef
   ) { }
-
+  
+  /**
+   * Ciclo de Vida antes de cargar los elementos del DOM
+   * * Antes de que cargue el DOM identifica las variables
+   */
   ngOnInit(): void {
     /* Se detecta el idioma y se obtienen los botones ya añadidos de avaya */
     this.checkLanguage_getButtonsAdded();
@@ -66,13 +70,21 @@ export class Trouble14Component implements OnInit, OnDestroy {
     });
 
   }
-  /* Elimina el borde rojo del select por odioma */
+  /**
+   * Esta función elimina el borde rojo del select
+   * * Se identifica el idoma dentro de la función
+   */
   public deleteBorderErrorSelect(): void {
     if(this.currentLan === 'sp') this.renderer.removeClass(this.selectButtonsSp.nativeElement, 'border__error');
     else if(this.currentLan === 'in') this.renderer.removeClass(this.selectButtonsIn.nativeElement, 'border__error');
     else this.renderer.removeClass(this.selectButtonsPt.nativeElement, 'border__error');
   }
-  /* Eliminar botones ya insertados en avaya o agregar nuevos botones */
+  /**
+   * Esta función Añade o Elimina botones de Avaya
+   * * Se detectan los cambios en el ngZone
+   * * Se remueve el Listener
+   * @param {string} mode 'add' or 'delete'
+   */
   public delete_add_Checks(mode: string): void {
     /* Si el idioma es español... */
     if(this.currentLan === 'sp') {
@@ -81,7 +93,7 @@ export class Trouble14Component implements OnInit, OnDestroy {
         /* Si no se selecciona ningun boton... */
         if(this.select.sp === '???') {
           /* Se muestra un dialog */
-          this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'Tienes que elegir un botón' });
+          this.dialog('error', 'Tienes que seleccionar algún botón.');
           /* Se pone el borde rojo en el select español */
           this.setBorderErrorSelect();
           /* Si se selecciona un boton... */
@@ -89,7 +101,7 @@ export class Trouble14Component implements OnInit, OnDestroy {
           /* Si ya hay ocho botones en avaya... */
           if(this.buttonsAvayaExists.length == 8) {
             /* Se muestra un dialog */
-            this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'Ha superado el límite de botones para agregar en: 8' });
+            this.dialog('error', 'Ha superado el límite de botones para agregar en: 8');
             /* Si hay menos de ocho botones en avaya... */
           }else {
             console.log( this.select.sp );
@@ -104,12 +116,10 @@ export class Trouble14Component implements OnInit, OnDestroy {
           /* Si hay alguno checkeado.. */
           if(this.buttonsAvayaExists[i].check) count++;
         }
-        /* Si no se selecciona ningun boton... */
-        if(count < 1) {
-          /* Se muestra un Dialog */
-          this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No has seleccionado ningún botón para eliminar' });
-          this.__ipcService.removeAllListeners('dialog');
-        }else {
+        /* Si no se selecciona ningun boton Se muestra un dialog... */
+        if(count < 1) this.dialog('error', 'No has seleccionado ningún botón para eliminar');
+        /* Si se selecciona algun boton... */
+        else {
           /* Se guarda en la variable itemsSelected, los botones que están seleccionados */
           const itemsSelected: any[] = this.buttonsAvayaExists.filter((item: any) => item.check);
           /* Se recorren los botones que están ya agregados en avaya */
@@ -125,12 +135,10 @@ export class Trouble14Component implements OnInit, OnDestroy {
           this.__ipcService.send('trouble_14', { mode: 'delete', buttonsDelete: itemsSelected });
           this.__ipcService.removeAllListeners('trouble_14');
           this.__ipcService.on('trouble_14', (e, args) => {
-            /* Si no se eliminan los botones... */
-            if(args.status === '001') {
-              /* Se muestra un Dialog */
-              this.__ipcService.send('dialog', { type: 'error', parent: 'trouble14', text: 'No ha sido posible quitar los botones seleccionados.' })
+            /* Si no se eliminan los botones Se muestra un Dialog */
+            if(args.status === '001') this.dialog('error', 'No ha sido posible quitar los botones seleccionados.');
             /* Si se eliminan los botones... */
-            }else {
+            else {
               this.buttonsAvayaExists = args.buttons.map((item: any) => {
                 return { Label: item.$.Label, Name: item.$.Name, check: false };
               });
@@ -156,13 +164,21 @@ export class Trouble14Component implements OnInit, OnDestroy {
 
     }
   }
-  /* aplica el borde rojo del select por idioma */
+  /**
+   * Esta función establece el borde rojo en el select
+   * * Se identifica el idioma dentro de la función
+   */
   private setBorderErrorSelect(): void {
     if(this.currentLan === 'sp') this.renderer.addClass(this.selectButtonsSp.nativeElement, 'border__error');
     else if(this.currentLan === 'in') this.renderer.addClass(this.selectButtonsIn.nativeElement, 'border__error');
     else this.renderer.addClass(this.selectButtonsPt.nativeElement, 'border__error');
   }
-  /* Se detecta el idioma de la App */
+  /**
+   * Esta función identifica el idioma que tiene la APP
+   * y obtiene los botones ya agregados en Avaya
+   * * Se detectan los cambios en el ngZone
+   * * Se remueve el Listener
+   */
   private checkLanguage_getButtonsAdded(): void {
     //Peticion IPC para detectar el idioma
     this.__ipcService.send( 'checkLanguage' );
@@ -206,6 +222,20 @@ export class Trouble14Component implements OnInit, OnDestroy {
       });
     });
   }
+  /**
+   * Esta función Transmite un IPC para mostrar una alerta Nativa
+   * * Se remueve el Listener
+   * @param {string} type Tipo de alerta
+   * @param {string} text Mensaje de Alerta
+   */
+  private dialog(type: string, text: string): void {
+    this.__ipcService.send('dialog', { type, parent: 'trouble14', text });
+    this.__ipcService.removeAllListeners('dialog');
+  }
+  /**
+   * Ciclo de Vida cuando se destruye el constructor
+   * * Se eliminan los Listeners de todos los IPC
+   */
   ngOnDestroy(): void {
     this.__ipcService.removeAllListeners('getButtonsAvaya');
     this.__ipcService.removeAllListeners('checkLanguage');
