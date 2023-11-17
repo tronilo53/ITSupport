@@ -179,7 +179,7 @@ ipcMain.on( 'openAvaya', ( event, args ) => {
 });
 //ABRIR VENTANA NUEVA DE trouble_14
 ipcMain.on( 'openTrouble14', ( event, args ) => {
-    if( !fs.existsSync( RUTE__PROFILE ) ) event.sender.send( 'trouble_14', { data: 'notExist' } );
+    if( !fs.existsSync( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml` ) ) event.sender.send( 'trouble_14', { data: 'notExist' } );
     else {
         modalOpenTrouble14 = new BrowserWindow( 
             { 
@@ -284,22 +284,19 @@ ipcMain.on( 'getDataOsAvaya', ( event, args ) => {
 });
 //OBTENER BOTONES FAVORITOS DE AVAYA
 ipcMain.on( 'getButtonsAvaya', ( event, args ) => {
-    if( !fs.existsSync( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml` ) ) event.sender.send( 'getButtonsAvaya', { data: 'notExist' } );
-    else {
-        fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( errorRead, data ) => {
-            xml2js.parseString( data, ( errorJson, result ) => {
-                const json = result;
-                if(json.SelectedFeatures.SelectedFeature) {
-                    if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
-                        event.sender.send( 'getButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
-                    }else {
-                        event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
-                    }
+    fs.readFile( `${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, ( errorRead, data ) => {
+        xml2js.parseString( data, ( errorJson, result ) => {
+            const json = result;
+            if(json.SelectedFeatures.SelectedFeature) {
+                if( json.SelectedFeatures.SelectedFeature.length > 0 ) {
+                    event.sender.send( 'getButtonsAvaya', { data: json.SelectedFeatures.SelectedFeature } );
+                }else {
+                    event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
                 }
-                else event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
-            });
+            }
+            else event.sender.send( 'getButtonsAvaya', { data: 'notButtons' } );
         });
-    }
+    });
 });
 //MODIFICAR BOTONES DE AVAYA(APLICAR)
 ipcMain.on( 'modifyButtonsAvaya', ( event, args ) => {

@@ -17,13 +17,13 @@
     <h2 class="text-center mt-4">Botones Favoritos</h2>
     <div class="row">
         <div class="mb-3">
-            <select name="buttons" id="buttons" class="form-control" (focus)="deleteBorderErrorSelect('sp')" [(ngModel)]="select.sp" #selectButtonsSp>
+            <select name="buttons" id="buttons" class="form-control" (focus)="deleteBorderErrorSelect()" [(ngModel)]="select.sp" #selectButtonsSp>
                 <option value="???">Seleccione un botón</option>
                 <option [value]="b.Label" *ngFor="let b of allButtons">{{ b.Label }}</option>
             </select>
         </div>
         <div class="mb-3">
-            <button type="button" class="btn btn-danger" (click)="addButtons('sp')" #buttonAddSp>Añadir</button>
+            <button type="button" class="btn btn-danger" (click)="delete_add_Checks('add')" #buttonAddSp>Añadir</button>
         </div>
     </div>
     <div class="row">
@@ -40,7 +40,7 @@
                 </ul>
             </div>
             <div class="mb-3" style="text-align: left;">
-                <button type="button" class="btn btn-danger" (click)="deleteChecksSelected('sp')">Quitar Seleccionados</button>
+                <button type="button" class="btn btn-danger" (click)="delete_add_Checks('sp')">Quitar Seleccionados</button>
             </div>
         </div>
         <div class="alert alert-warning none" role="alert" #alertWarningSp>
