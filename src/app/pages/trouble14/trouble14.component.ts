@@ -49,6 +49,13 @@ export class Trouble14Component implements OnInit, OnDestroy {
   //Se declara variable para guardar count de botones activos
   public countButtonsActive: number = 0;
 
+  /**
+   * Constructor de Trouble14Component
+   * @param __ipcService Comunicaciones con IPC
+   * @param renderer Manipulación del DOM
+   * @param __dataService Peticiones http con la BBDD
+   * @param __changeDetectorRef Detección de cambios
+   */
   constructor( 
     private __ipcService: IpcService,
     private renderer: Renderer2,
@@ -104,7 +111,12 @@ export class Trouble14Component implements OnInit, OnDestroy {
             this.dialog('error', 'Ha superado el límite de botones para agregar en: 8');
             /* Si hay menos de ocho botones en avaya... */
           }else {
-            console.log( this.select.sp );
+            /* IPC para agregar botones */
+            this.__ipcService.send('trouble_14', { mode: 'add', buttons: this.select.sp });
+            this.__ipcService.removeAllListeners('trouble_14');
+            this.__ipcService.on('trouble_14', (a, args) => {
+              console.log(args);
+            });
           }
         }
       /* Si se eliminan botones... */

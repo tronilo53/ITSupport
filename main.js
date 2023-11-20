@@ -629,7 +629,9 @@ ipcMain.on( 'trouble_13', ( event, args ) => {
 ipcMain.on( 'trouble_14', ( event, args ) => {
     /* Si queremos añadir... */
     if(args.mode === 'add') {
-
+        fs.readFile(`${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, (error, data) => {
+            //TODO: PENDIENTE...
+        });
     /* Si queremos quitar... */
     }else {
         fs.readFile(`${RUTE__PROFILE}/SelectedPhoneFeatures.xml`, (error, data) => {
